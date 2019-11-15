@@ -13,10 +13,10 @@
       >
         <div
           class="absolute w-full left-0"
-          style="top: 50%; transform: translateY(-11rem);"
+          style="top: 50%; transform: translateY(-11.5rem);"
         >
-          <p class="w-full text-2xl font-bold text-gray-700">
-            欢迎登录， <br />
+          <p class="w-full pb-4 text-2xl font-bold text-gray-700">
+            欢迎登录 <br />
             乐享校园后台管理系统
           </p>
           <vs-input
@@ -39,6 +39,12 @@
             color='danger'
             :active.sync="signInError"
           >{{ signInErrorText }}</vs-alert>
+          <div class="text-right">
+            <span
+              class="text-sm text-gray-500 cursor-pointer hover:text-blue-500"
+              style="transition: 0.4s;"
+            >忘记密码？</span>
+          </div>
           <vs-button
             id="signInBtn"
             class="w-full mt-3 vs-con-loading__container"
@@ -47,7 +53,7 @@
             type="gradient"
             :disabled="signInDisable"
             @click="login"
-          >登录</vs-button>
+          >登 录</vs-button>
         </div>
       </div>
 
