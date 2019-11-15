@@ -7,9 +7,9 @@
 
 ### 命令
 ```bash
-yarn install     # 安装依赖
-yarn run serve   # 启动项目
-yarn run build   # 构建项目
-yarn run test    # 执行测试
-yarn run lint    # 格式化文件
+npm install     # 安装依赖
+npm run serve   # 启动项目
+npm run build   # 构建项目
+npm run test    # 执行测试
+npm run lint    # 格式化文件
 ```
