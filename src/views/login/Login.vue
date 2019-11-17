@@ -59,6 +59,8 @@
 
       <img
         class="w-2/3"
+        style="user-select: none;"
+        draggable="false"
         src="@/assets/images/pages/login/bg.png"
       >
     </div>

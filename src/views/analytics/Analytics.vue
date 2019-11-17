@@ -7,16 +7,18 @@
           <div class="h-full relative flex flex-col justify-center items-center py-4">
             <img
               class="decore-left absolute top-0 left-0"
-              src="@/assets/images/pages/dashboard/decore_left.png"
+              style="user-select: none;"
               width="200"
-              alt="装饰1"
-            />
+              draggable="false"
+              src="@/assets/images/pages/dashboard/decore_left.png"
+            >
             <img
               class="decore-right absolute top-0 right-0"
-              src="@/assets/images/pages/dashboard/decore_right.png"
+              style="user-select: none;"
               width="175"
-              alt="装饰2"
-            />
+              draggable="false"
+              src="@/assets/images/pages/dashboard/decore_right.png"
+            >
             <div class="circle flex justify-center items-center rounded-full">
               <i class="iconfont icon-safety"></i>
             </div>
