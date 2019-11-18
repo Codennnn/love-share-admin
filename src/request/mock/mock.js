@@ -4,8 +4,9 @@ import notice from './notice'
 import goods from './goods'
 import order from './order'
 import buying from './buying'
+import category from './category'
+import school from './school'
 import service from './service'
-import common from './common'
 
 // 用户
 Mock.mock('/api/user/login', 'post', user.login)
@@ -36,9 +37,6 @@ Mock.mock('/api/goods/list_info', 'get', goods.list_info)
 Mock.mock('/api/goods/published', 'get', goods.published)
 Mock.mock('/api/goods/bought', 'get', goods.bought)
 Mock.mock('/api/goods/detail', 'get', goods.goods_detail)
-Mock.mock('/api/goods/category_list', 'get', goods.category_list)
-Mock.mock('/api/goods/category/add', 'post', goods.add_category)
-Mock.mock('/api/goods/category/delete', 'delete', goods.delete_category)
 Mock.mock('/api/goods/delete', 'delete', goods.delete)
 Mock.mock('/api/goods/collect', 'post', goods.collect)
 Mock.mock('/api/goods/uncollect', 'delete', goods.uncollect)
@@ -61,8 +59,15 @@ Mock.mock('/api/buying/add', 'post', buying.add_buying)
 Mock.mock('/api/buying/delete', 'delete', buying.delete_buying)
 Mock.mock('/api/buying/update', 'put', buying.update_buying)
 
-// 通用
-Mock.mock('/api/common/school_list', 'get', common.schools)
+// 分类
+Mock.mock('/api/category/list', 'get', category.list)
+Mock.mock('/api/category/add', 'post', category.add)
+Mock.mock('/api/category/delete', 'delete', category.delete)
+
+// 学校
+Mock.mock('/api/school/list', 'get', school.list)
+Mock.mock('/api/school/add', 'post', school.add)
+Mock.mock('/api/school/delete', 'delete', school.delete)
 
 Mock.mock(/\/article/, 'get', service.article)
 
