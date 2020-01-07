@@ -130,7 +130,7 @@ $hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
   background: #fff;
   box-shadow: 0 15px 20px #fff;
   overflow: hidden;
-  transition: all 0.5s;
+  transition: $side-bar-collapse-transition;
   &.logo-collapse {
     width: 64px;
     padding: 0 18px;
@@ -149,30 +149,37 @@ $hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
   }
 }
 
-.el-submenu {
+.el-submenu::v-deep {
   margin-bottom: 10px;
-  &::v-deep {
-    .el-submenu__title {
-      &:hover {
-        border-radius: 0.5rem;
-        background-color: $hoverColor;
-      }
-      .menu-icon {
-        margin-right: 10px;
-        font-size: 22px;
-        font-weight: normal;
-        color: $menuIcon;
-      }
-    }
-    &.is-opened .el-submenu__title {
+  .el-submenu__title {
+    &:hover {
       border-radius: 0.5rem;
       background-color: $hoverColor;
     }
-    &.is-active .el-submenu__title {
-      border-radius: 0.5rem;
-      background-color: rgba(var(--vs-primary), 0.1);
+    .menu-icon {
+      margin-right: 10px;
+      font-size: 22px;
+      font-weight: normal;
+      color: $menuIcon;
     }
   }
+  .el-submenu__icon-arrow {
+    transform: rotateZ(-90deg);
+  }
+  &.is-opened {
+    .el-submenu__title {
+      border-radius: 0.5rem;
+      background-color: $hoverColor;
+      .el-submenu__icon-arrow {
+        transform: rotateZ(0);
+      }
+    }
+  }
+  &.is-active .el-submenu__title {
+    border-radius: 0.5rem;
+    background-color: rgba(var(--vs-primary), 0.1);
+  }
+
   .el-menu-item-group {
     .el-menu-item {
       height: 40px;

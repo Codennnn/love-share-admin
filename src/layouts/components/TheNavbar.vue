@@ -84,8 +84,7 @@
                     v-if="this.cartList.length > 0"
                   >
                     <li
-                      class="flex p-2
-                    cursor-pointer hover:bg-gray-200"
+                      class="flex p-2 cursor-pointer hover:bg-gray-200"
                       style="transition: all 0.3s;"
                       v-for="(item, i) in cartList"
                       :key="i"
@@ -426,7 +425,7 @@ export default {
   padding: 1.4rem;
   padding-top: 1.2rem;
   box-sizing: border-box;
-  transition: width 0.5s;
+  transition: $side-bar-collapse-transition;
   &.collapse {
     width: calc(100% - #{$side-bar-width} + 178px);
   }
@@ -445,7 +444,7 @@ export default {
     cursor: pointer;
     font-size: 22px;
     font-weight: 500;
-    color: $navIcon;
+    color: $nav-icon-color;
   }
 }
 
