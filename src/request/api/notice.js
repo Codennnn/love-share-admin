@@ -1,16 +1,48 @@
 import request from '../request'
 
-export function getNotices() {
+export function getNoticeList(params) {
   return request({
-    url: '/notice/notices',
+    url: '/notice/list',
+    method: 'get',
+    params,
+  })
+}
+
+export function getUnreadNotices() {
+  return request({
+    url: '/notice/unread',
     method: 'get',
   })
 }
 
-export function register(query) {
+export function setNoticeRead(data) {
   return request({
-    url: '/notice/register',
-    method: 'post',
-    params: query,
+    url: '/notice/set_read',
+    method: 'put',
+    data,
+  })
+}
+
+export function setAllNoticesRead(data) {
+  return request({
+    url: '/notice/set_all_read',
+    method: 'put',
+    data,
+  })
+}
+
+export function deleteNotice(data) {
+  return request({
+    url: '/notice/delete',
+    method: 'delete',
+    data,
+  })
+}
+
+export function deleteManyNotices(data) {
+  return request({
+    url: '/notice/delete_many',
+    method: 'delete',
+    data,
   })
 }

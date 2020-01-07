@@ -57,6 +57,9 @@ export default {
   mutations,
   actions,
   getters: {
+    adminId: state => state.info._id,
     roles: state => state.info.roles,
+    nickname: state => state.info.nickname,
+    avatar: state => state.info.avatar_url,
   },
 }
