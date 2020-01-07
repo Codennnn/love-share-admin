@@ -4,17 +4,16 @@ import Router from 'vue-router'
 import Layout from '@/layouts/Main.vue' // 主框架
 import Analytics from '@/views/analytics/Analytics.vue' // 数据分析
 
-const Login = () => import('@/views/login/Login.vue')
 const TodoList = () => import('@/views/todo-list/TodoList.vue')
 
 Vue.use(Router)
 
 export const constantRoutes = [
   {
-    path: '/login',
-    name: 'Login',
+    path: '/sign',
+    name: 'Sing',
     hidden: true,
-    component: Login,
+    component: () => import('@/views/sign/Sign.vue'),
     meta: { title: '登录' },
   },
   {

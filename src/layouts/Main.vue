@@ -52,7 +52,12 @@
               leave-active-class="animated fadeOut faster"
               mode="out-in"
             >
-              <router-view />
+              <keep-alive
+                :include="alivePages"
+                :max="5"
+              >
+                <router-view />
+              </keep-alive>
             </transition>
           </div>
 
@@ -78,6 +83,10 @@ export default {
     TheFooter,
     BackToTop,
   },
+
+  data: () => ({
+    alivePages: [], // 允许缓存的路由
+  }),
 
   computed: {
     sidebarCollapse() {

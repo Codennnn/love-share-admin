@@ -361,7 +361,7 @@ export default {
     // 退出登录
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.replace('/login')
+      this.$router.replace('/sign')
     },
 
     // 网页全屏

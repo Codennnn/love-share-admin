@@ -7,8 +7,8 @@
       @click="switchCollapse"
     >
       <img
-        class="w-6 h-6"
-        src="@/assets/images/logo/logo.png"
+        style="width: 2.6rem;"
+        src="@/assets/images/logo.png"
       />
       <transition
         enter-active-class="animated fadeIn faster"
@@ -16,9 +16,9 @@
         mode="out-in"
       >
         <img
-          class="w-32 ml-3"
-          src="@/assets/images/logo/logo-text.png"
           v-show="!sidebarCollapse"
+          class="w-24 ml-3"
+          src="@/assets/images/logo-text.png"
         >
       </transition>
     </div>
@@ -77,11 +77,6 @@
 import _debounce from 'lodash/debounce' // 引入防抖函数
 
 export default {
-  data() {
-    return {
-    }
-  },
-
   mounted() {
     window.onresize = _debounce(() => {
       if (document.body.clientWidth <= 1300) {

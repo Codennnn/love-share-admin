@@ -8,29 +8,29 @@ import { getToken } from '@/permission/token'
 
 NProgress.configure({ showSpinner: false }) // NProgress 配置
 
-const whiteList = ['/login']
+const whiteList = ['/sign']
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start() // 进度条开始
 
   // 设置网页标题
-  const title = to.meta ?.title
+  const title = to.meta?.title
   document.title = title ? `${title} - 乐享校园` : '校园闲置物品交易平台'
 
   const hasToken = !!getToken()
 
   if (hasToken) {
-    if (to.path === '/login') {
+    if (to.path === '/sign') {
       // 如果已经有了token再访问登录页的话，将会被重定向到首页
       next({ path: '/' })
     } else {
-      const hasRoles = !!(store.state.user.roles ?.length > 0)
+      const hasRoles = !!(store.state.user.roles?.length > 0)
       if (hasRoles) {
         next()
       } else {
         const { roles } = await store.dispatch('user/getUserInfo')
           .catch(() => {
-            next('/login')
+            next('/sign')
           })
         const accessedRoutes = await store.dispatch('permission/generateRoutes', roles)
         // console.log('<动态路由>', accessedRoutes);
@@ -44,7 +44,7 @@ router.beforeEach(async (to, from, next) => {
     next()
   } else {
     // 最后，如果没有权限，则重定向回登录页
-    next('/login')
+    next('/sign')
   }
 })
 

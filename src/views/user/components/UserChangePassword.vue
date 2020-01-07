@@ -127,7 +127,7 @@ export default {
           })
           // 重新登录
           await this.$store.dispatch('user/logout')
-          this.$router.replace('/login')
+          this.$router.replace('/sign')
         }
       } catch {
         // TODO
