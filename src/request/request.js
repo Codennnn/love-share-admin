@@ -13,8 +13,6 @@ service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencod
 
 service.interceptors.request.use(
   (config) => {
-    console.log('>>>>>>>>>>>>')
-
     // 每次请求都带上token
     const token = getToken()
     if (token) {
@@ -24,7 +22,6 @@ service.interceptors.request.use(
     return config
   },
   (error) => {
-    console.log('######', error, '######')
     Promise.reject(error)
   },
 )
@@ -45,6 +42,9 @@ const errorHandler = {
   404(status, statusText) {
     this.errorNotify({ title: `${status}`, message: `找不到资源 - ${statusText}` })
   },
+  418(status) {
+    this.errorNotify({ title: `${status}`, message: '登录过期，请重新登录~', duration: '3000' })
+  },
   500(status, statusText) {
     this.errorNotify({ title: `${status}`, message: `服务器出问题了 - ${statusText}` })
   },
@@ -56,14 +56,10 @@ const errorHandler = {
 service.interceptors.response.use(
   (response) => {
     const res = response
-    console.log(`%c${res.config.url}`, 'color: green;')
-    console.log(res.data)
-    console.log('<<<<<<<<<<<<')
     return res.data
   },
   (error) => {
     console.log(error, error.response)
-    console.log('<<<<<<<<<<<<')
     const { status = 'default', statusText } = error.response
     /* eslint no-unused-expressions: [2, { allowTernary: true }] */
     Object.prototype.hasOwnProperty.call(errorHandler, status)

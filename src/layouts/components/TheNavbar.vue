@@ -341,7 +341,7 @@ export default {
 
   computed: {
     ...mapState(['sidebarCollapse']),
-    ...mapState('user', ['nickname', 'roles']),
+    ...mapState('admin', ['nickname', 'roles']),
     ...mapState('cart', ['cartList']),
     ...mapGetters('cart', ['cartAmount']),
   },
@@ -359,7 +359,7 @@ export default {
 
     // 退出登录
     async logout() {
-      await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('admin/SignOut')
       this.$router.replace('/sign')
     },
 

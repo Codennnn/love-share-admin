@@ -16,15 +16,6 @@ export function register(query) {
   })
 }
 
-export function logout() { }
-
-export function getUserInfo() {
-  return request({
-    url: '/user/info',
-    method: 'get',
-  })
-}
-
 export function resetPassword() {
   return request({
     url: '/user/reset_password',

@@ -57,7 +57,6 @@ const signInInput = [
     warningText: '',
   },
 ]
-
 export default {
   name: 'Login',
   data: () => ({
@@ -83,9 +82,9 @@ export default {
       })
       this.signInDisable = true
 
-      const [username, password] = [this.signInInput[0].value, this.signInInput[1].value]
+      const [account, password] = [this.signInInput[0].value, this.signInInput[1].value]
 
-      const code = await this.$store.dispatch('user/login', { username, password })
+      const code = await this.$store.dispatch('admin/signIn', { account, password })
 
       if (code === 2000) {
         this.$router.replace('/')

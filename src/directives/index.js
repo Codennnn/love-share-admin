@@ -5,7 +5,7 @@ import store from '@/store/store'
 Vue.directive('auth', {
   inserted(el, binding) {
     const { value = ['super_admin'] } = binding
-    const { roles } = store.getters
+    const { roles } = store.getters['admin/roles']
 
     const hasPermission = roles.some(role => value.includes(role))
     if (!hasPermission) {
@@ -15,6 +15,6 @@ Vue.directive('auth', {
 })
 
 Vue.prototype.$auth = (value = ['super_admin']) => {
-  const { roles } = store.getters
+  const { roles } = store.getters['admin/roles']
   return roles.some(role => value.includes(role))
 }

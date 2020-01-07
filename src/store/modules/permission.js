@@ -2,10 +2,10 @@ import { constantRoutes, asyncRoutes } from '@/router/router'
 
 // 检测是否能对应上相应路由的角色权限
 function hasPermission(roles, route) {
-  if (route.meta ?.roles) {
+  if (route.meta?.roles) {
     return roles.some(role => route.meta.roles.includes(role))
   }
-  // 默认是具有admin权限的，所以返回true
+  // 默认是具有 admin 权限的，所以返回 true
   return true
 }
 
