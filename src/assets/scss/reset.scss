@@ -84,3 +84,10 @@ body {
     font-size: 0.875rem;
   }
 }
+
+// 修改 vuesax 小尺寸按钮的字体大小
+.vs-button.small {
+  & .vs-button-text {
+    font-size: 0.775rem;
+  }
+}
