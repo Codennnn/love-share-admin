@@ -1,71 +1,69 @@
 <template>
-  <div class="relative">
-    <div
-      class="nav-wrapper"
-      :class="{ collapse: sidebarCollapse }"
-    >
-      <div class="nav-bar rounded-lg">
-        <div>
-          <router-link
-            v-for="(item, index) in navIcons"
-            :key="index"
-            :to="item.route"
+  <div
+    class="nav-wrapper"
+    :class="{ collapse: sidebarCollapse }"
+  >
+    <div class="nav-bar rounded-lg">
+      <div>
+        <router-link
+          v-for="(item, index) in navIcons"
+          :key="index"
+          :to="item.route"
+        >
+          <el-tooltip
+            :open-delay="100"
+            :content="item.tip"
+            effect="light"
           >
-            <el-tooltip
-              :open-delay="100"
-              :content="item.tip"
-              effect="light"
-            >
-              <i
-                class="nav-icon mr-3"
-                :class="item.icon"
-              ></i>
-            </el-tooltip>
-          </router-link>
-        </div>
-        <div class="nav-right">
-          <div class="flex items-center">
+            <i
+              class="nav-icon mr-3"
+              :class="item.icon"
+            ></i>
+          </el-tooltip>
+        </router-link>
+      </div>
+      <div class="nav-right">
+        <div class="flex items-center">
 
-            <!-- 搜索图标 -->
-            <el-tooltip
-              :open-delay="100"
-              :content="showSearchInput ? '关闭搜索' : '全站搜索'"
-              effect="light"
-            >
-              <i
-                class="nav-icon ml-3"
-                :class="[showSearchInput ? 'el-icon-close' : 'el-icon-search']"
-                @click="showSearchInput = !showSearchInput"
-              ></i>
-            </el-tooltip>
-            <vs-input
-              class="nav-search overflow-hidden"
-              :class="[showSearchInput ? 'w-48': 'w-0']"
-              placeholder="搜索你想要的宝贝"
-              @keyup.esc="showSearchInput = false"
-              @keyup.enter="search"
-              v-model="searchText"
-            />
+          <!-- 搜索图标 -->
+          <el-tooltip
+            :open-delay="100"
+            :content="showSearchInput ? '关闭搜索' : '全站搜索'"
+            effect="light"
+          >
+            <i
+              class="nav-icon ml-3"
+              :class="[showSearchInput ? 'el-icon-close' : 'el-icon-search']"
+              @click="showSearchInput = !showSearchInput"
+            ></i>
+          </el-tooltip>
+          <vs-input
+            class="nav-search overflow-hidden"
+            :class="[showSearchInput ? 'w-48': 'w-0']"
+            placeholder="搜索你想要的宝贝"
+            @keyup.esc="showSearchInput = false"
+            @keyup.enter="search"
+            v-model="searchText"
+          />
 
-            <!-- 全屏图标 -->
-            <el-tooltip
-              :open-delay="100"
-              content="切换全屏"
-              effect="light"
-            >
-              <i
-                class="nav-icon mx-3"
-                :class="[isFullScreen ? 'el-icon-crop' : 'el-icon-full-screen']"
-                @click="screenfull"
-              ></i>
-            </el-tooltip>
+          <!-- 全屏图标 -->
+          <el-tooltip
+            :open-delay="100"
+            content="切换全屏"
+            effect="light"
+          >
+            <i
+              class="nav-icon mx-3"
+              :class="[isFullScreen ? 'el-icon-crop' : 'el-icon-full-screen']"
+              @click="screenfull"
+            ></i>
+          </el-tooltip>
 
-            <!-- 通知图标 -->
-            <Notice />
+          <!-- 通知图标 -->
+          <Notice />
 
-            <!-- 头像图标 -->
-            <Avatar class="ml-4" />
-          </div>
+          <!-- 头像图标 -->
+          <Avatar class="ml-4" />
         </div>
       </div>
     </div>
@@ -139,7 +137,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .nav-wrapper {
   position: fixed;
   z-index: 999;
@@ -149,8 +147,9 @@ export default {
   padding-top: 1.2rem;
   box-sizing: border-box;
   transition: $side-bar-collapse-transition;
+
   &.collapse {
-    width: calc(100% - #{$side-bar-width} + 178px);
+    width: calc(100% - #{$side-bar-width} + 190px);
   }
 }
 
@@ -163,12 +162,6 @@ export default {
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
-  .nav-icon {
-    cursor: pointer;
-    font-size: 22px;
-    font-weight: 500;
-    color: $nav-icon-color;
-  }
 }
 
 .nav-right {
@@ -189,5 +182,14 @@ export default {
       border-bottom: 2px solid #a0a0a0 !important;
     }
   }
+}
+</style>
+
+<style lang="scss">
+.nav-icon {
+  cursor: pointer;
+  font-size: $nav-icon-size;
+  color: $nav-icon-color;
+  font-weight: 500;
 }
 </style>

@@ -112,8 +112,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
-
 .menu-main {
   position: fixed;
   top: 0;
@@ -154,13 +152,13 @@ $hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
   .el-submenu__title {
     &:hover {
       border-radius: 0.5rem;
-      background-color: $hoverColor;
+      background-color: $side-bar-item-hover-color;
     }
     .menu-icon {
       margin-right: 10px;
       font-size: 22px;
       font-weight: normal;
-      color: $menuIcon;
+      color: $side-bar-menu-icon-color;
     }
   }
   .el-submenu__icon-arrow {
@@ -169,7 +167,7 @@ $hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
   &.is-opened {
     .el-submenu__title {
       border-radius: 0.5rem;
-      background-color: $hoverColor;
+      background-color: $side-bar-item-hover-color;
       .el-submenu__icon-arrow {
         transform: rotateZ(0);
       }
@@ -186,7 +184,7 @@ $hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
       line-height: 40px;
       &:hover {
         border-radius: 5px;
-        background-color: $hoverColor;
+        background-color: $side-bar-item-hover-color;
       }
     }
   }
@@ -197,13 +195,13 @@ $hoverColor: #f4f4f4; // 导航菜单 hover 时的背景色
   height: 40px;
   &:hover {
     border-radius: 5px;
-    background-color: $hoverColor;
+    background-color: $side-bar-item-hover-color;
   }
   .menu-icon {
     margin-right: 15px;
     font-size: 22px;
     font-weight: normal;
-    color: $menuIcon;
+    color: $side-bar-menu-icon-color;
   }
 }
 
