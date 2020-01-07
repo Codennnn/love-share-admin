@@ -4,13 +4,13 @@ $danger: rgb(242, 19, 93);
 $warning:rgb(255, 130, 0);
 $dark: rgb(36, 33, 69);
 
-$baseShadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); // 基础投影
+$baseShadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); // 基础投影
 
 // Sidebar
 $side-bar-item-hover-color: #f4f4f4;
 $side-bar-menu-icon-color: #545454;
-$side-bar-width: 260px; // 侧边栏宽度
 $side-bar-collapse-transition: all 0.3s;
+$side-bar-width: 260px;
 
 // Navbar
 $nav-icon-color: #686868;
