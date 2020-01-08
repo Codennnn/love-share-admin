@@ -1,28 +1,28 @@
 <template>
   <div>
     <div class="info mb-6 p-5 light-shadow bg-white rounded-lg">
-      <p class="mb-4 text-lg text-gray-600">账号</p>
+      <p class="mb-4 text-lg text-gray-600">账 号</p>
       <div class="mb-4 flex">
         <img
           width="100px"
-          class="mr-8 light-shadow rounded-lg"
-          src="https://avatars2.githubusercontent.com/u/31676496?s=460&v=4"
+          class="mr-8 base-shadow rounded-lg"
           alt="avatar"
+          :src="detail.avatar_url"
         >
         <div class="w-full flex">
           <div class="flex-1">
             <table>
               <tr>
                 <td>管理员账号</td>
-                <td>{{ 'super_admin' }}</td>
+                <td>{{ detail.account }}</td>
               </tr>
               <tr>
                 <td>昵 称</td>
-                <td>{{ '令狐少侠' }}</td>
+                <td>{{ detail.nickname }}</td>
               </tr>
               <tr>
                 <td>真实姓名</td>
-                <td>{{ '令狐少侠' }}</td>
+                <td>{{ detail.real_name || '未填写' }}</td>
               </tr>
             </table>
           </div>
@@ -30,7 +30,7 @@
             <table>
               <tr>
                 <td>电子邮箱</td>
-                <td>{{ 'super_admin' }}</td>
+                <td>{{ detail.email || '未填写' }}</td>
               </tr>
               <tr>
                 <td>状 态</td>
@@ -52,9 +52,9 @@
     </div>
 
     <div class="permission p-5 light-shadow bg-white rounded-lg">
-      <p class="text-lg text-gray-600">权限</p>
+      <p class="text-lg text-gray-600">权 限</p>
       <vs-divider />
-      <table>
+      <!-- <table>
         <tr>
           <th>Module</th>
           <th>Read</th>
@@ -77,6 +77,32 @@
             <vs-checkbox :disabled="true"></vs-checkbox>
           </td>
         </tr>
+      </table> -->
+
+      <table v-if="detail.permissions && detail.permissions.length > 0">
+        <tr>
+          <th>Module</th>
+          <th>Read</th>
+          <th>Write</th>
+          <th>Create</th>
+          <th>Delete</th>
+        </tr>
+
+        <tr
+          v-for="(it, i) in detail.permissions"
+          :key="i"
+        >
+          <td>{{ it.module }}</td>
+          <td
+            v-for="(td, j) in it.purview"
+            :key="j"
+          >
+            <vs-checkbox
+              class="pointer-events-none"
+              v-model="td[auth[j]]"
+            ></vs-checkbox>
+          </td>
+        </tr>
       </table>
     </div>
   </div>
@@ -88,7 +114,12 @@ import { getAdminDetail } from '@/request/api/admin'
 export default {
   name: 'AdminDetail',
   data: () => ({
-    info: {},
+    detail: {},
+    permissions: [{
+      module: 'users',
+      purview: [{ read: false }, { write: false }, { create: false }, { delete: false }],
+    }],
+    auth: ['read', 'write'],
   }),
 
   mounted() {
@@ -99,7 +130,7 @@ export default {
     async getAdminDetail(admin_id) {
       const { code, data } = await getAdminDetail({ admin_id })
       if (code === 2000) {
-        console.log(data)
+        this.detail = data.admin_detail
       }
     },
   },

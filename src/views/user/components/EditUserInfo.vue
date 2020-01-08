@@ -130,7 +130,6 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import _isEqual from 'lodash/isEqual'
 import _cloneDeepWith from 'lodash/cloneDeepWith'
-import { getSchoolList } from '@/request/api/common'
 
 export default {
   name: 'EditUserInfo',
@@ -157,10 +156,6 @@ export default {
 
   components: { VuePerfectScrollbar },
 
-  mounted() {
-    this.getSchoolList()
-  },
-
   computed: {
     isSidebarActiveLocal: {
       get() {
@@ -186,17 +181,6 @@ export default {
   methods: {
     initValues() {
       // this.$refs.fileUpload.srcs = []
-    },
-
-    async getSchoolList() {
-      try {
-        const { code, data } = await getSchoolList()
-        if (code === 2000) {
-          this.schoolList = data.school_list
-        }
-      } catch {
-        // TODO
-      }
     },
 
     onUpdate() {
