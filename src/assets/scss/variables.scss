@@ -4,7 +4,9 @@ $danger: rgb(242, 19, 93);
 $warning:rgb(255, 130, 0);
 $dark: rgb(36, 33, 69);
 
-$baseShadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); // 基础投影
+// Shadow
+$base-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); // 基础投影
+$light-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05); // 基础投影
 
 // Sidebar
 $side-bar-item-hover-color: #f4f4f4;
@@ -16,5 +18,10 @@ $side-bar-width: 260px;
 $nav-icon-color: #686868;
 $nav-icon-size: 22px;
 
-//  Footer
+// Footer
 $footer-height: 65px;
+
+// Font Color
+$text-gray-500: #a0aec0;
+$text-gray-600: #718096;
+$text-gray-700: #4a5569;

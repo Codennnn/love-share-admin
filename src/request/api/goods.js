@@ -1,29 +1,31 @@
 import request from '../request'
 
-export function getGoods() {
+export function getGoodsList() {
   return request({
     url: '/goods/list',
     method: 'get',
   })
 }
 
-export function getStoredGoods() {
+export function getGoodsListOnSell(params) {
   return request({
-    url: '/goods/stored',
+    url: '/goods/list/on_sell',
     method: 'get',
+    params,
   })
 }
 
-export function getDismountedGoods() {
+export function getGoodsListOffSell(params) {
   return request({
-    url: '/goods/dismounted',
+    url: '/goods/list/off_sell',
     method: 'get',
+    params,
   })
 }
 
 export function getGoodsListInfo() {
   return request({
-    url: '/goods/list_info',
+    url: '/goods/list/info',
     method: 'get',
   })
 }

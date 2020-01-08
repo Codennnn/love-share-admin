@@ -85,7 +85,7 @@ export default {
   },
 
   data: () => ({
-    alivePages: [], // 允许缓存的路由
+    alivePages: ['Analytics'], // 允许缓存的路由
   }),
 
   computed: {

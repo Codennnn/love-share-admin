@@ -1,15 +1,25 @@
 import request from '../request'
 
-export function getNotices() {
+export function checkNickname(data) {
   return request({
-    url: '/common/notices',
-    method: 'get',
+    url: '/common/check_nickname',
+    method: 'post',
+    data,
   })
 }
 
-export function getSchoolList() {
+export function checkPhoneNumber(data) {
   return request({
-    url: '/common/school_list',
-    method: 'get',
+    url: '/common/check_phone_number',
+    method: 'post',
+    data,
+  })
+}
+
+export function getVerificationCode(data) {
+  return request({
+    url: '/common/verification_code',
+    method: 'post',
+    data,
   })
 }

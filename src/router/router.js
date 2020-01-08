@@ -62,12 +62,6 @@ export const asyncRoutes = [
         component: () => import('@/views/goods/GoodsCategory.vue'),
         meta: { title: '商品分类', roles: ['super_admin'] },
       },
-      {
-        path: '/goods-addition',
-        name: 'GoodsAddition',
-        component: () => import('@/views/goods/GoodsAddition.vue'),
-        meta: { title: '添加商品', roles: ['super_admin'] },
-      },
     ],
     meta: { title: '商品管理', icon: 'el-icon-box', roles: ['super_admin'] },
   },
@@ -204,18 +198,6 @@ export const asyncRoutes = [
             { title: '首页', url: '/' },
             { title: '商品列表', url: '/goods-list' },
             { title: '商品图片列表', active: true },
-          ],
-        },
-      },
-      {
-        path: '/goods-cart',
-        name: 'GoodsCart',
-        component: () => import('@/views/goods/GoodsCart.vue'),
-        meta: {
-          title: '购物车',
-          breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '购物车', active: true },
           ],
         },
       },

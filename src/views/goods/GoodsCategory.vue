@@ -2,9 +2,9 @@
   <div class="pt-3">
     <el-transfer
       v-model="category"
+      :data="categoryList"
       :titles="titles"
       :props="{key: 'value', lebel: 'value'}"
-      :data="categoryList"
       @left-check-change="leftCheck"
       @change="change"
     >
@@ -18,7 +18,7 @@
           size="small"
           slot="reference"
           :disabled="disabled"
-          @click="onDeleteCategory()"
+          @click="deleteCategory()"
         >删除选中分类</vs-button>
         <el-popover
           width="200"
@@ -30,7 +30,7 @@
               class="w-full"
               label-placeholder="分类名称"
               v-model="categoryName"
-              @keyup.enter="onAddCategory()"
+              @keyup.enter="addCategory()"
             />
             <div class="mt-2 flex justify-end">
               <vs-button
@@ -40,7 +40,7 @@
               >取消</vs-button>
               <vs-button
                 type="flat"
-                @click="onAddCategory()"
+                @click="addCategory()"
               >确定</vs-button>
             </div>
           </div>
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getGoodsCategory, addGoodsCategory, deleteGoodsCategory } from '@/request/api/goods'
+import { addCategory, deleteCategory } from '@/request/api/category'
 
 export default {
   name: 'GoodsCategory',
@@ -67,38 +67,25 @@ export default {
     disabled: true,
     selected: [],
     category: [],
-    categoryList: [],
   }),
 
-  mounted() {
-    this.getGoodsCategory()
+  computed: {
+    categoryList() {
+      return this.$store.state.categoryList
+    },
   },
 
   methods: {
-    async getGoodsCategory() {
-      try {
-        const { code, data } = await getGoodsCategory()
-        if (code === 2000) {
-          this.categoryList = data.category_list.map(el => ({
-            value: el,
-          }))
-          this.category = this.categoryList.map(it => it.value)
-        }
-      } catch {
-        //
-      }
-    },
-
-    onAddCategory() {
+    addCategory() {
       if (this.categoryName.length > 0) {
         this.categoryList.push({ value: this.categoryName })
         this.showPopover = false
         this.categoryName = ''
-        addGoodsCategory()
+        addCategory()
       }
     },
 
-    onDeleteCategory() {
+    deleteCategory() {
       this.selected.forEach((it) => {
         this.categoryList.forEach((el, i, _) => {
           if (el.value === it) {
@@ -107,7 +94,7 @@ export default {
         })
       })
       this.disabled = true
-      deleteGoodsCategory()
+      deleteCategory()
     },
 
     leftCheck(checked) {

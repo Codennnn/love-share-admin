@@ -5,7 +5,14 @@
 </template>
 
 <script>
-export default { name: 'App' }
+export default {
+  name: 'App',
+
+  created() {
+    this.$store.dispatch('getCategoryList')
+    this.$store.dispatch('getSchoolList')
+  },
+}
 </script>
 
 <style lang="scss">

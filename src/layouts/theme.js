@@ -28,6 +28,7 @@ Vue.use(Vuesax, {
       danger: '#EA5455',
       warning: '#FF9F43',
       dark: '#1E1E1E',
+      gray: '#718096',
     },
   },
 })
