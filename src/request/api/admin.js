@@ -22,3 +22,11 @@ export function getAdminInfo() {
     method: 'get',
   })
 }
+
+export function getAdminDetail(params) {
+  return request({
+    url: '/admin/detail',
+    method: 'get',
+    params,
+  })
+}

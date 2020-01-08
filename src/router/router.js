@@ -215,15 +215,28 @@ export const asyncRoutes = [
         },
       },
       {
-        path: '/profile',
-        name: 'Profile',
-        component: () => import('@/views/user/UserDetail.vue'),
+        path: '/admin-detail',
+        name: 'AdminDetail',
+        component: () => import('@/views/admin/AdminDetail.vue'),
         meta: {
-          title: '个人中心',
+          title: '管理员信息',
           breadcrumb: [
             { title: '首页', url: '/' },
-            { title: '用户列表', url: '/user-list' },
-            { title: '个人中心', active: true },
+            { title: '管理员列表', url: '/user-list' },
+            { title: '管理员信息', active: true },
+          ],
+        },
+      },
+      {
+        path: '/admin-edit',
+        name: 'AdminEdit',
+        component: () => import('@/views/admin/AdminEdit.vue'),
+        meta: {
+          title: '管理员信息',
+          breadcrumb: [
+            { title: '首页', url: '/' },
+            { title: '管理员列表', url: '/user-list' },
+            { title: '管理员信息', active: true },
           ],
         },
       },

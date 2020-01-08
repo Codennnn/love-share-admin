@@ -42,7 +42,7 @@
 import { mapGetters } from 'vuex'
 
 const popItems = [
-  { icon: 'el-icon-user', text: '个人中心', route: '/profile' },
+  { icon: 'el-icon-user', text: '个人中心', route: '/admin-detail' },
   { icon: 'el-icon-message', text: '我的消息', route: '/my-club' },
   { icon: 'el-icon-switch-button', text: '退出登录' },
 ]

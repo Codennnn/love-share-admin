@@ -62,8 +62,8 @@
                   <vs-dropdown-item
                     class="text-center"
                     @click="$router.push({
-                              path: '/user-detail',
-                              query: { id: tr.user_id }
+                              path: '/admin-detail',
+                              query: { adminId: tr._id }
                             })"
                   >
                     <i class="el-icon-news mr-2"></i>
