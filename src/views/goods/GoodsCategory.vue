@@ -1,11 +1,11 @@
 <template>
   <div class="pt-3">
     <el-transfer
-      v-model="category"
+      v-model="selected"
       :data="categoryList"
       :titles="titles"
-      :props="{key: 'value', lebel: 'value'}"
-      @left-check-change="leftCheck"
+      :props="{key: 'name', lebel: '_id'}"
+      @left-check-change="leftCheckChange"
       @change="change"
     >
       <div
@@ -61,12 +61,11 @@ import { addCategory, deleteCategory } from '@/request/api/category'
 export default {
   name: 'GoodsCategory',
   data: () => ({
+    titles: ['可选分类', '已选分类'],
     showPopover: false,
     categoryName: '',
-    titles: ['可选分类', '已选分类'],
+    selected: [], // 右侧列表
     disabled: true,
-    selected: [],
-    category: [],
   }),
 
   computed: {
@@ -97,17 +96,16 @@ export default {
       deleteCategory()
     },
 
-    leftCheck(checked) {
-      this.selected = checked
-      if (this.selected.length > 0) {
+    leftCheckChange(checked) {
+      if (checked.length > 0) {
         this.disabled = false
       } else {
         this.disabled = true
       }
     },
 
-    change() {
-      // console.log(this.category)
+    change(e) {
+      console.log(e)
     },
   },
 }

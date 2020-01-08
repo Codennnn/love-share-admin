@@ -23,60 +23,72 @@
       </transition>
     </div>
 
-    <el-menu
-      router
-      unique-opened
-      class="wrapper"
-      :default-active="$route.path"
-      :class="{ 'side-bar-menu': !sidebarCollapse }"
-      :collapse="sidebarCollapse"
+    <VuePerfectScrollbar
+      class="menu-scroll-wrapper"
+      :settings="{
+        maxScrollbarLength: 160,
+        wheelSpeed: 0.60,
+      }"
     >
-      <!-- 菜单主内容 -->
-      <template v-for="(menuItem,index) in sidebarList">
-        <template v-if="!menuItem.hidden">
-          <!-- 嵌套子菜单 -->
-          <el-submenu
-            v-if="menuItem.children && !menuItem.single"
-            :key="index"
-            :index="index.toString()"
-          >
-            <template slot="title">
+      <el-menu
+        router
+        unique-opened
+        class="main"
+        :default-active="$route.path"
+        :class="{ 'side-bar-menu': !sidebarCollapse }"
+        :collapse="sidebarCollapse"
+      >
+        <!-- 菜单主内容 -->
+        <template v-for="(menuItem,index) in sidebarList">
+          <template v-if="!menuItem.hidden">
+            <!-- 嵌套子菜单 -->
+            <el-submenu
+              v-if="menuItem.children && !menuItem.single"
+              :key="index"
+              :index="index.toString()"
+            >
+              <template slot="title">
+                <i
+                  class="menu-icon"
+                  :class="menuItem.meta.icon"
+                ></i>
+                <span slot="title">{{ menuItem.meta.title }}</span>
+              </template>
+              <el-menu-item-group
+                v-for="(subItem, index, key) in menuItem.children"
+                :key="key"
+              >
+                <el-menu-item :index="subItem.path">{{ subItem.meta.title }}</el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+            <!-- 单个菜单项 -->
+            <el-menu-item
+              v-else-if="menuItem.children && menuItem.single"
+              class="mt-3"
+              :key="index"
+              :index="menuItem.children[0].path"
+            >
               <i
                 class="menu-icon"
-                :class="menuItem.meta.icon"
+                :class="menuItem.children[0].meta.icon"
               ></i>
-              <span slot="title">{{ menuItem.meta.title }}</span>
-            </template>
-            <el-menu-item-group
-              v-for="(subItem, index, key) in menuItem.children"
-              :key="key"
-            >
-              <el-menu-item :index="subItem.path">{{ subItem.meta.title }}</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <!-- 单个菜单项 -->
-          <el-menu-item
-            v-else-if="menuItem.children && menuItem.single"
-            class="mt-3"
-            :key="index"
-            :index="menuItem.children[0].path"
-          >
-            <i
-              class="menu-icon"
-              :class="menuItem.children[0].meta.icon"
-            ></i>
-            <span slot="title">{{ menuItem.children[0].meta.title }}</span>
-          </el-menu-item>
+              <span slot="title">{{ menuItem.children[0].meta.title }}</span>
+            </el-menu-item>
+          </template>
         </template>
-      </template>
-    </el-menu>
+      </el-menu>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import _debounce from 'lodash/debounce' // 引入防抖函数
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
+  name: 'TheSidebar',
+  components: { VuePerfectScrollbar },
+
   mounted() {
     window.onresize = _debounce(() => {
       if (document.body.clientWidth <= 1300) {
@@ -119,7 +131,13 @@ export default {
   z-index: 999;
   height: 100%;
   background: #fff;
-  overflow-y: scroll;
+}
+
+// 滚动区域
+.menu-scroll-wrapper {
+  height: calc(100% - 64px);
+  padding-bottom: 4rem;
+  overflow: hidden;
 }
 
 .logo {
@@ -135,7 +153,7 @@ export default {
   }
 }
 
-.el-menu.wrapper {
+.el-menu.main {
   max-width: $side-bar-width;
   border-right: none;
   &:not(.el-menu--collapse) {

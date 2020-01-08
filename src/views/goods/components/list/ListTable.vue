@@ -34,7 +34,7 @@
         <vs-th>商品名称</vs-th>
         <vs-th>分类</vs-th>
         <vs-th>单价</vs-th>
-        <vs-th>件数</vs-th>
+        <vs-th>收藏数</vs-th>
         <vs-th>卖家昵称</vs-th>
         <vs-th>#</vs-th>
       </template>
@@ -52,9 +52,9 @@
                 :key="i"
               >{{ it.name }}</vs-chip>
             </vs-td>
-            <vs-td class="font-bold text-gray-700">￥{{ Number(tr.price).toFixed(2) }}</vs-td>
-            <vs-td class="font-bold">{{ tr.quantity }}</vs-td>
-            <vs-td class="text-gray-700">{{ tr.seller.nickname }}</vs-td>
+            <vs-td class="text-gray-700 font-bold">￥{{ Number(tr.price).toFixed(2) }}</vs-td>
+            <vs-td>{{ tr.collect_num }}</vs-td>
+            <vs-td class="text-gray-700 font-bold">{{ tr.seller.nickname }}</vs-td>
             <vs-td class="text-gray-600">{{ i + 1 }}</vs-td>
 
             <!-- 展开的内容 -->
@@ -201,7 +201,7 @@ export default {
   },
 
   methods: {
-  // 查看商品详情
+    // 查看商品详情
     viewGoodsDetail(goodsId) {
       this.$router.push({ path: '/goods-detail', query: { goodsId } })
     },
@@ -214,7 +214,7 @@ export default {
     // 按日期获取商品
     onDateChange(date) {
       console.log(this.$dayjs(date[0]).unix(), this.$dayjs(date[1]).unix())
-      this.getGoodsListOffSell()
+      this.$emit('getGoodsListOnSell', date)
     },
 
     // 复制商品编号

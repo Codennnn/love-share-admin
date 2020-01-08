@@ -8,6 +8,14 @@ export function signIn(data) {
   })
 }
 
+export function getAdminList(params) {
+  return request({
+    url: '/admin/list',
+    method: 'get',
+    params,
+  })
+}
+
 export function getAdminInfo() {
   return request({
     url: '/admin/info',

@@ -89,9 +89,9 @@ export const asyncRoutes = [
         meta: { title: '用户列表' },
       },
       {
-        path: '/manager-list',
-        name: 'ManagerList',
-        component: () => import('@/views/user/ManagerList.vue'),
+        path: '/admin-list',
+        name: 'AdminList',
+        component: () => import('@/views/admin/AdminList.vue'),
         meta: { title: '管理员列表' },
       },
     ],
@@ -185,19 +185,6 @@ export const asyncRoutes = [
             { title: '首页', url: '/' },
             { title: '商品列表', url: '/goods-list' },
             { title: '商品详情', active: true },
-          ],
-        },
-      },
-      {
-        path: '/goods-vivid-list',
-        name: 'GoodsVividList',
-        component: () => import('@/views/goods/GoodsVividList.vue'),
-        meta: {
-          title: '商品图片列表',
-          breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '商品列表', url: '/goods-list' },
-            { title: '商品图片列表', active: true },
           ],
         },
       },

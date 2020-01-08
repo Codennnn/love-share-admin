@@ -39,27 +39,54 @@
 
       <div class="w-2/4 py-3 px-6 rounded-lg bg-white">
         <div class="mb-3 text-gray-600">高级操作</div>
-        <div class="flex items-center justify-end text-sm">
-          <vs-button
-            class="mr-5"
-            color="primary"
-            type="border"
-            @click="exportExcel"
-          >导出列表数据</vs-button>
-          <vs-button @click="$router.push({
-                      path: '/goods-vivid-list'
-                    })">查看图片列表</vs-button>
+        <div class="flex items-center justify-between text-sm">
+          <div class="sm:w-1/2">
+            <vs-input
+              class="search-input w-full"
+              icon="search"
+              placeholder="输入商品 ID 搜索"
+              v-model="searchText"
+              @keyup.enter="onSearchByID"
+            />
+          </div>
+          <div class="sm:w-1/2 text-right">
+            <vs-button
+              color="primary"
+              type="border"
+              @click="exportExcel"
+            >导出列表数据</vs-button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 筛选搜索 -->
-    <div class="mb-6 pt-3 pb-5 px-6 rounded-lg bg-white">
-      <div class="mb-3 text-gray-600">筛选搜索</div>
-      <div class="flex justify-around items-center flex-wrap">
+    <div class="mb-6 py-4 px-6 rounded-lg bg-white">
+      <div class="flex items-center justify-between text-gray-600">
+        <div>过滤搜索</div>
+        <div>
+          <i
+            class="el-icon-arrow-down mr-2 cursor-pointer"
+            style="transition: transform 0.3s;"
+            :style="filtersStyle"
+            :title="hideFilters ? '展开' : '收起'"
+            @click="hideFilters = !hideFilters"
+          ></i>
+          <i
+            title="重置"
+            class="el-icon-refresh-right cursor-pointer"
+            @click="selectedCategory = '', selectedSchool = ''"
+          ></i>
+        </div>
+      </div>
+      <div
+        class="pt-5 pb-2 flex justify-around items-center flex-wrap overflow-hidden"
+        style="transition: all 0.4s ease;"
+        :style="inputStyle"
+      >
         <div>
           <el-select
-            v-model="category"
+            v-model="selectedCategory"
             filterable
             placeholder="根据商品分类搜索"
           >
@@ -74,7 +101,7 @@
         </div>
         <div>
           <el-select
-            v-model="school"
+            v-model="selectedSchool"
             filterable
             placeholder="根据商品分类搜索"
           >
@@ -89,7 +116,7 @@
         </div>
         <div>
           <el-select
-            v-model="school"
+            v-model="selectedSchool"
             filterable
             placeholder="根据学校搜索"
           >
@@ -108,15 +135,6 @@
             type="relief"
           >确认搜索</vs-button>
         </div>
-        <div class="mt">
-          <vs-input
-            class="search-input w-64"
-            icon="search"
-            placeholder="输入商品 ID 搜索"
-            v-model="searchText"
-            @keyup.enter="onSearchByID"
-          />
-        </div>
       </div>
     </div>
 
@@ -125,6 +143,7 @@
       :goodsList="goodsList"
       :tableTitle="tableTitle"
       :loading="tableLoading"
+      @getGoodsListOnSell="getGoodsListOnSell"
     />
   </div>
 </template>
@@ -145,20 +164,44 @@ export default {
 
   data: () => ({
     goodsList: [],
-    category: '',
-    school: '',
+    selectedCategory: '',
+    selectedSchool: '',
     tableTitle: null, // 表格标题
     onSellCount: '--', // 已上架商品数量
     offSellCount: '--', // 违规下架商品数量
     searchText: '',
     tableLoading: false,
+    hideFilters: false, // 隐藏过滤搜索
   }),
 
   computed: {
     ...mapState(['categoryList', 'schoolList']),
+    filtersStyle() {
+      if (this.hideFilters) {
+        return {
+          transform: 'rotate(-180deg)',
+        }
+      }
+      return {
+        transform: 'rotate(0)',
+      }
+    },
+    inputStyle() {
+      if (this.hideFilters) {
+        return {
+          opacity: '0',
+          'max-height': '0',
+          padding: '0',
+        }
+      }
+      return {
+        opacity: '1',
+        'max-height': '100px',
+      }
+    },
   },
 
-  created() {
+  activated() {
     this.getGoodsListOnSell()
     this.getGoodsListInfo()
   },
