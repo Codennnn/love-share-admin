@@ -9,9 +9,19 @@ $base-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); // 基础投影
 $light-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05); // 基础投影
 
 // Sidebar
-$side-bar-item-hover-color: #f4f4f4;
-$side-bar-menu-icon-color: #545454;
-$side-bar-collapse-transition: all 0.3s;
+$sb-color-dark: rgba(var(--vs-primary), 1) !important;
+$sb-item-hover-color-dark: rgba(255, 255, 255, 0.1) !important;
+$sb-menu-icon-color-dark: #fff !important;
+$sb-menu-active-bg-dark: rgba(255, 255, 255, 0.1) !important;
+
+$sb-color-light: #fff !important;
+$sb-item-hover-color-light: #f4f4f4 !important;
+$sb-menu-icon-color-light: #545454;
+$sb-menu-active-bg-light: linear-gradient(to right,
+  rgba(var(--vs-primary), 1),
+  rgba(var(--vs-primary), 0.7)) !important;
+
+$side-bar-collapse-transition: all 0.3s !important;
 $side-bar-width: 260px;
 
 // Navbar
@@ -25,3 +35,7 @@ $footer-height: 65px;
 $text-gray-500: #a0aec0;
 $text-gray-600: #718096;
 $text-gray-700: #4a5569;
+
+$bg-primary-gradient: linear-gradient(to right,
+  rgba(var(--vs-primary), 1),
+  rgba(var(--vs-primary), 0.7)) !important;
