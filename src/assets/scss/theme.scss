@@ -1,0 +1,155 @@
+// 深色主题
+.menu-dark::v-deep {
+
+  &.menu-main {
+    background: $sb-color-dark;
+
+    .logo {
+      background: $sb-color-dark;
+      box-shadow: none !important;
+    }
+
+    .el-menu.main {
+      background: $sb-color-dark;
+    }
+
+    // 有子菜单
+    .el-submenu {
+      color: white;
+
+      .el-submenu__title {
+        color: white;
+
+        &:hover {
+          background-color: $sb-item-hover-color-dark;
+        }
+
+        .menu-icon {
+          color: $sb-menu-icon-color-dark;
+          opacity: 0.5;
+        }
+      }
+
+      .el-submenu__icon-arrow {
+        color: white;
+      }
+
+      &.is-opened {
+        .el-submenu__title {
+          background: $sb-item-hover-color-dark;
+        }
+      }
+
+      &.is-active {
+        .el-submenu__title {
+          background: $sb-item-hover-color-dark;
+        }
+
+        .menu-icon {
+          opacity: 1;
+        }
+      }
+
+      .el-menu-item-group {
+        background: $sb-color-dark;
+
+        .el-menu-item {
+          &:hover {
+            background: $sb-item-hover-color-dark;
+          }
+        }
+      }
+    }
+
+    // 无子菜单
+    .el-menu-item {
+
+      color: white;
+
+      // 鼠标悬浮样式
+      &:hover {
+        background: $sb-item-hover-color-dark;
+      }
+
+      .menu-icon {
+        color: $sb-menu-icon-color-dark;
+        opacity: 0.5;
+      }
+    }
+
+    .el-menu-item.is-active {
+      color: #fff;
+      box-shadow: 0 0 10px $sb-color-dark;
+      background: $sb-menu-active-bg-dark;
+
+      .menu-icon {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+// 浅色主题
+.menu-light::v-deep {
+
+  &.menu-main {
+    background: $sb-color-light;
+
+    .logo {
+      background: $sb-color-light;
+      box-shadow: 0 15px 20px #fff !important;
+    }
+
+    .el-menu.main {
+      background: $sb-color-light;
+    }
+
+    // 有子菜单
+    .el-submenu {
+      .el-submenu__title {
+        &:hover {
+          background-color: $sb-item-hover-color-light;
+        }
+
+        .menu-icon {
+          color: $sb-menu-icon-color-light;
+        }
+      }
+
+      &.is-opened {
+        .el-submenu__title {
+          background: $sb-item-hover-color-light;
+        }
+      }
+
+      &.is-active {
+        .el-submenu__title {
+          background: $sb-item-hover-color-light;
+        }
+      }
+
+      .el-menu-item-group {
+        background: $sb-color-light;
+      }
+    }
+
+    // 无子菜单
+    .el-menu-item {
+
+      // 鼠标悬浮样式
+      &:hover {
+        background: $sb-item-hover-color-light;
+      }
+
+      .menu-icon {
+        color: $sb-menu-icon-color-light;
+      }
+    }
+
+    .el-menu-item.is-active {
+      box-shadow: 0 0 10px $sb-color-dark;
+      background: $sb-menu-active-bg-light;
+    }
+  }
+}
