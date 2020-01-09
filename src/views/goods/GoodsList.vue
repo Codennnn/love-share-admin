@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="w-2/4 py-3 px-6 rounded-lg bg-white">
+      <div class="w-2/4 py-3 px-6 rounded-lg bg-gray">
         <div class="mb-3 text-gray-600">高级操作</div>
         <div class="flex items-center justify-between text-sm">
           <div class="sm:w-1/2">
@@ -61,7 +61,7 @@
     </div>
 
     <!-- 筛选搜索 -->
-    <div class="mb-6 py-4 px-6 rounded-lg bg-white">
+    <div class="mb-6 py-4 px-6 rounded-lg base-shadow bg-white">
       <div class="flex items-center justify-between text-gray-600">
         <div>过滤搜索</div>
         <div>
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div
-        class="pt-5 pb-2 flex justify-around items-center flex-wrap overflow-hidden"
+        class="pt-8 pb-4 flex justify-around items-center flex-wrap overflow-hidden"
         style="transition: all 0.4s ease;"
         :style="inputStyle"
       >
@@ -294,12 +294,12 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-radius: 0.5rem;
-  background: white;
+  background: $bg-gray;
   transition: all 0.4s;
   cursor: pointer;
 
   &:hover {
-    box-shadow: $light-shadow;
+    box-shadow: $base-shadow;
   }
 }
 

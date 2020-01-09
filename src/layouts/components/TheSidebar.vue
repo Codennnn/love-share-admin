@@ -21,7 +21,7 @@
         <img
           v-show="!sidebarCollapse"
           class="w-24 ml-3"
-          src="@/assets/images/logo-text.png"
+          :src="logoText"
         >
       </transition>
     </div>
@@ -90,6 +90,8 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 const logoLight = require('@/assets/images/logo-light.png')
 const logoDark = require('@/assets/images/logo-dark.png')
+const logoTextDark = require('@/assets/images/logo-text-dark.png')
+const logoTextLight = require('@/assets/images/logo-text-light.png')
 
 export default {
   name: 'TheSidebar',
@@ -111,16 +113,22 @@ export default {
 
   computed: {
     menuTheme() {
-      return this.$store.state.menuTheme
+      return this.$store.state.menuTheme === 'menu-dark'
     },
     logo() {
-      if (this.menuTheme === 'menu-dark') {
+      if (this.menuTheme) {
         return logoLight
       }
       return logoDark
     },
+    logoText() {
+      if (this.menuTheme) {
+        return logoTextLight
+      }
+      return logoTextDark
+    },
     menuClass() {
-      if (this.menuTheme === 'menu-dark') {
+      if (this.menuTheme) {
         return 'menu-dark'
       }
       return 'menu-light'
