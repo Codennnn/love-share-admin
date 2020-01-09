@@ -33,16 +33,31 @@
             >
               <div
                 class="flex items-center mt-1 ml-1 mb-3"
-                v-if="$route.meta.breadcrumb"
+                v-if="$route.meta && $route.meta.breadcrumb"
               >
                 <i
                   class="iconfont icon-back"
                   @click="$router.go(-1)"
                 ></i>
-                <vs-breadcrumb
-                  separator="chevron_right"
-                  :items="$route.meta.breadcrumb"
-                ></vs-breadcrumb>
+                <vs-breadcrumb>
+                  <template v-for="(br, i) in $route.meta.breadcrumb">
+                    <li
+                      :class="{'pointer-events-none': br.active}"
+                      :key="i"
+                    >
+                      <router-link
+                        :to="String(br.to)"
+                        :class="{'text-primary': br.active}"
+                      >{{ br.title }}</router-link>
+                      <span
+                        v-if="!br.active"
+                        class="vs-breadcrum--separator"
+                      >
+                        <i class="el-icon-arrow-right"></i>
+                      </span>
+                    </li>
+                  </template>
+                </vs-breadcrumb>
               </div>
             </transition>
 
@@ -100,7 +115,24 @@ export default {
 .layout-main {
   position: relative;
   height: 100%;
-  background: rgb(248, 248, 248);
+  // background: rgb(248, 248, 248);
+  background: white;
+}
+
+.el-breadcrumb::v-deep {
+  .el-breadcrumb__inner {
+    font-size: 0.95rem;
+    &.is-link {
+      font-weight: normal;
+    }
+    &:not(.is-link) {
+      cursor: default;
+      color: gray;
+      &:hover {
+        color: gray;
+      }
+    }
+  }
 }
 
 #content-area {

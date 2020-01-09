@@ -14,6 +14,9 @@ const mutations = {
   SET_INFO(state, info) {
     state.info = info
   },
+  SET_AVATAR(state, url) {
+    state.info.avatar_url = url
+  },
 }
 
 const actions = {

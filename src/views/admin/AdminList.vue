@@ -18,6 +18,7 @@
           color="primary"
           type="border"
           size="small"
+          @click="$router.push('/admin-create')"
         >
           <i class="el-icon-plus mr-1 font-semibold"></i>
           <span>添加管理员</span>

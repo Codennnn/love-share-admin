@@ -1,5 +1,8 @@
 <template>
-  <div class="menu-main">
+  <div
+    class="menu-main"
+    :class="menuClass"
+  >
     <!-- 顶部LOGO -->
     <div
       class="logo sticky top-0 left-0 z-50 w-full flex items-center h-16 cursor-pointer"
@@ -8,7 +11,7 @@
     >
       <img
         style="width: 2.6rem;"
-        src="@/assets/images/logo.png"
+        :src="logo"
       />
       <transition
         enter-active-class="animated fadeIn faster"
@@ -85,6 +88,9 @@
 import _debounce from 'lodash/debounce' // 引入防抖函数
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
+const logoLight = require('@/assets/images/logo-light.png')
+const logoDark = require('@/assets/images/logo-dark.png')
+
 export default {
   name: 'TheSidebar',
   components: { VuePerfectScrollbar },
@@ -104,6 +110,21 @@ export default {
   },
 
   computed: {
+    menuTheme() {
+      return this.$store.state.menuTheme
+    },
+    logo() {
+      if (this.menuTheme === 'menu-dark') {
+        return logoLight
+      }
+      return logoDark
+    },
+    menuClass() {
+      if (this.menuTheme === 'menu-dark') {
+        return 'menu-dark'
+      }
+      return 'menu-light'
+    },
     sidebarCollapse() {
       return this.$store.state.sidebarCollapse
     },
@@ -124,13 +145,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/theme.scss";
+
 .menu-main {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
   height: 100%;
-  background: #fff;
 }
 
 // 滚动区域
@@ -143,8 +165,6 @@ export default {
 .logo {
   width: $side-bar-width;
   padding: 0 36px;
-  background: #fff;
-  box-shadow: 0 15px 20px #fff;
   overflow: hidden;
   transition: $side-bar-collapse-transition;
   &.logo-collapse {
@@ -170,13 +190,11 @@ export default {
   .el-submenu__title {
     &:hover {
       border-radius: 0.5rem;
-      background-color: $side-bar-item-hover-color;
     }
     .menu-icon {
       margin-right: 10px;
       font-size: 22px;
       font-weight: normal;
-      color: $side-bar-menu-icon-color;
     }
   }
   .el-submenu__icon-arrow {
@@ -185,7 +203,6 @@ export default {
   &.is-opened {
     .el-submenu__title {
       border-radius: 0.5rem;
-      background-color: $side-bar-item-hover-color;
       .el-submenu__icon-arrow {
         transform: rotateZ(0);
       }
@@ -193,7 +210,6 @@ export default {
   }
   &.is-active .el-submenu__title {
     border-radius: 0.5rem;
-    background-color: rgba(var(--vs-primary), 0.1);
   }
 
   .el-menu-item-group {
@@ -202,7 +218,6 @@ export default {
       line-height: 40px;
       &:hover {
         border-radius: 5px;
-        background-color: $side-bar-item-hover-color;
       }
     }
   }
@@ -213,27 +228,33 @@ export default {
   height: 40px;
   &:hover {
     border-radius: 5px;
-    background-color: $side-bar-item-hover-color;
   }
   .menu-icon {
     margin-right: 15px;
     font-size: 22px;
     font-weight: normal;
-    color: $side-bar-menu-icon-color;
   }
 }
 
 .el-menu-item.is-active {
   color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(var(--vs-primary), 1);
-  background: linear-gradient(
-    to right,
-    rgba(var(--vs-primary), 1),
-    rgba(var(--vs-primary), 0.7)
-  );
   .menu-icon {
     color: inherit;
+  }
+}
+</style>
+
+<style lang="scss">
+.el-menu--vertical {
+  .el-menu-item-group {
+    background: white;
+  }
+
+  .el-menu-item.is-active {
+    background: $bg-primary-gradient;
+    color: white;
+    opacity: 0.9;
   }
 }
 </style>

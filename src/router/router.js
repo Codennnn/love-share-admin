@@ -26,6 +26,9 @@ export const constantRoutes = [
 ]
 
 export const asyncRoutes = [
+  /*
+   * 数据分析
+   */
   {
     path: '/',
     redirect: '/analytics',
@@ -46,6 +49,10 @@ export const asyncRoutes = [
     ],
     meta: { title: '数据分析', icon: 'el-icon-data-analysis' },
   },
+
+  /*
+   * 商品管理
+   */
   {
     path: '',
     component: Layout,
@@ -65,6 +72,10 @@ export const asyncRoutes = [
     ],
     meta: { title: '商品管理', icon: 'el-icon-box', roles: ['super_admin'] },
   },
+
+  /*
+   * 订单管理
+   */
   {
     path: '',
     component: Layout,
@@ -78,6 +89,10 @@ export const asyncRoutes = [
     ],
     meta: { title: '订单管理', icon: 'el-icon-files' },
   },
+
+  /*
+   * 用户管理
+   */
   {
     path: '',
     component: Layout,
@@ -97,6 +112,10 @@ export const asyncRoutes = [
     ],
     meta: { title: '用户管理', icon: 'el-icon-user' },
   },
+
+  /*
+   * 求购管理
+   */
   {
     path: '',
     component: Layout,
@@ -110,6 +129,10 @@ export const asyncRoutes = [
     ],
     meta: { title: '求购管理', icon: 'el-icon-sell' },
   },
+
+  /*
+   * 用户管理
+   */
   {
     path: '',
     component: Layout,
@@ -123,6 +146,10 @@ export const asyncRoutes = [
     ],
     meta: { title: '评价管理', icon: 'el-icon-chat-line-square' },
   },
+
+  /*
+   * 资讯管理
+   */
   {
     path: '/service',
     component: Layout,
@@ -169,7 +196,9 @@ export const asyncRoutes = [
     ],
   },
 
-  // 不显示在侧边栏的路由
+  /*
+   * 不显示在侧边栏的路由
+   */
   {
     path: '',
     hidden: true,
@@ -222,7 +251,7 @@ export const asyncRoutes = [
           title: '管理员信息',
           breadcrumb: [
             { title: '首页', url: '/' },
-            { title: '管理员列表', url: '/user-list' },
+            { title: '管理员列表', url: '/admin-list' },
             { title: '管理员信息', active: true },
           ],
         },
@@ -235,8 +264,21 @@ export const asyncRoutes = [
           title: '管理员信息',
           breadcrumb: [
             { title: '首页', url: '/' },
-            { title: '管理员列表', url: '/user-list' },
+            { title: '管理员列表', url: '/admin-list' },
             { title: '管理员信息', active: true },
+          ],
+        },
+      },
+      {
+        path: '/admin-create',
+        name: 'AdminCreate',
+        component: () => import('@/views/admin/AdminCreate.vue'),
+        meta: {
+          title: '创建管理员',
+          breadcrumb: [
+            { title: '首页', to: '/' },
+            { title: '管理员列表', to: '/admin-list' },
+            { title: '创建管理员', active: true },
           ],
         },
       },
