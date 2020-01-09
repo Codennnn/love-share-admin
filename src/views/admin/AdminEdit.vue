@@ -1,32 +1,35 @@
 <template>
   <div>
-    <vs-tabs>
-      <vs-tab label="Home">
-        <div class="con-tab-ejemplo">
-          Home
+    <vs-tabs class="p-6 bg-white">
+      <vs-tab
+        icon="el-icon-user"
+        icon-pack="el-icon"
+        label="账号"
+      >
+        <div class="w-1/2 py-5 pr-4">
+          <EditForm />
         </div>
-      </vs-tab>
-      <vs-tab label="Service">
-        <div class="con-tab-ejemplo">
-          Service
+
+        <div
+          class="mb-5 p-5 rounded-lg"
+          style="border: 1px solid #e4e4e4;"
+        >
+          <p class="text-lg text-gray-600">权 限</p>
+          <vs-divider />
+          <EditPermission :editable="true" />
         </div>
-      </vs-tab>
-      <vs-tab label="login">
-        <div class="con-tab-ejemplo">
-          login
+
+        <div class="flex justify-end">
+          <vs-button>保存设置</vs-button>
         </div>
       </vs-tab>
       <vs-tab
-        disabled
-        label="Disabled"
+        icon="el-icon-user"
+        icon-pack="el-icon"
+        label="账号"
       >
         <div class="con-tab-ejemplo">
-          Disabled
-        </div>
-      </vs-tab>
-      <vs-tab label="Lorem ipsum dolor sit amet">
-        <div class="con-tab-ejemplo">
-          Lorem ipsum dolor sit amet
+          Service
         </div>
       </vs-tab>
     </vs-tabs>
@@ -34,7 +37,19 @@
 </template>
 
 <script>
+import EditForm from './edit/EditForm.vue'
+import EditPermission from './edit/EditPermission.vue'
+
 export default {
   name: 'AdminEdit',
+  components: { EditForm, EditPermission },
 }
 </script>
+
+<style lang="scss" scoped>
+.vs-tabs {
+  .ul-tabs {
+    box-shadow: none;
+  }
+}
+</style>
