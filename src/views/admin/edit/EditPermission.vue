@@ -62,9 +62,13 @@ export default {
   methods: {
     initValues() {
       if (this.permissions) {
-        this.per = _cloneDeepWith(this.permissions).map(el => ({
-          module: el.module,
-          purview: this.actions.map(it => ({ it: el.purview.includes(it) })),
+        this.per = _cloneDeepWith(this.permissions).map(permission => ({
+          module: permission.module,
+          purview: this.actions.map((action) => {
+            const obj = {}
+            obj[`${action}`] = permission.purview.includes(action)
+            return obj
+          }),
         }))
         console.log(this.per)
       } else {

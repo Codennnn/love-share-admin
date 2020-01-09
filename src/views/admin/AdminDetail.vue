@@ -43,7 +43,6 @@
       </div>
       <div class="flex justify-end">
         <vs-button
-          class="w-24"
           icon="el-icon-edit"
           icon-pack="el-icon"
           @click="$router.push('/admin-edit')"
@@ -54,20 +53,25 @@
     <div class="permission p-5 light-shadow bg-white rounded-lg">
       <p class="text-lg text-gray-600">权 限</p>
       <vs-divider />
+      <EditPermission :permissions="permissions" />
     </div>
   </div>
 </template>
 
 <script>
+import EditPermission from './edit/EditPermission.vue'
+
 import { getAdminDetail } from '@/request/api/admin'
 
 export default {
   name: 'AdminDetail',
+  components: { EditPermission },
+
   data: () => ({
     detail: {},
     permissions: [{
-      module: 'users',
-      purview: [{ read: false }, { write: false }, { create: false }, { delete: false }],
+      module: 'user',
+      purview: ['read'],
     }],
   }),
 
