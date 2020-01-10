@@ -7,7 +7,7 @@
         label="账号"
       >
         <div class="w-1/2 py-5 pr-4">
-          <EditForm />
+          <EditForm ref="editForm" />
         </div>
 
         <div
@@ -16,7 +16,12 @@
         >
           <p class="text-lg text-gray-600">权 限</p>
           <vs-divider />
-          <EditPermission :editable="true" />
+          <EditPermission
+            v-if="info"
+            ref="editPermissions"
+            :permissions="info.permissions"
+            :editable="true"
+          />
         </div>
 
         <div class="flex justify-end">
@@ -24,12 +29,12 @@
         </div>
       </vs-tab>
       <vs-tab
-        icon="el-icon-user"
+        icon="el-icon-key"
         icon-pack="el-icon"
-        label="账号"
+        label="安全"
       >
-        <div class="con-tab-ejemplo">
-          Service
+        <div>
+          <EditPassword ref="editPassword" />
         </div>
       </vs-tab>
     </vs-tabs>
@@ -38,16 +43,25 @@
 
 <script>
 import EditForm from './edit/EditForm.vue'
+import EditPassword from './edit/EditPassword.vue'
 import EditPermission from './edit/EditPermission.vue'
 
 export default {
   name: 'AdminEdit',
-  components: { EditForm, EditPermission },
+  components: { EditForm, EditPassword, EditPermission },
+
+  data: () => ({
+    info: null,
+  }),
+
+  mounted() {
+    this.info = this.$route.query.detail
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.vs-tabs {
+.vs-tabs::v-deep {
   .ul-tabs {
     box-shadow: none;
   }

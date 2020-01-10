@@ -45,7 +45,7 @@
         <vs-button
           icon="el-icon-edit"
           icon-pack="el-icon"
-          @click="$router.push('/admin-edit')"
+          @click="editAdmin()"
         >编 辑</vs-button>
       </div>
     </div>
@@ -81,6 +81,13 @@ export default {
       if (code === 2000) {
         this.detail = data.admin_detail
       }
+    },
+
+    editAdmin() {
+      this.$router.push({
+        path: '/admin-edit',
+        query: { detail: this.detail },
+      })
     },
   },
 }
