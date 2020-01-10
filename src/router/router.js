@@ -287,19 +287,6 @@ export const asyncRoutes = [
           ],
         },
       },
-      {
-        path: '/admin-create',
-        name: 'AdminCreate',
-        component: () => import('@/views/admin/AdminCreate.vue'),
-        meta: {
-          title: '创建管理员',
-          breadcrumb: [
-            { title: '首页', to: '/' },
-            { title: '管理员列表', to: '/admin-list' },
-            { title: '创建管理员', active: true },
-          ],
-        },
-      },
     ],
   },
 

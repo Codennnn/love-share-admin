@@ -53,32 +53,32 @@
           </vs-td>
           <vs-td>
             <div class="text-center">
-              <vs-dropdown>
+              <el-dropdown>
                 <i class="el-icon-more-outline"></i>
-                <vs-dropdown-menu class="w-24">
-                  <vs-dropdown-item class="text-center">
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item class="text-center">
                     <i class="el-icon-chat-round mr-2"></i>
                     <span>联系</span>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
+                  </el-dropdown-item>
+                  <el-dropdown-item
                     class="text-center"
-                    @click="$router.push({
+                    @click.native="$router.push({
                               path: '/admin-detail',
                               query: { adminId: tr._id }
                             })"
                   >
                     <i class="el-icon-news mr-2"></i>
                     <span>查看</span>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    divided
                     class="text-center text-danger"
-                    divider
                   >
                     <i class="el-icon-delete mr-2"></i>
                     <span>删除</span>
-                  </vs-dropdown-item>
-                </vs-dropdown-menu>
-              </vs-dropdown>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </vs-td>
         </vs-tr>

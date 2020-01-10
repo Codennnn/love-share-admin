@@ -53,7 +53,7 @@
     <div class="permission p-5 light-shadow bg-white rounded-lg">
       <p class="text-lg text-gray-600">权 限</p>
       <vs-divider />
-      <EditPermission :permissions="permissions" />
+      <EditPermission :permissions="detail.permissions" />
     </div>
   </div>
 </template>
@@ -69,10 +69,6 @@ export default {
 
   data: () => ({
     detail: {},
-    permissions: [{
-      module: 'user',
-      purview: ['read'],
-    }],
   }),
 
   mounted() {
@@ -81,9 +77,9 @@ export default {
 
   methods: {
     async getAdminDetail(admin_id) {
-      const { code, data: { admin_detail } } = await getAdminDetail({ admin_id })
+      const { code, data } = await getAdminDetail({ admin_id })
       if (code === 2000) {
-        this.detail = admin_detail
+        this.detail = data.admin_detail
       }
     },
   },

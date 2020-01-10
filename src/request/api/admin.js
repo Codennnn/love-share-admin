@@ -8,6 +8,14 @@ export function signIn(data) {
   })
 }
 
+export function createAdmin(data) {
+  return request({
+    url: '/admin/create',
+    method: 'post',
+    data,
+  })
+}
+
 export function getAdminList(params) {
   return request({
     url: '/admin/list',

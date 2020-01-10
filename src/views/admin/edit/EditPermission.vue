@@ -41,6 +41,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    allSelected: Boolean,
     permissions: Array,
   },
 
@@ -55,28 +56,52 @@ export default {
     actions: ['read', 'write', 'create', 'delete'],
   }),
 
-  created() {
-    this.initValues()
+  watch: {
+    permissions: {
+      handler(v) {
+        if (v) {
+          this.setPermissions()
+        } else {
+          this.initValues()
+        }
+      },
+      immediate: true,
+    },
+    allSelected(status) {
+      if (status) {
+        this.setAllCheckboxStatus(status)
+      } else {
+        this.setAllCheckboxStatus(status)
+      }
+    },
   },
 
   methods: {
     initValues() {
-      if (this.permissions) {
-        this.per = _cloneDeepWith(this.permissions).map(permission => ({
-          module: permission.module,
-          purview: this.actions.map((action) => {
-            const obj = {}
-            obj[`${action}`] = permission.purview.includes(action)
-            return obj
-          }),
-        }))
-      } else {
-        const purview = [{ read: false }, { write: false }, { create: false }, { delete: false }]
-        this.per = Object.keys(this.modules).map(key => ({
-          module: key,
-          purview: _cloneDeepWith(purview),
-        }))
-      }
+      const purview = [{ read: false }, { write: false }, { create: false }, { delete: false }]
+      this.per = Object.keys(this.modules).map(key => ({
+        module: key,
+        purview: _cloneDeepWith(purview),
+      }))
+    },
+
+    setPermissions() {
+      this.per = _cloneDeepWith(this.permissions).map(permission => ({
+        module: permission.module,
+        purview: this.actions.map((action) => {
+          const obj = {}
+          obj[`${action}`] = permission.purview.includes(action)
+          return obj
+        }),
+      }))
+    },
+
+    setAllCheckboxStatus(status) {
+      this.per.forEach((el) => {
+        el.purview.forEach((it, i) => {
+          it[this.actions[i]] = status
+        })
+      })
     },
 
     getPermissions() {
@@ -101,6 +126,11 @@ table.permission {
   td {
     padding: 0.6rem 0.5rem 0.6rem 0.5rem;
     font-size: 0.9rem;
+    .con-vs-checkbox::v-deep {
+      .vs-checkbox--input {
+        width: 20px;
+      }
+    }
   }
   td:nth-child(1) {
     color: #626262;
