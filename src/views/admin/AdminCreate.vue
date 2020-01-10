@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 base-shadow bg-white rounded-lg">
+  <div class="mt-6 p-6 base-shadow bg-white rounded-lg">
     <div class="mb-5 flex">
       <div class="w-1/2 pr-5">
         <vs-button @click="showAvatarPopup = true">添加头像</vs-button>

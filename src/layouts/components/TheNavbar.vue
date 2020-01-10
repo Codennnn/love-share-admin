@@ -138,13 +138,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/theme/navbar.scss";
+
 .nav-wrapper {
   position: fixed;
   z-index: 999;
   width: calc(100% - #{$side-bar-width});
   min-width: 900px;
-  padding: 1.4rem;
-  padding-top: 1.2rem;
+  padding: 1.2rem 2rem;
   box-sizing: border-box;
   transition: $side-bar-collapse-transition;
 

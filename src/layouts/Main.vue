@@ -23,7 +23,7 @@
         <!-- 头部 -->
         <TheNavbar />
 
-        <div class="router-view px-6">
+        <div class="router-view">
           <div class="router-content pt-24">
             <!-- 面包屑导航 -->
             <transition
@@ -157,6 +157,7 @@ export default {
 .router-view {
   position: relative;
   min-height: 100vh;
+  padding: 0 2rem;
   .router-content {
     min-height: calc(100vh - #{$footer-height});
     .icon-back {
