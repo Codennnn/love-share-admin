@@ -7,7 +7,11 @@
         label="账号"
       >
         <div class="w-1/2 py-5 pr-4">
-          <EditForm ref="editForm" />
+          <EditForm
+            ref="editForm"
+            :form-data="info"
+          />
+          <EditAvatar :avatar="info.avatar_url" />
         </div>
 
         <div
@@ -17,7 +21,6 @@
           <p class="text-lg text-gray-600">权 限</p>
           <vs-divider />
           <EditPermission
-            v-if="info"
             ref="editPermissions"
             :permissions="info.permissions"
             :editable="true"
@@ -42,16 +45,19 @@
 </template>
 
 <script>
+import EditAvatar from './edit/EditAvatar.vue'
 import EditForm from './edit/EditForm.vue'
 import EditPassword from './edit/EditPassword.vue'
 import EditPermission from './edit/EditPermission.vue'
 
 export default {
   name: 'AdminEdit',
-  components: { EditForm, EditPassword, EditPermission },
+  components: {
+    EditAvatar, EditForm, EditPassword, EditPermission,
+  },
 
   data: () => ({
-    info: null,
+    info: {},
   }),
 
   mounted() {

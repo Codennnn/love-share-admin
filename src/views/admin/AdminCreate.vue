@@ -30,7 +30,7 @@
         <p class="text-lg text-gray-600">权 限</p>
         <div>
           <vs-switch v-model="allSelected">
-            <span slot="on">已全选</span>
+            <span slot="on">全选</span>
             <span slot="off">全选</span>
           </vs-switch>
         </div>

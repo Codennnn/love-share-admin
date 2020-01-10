@@ -50,12 +50,12 @@ const checkRealName = (rule, value, callback) => {
 
 export default {
   name: 'EditForm',
+  props: {
+    formData: Object,
+  },
+
   data: () => ({
-    form: {
-      nickname: '',
-      real_name: '',
-      email: '',
-    },
+    form: {},
     rules: {
       nickname: [
         { validator: checkNickname, trigger: 'blur' },
@@ -65,6 +65,23 @@ export default {
       ],
     },
   }),
+
+  watch: {
+    formData: {
+      handler(v) {
+        if (v) {
+          this.form = v
+        } else {
+          this.form = {
+            nickname: '',
+            real_name: '',
+            email: '',
+          }
+        }
+      },
+      immediate: true,
+    },
+  },
 
   methods: {
     submit() {

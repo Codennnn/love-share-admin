@@ -72,7 +72,7 @@ export default {
   }),
 
   mounted() {
-    this.getAdminDetail(this.$route.query.adminId || this.$store.state.admin.info._id)
+    this.getAdminDetail(this.$route.query.adminId || this.$store.getters['admin/adminId'])
   },
 
   methods: {

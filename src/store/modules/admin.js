@@ -47,6 +47,7 @@ const actions = {
   },
 
   async SignOut({ commit }) {
+    localStorage.removeItem('vuex')
     commit('SET_TOKEN', '')
     removeToken() // 移除本地token缓存
     resetRouter() // 重置路由，不然会出现路由重复的情况

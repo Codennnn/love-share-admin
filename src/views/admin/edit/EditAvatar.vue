@@ -56,6 +56,10 @@ export default {
   name: 'EditAvatar',
   components: { ReplaceAvatar },
 
+  props: {
+    avatar: String,
+  },
+
   data: () => ({
     gender: 0,
     showAvatarPopup: false,
@@ -71,6 +75,14 @@ export default {
           } else {
             this.avatarUrl = 'https://cdn.hrspider.top/default_avatar_male.jpg'
           }
+        }
+      },
+      immediate: true,
+    },
+    avatar: {
+      handler(avatar) {
+        if (avatar) {
+          this.avatarUrl = avatar
         }
       },
       immediate: true,
