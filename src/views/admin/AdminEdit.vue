@@ -2,16 +2,18 @@
   <div>
     <vs-tabs class="p-6 bg-white">
       <vs-tab
-        class="px-4 py-10"
+        id="main"
+        class="px-4 py-10 vs-con-loading__container"
         icon="el-icon-user"
         icon-pack="el-icon"
-        label="账号"
+        label="账号信息"
       >
         <div class="mb-8 flex">
           <div class="mr-16">
             <EditAvatar
-              :admin-id="info._id"
-              :avatar="info.avatar_url"
+              ref="editAvatar"
+              :admin-id="detail._id"
+              :avatar="detail.avatar_url"
               @updateInfo="getAdminDetail()"
             />
           </div>
@@ -31,20 +33,20 @@
           <vs-divider />
           <EditPermission
             ref="editPermissions"
-            :permissions="info.permissions"
+            :permissions="detail.permissions"
             :editable="true"
           />
         </div>
 
         <div class="flex justify-end">
-          <vs-button>保存设置</vs-button>
+          <vs-button @click="onUpdateAmin()">保存设置</vs-button>
         </div>
       </vs-tab>
       <vs-tab
         class="px-4 py-10"
         icon="el-icon-key"
         icon-pack="el-icon"
-        label="安全"
+        label="安全设置"
       >
         <div>
           <EditPassword ref="editPassword" />
@@ -60,7 +62,7 @@ import EditForm from './edit/EditForm.vue'
 import EditPassword from './edit/EditPassword.vue'
 import EditPermission from './edit/EditPermission.vue'
 
-import { getAdminDetail } from '@/request/api/admin'
+import { getAdminDetail, updateAdmin } from '@/request/api/admin'
 
 export default {
   name: 'AdminEdit',
@@ -70,6 +72,7 @@ export default {
 
   data: () => ({
     info: {},
+    detail: {},
   }),
 
   mounted() {
@@ -77,12 +80,55 @@ export default {
   },
 
   methods: {
-    getAdminDetail() {
-      getAdminDetail({ admin_id: this.$route.query.adminId }).then(({ code, data }) => {
-        if (code === 2000) {
-          this.info = data.admin_detail
+    async getAdminDetail() {
+      const {
+        code,
+        data: { admin_detail },
+      } = await getAdminDetail({ admin_id: this.$route.query.adminId })
+      if (code === 2000) {
+        this.detail = admin_detail
+        this.info = {
+          _id: admin_detail._id,
+          nickname: admin_detail.nickname,
+          real_name: admin_detail.real_name,
+          email: admin_detail.email,
         }
-      })
+      }
+    },
+
+    async onUpdateAmin() {
+      if (this.$refs.editForm.submit()) {
+        this.$vs.loading({
+          container: '#main',
+          scale: 1,
+        })
+        const payload = Object.assign({
+          admin_id: this.info._id,
+          gender: this.$refs.editAvatar.gender,
+          permissions: this.$refs.editPermissions.getPermissions(),
+        }, this.$refs.editForm.form)
+        try {
+          const { code, msg } = await updateAdmin(payload)
+          if (code === 2000) {
+            await this.getAdminDetail()
+            this.$vs.notify({
+              title: '信息更新成功',
+              text: msg,
+              color: 'success',
+            })
+          } else {
+            throw new Error(msg)
+          }
+        } catch (err) {
+          this.$vs.notify({
+            title: '信息更新失败',
+            text: err,
+            color: 'danger',
+          })
+        } finally {
+          this.$vs.loading.close('#main > .con-vs-loading')
+        }
+      }
     },
   },
 }

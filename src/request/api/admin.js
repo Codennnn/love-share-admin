@@ -16,6 +16,14 @@ export function createAdmin(data) {
   })
 }
 
+export function updateAdmin(data) {
+  return request({
+    url: '/admin/update',
+    method: 'put',
+    data,
+  })
+}
+
 export function getAdminList(params) {
   return request({
     url: '/admin/list',
