@@ -1,0 +1,18 @@
+// Fixed
+.nav-fixed {
+  position: fixed;
+  z-index: 999;
+  padding: 1.2rem 2rem;
+
+  .nav-bar {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Scroll
+.nav-scroll {
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+  padding: 1.2rem 2rem;
+}

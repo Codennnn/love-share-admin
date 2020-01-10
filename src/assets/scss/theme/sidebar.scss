@@ -4,6 +4,19 @@
   &.menu-main {
     background: $sb-color-dark;
 
+    &.collapse {
+      .el-submenu {
+        .is-active {
+          .el-submenu__title {
+            &::before {
+              top: 20px;
+              // display: none;
+            }
+          }
+        }
+      }
+    }
+
     .logo {
       background: $sb-color-dark;
       box-shadow: none !important;
@@ -11,6 +24,38 @@
 
     .el-menu.main {
       background: $sb-color-dark;
+    }
+
+    // 侧边栏展开时
+    .el-menu:not(.el-menu--collapse) {
+      .el-submenu {
+        &.is-active {
+          .el-submenu__title {
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              right: -18px;
+              width: 40px;
+              height: 40px;
+              transform: translateY(-100%) scaleX(-1);
+              background-image: radial-gradient(200px at 40px 0px, rgba(0, 0, 0, 0) 40px, #fff 40px);
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              z-index: 99;
+              bottom: 0;
+              right: -18px;
+              width: 40px;
+              height: 40px;
+              transform: translateY(100%) scale(-1, -1);
+              background-image: radial-gradient(200px at 40px 0px, rgba(0, 0, 0, 0) 40px, #fff 40px);
+            }
+          }
+        }
+      }
     }
 
     // 有子菜单
@@ -41,11 +86,21 @@
       }
 
       &.is-active {
+        .el-submenu__icon-arrow {
+          color: $sb-color-dark;
+        }
+
         .el-submenu__title {
-          background: $sb-item-hover-color-dark;
+          // background: $sb-item-hover-color-dark;
+          position: relative;
+          border-radius: 4rem 0 0 4rem;
+          background: white !important;
+          color: $sb-color-dark;
+          box-shadow: 18px 0 0 0 white;
         }
 
         .menu-icon {
+          color: $sb-color-dark;
           opacity: 1;
         }
       }
