@@ -158,7 +158,7 @@ export default {
   position: relative;
   min-height: 100vh;
   .router-content {
-    min-height: calc(100vh - 3rem - #{$footer-height});
+    min-height: calc(100vh - #{$footer-height});
     .icon-back {
       cursor: pointer;
       font-size: 30px;
