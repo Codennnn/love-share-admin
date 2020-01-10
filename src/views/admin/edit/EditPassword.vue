@@ -13,7 +13,10 @@
         label="登录账号"
         prop="account"
       >
-        <el-input v-model="form.account"></el-input>
+        <el-input
+          placeholder="只能由字母和数字组成"
+          v-model="form.account"
+        ></el-input>
       </el-form-item>
       <el-form-item
         label="密码"
@@ -42,6 +45,8 @@
 const checkAccount = (rule, value, callback) => {
   if (!value) {
     callback(new Error('请填写账号'))
+  } else if (!/^[0-9a-zA-Z]+$/.test(value)) {
+    callback(new Error('账号不符合规范'))
   }
   callback()
 }

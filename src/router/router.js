@@ -184,7 +184,7 @@ export const asyncRoutes = [
         meta: { title: '创建管理员' },
       },
     ],
-    meta: { title: '网站管理', icon: 'el-icon-user' },
+    meta: { title: '网站管理', icon: 'el-icon-monitor' },
   },
 
   {

@@ -1,7 +1,7 @@
 <template>
   <div
     class="nav-wrapper"
-    :class="{ collapse: sidebarCollapse }"
+    :class="[{ collapse: sidebarCollapse }, navbarType]"
   >
     <div class="nav-bar rounded-lg">
       <div>
@@ -86,6 +86,8 @@ const navIcons = [
 
 export default {
   name: 'TheNavBar',
+  components: { Notice, Avatar },
+
   data: () => ({
     navIcons,
     searchText: '',
@@ -93,7 +95,15 @@ export default {
     isFullScreen: false, // 是否全屏,
   }),
 
-  components: { Notice, Avatar },
+  computed: {
+    ...mapState(['sidebarCollapse']),
+    navbarType() {
+      if (this.$store.state.navbarType === 'fixed') {
+        return 'nav-fixed'
+      }
+      return 'nav-scroll'
+    },
+  },
 
   mounted() {
     if (screenfull.enabled) {
@@ -107,9 +117,6 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState(['sidebarCollapse']),
-  },
 
   methods: {
     // 网页全屏
@@ -141,11 +148,8 @@ export default {
 @import "~@/assets/scss/theme/navbar.scss";
 
 .nav-wrapper {
-  position: fixed;
-  z-index: 999;
   width: calc(100% - #{$side-bar-width});
   min-width: 900px;
-  padding: 1.2rem 2rem;
   box-sizing: border-box;
   transition: $side-bar-collapse-transition;
 
@@ -161,8 +165,8 @@ export default {
   height: 65px;
   padding: 0.6rem 1rem;
   background: #fff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
+  transition: all 0.3s;
 }
 
 .nav-right {

@@ -87,12 +87,20 @@ export default {
 
   data: () => ({
     active: false,
-    navbarType: 'fixed',
+    navType: 'fixed',
   }),
 
   computed: {
     menuTheme() {
       return this.$store.state.menuTheme
+    },
+    navbarType: {
+      set(type) {
+        this.$store.commit('SET_NAV_TYPE', type)
+      },
+      get() {
+        return this.$store.state.navbarType
+      },
     },
   },
 

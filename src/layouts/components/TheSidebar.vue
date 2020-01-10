@@ -1,12 +1,11 @@
 <template>
   <div
     class="menu-main"
-    :class="menuClass"
+    :class="[{collapse: sidebarCollapse}, menuClass]"
   >
     <!-- 顶部LOGO -->
     <div
       class="logo sticky top-0 left-0 z-50 w-full flex items-center h-16 cursor-pointer"
-      :class="{ 'logo-collapse': sidebarCollapse }"
       @click="switchCollapse"
     >
       <img
@@ -161,6 +160,12 @@ export default {
   left: 0;
   z-index: 999;
   height: 100%;
+  &.collapse {
+    .logo {
+      width: 64px;
+      padding: 0 18px;
+    }
+  }
 }
 
 // 滚动区域
@@ -175,10 +180,6 @@ export default {
   padding: 0 36px;
   overflow: hidden;
   transition: $side-bar-collapse-transition;
-  &.logo-collapse {
-    width: 64px;
-    padding: 0 18px;
-  }
 }
 
 .el-menu.main {

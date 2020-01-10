@@ -1,21 +1,72 @@
 <template>
   <div class="mt-6 p-6 base-shadow bg-white rounded-lg">
-    <div class="mb-5 flex">
-      <div class="w-1/2 pr-5">
-        <vs-button @click="showAvatarPopup = true">添加头像</vs-button>
+    <div class="mb-6 flex items-center">
+      <!-- 头像 -->
+      <div class="pr-10 flex flex-col items-center justify-center">
+        <img
+          class="base-shadow rounded-lg"
+          width="150px"
+          :src="defaultAvatar"
+        >
+        <div class="my-3  flex">
+          <div
+            class="mr-3 px-3 py-1 text-primary rounded-lg cursor-pointer"
+            style="background: rgba(var(--vs-primary), 0.1)"
+            @click="gender = 0"
+          >
+            汉子
+            <i
+              v-show="!gender"
+              class="el-icon-check"
+            ></i>
+          </div>
+          <div
+            class="px-3 py-1 text-danger rounded-lg cursor-pointer"
+            style="background: rgba(var(--vs-danger), 0.1)"
+            @click="gender = 1"
+          >
+            妹纸
+            <i
+              v-show="gender"
+              class="el-icon-check"
+            ></i>
+          </div>
+        </div>
+        <vs-button
+          class="w-full"
+          size="small"
+          type="border"
+          @click="showAvatarPopup = true"
+        >更换默认头像</vs-button>
       </div>
-      <div class="w-1/2">
-        <EditForm />
+      <!-- 表单 -->
+      <div class="flex-1">
+        <div class="flex">
+          <div class="w-1/2 pr-6">
+            <EditForm ref="editForm" />
+          </div>
+          <div class="w-1/2">
+            <EditPassword ref="editPassword" />
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 权限 -->
     <div
       class="mb-5 p-5 rounded-lg"
       style="border: 1px solid #e4e4e4;"
     >
       <p class="text-lg text-gray-600">权 限</p>
       <vs-divider />
-      <EditPermission :editable="true" />
+      <EditPermission
+        ref="editPermissions"
+        :editable="true"
+      />
+    </div>
+
+    <div class="flex justify-end">
+      <vs-button @click="onCreate()">信息无误，确认创建</vs-button>
     </div>
 
     <ReplaceAvatar
@@ -29,6 +80,7 @@
 <script>
 import Vue from 'vue'
 import EditForm from './edit/EditForm.vue'
+import EditPassword from './edit/EditPassword.vue'
 import EditPermission from './edit/EditPermission.vue'
 
 const ReplaceAvatar = Vue.component(
@@ -38,12 +90,24 @@ const ReplaceAvatar = Vue.component(
 
 export default {
   name: 'AdminCreate',
-  components: { EditForm, EditPermission, ReplaceAvatar },
+  components: {
+    EditForm, EditPassword, EditPermission, ReplaceAvatar,
+  },
 
   data: () => ({
     showAvatarPopup: false,
     avatarImage: '',
+    gender: 0,
   }),
+
+  computed: {
+    defaultAvatar() {
+      if (this.gender) {
+        return 'https://cdn.hrspider.top/default_avatar_female.jpg'
+      }
+      return 'https://cdn.hrspider.top/default_avatar_male.jpg'
+    },
+  },
 
   methods: {
     onSelect(file) {
@@ -58,6 +122,22 @@ export default {
       reader.onload = (e) => {
         this.showAvatarPopup = true
         this.avatarImage = e.target.result
+      }
+    },
+
+    onCreate() {
+      const { editForm, editPassword, editPermissions } = this.$refs
+
+      if (editForm.submit() && editPassword.submit()) {
+        const permissions = editPermissions.getPermissions()
+        const data = Object.assign(
+          editForm.form,
+          editPassword.form,
+          { avatar_url: this.defaultAvatar },
+          { gender: this.gender },
+          { permissions },
+        )
+        console.log(data)
       }
     },
   },

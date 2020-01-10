@@ -70,7 +70,6 @@ export default {
             return obj
           }),
         }))
-        console.log(this.per)
       } else {
         const purview = [{ read: false }, { write: false }, { create: false }, { delete: false }]
         this.per = Object.keys(this.modules).map(key => ({
@@ -78,6 +77,13 @@ export default {
           purview: _cloneDeepWith(purview),
         }))
       }
+    },
+
+    getPermissions() {
+      return this.per.map(el => ({
+        module: el.module,
+        purview: el.purview.filter((it, i) => it[this.actions[i]]).map(it => Object.keys(it)[0]),
+      }))
     },
   },
 }
