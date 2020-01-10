@@ -5,8 +5,9 @@ $warning:rgb(255, 130, 0);
 $dark: rgb(36, 33, 69);
 
 // Shadow
-$base-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); // 基础投影
-$light-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05); // 基础投影
+$light-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+$base-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+$heavy-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
 
 // Sidebar
 $sb-color-dark: rgba(var(--vs-primary), 1) !important;

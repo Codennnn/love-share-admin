@@ -62,6 +62,10 @@
   box-shadow: $light-shadow;
 }
 
+.heavy-shadow {
+  box-shadow: $heavy-shadow;
+}
+
 img {
   user-select: none;
   -webkit-user-drag: none;
