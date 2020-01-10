@@ -103,12 +103,6 @@ export const asyncRoutes = [
         component: () => import('@/views/user/UserList.vue'),
         meta: { title: '用户列表' },
       },
-      {
-        path: '/admin-list',
-        name: 'AdminList',
-        component: () => import('@/views/admin/AdminList.vue'),
-        meta: { title: '管理员列表' },
-      },
     ],
     meta: { title: '用户管理', icon: 'el-icon-user' },
   },
@@ -144,7 +138,7 @@ export const asyncRoutes = [
         meta: { title: '用户列表' },
       },
     ],
-    meta: { title: '评价管理', icon: 'el-icon-chat-line-square' },
+    meta: { title: '留言管理', icon: 'el-icon-chat-line-square' },
   },
 
   /*
@@ -169,6 +163,30 @@ export const asyncRoutes = [
     ],
     meta: { title: '资讯管理', icon: 'el-icon-thumb' },
   },
+
+  /*
+   * 资讯管理
+   */
+  {
+    path: '',
+    component: Layout,
+    children: [
+      {
+        path: '/admin-list',
+        name: 'AdminList',
+        component: () => import('@/views/admin/AdminList.vue'),
+        meta: { title: '管理员列表' },
+      },
+      {
+        path: '/admin-create',
+        name: 'AdminCreate',
+        component: () => import('@/views/admin/AdminCreate.vue'),
+        meta: { title: '创建管理员' },
+      },
+    ],
+    meta: { title: '网站管理', icon: 'el-icon-user' },
+  },
+
   {
     path: '',
     single: true,

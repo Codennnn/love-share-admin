@@ -170,7 +170,7 @@ export default {
 }
 
 // 搜索框
-.nav-search {
+.nav-search::v-deep {
   // 重设输入框样式
   .vs-inputx {
     border: none !important;

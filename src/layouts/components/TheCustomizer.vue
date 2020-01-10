@@ -2,8 +2,9 @@
   <div>
     <vs-button
       v-show="!active"
+      title="主题定制"
       class="fixed right-0 rounded-r-none"
-      icon="el-icon-setting"
+      icon="el-icon-loading"
       icon-pack="el-icon"
       style="top: 50%; z-index: 999999;"
       @click.stop="active = true"

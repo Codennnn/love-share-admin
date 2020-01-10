@@ -1,5 +1,5 @@
 const state = {
-  menuTheme: 'menu-dark',
+  menuTheme: 'menu-light',
   sidebarCollapse: false,
   categoryList: [],
   schoolList: [],
