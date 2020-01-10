@@ -81,6 +81,10 @@
         </div>
       </div>
     </div>
+
+    <!-- 自定义栏 -->
+    <TheCustomizer />
+
   </div>
 </template>
 
@@ -89,6 +93,7 @@ import BackToTop from 'vue-backtotop'
 import TheSidebar from './components/TheSidebar.vue'
 import TheNavbar from './components/TheNavbar.vue'
 import TheFooter from './components/TheFooter.vue'
+import TheCustomizer from './components/TheCustomizer.vue'
 
 export default {
   name: 'Main',
@@ -96,6 +101,7 @@ export default {
     TheSidebar,
     TheNavbar,
     TheFooter,
+    TheCustomizer,
     BackToTop,
   },
 
