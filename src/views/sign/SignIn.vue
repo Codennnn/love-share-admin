@@ -43,7 +43,7 @@
 <script>
 const signInInput = [
   {
-    placeholder: '手机号/邮箱',
+    placeholder: '管理员账号',
     value: '',
     type: 'text',
     isWarnng: false,
@@ -86,10 +86,10 @@ export default {
 
       const code = await this.$store.dispatch('admin/signIn', { account, password })
 
+      // 4001 - 账号未注册，4003 - 密码错误
       if (code === 2000) {
         this.$router.replace('/')
       } else if (code === 3000 || code === 4004) {
-        // 3000 - 账号错误，4004 - 密码错误
         this.signInError = true
       }
       // 关闭按钮的加载动画

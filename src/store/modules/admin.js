@@ -48,7 +48,6 @@ const actions = {
 
   async SignOut({ commit }) {
     commit('SET_TOKEN', '')
-    commit('SET_ROLES', [])
     removeToken() // 移除本地token缓存
     resetRouter() // 重置路由，不然会出现路由重复的情况
   },

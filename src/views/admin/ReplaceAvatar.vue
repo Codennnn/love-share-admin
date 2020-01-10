@@ -5,20 +5,6 @@
     :active.sync="showPopup"
   >
     <div>
-      <div class="text-center">
-        <vs-button
-          class="mb-4"
-          type="flat"
-          @click="$refs.fileInput.click()"
-        >选择图片</vs-button>
-        <input
-          ref="fileInput"
-          style="display: none;"
-          type='file'
-          accept="image/jpeg,image/jpg,image/png"
-          @change="getImage"
-        />
-      </div>
       <div class="flex flex-col justify-center items-center">
         <vueCropper
           ref="cropper"
@@ -33,7 +19,7 @@
           :centerBox="true"
           :fixed="true"
           :infoTrue="true"
-          :img="img"
+          :img="avatarBase64"
         ></vueCropper>
 
         <!-- 警告框 -->
@@ -46,6 +32,21 @@
           >
             图片上传失败，请重试！
           </vs-alert>
+        </div>
+
+        <div class="text-center">
+          <vs-button
+            class="mb-4"
+            type="flat"
+            @click="$refs.fileInput.click()"
+          >选择图片</vs-button>
+          <input
+            ref="fileInput"
+            style="display: none;"
+            type='file'
+            accept="image/jpeg,image/jpg,image/png"
+            @change="getImage"
+          />
         </div>
 
         <vs-button
@@ -98,17 +99,23 @@ export default {
 
 
   data: () => ({
-    img: '',
+    avatarBase64: '',
+    avatarUrl: '',
     btnDisable: false,
     showAlert: false,
   }),
 
   methods: {
     getImage({ target: { files } }) {
+      const isLt4M = ((files[0].size / 1024 / 1024) < 2)
+      if (!isLt4M) {
+        this.$message.error('上传文件大小不能超过 2MB!')
+        return
+      }
       const reader = new FileReader()
       reader.readAsDataURL(files[0])
       reader.onload = ({ target: { result } }) => {
-        this.img = result
+        this.avatarBase64 = result
       }
     },
 
@@ -129,8 +136,10 @@ export default {
         try {
           const { code, data } = await replaceAvatar(formData)
           if (code === 2000) {
+            this.avatarUrl = data.avatar_url
             this.$store.commit('admin/SET_AVATAR', data.avatar_url)
             this.$vs.notify({
+              time: 3000,
               title: '图片上传成功',
               text: '头像已更换',
               color: 'success',
