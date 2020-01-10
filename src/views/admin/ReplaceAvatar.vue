@@ -150,7 +150,7 @@ export default {
             if (res.code === 2000) {
               this.avatarUrl = avatar_url
               if (this.adminId === this.$store.getters['admin/adminId']) {
-                this.$emit('updateAvatar', avatar_url)
+                this.$emit('updateInfo')
                 this.$store.commit('admin/SET_AVATAR', avatar_url)
               }
               this.$vs.notify({

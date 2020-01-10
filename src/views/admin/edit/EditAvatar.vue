@@ -41,7 +41,7 @@
       ref="replaceAvatar"
       :admin-id="adminId"
       :popupActive="showAvatarPopup"
-      @updateAvatar="(avatar) => { $emit('updateAvatar', avatar) }"
+      @updateInfo="$emit('updateInfo')"
       @closePopup="showAvatarPopup = false"
     />
   </div>
@@ -68,16 +68,20 @@ export default {
     gender: 0,
     showAvatarPopup: false,
     avatarUrl: 'https://cdn.hrspider.top/default_avatar_male.jpg',
+    defaultAvatar: {
+      male: 'https://cdn.hrspider.top/default_avatar_male.jpg',
+      female: 'https://cdn.hrspider.top/default_avatar_female.jpg',
+    },
   }),
 
   watch: {
     gender: {
       handler(gender) {
-        if (this.$refs.replaceAvatar?.avatarUrl?.length <= 0) {
+        if (this.avatar === this.defaultAvatar.male || this.avatar === this.defaultAvatar.female) {
           if (gender) {
-            this.avatarUrl = 'https://cdn.hrspider.top/default_avatar_female.jpg'
+            this.avatarUrl = this.defaultAvatar.female
           } else {
-            this.avatarUrl = 'https://cdn.hrspider.top/default_avatar_male.jpg'
+            this.avatarUrl = this.defaultAvatar.male
           }
         }
       },

@@ -86,7 +86,7 @@ export default {
     editAdmin() {
       this.$router.push({
         path: '/admin-edit',
-        query: { detail: this.detail },
+        query: { adminId: this.detail._id },
       })
     },
   },

@@ -12,7 +12,7 @@
             <EditAvatar
               :admin-id="info._id"
               :avatar="info.avatar_url"
-              @updateAvatar="(avatar) => { info.avatar_url = avatar }"
+              @updateInfo="getAdminDetail()"
             />
           </div>
           <div class="w-1/3">
@@ -60,6 +60,8 @@ import EditForm from './edit/EditForm.vue'
 import EditPassword from './edit/EditPassword.vue'
 import EditPermission from './edit/EditPermission.vue'
 
+import { getAdminDetail } from '@/request/api/admin'
+
 export default {
   name: 'AdminEdit',
   components: {
@@ -71,7 +73,17 @@ export default {
   }),
 
   mounted() {
-    this.info = this.$route.query.detail
+    this.getAdminDetail()
+  },
+
+  methods: {
+    getAdminDetail() {
+      getAdminDetail({ admin_id: this.$route.query.adminId }).then(({ code, data }) => {
+        if (code === 2000) {
+          this.info = data.admin_detail
+        }
+      })
+    },
   },
 }
 </script>
