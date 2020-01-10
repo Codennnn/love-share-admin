@@ -39,9 +39,17 @@ export function getAdminDetail(params) {
   })
 }
 
-export function replaceAvatar(data) {
+export function uploadAvatar(data) {
   return request({
     headers: { 'Content-Type': 'multipart/form-data' },
+    url: '/admin/upload_avatar',
+    method: 'post',
+    data,
+  })
+}
+
+export function replaceAvatar(data) {
+  return request({
     url: '/admin/replace_avatar',
     method: 'put',
     data,

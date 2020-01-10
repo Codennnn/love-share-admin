@@ -2,16 +2,25 @@
   <div>
     <vs-tabs class="p-6 bg-white">
       <vs-tab
+        class="px-4 py-10"
         icon="el-icon-user"
         icon-pack="el-icon"
         label="账号"
       >
-        <div class="w-1/2 py-5 pr-4">
-          <EditForm
-            ref="editForm"
-            :form-data="info"
-          />
-          <EditAvatar :avatar="info.avatar_url" />
+        <div class="mb-8 flex">
+          <div class="mr-16">
+            <EditAvatar
+              :admin-id="info._id"
+              :avatar="info.avatar_url"
+              @updateAvatar="(avatar) => { info.avatar_url = avatar }"
+            />
+          </div>
+          <div class="w-1/3">
+            <EditForm
+              ref="editForm"
+              :form-data="info"
+            />
+          </div>
         </div>
 
         <div
@@ -32,6 +41,7 @@
         </div>
       </vs-tab>
       <vs-tab
+        class="px-4 py-10"
         icon="el-icon-key"
         icon-pack="el-icon"
         label="安全"

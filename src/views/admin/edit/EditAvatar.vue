@@ -30,15 +30,18 @@
       </div>
     </div>
     <vs-button
-      class="w-full"
+      v-if="adminId"
+      class="w-full max-w-xs"
       size="small"
       type="border"
       @click="showAvatarPopup = true"
-    >更换默认头像</vs-button>
+    >更换头像</vs-button>
 
     <ReplaceAvatar
       ref="replaceAvatar"
+      :admin-id="adminId"
       :popupActive="showAvatarPopup"
+      @updateAvatar="(avatar) => { $emit('updateAvatar', avatar) }"
       @closePopup="showAvatarPopup = false"
     />
   </div>
@@ -57,6 +60,7 @@ export default {
   components: { ReplaceAvatar },
 
   props: {
+    adminId: String,
     avatar: String,
   },
 

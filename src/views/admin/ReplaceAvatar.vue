@@ -30,13 +30,13 @@
             color="danger"
             :active.sync="showAlert"
           >
-            图片上传失败，请重试！
+            {{ alertText }}
           </vs-alert>
         </div>
 
         <div class="text-center">
           <vs-button
-            class="mb-4"
+            class="my-1"
             type="flat"
             @click="$refs.fileInput.click()"
           >选择图片</vs-button>
@@ -51,7 +51,7 @@
 
         <vs-button
           id="replaceBtn"
-          class="w-full mt-4 vs-con-loading__container"
+          class="w-full vs-con-loading__container"
           :disabled="btnDisable"
           @click="onReplace()"
         >确认更换</vs-button>
@@ -63,26 +63,27 @@
 <script>
 import { VueCropper } from 'vue-cropper'
 
-import { replaceAvatar } from '@/request/api/admin'
+import { uploadAvatar, replaceAvatar } from '@/request/api/admin'
 
 export default {
   name: 'ReplaceAvatar',
   components: { VueCropper },
 
   props: {
+    adminId: String,
     popupActive: {
       type: Boolean,
       required: true,
     },
   },
 
-  watch: {
-    popupActive(active) {
-      if (active) {
-        this.showPopup = true
-      }
-    },
-  },
+  data: () => ({
+    avatarBase64: '',
+    avatarUrl: '',
+    btnDisable: false,
+    showAlert: false,
+    alertText: '',
+  }),
 
   computed: {
     showPopup: {
@@ -97,33 +98,42 @@ export default {
     },
   },
 
-
-  data: () => ({
-    avatarBase64: '',
-    avatarUrl: '',
-    btnDisable: false,
-    showAlert: false,
-  }),
+  watch: {
+    popupActive(active) {
+      if (active) {
+        this.showPopup = true
+      }
+    },
+  },
 
   methods: {
+    onShowAlert(text) {
+      this.showAlert = true
+      this.alertText = text
+    },
+
     getImage({ target: { files } }) {
-      const isLt4M = ((files[0].size / 1024 / 1024) < 2)
-      if (!isLt4M) {
-        this.$message.error('上传文件大小不能超过 2MB!')
-        return
-      }
-      const reader = new FileReader()
-      reader.readAsDataURL(files[0])
-      reader.onload = ({ target: { result } }) => {
-        this.avatarBase64 = result
+      if (files) {
+        const isLt2M = ((files[0].size / 1024 / 1024) < 2)
+        if (!isLt2M) {
+          this.onShowAlert('图片大小不能超过 2MB！')
+          return
+        }
+        const reader = new FileReader()
+        reader.readAsDataURL(files[0])
+        reader.onload = ({ target: { result } }) => {
+          this.avatarBase64 = result
+        }
       }
     },
 
     onReplace() {
       this.$refs.cropper.getCropBlob(async (blob) => {
+        console.log(blob)
         const filename = `${Date.now()}.${blob.type.split('/')[1]}`
         const formData = new FormData()
         formData.append('avatar', blob, filename)
+        formData.append('id', this.adminId)
 
         this.$vs.loading({
           background: 'primary',
@@ -134,22 +144,28 @@ export default {
         this.btnDisable = true
 
         try {
-          const { code, data } = await replaceAvatar(formData)
+          const { code, data: { avatar_url } } = await uploadAvatar(formData)
           if (code === 2000) {
-            this.avatarUrl = data.avatar_url
-            this.$store.commit('admin/SET_AVATAR', data.avatar_url)
-            this.$vs.notify({
-              time: 3000,
-              title: '图片上传成功',
-              text: '头像已更换',
-              color: 'success',
-            })
-            this.showPopup = false
+            const res = await replaceAvatar({ admin_id: this.adminId, avatar_url })
+            if (res.code === 2000) {
+              this.avatarUrl = avatar_url
+              if (this.adminId === this.$store.getters['admin/adminId']) {
+                this.$emit('updateAvatar', avatar_url)
+                this.$store.commit('admin/SET_AVATAR', avatar_url)
+              }
+              this.$vs.notify({
+                time: 3000,
+                title: '图片上传成功',
+                text: '头像已更换',
+                color: 'success',
+              })
+              this.showPopup = false
+            }
           } else if (code === 3000 || code === 4003 || code === 5000) {
             this.showAlert = true
           }
         } catch {
-          this.showAlert = true
+          this.onShowAlert('图片上传失败，请重试！')
         } finally {
           this.$vs.loading.close('#replaceBtn > .con-vs-loading')
           this.btnDisable = false
