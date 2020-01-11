@@ -23,6 +23,7 @@
         >
           <vs-checkbox
             :class="{'pointer-events-none': !editable}"
+            :disabled="!editable"
             v-model="td[actions[j]]"
           ></vs-checkbox>
         </td>
@@ -52,6 +53,7 @@ export default {
       goods: '商品',
       order: '订单',
       comment: '留言',
+      admin: '管理员',
     },
     actions: ['read', 'write', 'create', 'delete'],
   }),
@@ -86,14 +88,35 @@ export default {
     },
 
     setPermissions() {
-      this.per = _cloneDeepWith(this.permissions).map(permission => ({
-        module: permission.module,
-        purview: this.actions.map((action) => {
-          const obj = {}
-          obj[`${action}`] = permission.purview.includes(action)
-          return obj
-        }),
-      }))
+      const permissions = _cloneDeepWith(this.permissions)
+      this.per = Object.keys(this.modules).map((key) => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const el of permissions) {
+          if (el.module === key) {
+            return {
+              module: key,
+              purview: this.actions.map((action) => {
+                const obj = {}
+                obj[`${action}`] = el.purview.includes(action)
+                return obj
+              }),
+            }
+          }
+        }
+        return {
+          module: key,
+          purview: [{ read: false }, { write: false }, { create: false }, { delete: false }],
+        }
+      })
+
+      // this.per = permissions.map(permission => ({
+      //   module: permission.module,
+      //   purview: this.actions.map((action) => {
+      //     const obj = {}
+      //     obj[`${action}`] = permission.purview.includes(action)
+      //     return obj
+      //   }),
+      // }))
     },
 
     setAllCheckboxStatus(status) {
@@ -129,6 +152,9 @@ table.permission {
     .con-vs-checkbox::v-deep {
       .vs-checkbox--input {
         width: 20px;
+        &:disabled + .vs-checkbox {
+          opacity: 0.6;
+        }
       }
     }
   }

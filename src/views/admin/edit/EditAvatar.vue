@@ -75,13 +75,15 @@ export default {
   }),
 
   watch: {
+    // 根据性别切换默认头像
     gender: {
       handler(gender) {
-        if (this.avatar === this.defaultAvatar.male || this.avatar === this.defaultAvatar.female) {
+        const { male, female } = this.defaultAvatar
+        if (this.avatarUrl === male || this.avatarUrl === female) {
           if (gender) {
-            this.avatarUrl = this.defaultAvatar.female
+            this.avatarUrl = female
           } else {
-            this.avatarUrl = this.defaultAvatar.male
+            this.avatarUrl = male
           }
         }
       },

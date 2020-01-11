@@ -62,39 +62,36 @@ export default {
   data: () => ({
     signInInput,
     signInError: false,
-    signInErrorText: '账号或密码有误，请重新输入',
+    signInErrorText: '账号或密码有误，请确认是否已注册',
     signInDisable: false,
   }),
 
   methods: {
     async login() {
-      if (!this.validate()) {
-        // 非空验证不通过，退出程序
-        return
+      if (this.validate()) {
+        this.$vs.loading({
+          background: 'primary',
+          color: '#fff',
+          container: '#signInBtn',
+          scale: 0.45,
+        })
+        this.signInDisable = true
+
+        const [account, password] = [this.signInInput[0].value, this.signInInput[1].value]
+
+        const code = await this.$store.dispatch('admin/signIn', { account, password })
+
+        // 4001 - 账号未注册，4003 - 密码错误
+        if (code === 2000) {
+          this.$router.replace('/')
+        } else if (code === 4001 || code === 4003) {
+          this.signInError = true
+        } else {
+          this.$message.error('登录失败，请再次尝试')
+        }
+        this.$vs.loading.close('#signInBtn > .con-vs-loading')
+        this.signInDisable = false
       }
-
-      // 显示登录按钮的加载动画
-      this.$vs.loading({
-        background: 'primary',
-        color: '#fff',
-        container: '#signInBtn',
-        scale: 0.45,
-      })
-      this.signInDisable = true
-
-      const [account, password] = [this.signInInput[0].value, this.signInInput[1].value]
-
-      const code = await this.$store.dispatch('admin/signIn', { account, password })
-
-      // 4001 - 账号未注册，4003 - 密码错误
-      if (code === 2000) {
-        this.$router.replace('/')
-      } else if (code === 3000 || code === 4004) {
-        this.signInError = true
-      }
-      // 关闭按钮的加载动画
-      this.$vs.loading.close('#signInBtn > .con-vs-loading')
-      this.signInDisable = false
     },
 
     // 输入框非空验证

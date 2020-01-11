@@ -38,8 +38,11 @@
           />
         </div>
 
-        <div class="flex justify-end">
-          <vs-button @click="onUpdateAmin()">保存设置</vs-button>
+        <div class="flex">
+          <vs-button
+            class="save ml-auto"
+            @click="onUpdateAmin()"
+          >保存设置</vs-button>
         </div>
       </vs-tab>
       <vs-tab
@@ -138,6 +141,9 @@ export default {
 .vs-tabs::v-deep {
   .ul-tabs {
     box-shadow: none;
+  }
+  .save:hover {
+    color: white !important;
   }
 }
 </style>
