@@ -46,7 +46,7 @@ const errorHandler = {
     this.errorNotify({ title: `${status}`, message: '登录过期，请重新登录~', duration: '3000' })
   },
   500(status, statusText) {
-    this.errorNotify({ title: `${status}`, message: `服务器出问题了 - ${statusText}` })
+    this.errorNotify({ title: `${status}`, message: `服务出错 - ${statusText}` })
   },
   default() {
     this.errorNotify()
@@ -55,8 +55,16 @@ const errorHandler = {
 
 service.interceptors.response.use(
   (response) => {
-    const res = response
-    return res.data
+    const { data } = response
+    const { code, msg } = data
+    if (code === 5000) {
+      errorHandler.errorNotify({
+        title: '哎呀，大事不好啦 〒▽〒',
+        message: `错误代码：${code} - ${msg}`,
+        duration: 5000,
+      })
+    }
+    return data
   },
   (error) => {
     console.log(error, error.response)
