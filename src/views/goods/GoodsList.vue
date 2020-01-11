@@ -6,10 +6,10 @@
         @click="getGoodsListOnSell()"
       >
         <div>
-          <div class="text-3xl">
+          <div class="text-3xl text-bg-white">
             {{ onSellCount.toLocaleString() }}
           </div>
-          <div class="text-gray-600">已上架商品</div>
+          <div class="text-bg-gray">已上架商品</div>
         </div>
         <div
           class="rounded-full"
@@ -24,10 +24,10 @@
         @click="getGoodsListOffSell()"
       >
         <div>
-          <div class="text-3xl">
+          <div class="text-3xl text-bg-white">
             {{ offSellCount.toLocaleString() }}
           </div>
-          <div class="text-gray-600">已下架商品</div>
+          <div class="text-bg-gray">已下架商品</div>
         </div>
         <div
           class="rounded-full"

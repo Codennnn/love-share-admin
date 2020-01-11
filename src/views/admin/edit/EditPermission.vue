@@ -53,6 +53,7 @@ export default {
       goods: '商品',
       order: '订单',
       comment: '留言',
+      guide: '指引',
       admin: '管理员',
     },
     actions: ['read', 'write', 'create', 'delete'],

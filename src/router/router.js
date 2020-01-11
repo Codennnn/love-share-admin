@@ -70,7 +70,7 @@ export const asyncRoutes = [
         meta: { title: '商品分类', roles: ['super_admin'] },
       },
     ],
-    meta: { title: '商品管理', icon: 'el-icon-box', roles: ['super_admin'] },
+    meta: { title: '商品管理', icon: 'el-icon-box' },
   },
 
   /*

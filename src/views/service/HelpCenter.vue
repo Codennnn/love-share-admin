@@ -1,27 +1,56 @@
 <template>
   <div class="mt-4 flex items-start">
-    <div class="w-1/5 bg-white rounded-lg">
-      <vs-collapse>
-        <vs-collapse-item
-          open
-          v-for="(menu, index) in menus"
-          :key="index"
+    <div class="w-1/5">
+      <!-- 栏目 -->
+      <VuePerfectScrollbar
+        class="bg-gray"
+        style="height: 550px; border-radius: 0.8rem;"
+        :settings="{
+          maxScrollbarLength: 160,
+          wheelSpeed: 0.60,
+        }"
+      >
+        <vs-collapse class="section">
+          <vs-collapse-item
+            open
+            v-for="(guide, i) in guideList"
+            :key="i"
+          >
+            <div slot="header">
+              {{ guide.section }}
+            </div>
+            <ul class="ml-2 text-bg-gray">
+              <li
+                class="mb-2"
+                v-for="(article, j) in guide.articles"
+                :key="j"
+                @click="getArticle(guide._id, article._id)"
+              >
+                {{ article.title }}
+              </li>
+              <li class="add-article opacity-0 text-primary">添加文章</li>
+            </ul>
+          </vs-collapse-item>
+        </vs-collapse>
+      </VuePerfectScrollbar>
+
+      <div>
+        <vs-input
+          v-model="payload.section"
+          placeholder="栏目名称"
+        />
+        <vs-input
+          v-model="payload.articles[0].title"
+          placeholder="文章名称"
+        />
+        <vs-button
+          type="border"
+          @click="createGuide()"
         >
-          <div slot="header">
-            {{ menu.title }}
-          </div>
-          <ul class="ml-2 text-gray-600">
-            <li
-              class="mb-2"
-              v-for="(submenu, index) in menu.submenus"
-              :key="index"
-              @click="getArticle()"
-            >
-              {{ submenu.title }}
-            </li>
-          </ul>
-        </vs-collapse-item>
-      </vs-collapse>
+          <i class="el-icon-plus"></i>
+          添加栏目
+        </vs-button>
+      </div>
     </div>
 
     <div
@@ -33,6 +62,7 @@
           <div
             v-if="!showEditor"
             class="text-xl font-bold"
+            style="color: rgb(28, 57, 86);"
           >{{ article.title }}</div>
           <div v-else>
             <vs-input
@@ -74,7 +104,11 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
-import { getArticle } from '@/request/api/service'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+
+import {
+  getGuideList, createGuide, addArticle, getArticle,
+} from '@/request/api/guide'
 
 const menus = [
   {
@@ -113,38 +147,103 @@ const menus = [
 
 export default {
   name: 'HelpCenter',
+  components: { VueEditor, VuePerfectScrollbar },
+
   data: () => ({
+    guideList: [],
+    article: {}, // 当前显示的文章
     menus,
+    payload: { // 新建栏目数据源
+      section: '',
+      articles: [
+        {
+          title: '',
+          content: '',
+        },
+      ],
+    },
+
     showEditor: false,
     title: '',
     content: '',
-    article: {},
   }),
 
-  components: { VueEditor },
-
-  mounted() {
-    this.getArticle()
+  created() {
+    this.getGuideList()
   },
 
   methods: {
-    async getArticle() {
-      this.$vs.loading({
-        container: '#artical-loading',
-        scale: 1,
-      })
-
+    async getGuideList() {
       try {
-        const { code, data } = await getArticle()
+        const { code, data } = await getGuideList()
         if (code === 2000) {
-          this.article = data.article
+          this.guideList = data.guide_list
         }
       } catch {
         // TODO
       }
+    },
 
-      this.$vs.loading.close('#artical-loading > .con-vs-loading')
+    async createGuide() {
+      const { section, articles } = this.payload
+      if (section.length > 0 && articles[0].title.length > 0) {
+        if (this.guideList.some(el => el.section === section)) {
+          const { code } = await addArticle({
+            section,
+            title: articles[0].title,
+            content: '',
+          })
+          if (code === 2000) {
+            this.getGuideList()
+          }
+        } else {
+          const { code } = await createGuide(this.payload)
+          if (code === 2000) {
+            this.getGuideList()
+          }
+        }
+      }
+    },
+
+    async getArticle(section_id, article_id) {
+      this.$vs.loading({
+        container: '#artical-loading',
+        scale: 1,
+      })
+      try {
+        const { code, data } = await getArticle({
+          section_id, article_id,
+        })
+        if (code === 2000) {
+          this.article = data.article
+        }
+      } finally {
+        this.$vs.loading.close('#artical-loading > .con-vs-loading')
+      }
     },
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.section {
+  .vs-collapse-item {
+    .vs-collapse-item--header {
+      div {
+        color: rgb(28, 57, 86);
+      }
+    }
+    &.open-item {
+      &:hover {
+        .add-article {
+          opacity: 0.7;
+          transition: all 0.3s;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
