@@ -165,7 +165,7 @@ export const asyncRoutes = [
   },
 
   /*
-   * 资讯管理
+   * 网站管理
    */
   {
     path: '',
@@ -229,8 +229,8 @@ export const asyncRoutes = [
         meta: {
           title: '商品详情',
           breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '商品列表', url: '/goods-list' },
+            { title: '首页', to: '/' },
+            { title: '商品列表', to: '/goods-list' },
             { title: '商品详情', active: true },
           ],
         },
@@ -242,8 +242,8 @@ export const asyncRoutes = [
         meta: {
           title: '订单详情',
           breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '查询订单', url: '/order-list' },
+            { title: '首页', to: '/' },
+            { title: '查询订单', to: '/order-list' },
             { title: '订单详情', active: true },
           ],
         },
@@ -255,8 +255,8 @@ export const asyncRoutes = [
         meta: {
           title: '用户详情',
           breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '用户列表', url: '/user-list' },
+            { title: '首页', to: '/' },
+            { title: '用户列表', to: '/user-list' },
             { title: '用户详情', active: true },
           ],
         },
@@ -268,8 +268,8 @@ export const asyncRoutes = [
         meta: {
           title: '管理员信息',
           breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '管理员列表', url: '/admin-list' },
+            { title: '首页', to: '/' },
+            { title: '管理员列表', to: '/admin-list' },
             { title: '管理员信息', active: true },
           ],
         },
@@ -281,9 +281,9 @@ export const asyncRoutes = [
         meta: {
           title: '管理员信息',
           breadcrumb: [
-            { title: '首页', url: '/' },
-            { title: '管理员列表', url: '/admin-list' },
-            { title: '管理员信息', active: true },
+            { title: '首页', to: '/' },
+            { title: '管理员列表', to: '/admin-list' },
+            { title: '编辑管理员', active: true },
           ],
         },
       },
@@ -294,8 +294,8 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history',
-  mode: 'hash',
+  mode: 'history',
+  // mode: 'hash',
   base: process.env.BASE_URL,
   routes: constantRoutes,
 })

@@ -14,6 +14,7 @@
               ref="editAvatar"
               :admin-id="detail._id"
               :avatar="detail.avatar_url"
+              :gender="detail.gender"
               @updateInfo="getAdminDetail()"
             />
           </div>
@@ -101,15 +102,14 @@ export default {
 
     async onUpdateAmin() {
       if (this.$refs.editForm.submit()) {
-        this.$vs.loading({
-          container: '#main',
-          scale: 1,
-        })
+        this.$vs.loading({ container: '#main', scale: 1 })
+
         const payload = Object.assign({
           admin_id: this.info._id,
-          gender: this.$refs.editAvatar.gender,
+          gender: this.$refs.editAvatar.selectedGender,
           permissions: this.$refs.editPermissions.getPermissions(),
         }, this.$refs.editForm.form)
+
         try {
           const { code, msg } = await updateAdmin(payload)
           if (code === 2000) {

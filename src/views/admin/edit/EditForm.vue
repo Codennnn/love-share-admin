@@ -33,7 +33,7 @@
 const checkNickname = (rule, value, callback) => {
   if (!value) {
     callback(new Error('请填写昵称'))
-  } else if (!/^[\d\w\u4e00-\u9fa5,.;:"'?!-]{2,8}$/.test(value)) {
+  } else if (!/^[\d\w\u4e00-\u9fa5,.;:"'?!-]{2,12}$/.test(value)) {
     callback(new Error('昵称的格式不正确'))
   }
   callback()

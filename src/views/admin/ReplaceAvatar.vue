@@ -129,7 +129,6 @@ export default {
 
     onReplace() {
       this.$refs.cropper.getCropBlob(async (blob) => {
-        console.log(blob)
         const filename = `${Date.now()}.${blob.type.split('/')[1]}`
         const formData = new FormData()
         formData.append('avatar', blob, filename)

@@ -108,15 +108,6 @@ export default {
           purview: [{ read: false }, { write: false }, { create: false }, { delete: false }],
         }
       })
-
-      // this.per = permissions.map(permission => ({
-      //   module: permission.module,
-      //   purview: this.actions.map((action) => {
-      //     const obj = {}
-      //     obj[`${action}`] = permission.purview.includes(action)
-      //     return obj
-      //   }),
-      // }))
     },
 
     setAllCheckboxStatus(status) {

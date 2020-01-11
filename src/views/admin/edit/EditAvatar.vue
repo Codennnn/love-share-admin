@@ -9,22 +9,22 @@
       <div
         class="mr-3 px-3 py-1 text-primary rounded-lg cursor-pointer"
         style="background: rgba(var(--vs-primary), 0.1)"
-        @click="gender = 0"
+        @click="selectedGender = 0"
       >
         汉子
         <i
-          v-show="!gender"
+          v-show="!selectedGender"
           class="el-icon-check"
         ></i>
       </div>
       <div
         class="px-3 py-1 text-danger rounded-lg cursor-pointer"
         style="background: rgba(var(--vs-danger), 0.1)"
-        @click="gender = 1"
+        @click="selectedGender = 1"
       >
         妹纸
         <i
-          v-show="gender"
+          v-show="selectedGender"
           class="el-icon-check"
         ></i>
       </div>
@@ -62,10 +62,11 @@ export default {
   props: {
     adminId: String,
     avatar: String,
+    gender: Number,
   },
 
   data: () => ({
-    gender: 0,
+    selectedGender: 0,
     showAvatarPopup: false,
     avatarUrl: 'https://cdn.hrspider.top/default_avatar_male.jpg',
     defaultAvatar: {
@@ -76,7 +77,7 @@ export default {
 
   watch: {
     // 根据性别切换默认头像
-    gender: {
+    selectedGender: {
       handler(gender) {
         const { male, female } = this.defaultAvatar
         if (this.avatarUrl === male || this.avatarUrl === female) {
@@ -93,6 +94,14 @@ export default {
       handler(avatar) {
         if (avatar) {
           this.avatarUrl = avatar
+        }
+      },
+      immediate: true,
+    },
+    gender: {
+      handler(gender) {
+        if (gender) {
+          this.selectedGender = gender
         }
       },
       immediate: true,

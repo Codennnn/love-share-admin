@@ -80,10 +80,11 @@ export default {
         })
 
         const permissions = editPermissions.getPermissions()
+        // 数据载体
         const payload = Object.assign(
           editForm.form,
           editPassword.form,
-          { avatar_url: editAvatar.avatarImage },
+          { avatar_url: editAvatar.avatarUrl },
           { gender: editAvatar.gender },
           { permissions },
         )
