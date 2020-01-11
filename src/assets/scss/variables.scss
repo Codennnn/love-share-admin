@@ -9,6 +9,14 @@ $light-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
 $base-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
 $heavy-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
 
+// Background
+$text-bg-gray: rgb(139, 153, 168) !important;
+$text-bg-white: rgb(28, 57, 86) !important;
+$bg-gray: rgb(248, 249, 250) !important;
+$bg-primary-gradient: linear-gradient(to right,
+  rgba(var(--vs-primary), 1),
+  rgba(var(--vs-primary), 0.7)) !important;
+
 // Sidebar
 $sb-color-dark: rgba(var(--vs-primary), 1) !important;
 $sb-item-hover-color-dark: rgba(255, 255, 255, 0.1) !important;
@@ -36,9 +44,3 @@ $footer-height: 65px;
 $text-gray-500: #a0aec0;
 $text-gray-600: #718096;
 $text-gray-700: #4a5569;
-
-$bg-primary-gradient: linear-gradient(to right,
-  rgba(var(--vs-primary), 1),
-  rgba(var(--vs-primary), 0.7)) !important;
-
-$bg-gray: rgb(248, 248, 248) !important;
