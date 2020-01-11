@@ -41,7 +41,7 @@
         />
         <vs-input
           v-model="payload.articles[0].title"
-          placeholder="文章名称"
+          placeholder="文章标题"
         />
         <vs-button
           type="border"
@@ -57,7 +57,7 @@
       id="artical-loading"
       class="vs-con-loading__container w-4/5 pl-6"
     >
-      <div class="p-4 bg-white rounded-lg">
+      <div class="px-4 bg-white rounded-lg">
         <div class="flex items-center justify-between">
           <div
             v-if="!showEditor"
@@ -90,13 +90,30 @@
           </div>
         </div>
         <vs-divider />
-        <div
-          v-if="!showEditor"
-          v-html="article.content"
-        ></div>
-        <div v-else>
-          <vue-editor v-model="content" />
-        </div>
+
+        <VuePerfectScrollbar
+          style="height: 500px; border-radius: 0.8rem;"
+          :settings="{
+            maxScrollbarLength: 160,
+            wheelSpeed: 0.60,
+          }"
+        >
+          <template>
+          </template>
+          <template>
+            <div class="h-full flex flex-col justify-center items-center text-gray-400">
+              <i class="el-icon-warning-outline text-4xl"></i>
+              <p class="text-sm">未添加文章</p>
+            </div>
+          </template>
+          <div
+            v-if="!showEditor"
+            v-html="article.content"
+          ></div>
+          <div v-else>
+            <vue-editor v-model="content" />
+          </div>
+        </VuePerfectScrollbar>
       </div>
     </div>
   </div>
