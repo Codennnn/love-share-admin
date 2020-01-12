@@ -130,13 +130,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  table.permission {
+    tr:first-child {
+      color: themed("text-color-primary");
+    }
+    td:nth-child(1) {
+      color: themed("text-color-gray");
+    }
+  }
+}
+
 table.permission {
   width: 100%;
   th {
     padding: 1rem 0.5rem 0.8rem 0.5rem;
-  }
-  tr:first-child {
-    color: #626262;
   }
   td {
     padding: 0.6rem 0.5rem 0.6rem 0.5rem;
@@ -149,12 +159,6 @@ table.permission {
         }
       }
     }
-  }
-  td:nth-child(1) {
-    color: #626262;
-  }
-  td:nth-child(2) {
-    color: rgb(150, 150, 150);
   }
   .con-vs-checkbox {
     justify-content: flex-start;

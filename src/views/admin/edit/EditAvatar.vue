@@ -7,7 +7,7 @@
     >
     <div class="my-3  flex">
       <div
-        class="mr-3 px-3 py-1 text-primary rounded-lg cursor-pointer"
+        class="mr-3 px-3 py-1 primary rounded-lg cursor-pointer"
         style="background: rgba(var(--vs-primary), 0.1)"
         @click="selectedGender = 0"
       >
@@ -18,7 +18,7 @@
         ></i>
       </div>
       <div
-        class="px-3 py-1 text-danger rounded-lg cursor-pointer"
+        class="px-3 py-1 danger rounded-lg cursor-pointer"
         style="background: rgba(var(--vs-danger), 0.1)"
         @click="selectedGender = 1"
       >
@@ -106,9 +106,6 @@ export default {
       },
       immediate: true,
     },
-  },
-
-  methods: {
   },
 }
 </script>

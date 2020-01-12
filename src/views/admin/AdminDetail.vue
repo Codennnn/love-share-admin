@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="info mb-6 p-5 light-shadow bg-white rounded-lg">
-      <p class="mb-4 text-lg text-gray-600">账 号</p>
+    <div class="info mb-6 p-5 light-shadow bg-semi rounded-lg">
+      <p class="mb-4 text-lg text-semi">账 号</p>
       <div class="mb-4 flex">
         <img
           width="100px"
@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="permission p-5 light-shadow bg-white rounded-lg">
-      <p class="text-lg text-gray-600">权 限</p>
+    <div class="permission p-5 light-shadow bg-semi rounded-lg">
+      <p class="text-lg text-semi">权 限</p>
       <vs-divider />
       <EditPermission :permissions="detail.permissions" />
     </div>

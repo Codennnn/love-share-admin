@@ -35,6 +35,7 @@
 
       <template slot-scope="{data}">
         <vs-tr
+          class="bg-gray"
           v-for="(tr, i) in data"
           :key="i"
           :data="tr"
@@ -46,25 +47,25 @@
               :src="tr.avatar_url"
             />
           </vs-td>
-          <vs-td class="text-base text-gray-600 font-bold">{{ tr.nickname }}</vs-td>
-          <vs-td>{{ tr.real_name }}</vs-td>
+          <vs-td class="text-base text-gray font-bold">{{ tr.nickname }}</vs-td>
+          <vs-td class="text-semi">{{ tr.real_name }}</vs-td>
           <vs-td>
             <i
               v-if="tr.gender"
-              class="el-icon-female text-danger text-xl"
+              class="el-icon-female danger text-xl"
             ></i>
             <i
               v-else
-              class="el-icon-male text-primary text-xl"
+              class="el-icon-male primary text-xl"
             ></i>
           </vs-td>
-          <vs-td class="text-gray-600 cursor-text">{{ tr.account }}</vs-td>
+          <vs-td class="text-semi cursor-text">{{ tr.account }}</vs-td>
           <vs-td>
-            <p class="text-gray-600">{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
+            <p class="text-semi">{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
           </vs-td>
           <vs-td>
             <vs-dropdown vs-trigger-click>
-              <i class="el-icon-more-outline"></i>
+              <i class="el-icon-more-outline text-primary"></i>
               <vs-dropdown-menu class="w-24">
                 <vs-dropdown-item class="text-center">
                   <i class="el-icon-chat-round mr-2"></i>

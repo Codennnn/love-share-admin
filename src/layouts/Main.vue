@@ -36,24 +36,28 @@
                 v-if="$route.meta && $route.meta.breadcrumb"
               >
                 <i
-                  class="iconfont icon-back"
+                  title="返回"
+                  class="iconfont icon-back text-semi cursor-pointer"
+                  style="font-size: 25px;"
                   @click="$router.go(-1)"
                 ></i>
                 <vs-breadcrumb>
                   <template v-for="(br, i) in $route.meta.breadcrumb">
                     <li
+                      class="text-sm"
                       :class="{'pointer-events-none': br.active}"
                       :key="i"
                     >
                       <router-link
+                        class="text-semi"
+                        :class="{'primary': br.active}"
                         :to="String(br.to)"
-                        :class="{'text-primary': br.active}"
                       >{{ br.title }}</router-link>
                       <span
                         v-if="!br.active"
                         class="vs-breadcrum--separator"
                       >
-                        <i class="el-icon-arrow-right"></i>
+                        <i class="el-icon-arrow-right text-semi"></i>
                       </span>
                     </li>
                   </template>
@@ -166,15 +170,6 @@ export default {
   padding: 0 2rem;
   .router-content {
     min-height: calc(100vh - #{$footer-height});
-    .icon-back {
-      cursor: pointer;
-      font-size: 30px;
-      color: rgb(133, 133, 133);
-      transition: all 0.3s;
-      &:hover {
-        color: #333;
-      }
-    }
   }
   .router-footer {
     height: $footer-height;

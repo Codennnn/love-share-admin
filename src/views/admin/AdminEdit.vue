@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vs-tabs class="p-6 bg-white">
+    <vs-tabs class="p-6 bg-primary">
       <vs-tab
         id="main"
         class="px-4 py-10 vs-con-loading__container"
@@ -27,8 +27,8 @@
         </div>
 
         <div
-          class="mb-5 p-5 rounded-lg"
-          style="border: 1px solid #e4e4e4;"
+          class="mb-5 p-5 rounded-lg border-primary"
+          style="border: 1px solid;"
         >
           <p class="text-lg text-gray-600">权 限</p>
           <vs-divider />
