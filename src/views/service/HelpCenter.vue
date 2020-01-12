@@ -3,7 +3,7 @@
     <div class="w-1/5">
       <!-- 栏目 -->
       <VuePerfectScrollbar
-        class="bg-gray"
+        class="scroll-area"
         style="height: 550px; border-radius: 0.8rem;"
         :settings="{
           maxScrollbarLength: 160,
@@ -19,7 +19,7 @@
             <div slot="header">
               {{ guide.section }}
             </div>
-            <ul class="ml-2 text-bg-gray">
+            <ul class="ml-2 article-item">
               <li
                 class="mb-2"
                 v-for="(article, j) in guide.articles"
@@ -251,13 +251,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
-  .vs-collapse-item {
-    .vs-collapse-item--header {
-      div {
-        color: rgb(28, 57, 86);
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  .scroll-area {
+    background: themed("bg-color-gray");
+    .vs-collapse-item {
+      .vs-collapse-item--header {
+        div {
+          color: themed("text-color-primary");
+        }
+      }
+      .article-item {
+        color: themed("text-color-gray");
       }
     }
+  }
+}
+
+.section {
+  .vs-collapse-item {
     &.open-item {
       &:hover {
         .add-article {

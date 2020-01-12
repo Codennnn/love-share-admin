@@ -118,11 +118,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  .layout-main {
+    background: themed("bg-color-primary");
+  }
+}
+
 .layout-main {
   position: relative;
   height: 100%;
-  // background: rgb(248, 248, 248);
-  background: white;
 }
 
 .el-breadcrumb::v-deep {

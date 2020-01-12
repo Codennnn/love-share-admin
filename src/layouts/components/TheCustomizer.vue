@@ -17,10 +17,10 @@
       hidden-background
       v-model="active"
     >
-      <div class="mt-4 flex items-center justify-between px-6">
+      <div class="sidebar-header mt-4 flex items-center justify-between px-6">
         <div>
-          <div class="text-lg text-gray-600 font-bold">主题定制</div>
-          <div class="text-sm text-gray-600">自定义主题，实时预览</div>
+          <div class="text-lg font-bold">主题定制</div>
+          <div class="text-sm">自定义主题，实时预览</div>
         </div>
         <i
           class="el-icon-close text-2xl font-bold cursor-pointer"
@@ -38,7 +38,7 @@
       >
         <div class="p-6">
           <div>
-            <p class="mb-4">主题颜色</p>
+            <p class="section-title mb-4">主题颜色</p>
             <ul class="px-2 flex">
               <li
                 class="mr-6"
@@ -55,18 +55,16 @@
           <vs-divider></vs-divider>
 
           <div>
-            <p class="mb-4">顶部导航</p>
+            <p class="section-title mb-4">顶部导航</p>
             <ul class="px-2 flex">
               <li class="mr-6">
                 <vs-radio
-                  class=" text-gray-600"
                   vs-value="fixed"
                   v-model="navbarType"
                 >固定</vs-radio>
               </li>
               <li>
                 <vs-radio
-                  class=" text-gray-600"
                   vs-value="scroll"
                   v-model="navbarType"
                 >随页面滚动</vs-radio>
@@ -77,7 +75,7 @@
           <vs-divider></vs-divider>
 
           <div>
-            <p class="mb-4">侧边栏颜色</p>
+            <p class="section-title mb-4">侧边栏颜色</p>
             <ul class="px-2 flex">
               <li
                 class="w-10 h-10 mr-4 rounded-lg bg-white border-2 cursor-pointer"
@@ -138,6 +136,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@mixin sidebar-main {
+  .sidebar-main::v-deep {
+    color: themed("text-color-primary");
+    .vs-sidebar {
+      background: themed("bg-color-primary");
+      .sidebar-header {
+        color: themed("text-color-gray-600");
+      }
+      .section-title {
+        color: themed("text-color-gray-600");
+      }
+      .con-vs-radio {
+        color: themed("text-color-gray-500");
+      }
+    }
+  }
+}
+
+@include themeify {
+  @include sidebar-main;
+}
+
 .sidebar-main::v-deep {
   .vs-sidebar {
     max-width: 400px;

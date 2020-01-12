@@ -1,6 +1,5 @@
 // 深色主题
 .menu-dark::v-deep {
-
   &.menu-main {
     background: $sb-color-dark;
 
@@ -118,7 +117,6 @@
 
     // 无子菜单
     .el-menu-item {
-
       color: white;
 
       // 鼠标悬浮样式
@@ -144,10 +142,8 @@
   }
 }
 
-
 // 浅色主题
 .menu-light::v-deep {
-
   &.menu-main {
     background: $sb-color-light;
     box-shadow: 1px 0 15px rgba(0, 0, 0, 0.05) !important;

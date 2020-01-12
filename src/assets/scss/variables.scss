@@ -13,7 +13,9 @@ $heavy-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
 // Background
 $text-bg-gray: rgb(139, 153, 168) !important;
 $text-bg-white: rgb(28, 57, 86) !important;
-$bg-gray: rgb(248, 249, 250) !important;
+$bg-gray: rgb(248,
+249,
+250) !important;
 $bg-primary-gradient: linear-gradient(to right,
   rgba(var(--vs-primary), 1),
   rgba(var(--vs-primary), 0.7)) !important;
