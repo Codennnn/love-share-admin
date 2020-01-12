@@ -41,7 +41,7 @@ img {
 
 @include themeify {
   .primary {
-    color: themed("primary");
+    color: themed("primary") !important;
   }
 
   .success {
@@ -72,8 +72,16 @@ img {
     background: themed("bg-color-gray");
   }
 
+  .bg-semi {
+    background: themed("bg-color-semi");
+  }
+
   .bg-primary {
     background: themed("bg-color-primary");
+  }
+
+  .border-primary {
+    color: themed("border-color-primary");
   }
 
   .vs-inputx {
