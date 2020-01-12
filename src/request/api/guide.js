@@ -15,6 +15,14 @@ export function getGuideList() {
   })
 }
 
+export function getArticle(params) {
+  return request({
+    url: '/guide/article',
+    method: 'get',
+    params,
+  })
+}
+
 export function addArticle(data) {
   return request({
     url: '/guide/article/add',
@@ -23,10 +31,18 @@ export function addArticle(data) {
   })
 }
 
-export function getArticle(params) {
+export function updateArticle(data) {
   return request({
-    url: '/guide/article',
-    method: 'get',
-    params,
+    url: '/guide/article/update',
+    method: 'put',
+    data,
+  })
+}
+
+export function deleteArticle(data) {
+  return request({
+    url: '/guide/article/delete',
+    method: 'delete',
+    data,
   })
 }

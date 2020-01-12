@@ -75,18 +75,20 @@
           <vs-divider></vs-divider>
 
           <div>
-            <p class="section-title mb-4">侧边栏颜色</p>
+            <p class="section-title mb-4">侧边栏样式</p>
             <ul class="px-2 flex">
-              <li
+              <li>跟随主题</li>
+              <li>突出显示</li>
+              <!-- <li
                 class="w-10 h-10 mr-4 rounded-lg bg-white border-2 cursor-pointer"
                 :class="{'shadow-outline': menuTheme === 'menu-light'}"
                 @click="switchSidebar('menu-light')"
-              ></li>
-              <li
+              >跟随主题</li> -->
+              <!-- <li
                 class="w-10 h-10 rounded-lg bg-primary cursor-pointer"
                 :class="{'shadow-outline': menuTheme === 'menu-dark'}"
                 @click="switchSidebar('menu-dark')"
-              ></li>
+              >突出显示</li> -->
             </ul>
           </div>
 

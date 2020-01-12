@@ -154,6 +154,9 @@ export default {
     .nav-icon {
       color: themed("nav-icon-color");
     }
+    .user-text {
+      color: themed("text-color-semi");
+    }
   }
 }
 

@@ -153,26 +153,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/scss/theme/sidebar.scss";
-// @import "~@/assets/scss/theme/_themeify.scss";
-
-// @include themeify {
-//   .scroll-area {
-//     background: themed("bg-color-gray");
-//     .vs-collapse-item {
-//       .vs-collapse-item--header {
-//         div {
-//           color: themed("text-color-primary");
-//         }
-//       }
-//       .article-item {
-//         color: themed("text-color-semi");
-//       }
-//       .article-container {
-//         background: themed("bg-color-primary");
-//       }
-//     }
-//   }
-// }
 
 .menu-main {
   position: fixed;

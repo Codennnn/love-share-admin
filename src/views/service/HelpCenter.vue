@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4 flex items-start">
+    <!-- 栏目 -->
     <div class="w-1/5">
-      <!-- 栏目 -->
       <VuePerfectScrollbar
         class="scroll-area"
         style="height: 550px; border-radius: 0.8rem;"
@@ -19,7 +19,7 @@
             <div slot="header">
               {{ guide.section }}
             </div>
-            <ul class="ml-2 article-item">
+            <ul class="ml-2 text-semi">
               <li
                 class="mb-2"
                 v-for="(article, j) in guide.articles"
@@ -28,53 +28,83 @@
               >
                 {{ article.title }}
               </li>
-              <li class="add-article opacity-0 text-primary">添加文章</li>
+              <li class="add-article opacity-0 primary">添加文章</li>
             </ul>
           </vs-collapse-item>
         </vs-collapse>
       </VuePerfectScrollbar>
 
       <div>
-        <vs-input
-          v-model="payload.section"
-          placeholder="栏目名称"
-        />
-        <vs-input
-          v-model="payload.articles[0].title"
-          placeholder="文章标题"
-        />
-        <vs-button
-          type="border"
-          @click="createGuide()"
+        <el-popover
+          placement="top"
+          trigger="click"
         >
-          <i class="el-icon-plus"></i>
-          添加栏目
-        </vs-button>
+          <vs-input
+            v-model="payload.section"
+            placeholder="栏目名称"
+          />
+          <vs-input
+            v-model="payload.articles[0].title"
+            placeholder="文章标题"
+          />
+          <vs-button
+            slot="reference"
+            class="mt-4"
+            type="border"
+            @click="createGuide()"
+          >
+            <i class="el-icon-plus"></i>
+            添加栏目
+          </vs-button>
+        </el-popover>
       </div>
     </div>
 
+    <!-- 内容 -->
     <div
-      id="artical-loading"
-      class="vs-con-loading__container w-4/5 pl-6"
+      class="w-4/5 pl-6"
+      style="height: 550px;"
     >
-      <div class="article-container px-4 rounded-lg">
+      <div class="article-container h-full p-4 bg-gray rounded-lg vs-con-loading__container">
         <div class="flex items-center justify-between">
-          <div
-            v-if="!showEditor"
-            class="text-xl font-bold"
-            style="color: rgb(28, 57, 86);"
-          >{{ article.title }}</div>
+          <div v-if="!showEditor">
+            <div class="text-semi text-xl font-bold">{{ article.title }}</div>
+            <p class="text-gray text-sm">
+              最后更新于{{ $dayjs(article.updated_at).format('YYYY-MM-DD HH:mm:ss') }}
+            </p>
+          </div>
+
           <div v-else>
             <vs-input
               label="标题"
-              v-model="title"
+              v-model="editData.title"
             />
           </div>
+
           <div v-if="!showEditor">
             <vs-button
               class="text-sm"
-              @click="showEditor = true,title = article.title,content = article.content"
+              @click="onEditArticle()"
             >编辑</vs-button>
+            <el-popover
+              placement="bottom"
+              trigger="click"
+            >
+              <p class="text-center">删除后将无法恢复</p>
+              <div class="text-center">
+                <vs-button
+                  size="small"
+                  type="flat"
+                  color="danger"
+                  @click="onDeleteArticle()"
+                >确认删除</vs-button>
+              </div>
+              <i
+                slot="reference"
+                title="删除"
+                class="el-icon-delete ml-4 text-gray cursor-pointer"
+              ></i>
+            </el-popover>
           </div>
           <div v-else>
             <vs-button
@@ -86,32 +116,34 @@
             <vs-button
               class="text-sm"
               color="success"
+              @click="onUpdateArticle()"
             >完成编辑</vs-button>
           </div>
         </div>
         <vs-divider />
 
         <VuePerfectScrollbar
-          style="height: 500px; border-radius: 0.8rem;"
+          style="height: 420px;"
           :settings="{
             maxScrollbarLength: 160,
             wheelSpeed: 0.60,
           }"
         >
-          <template>
-          </template>
-          <template>
-            <div class="h-full flex flex-col justify-center items-center text-gray-400">
-              <i class="el-icon-warning-outline text-4xl"></i>
-              <p class="text-sm">未添加文章</p>
-            </div>
-          </template>
+          <div
+            v-if="!article.content || article.content.length <= 0 && !showEditor"
+            class="h-full flex flex-col justify-center items-center text-gray-400"
+          >
+            <i class="el-icon-warning-outline text-4xl"></i>
+            <p class="mt-2 text-sm">未添加内容</p>
+          </div>
+
           <div
             v-if="!showEditor"
             v-html="article.content"
+            class="text-semi"
           ></div>
           <div v-else>
-            <vue-editor v-model="content" />
+            <vue-editor v-model="editData.content" />
           </div>
         </VuePerfectScrollbar>
       </div>
@@ -124,7 +156,7 @@ import { VueEditor } from 'vue2-editor'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import {
-  getGuideList, createGuide, addArticle, getArticle,
+  getGuideList, createGuide, getArticle, addArticle, updateArticle, deleteArticle,
 } from '@/request/api/guide'
 
 const menus = [
@@ -181,6 +213,10 @@ export default {
     },
 
     showEditor: false,
+    editData: {
+      title: '',
+      content: '',
+    },
     title: '',
     content: '',
   }),
@@ -191,48 +227,37 @@ export default {
 
   methods: {
     async getGuideList() {
-      try {
-        const { code, data } = await getGuideList()
-        if (code === 2000) {
-          this.guideList = data.guide_list
-        }
-      } catch {
-        // TODO
+      const { code, data } = await getGuideList()
+      if (code === 2000) {
+        this.guideList = data.guide_list
+        const section = this.guideList[0]
+        this.getArticle(section._id, section.articles[0]._id)
       }
     },
 
     async createGuide() {
       const { section, articles } = this.payload
       if (section.length > 0 && articles[0].title.length > 0) {
-        const flag = this.guideList.some((el) => {
+        const flag = this.guideList.some(async (el) => {
           if (el.section === section) {
-            this.addArticle(el._id, articles[0].title)
+            await addArticle({
+              section_id: el._id,
+              title: articles[0].title,
+            })
             return true
           }
           return false
         })
         if (!flag) {
-          const { code } = await createGuide(this.payload)
-          if (code === 2000) {
-            this.getGuideList()
-          }
+          await createGuide(this.payload)
         }
-      }
-    },
-
-    async addArticle(section_id, title) {
-      const { code } = await addArticle({
-        section_id,
-        title,
-      })
-      if (code === 2000) {
         this.getGuideList()
       }
     },
 
     async getArticle(section_id, article_id) {
       this.$vs.loading({
-        container: '#artical-loading',
+        container: '.article-container',
         scale: 1,
       })
       try {
@@ -243,7 +268,27 @@ export default {
           this.article = data.article
         }
       } finally {
-        this.$vs.loading.close('#artical-loading > .con-vs-loading')
+        this.$vs.loading.close('.article-container > .con-vs-loading')
+      }
+    },
+
+    onEditArticle() {
+      this.showEditor = true
+      this.editData = JSON.parse(JSON.stringify(this.article))
+    },
+
+    async onUpdateArticle() {
+      const { code } = await updateArticle(this.editData)
+      if (code === 2000) {
+        this.showEditor = false
+        this.getGuideList()
+      }
+    },
+
+    async onDeleteArticle() {
+      const { code } = await deleteArticle({ article_id: this.article._id })
+      if (code === 2000) {
+        this.getGuideList()
       }
     },
   },
@@ -261,12 +306,6 @@ export default {
         div {
           color: themed("text-color-primary");
         }
-      }
-      .article-item {
-        color: themed("text-color-semi");
-      }
-      .article-container {
-        background: themed("bg-color-primary");
       }
     }
   }

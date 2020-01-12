@@ -1,9 +1,9 @@
 <template>
   <div class="flex items-center">
     <!-- 用户名称 -->
-    <div class="mr-2 text-right">
+    <div class="user-text mr-2 text-right">
       <div class="text-right text-lg">{{ nickname }}</div>
-      <small style="color: #919191;">{{ setTitle(roles) }}</small>
+      <small>{{ setTitle(roles) }}</small>
     </div>
 
     <!-- 头像 -->
