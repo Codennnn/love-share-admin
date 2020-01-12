@@ -1,0 +1,56 @@
+$themes: (
+  /* -----------------------
+   * LIGHT-THEME 明亮主题
+   * -----------------------
+   */
+  light: (
+    /* Color */
+    primary: #6165f7,
+    success : #28C76F,
+    danger: #EA5455,
+    warning:#FF9F43,
+    dark: #1E1E1E,
+    gray: #718096,
+
+    /* Text Color */
+    text-color-primary: #000,
+    text-color-gray: #8b99a8,
+    text-color-gray-500: #a0aec0,
+    text-color-gray-600: #718096,
+    text-color-gray-700: #4a5569,
+
+    /* Background Color */
+    bg-color-primary: #fff,
+    bg-color-gray: #f8f9fa,
+    bg-color-gray-600: #718096,
+    // Icon Color
+    icon-color-base: #ccc // Icon Color
+  ),
+  /* -----------------------
+   * DARK-THEME 黑暗主题
+   * -----------------------
+   */
+  dark: (
+    /* Color */
+    primary: #6165f7,
+    success : #28C76F,
+    danger: #EA5455,
+    warning:#FF9F43,
+    dark: #1E1E1E,
+    gray: #718096,
+
+    /* Text Color */
+    text-color-primary: #fff,
+    text-color-gray: #8b99a8,
+    text-color-gray-500: #c8c8c8,
+    text-color-gray-600: #e6e6e6,
+
+    /* Background Color */
+    bg-color-primary: #232323,
+    bg-color-gray: #2c2c2c,
+    bg-color-gray-500: #c8c8c8,
+    bg-color-gray-600: #e6e6e6,
+    // Icon Color
+    icon-color-base: #ccc // Icon Color
+    )
+);
