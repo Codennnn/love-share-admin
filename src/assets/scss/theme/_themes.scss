@@ -13,7 +13,8 @@ $themes: (
     gray: #718096,
 
     /* Text Color */
-    text-color-primary: #000,
+    text-color-semi: #8b99a8,
+    text-color-primary: #6f8193,
     text-color-gray: #8b99a8,
     text-color-gray-500: #a0aec0,
     text-color-gray-600: #718096,
@@ -23,6 +24,17 @@ $themes: (
     bg-color-primary: #fff,
     bg-color-gray: #f8f9fa,
     bg-color-gray-600: #718096,
+
+    /* Navbar Color */
+    nav-icon-color: #686868,
+
+    /* Sidebar Color */
+    sidebar-semi-color: #6165f7,
+    sidebar-semi-text-color: #eee,
+    sidebar-semi-text-active-color: #6165f7,
+    sidebar-text-color: #666,
+    sidebar-text-active-color: #eee,
+    sidebar-item-active-color: #f6f7f8,
     // Icon Color
     icon-color-base: #ccc // Icon Color
   ),
@@ -40,8 +52,9 @@ $themes: (
     gray: #718096,
 
     /* Text Color */
-    text-color-primary: #fff,
-    text-color-gray: #8b99a8,
+    text-color-semi: #aaa,
+    text-color-primary: #bbb,
+    text-color-gray: #aaa,
     text-color-gray-500: #c8c8c8,
     text-color-gray-600: #e6e6e6,
 
@@ -50,7 +63,17 @@ $themes: (
     bg-color-gray: #2c2c2c,
     bg-color-gray-500: #c8c8c8,
     bg-color-gray-600: #e6e6e6,
+
+    /* Navbar Color */
+    nav-icon-color: #ccc,
+
+    /* Sidebar Color */
+    sidebar-semi-color: #3b3b3b,
+    sidebar-semi-text-color: #aaa,
+    sidebar-semi-text-active-color: #eee,
+    sidebar-text-color: #aaa,
+    sidebar-text-active-rgb(7, 5, 5)r: #6165f7,
+    sidebar-item-active-color: #333,
     // Icon Color
     icon-color-base: #ccc // Icon Color
-    )
-);
+  ));
