@@ -6,7 +6,7 @@
       class="fixed right-0 rounded-r-none"
       icon="el-icon-loading"
       icon-pack="el-icon"
-      style="top: 50%; z-index: 999999;"
+      style="top: 50%;"
       @click.stop="active = true"
     ></vs-button>
 
@@ -41,13 +41,29 @@
             <p class="section-title mb-4">主题颜色</p>
             <ul class="px-2 flex">
               <li
-                class="mr-6"
+                title="明亮模式"
+                class="relative mr-4"
                 @click="switchTheme('light')"
               >
-                明亮
+
+                <img src="@/assets/images/sidebar_default.svg">
+                <i
+                  v-show="themeStyle === 'light'"
+                  class="el-icon-check absolute primary"
+                  style="right: 5px; bottom: 5px;"
+                ></i>
               </li>
-              <li @click="switchTheme('dark')">
-                黑暗
+              <li
+                title="黑暗模式"
+                class="relative"
+                @click="switchTheme('dark')"
+              >
+                <img src="@/assets/images/dark.svg">
+                <i
+                  v-show="themeStyle === 'dark'"
+                  class="el-icon-check absolute primary"
+                  style="right: 5px; bottom: 5px;"
+                ></i>
               </li>
             </ul>
           </div>
@@ -77,8 +93,30 @@
           <div>
             <p class="section-title mb-4">侧边栏样式</p>
             <ul class="px-2 flex">
-              <li>跟随主题</li>
-              <li>突出显示</li>
+              <li
+                title="跟随主题"
+                class="relative mr-4"
+                @click="switchSidebar('menu-light')"
+              >
+                <img src="@/assets/images/sidebar_default.svg">
+                <i
+                  v-show="menuTheme === 'menu-light'"
+                  class="el-icon-check absolute primary"
+                  style="right: 5px; bottom: 5px;"
+                ></i>
+              </li>
+              <li
+                title="突出显示"
+                class="relative"
+                @click="switchSidebar('menu-dark')"
+              >
+                <img src="@/assets/images/sidebar_semi.svg">
+                <i
+                  v-show="menuTheme === 'menu-dark'"
+                  class="el-icon-check absolute primary"
+                  style="right: 5px; bottom: 5px;"
+                ></i>
+              </li>
               <!-- <li
                 class="w-10 h-10 mr-4 rounded-lg bg-white border-2 cursor-pointer"
                 :class="{'shadow-outline': menuTheme === 'menu-light'}"
@@ -113,6 +151,9 @@ export default {
   }),
 
   computed: {
+    themeStyle() {
+      return this.$store.state.themeStyle
+    },
     menuTheme() {
       return this.$store.state.menuTheme
     },

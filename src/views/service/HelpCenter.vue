@@ -28,30 +28,48 @@
               >
                 {{ article.title }}
               </li>
-              <li class="add-article opacity-0 primary">添加文章</li>
+              <li
+                class="add-article opacity-0 primary"
+                @click="visible1 = true, payload.section = guide.section, createGuide()"
+              >添加文章</li>
             </ul>
           </vs-collapse-item>
         </vs-collapse>
       </VuePerfectScrollbar>
 
-      <div>
+      <div class="text-center">
         <el-popover
           placement="top"
-          trigger="click"
+          trigger="manual"
+          v-model="visible1"
         >
-          <vs-input
-            v-model="payload.section"
-            placeholder="栏目名称"
-          />
-          <vs-input
-            v-model="payload.articles[0].title"
-            placeholder="文章标题"
-          />
+          <div>
+            <div class="mb-2 flex justify-end">
+              <i
+                class="el-icon-close text-lg cursor-pointer"
+                @click="visible1 = false"
+              ></i>
+            </div>
+            <vs-input
+              class="mb-4"
+              v-model="payload.section"
+              placeholder="栏目名称"
+            />
+            <vs-input
+              v-model="payload.articles[0].title"
+              placeholder="文章标题"
+            />
+            <vs-button
+              class="mt-4 mb-3 w-full"
+              @click="createGuide()"
+            >添加</vs-button>
+          </div>
+
           <vs-button
             slot="reference"
             class="mt-4"
             type="border"
-            @click="createGuide()"
+            @click.native="visible1 = true"
           >
             <i class="el-icon-plus"></i>
             添加栏目
@@ -69,8 +87,8 @@
         <div class="flex items-center justify-between">
           <div v-if="!showEditor">
             <div class="text-semi text-xl font-bold">{{ article.title }}</div>
-            <p class="text-gray text-sm">
-              最后更新于{{ $dayjs(article.updated_at).format('YYYY-MM-DD HH:mm:ss') }}
+            <p class="text-gray text-xs">
+              最后更新于 {{ $dayjs(article.updated_at).format('YYYY-MM-DD HH:mm:ss') }}
             </p>
           </div>
 
@@ -89,6 +107,7 @@
             <el-popover
               placement="bottom"
               trigger="click"
+              v-model="visible2"
             >
               <p class="text-center">删除后将无法恢复</p>
               <div class="text-center">
@@ -108,16 +127,13 @@
           </div>
           <div v-else>
             <vs-button
-              class="mr-4 text-sm"
-              type="border"
+              class="mr-4"
+              size="small"
+              type="flat"
               color="danger"
               @click="showEditor = false"
-            >取消编辑</vs-button>
-            <vs-button
-              class="text-sm"
-              color="success"
-              @click="onUpdateArticle()"
-            >完成编辑</vs-button>
+            >取消</vs-button>
+            <vs-button @click="onUpdateArticle()">完成编辑</vs-button>
           </div>
         </div>
         <vs-divider />
@@ -130,7 +146,7 @@
           }"
         >
           <div
-            v-if="!article.content || article.content.length <= 0 && !showEditor"
+            v-if="(!article.content && !showEditor) || (article.content.length <= 0 && !showEditor)"
             class="h-full flex flex-col justify-center items-center text-gray-400"
           >
             <i class="el-icon-warning-outline text-4xl"></i>
@@ -211,6 +227,8 @@ export default {
         },
       ],
     },
+    visible1: false,
+    visible2: false,
 
     showEditor: false,
     editData: {
@@ -220,6 +238,14 @@ export default {
     title: '',
     content: '',
   }),
+
+  watch: {
+    visible1(v) {
+      if (!v) {
+        this.payload = { section: '', articles: [{ title: '', content: '' }] }
+      }
+    },
+  },
 
   created() {
     this.getGuideList()
@@ -238,7 +264,7 @@ export default {
     async createGuide() {
       const { section, articles } = this.payload
       if (section.length > 0 && articles[0].title.length > 0) {
-        const flag = this.guideList.some(async (el) => {
+        const flag = await this.guideList.some(async (el) => {
           if (el.section === section) {
             await addArticle({
               section_id: el._id,
@@ -252,10 +278,12 @@ export default {
           await createGuide(this.payload)
         }
         this.getGuideList()
+        this.visible1 = false
       }
     },
 
     async getArticle(section_id, article_id) {
+      this.showEditor = false
       this.$vs.loading({
         container: '.article-container',
         scale: 1,
@@ -289,6 +317,7 @@ export default {
       const { code } = await deleteArticle({ article_id: this.article._id })
       if (code === 2000) {
         this.getGuideList()
+        this.visible2 = false
       }
     },
   },
