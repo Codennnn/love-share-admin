@@ -38,6 +38,7 @@ $themes: (
 
     /* Border Color */
     border-color-primary: #8b99a8,
+    input-bg-color: transparent,
     // Icon Color
     icon-color-base: #ccc // Icon Color
   ),
@@ -81,6 +82,7 @@ $themes: (
 
     /* Border Color */
     border-color-primary: #bbb,
+    input-bg-color: rgba(255, 255, 255, 0.15),
     // Icon Color
-    icon-color-base: #ccc // Icon Color
+    icon-color-base: #222 // Icon Color
   ));
