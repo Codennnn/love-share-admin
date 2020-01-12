@@ -1,4 +1,7 @@
 const mutations = {
+  SET_THEME_STYLE(state, theme) {
+    state.themeStyle = theme
+  },
   SET_MENU_THEME(state, theme) {
     state.menuTheme = theme
   },
@@ -8,6 +11,7 @@ const mutations = {
   SWITCH_SIDEBAR_COLLAPSE(state, status) {
     state.sidebarCollapse = status
   },
+
   SET_CATEGORY_LIST(state, list) {
     state.categoryList = list
   },

@@ -1,4 +1,5 @@
 const state = {
+  themeStyle: 'light',
   menuTheme: 'menu-light',
   navbarType: 'fixed',
 

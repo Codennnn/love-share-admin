@@ -204,21 +204,29 @@ export default {
     async createGuide() {
       const { section, articles } = this.payload
       if (section.length > 0 && articles[0].title.length > 0) {
-        if (this.guideList.some(el => el.section === section)) {
-          const { code } = await addArticle({
-            section,
-            title: articles[0].title,
-            content: '',
-          })
-          if (code === 2000) {
-            this.getGuideList()
+        const flag = this.guideList.some((el) => {
+          if (el.section === section) {
+            this.addArticle(el._id, articles[0].title)
+            return true
           }
-        } else {
+          return false
+        })
+        if (!flag) {
           const { code } = await createGuide(this.payload)
           if (code === 2000) {
             this.getGuideList()
           }
         }
+      }
+    },
+
+    async addArticle(section_id, title) {
+      const { code } = await addArticle({
+        section_id,
+        title,
+      })
+      if (code === 2000) {
+        this.getGuideList()
       }
     },
 

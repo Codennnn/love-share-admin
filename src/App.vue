@@ -8,9 +8,21 @@
 export default {
   name: 'App',
 
+  watch: {
+    '$store.state.themeStyle'(val) {
+      this.switchBodyDataset(val)
+    },
+  },
+
   created() {
     this.$store.dispatch('getCategoryList')
     this.$store.dispatch('getSchoolList')
+  },
+
+  methods: {
+    switchBodyDataset(theme) {
+      document.body.dataset.theme = theme
+    },
   },
 }
 </script>

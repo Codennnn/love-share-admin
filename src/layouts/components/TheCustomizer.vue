@@ -9,6 +9,7 @@
       style="top: 50%; z-index: 999999;"
       @click.stop="active = true"
     ></vs-button>
+
     <vs-sidebar
       class="sidebar-main overflow-hidden"
       style="top: 50%;"
@@ -37,6 +38,23 @@
       >
         <div class="p-6">
           <div>
+            <p class="mb-4">主题颜色</p>
+            <ul class="px-2 flex">
+              <li
+                class="mr-6"
+                @click="switchTheme('light')"
+              >
+                明亮
+              </li>
+              <li @click="switchTheme('dark')">
+                黑暗
+              </li>
+            </ul>
+          </div>
+
+          <vs-divider></vs-divider>
+
+          <div>
             <p class="mb-4">顶部导航</p>
             <ul class="px-2 flex">
               <li class="mr-6">
@@ -55,7 +73,9 @@
               </li>
             </ul>
           </div>
+
           <vs-divider></vs-divider>
+
           <div>
             <p class="mb-4">侧边栏颜色</p>
             <ul class="px-2 flex">
@@ -71,7 +91,9 @@
               ></li>
             </ul>
           </div>
+
           <vs-divider></vs-divider>
+
         </div>
       </VuePerfectScrollbar>
     </vs-sidebar>
@@ -105,6 +127,9 @@ export default {
   },
 
   methods: {
+    switchTheme(theme) {
+      this.$store.commit('SET_THEME_STYLE', theme)
+    },
     switchSidebar(theme) {
       this.$store.commit('SET_MENU_THEME', theme)
     },
