@@ -146,6 +146,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/scss/theme/navbar.scss";
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  .nav-bar::v-deep {
+    background: themed("bg-color-primary");
+    .nav-icon {
+      color: themed("nav-icon-color");
+    }
+  }
+}
 
 .nav-wrapper {
   width: calc(100% - #{$side-bar-width});
@@ -194,7 +204,6 @@ export default {
 .nav-icon {
   cursor: pointer;
   font-size: $nav-icon-size;
-  color: $nav-icon-color;
   font-weight: 500;
 }
 </style>

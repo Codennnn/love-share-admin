@@ -28,6 +28,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  .scroll-area {
+    color: themed("text-color-primary");
+  }
+}
+
 #app {
   height: 100%;
   background-color: rgb(245, 245, 245);

@@ -138,7 +138,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/scss/theme/_themeify.scss";
 
-@mixin sidebar-main {
+@include themeify {
   .sidebar-main::v-deep {
     color: themed("text-color-primary");
     .vs-sidebar {
@@ -154,10 +154,6 @@ export default {
       }
     }
   }
-}
-
-@include themeify {
-  @include sidebar-main;
 }
 
 .sidebar-main::v-deep {

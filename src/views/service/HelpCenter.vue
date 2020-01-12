@@ -57,7 +57,7 @@
       id="artical-loading"
       class="vs-con-loading__container w-4/5 pl-6"
     >
-      <div class="px-4 bg-white rounded-lg">
+      <div class="article-container px-4 rounded-lg">
         <div class="flex items-center justify-between">
           <div
             v-if="!showEditor"
@@ -263,7 +263,10 @@ export default {
         }
       }
       .article-item {
-        color: themed("text-color-gray");
+        color: themed("text-color-semi");
+      }
+      .article-container {
+        background: themed("bg-color-primary");
       }
     }
   }
