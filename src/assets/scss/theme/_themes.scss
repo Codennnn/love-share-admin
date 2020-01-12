@@ -35,6 +35,9 @@ $themes: (
     sidebar-text-color: #666,
     sidebar-text-active-color: #eee,
     sidebar-item-active-color: #f6f7f8,
+
+    /* Border Color */
+    border-color-primary: #8b99a8,
     // Icon Color
     icon-color-base: #ccc // Icon Color
   ),
@@ -57,6 +60,7 @@ $themes: (
     text-color-gray: #aaa,
     text-color-gray-500: #c8c8c8,
     text-color-gray-600: #e6e6e6,
+    text-color-gray-700: #aaa,
 
     /* Background Color */
     bg-color-primary: #232323,
@@ -74,6 +78,9 @@ $themes: (
     sidebar-text-color: #aaa,
     sidebar-text-active-rgb(7, 5, 5)r: #6165f7,
     sidebar-item-active-color: #333,
+
+    /* Border Color */
+    border-color-primary: #bbb,
     // Icon Color
     icon-color-base: #ccc // Icon Color
   ));
