@@ -57,11 +57,11 @@ service.interceptors.response.use(
   (response) => {
     const { data } = response
     const { code, msg } = data
-    if (code === 5000) {
+    if (code !== 2000) {
       errorHandler.errorNotify({
-        title: '哎呀，大事不好啦 〒▽〒',
+        title: '操作失常 〒▽〒',
         message: `错误代码：${code} - ${msg}`,
-        duration: 5000,
+        duration: 0,
       })
     }
     return data

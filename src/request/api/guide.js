@@ -1,5 +1,12 @@
 import request from '../request'
 
+export function getGuideList() {
+  return request({
+    url: '/guide/list',
+    method: 'get',
+  })
+}
+
 export function createGuide(data) {
   return request({
     url: '/guide/create',
@@ -8,10 +15,11 @@ export function createGuide(data) {
   })
 }
 
-export function getGuideList() {
+export function deleteGuide(data) {
   return request({
-    url: '/guide/list',
-    method: 'get',
+    url: '/guide/delete',
+    method: 'delete',
+    data,
   })
 }
 

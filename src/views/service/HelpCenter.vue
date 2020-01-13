@@ -11,31 +11,45 @@
         }"
       >
         <vs-collapse class="section">
-          <template v-for="(guide, i) in guideList">
-            <vs-collapse-item
-              open
-              v-if="guide.articles && guide.articles.length > 0"
-              :key="i"
-            >
-              <div slot="header">
-                {{ guide.section }}
-              </div>
-              <ul class="ml-2 text-semi">
-                <li
-                  class="mb-2"
-                  v-for="(article, j) in guide.articles"
-                  :key="j"
-                  @click="getArticle(guide._id, article._id)"
-                >
-                  {{ article.title }}
-                </li>
-                <li
-                  class="add-article opacity-0 primary"
-                  @click="visible1 = true, payload.section = guide.section, createGuide()"
-                >添加文章</li>
-              </ul>
-            </vs-collapse-item>
-          </template>
+          <vs-collapse-item
+            open
+            v-for="(guide, i) in guideList"
+            :key="i"
+          >
+            <div slot="header">
+              {{ guide.section }}
+              <vs-dropdown>
+                <i class="el-icon-more ml-1 text-xs text-light"></i>
+                <vs-dropdown-menu>
+                  <vs-dropdown-item @click="visible1 = true, payload.section = guide.section,
+                   createGuide()">
+                    添加文章
+                  </vs-dropdown-item>
+                  <vs-dropdown-item>
+                    编辑栏目
+                  </vs-dropdown-item>
+                  <vs-dropdown-item
+                    divider
+                    v-if="guide.articles.length <= 0"
+                    class="danger"
+                    @click="deleteGuide(guide._id)"
+                  >
+                    删除栏目
+                  </vs-dropdown-item>
+                </vs-dropdown-menu>
+              </vs-dropdown>
+            </div>
+            <ul class="ml-2 text-semi">
+              <li
+                class="mb-2"
+                v-for="(article, j) in guide.articles"
+                :key="j"
+                @click="getArticle(guide._id, article._id)"
+              >
+                {{ article.title }}
+              </li>
+            </ul>
+          </vs-collapse-item>
         </vs-collapse>
       </VuePerfectScrollbar>
 
@@ -69,10 +83,10 @@
 
           <div
             slot="reference"
-            class="w-full flex justify-center"
+            class="mt-5 w-full flex justify-center"
           >
             <div
-              class="mt-5 p-2 flex items-center justify-center bg-main cursor-pointer"
+              class="p-2 flex items-center justify-center bg-main cursor-pointer"
               style="width: 11rem; color: white; font-size: 0.95rem; border-radius: 0.35rem;"
               @click="visible1 = true"
             >
@@ -185,7 +199,7 @@ import { VueEditor } from 'vue2-editor'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import {
-  getGuideList, createGuide, getArticle, addArticle, updateArticle, deleteArticle,
+  getGuideList, createGuide, getArticle, addArticle, deleteGuide, updateArticle, deleteArticle,
 } from '@/request/api/guide'
 
 const menus = [
@@ -277,19 +291,25 @@ export default {
     async createGuide() {
       const { section, articles } = this.payload
       if (section.length > 0 && articles[0].title.length > 0) {
-        // eslint-disable-next-line no-restricted-syntax
-        for (const el of this.guideList) {
-          if (el.section === section) {
-            addArticle({
-              section_id: el._id,
-              title: articles[0].title,
-            })
-            return
-          }
+        const filter = this.guideList.filter(el => el.section === section)
+        if (filter.length > 0) {
+          await addArticle({
+            section_id: filter[0]._id,
+            title: articles[0].title,
+          })
+        } else {
+          await createGuide(this.payload)
         }
-        await createGuide(this.payload)
+
         this.getGuideList()
         this.visible1 = false
+      }
+    },
+
+    async deleteGuide(section_id) {
+      const { code } = await deleteGuide({ section_id })
+      if (code === 2000) {
+        this.getGuideList()
       }
     },
 
@@ -319,8 +339,8 @@ export default {
     async onUpdateArticle() {
       const { code } = await updateArticle(this.editData)
       if (code === 2000) {
+        await this.getGuideList()
         this.showEditor = false
-        this.getGuideList()
       }
     },
 
