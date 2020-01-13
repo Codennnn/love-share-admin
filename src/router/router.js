@@ -115,9 +115,9 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: '/buying-list',
-        name: 'BuyingList',
-        component: () => import('@/views/buying/BuyingList.vue'),
+        path: '/begging-list',
+        name: 'BeggingList',
+        component: () => import('@/views/begging/BeggingList.vue'),
         meta: { title: '求购列表' },
       },
     ],
