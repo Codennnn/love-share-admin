@@ -2,35 +2,23 @@
   <div class="data-list mt-4">
     <vs-table
       search
-      multiple
       pagination
       noDataText="暂无数据"
-      :max-items="itemsPerPage"
-      :data="buyingList"
-      v-model="selected"
+      :max-items="10"
+      :data="beggingList"
     >
       <div
         slot="header"
         class="flex flex-wrap-reverse items-center flex-grow justify-between"
       >
-        <vs-button
-          v-auth
-          style="padding: 7px 10px;"
-          color="primary"
-          type="border"
-          size="small"
-          @click="addNewDataSidebar = true, sidebarTitle = '添加求购信息'"
-        >
-          <i class="el-icon-plus mr-1 font-semibold"></i>
-          <span>添加求购信息</span>
-        </vs-button>
       </div>
 
       <template slot="thead">
         <vs-th sort-key="name">商品标题</vs-th>
         <vs-th sort-key="category">分类</vs-th>
-        <vs-th sort-key="price">求购价</vs-th>
-        <vs-th sort-key="time">发布时间</vs-th>
+        <vs-th>求购价</vs-th>
+        <vs-th sort-key="created_at">发布时间</vs-th>
+        <vs-th sort-key="updated_at">最后更新</vs-th>
       </template>
 
       <template slot-scope="{data}">
@@ -46,22 +34,26 @@
               v-for="(item, i) in tr.category"
               :key="i"
             >
-              {{ item }}
+              {{ item.name }}
             </vs-chip>
           </vs-td>
           <vs-td>
-            <p class="text-gray-600 font-bold">￥{{ Number(tr.price).toFixed(2) }}</p>
+            <p class="text-gray font-bold">
+              ￥{{ Number(tr.min_price).toFixed(2) }} - ￥{{ Number(tr.max_price).toFixed(2) }}
+            </p>
+          </vs-td>
+          <vs-td class="text-gray">
+            {{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}
+          </vs-td>
+          <vs-td class="text-gray">
+            {{ $dayjs(tr.updated_at).format('YYYY/MM/DD') }}
           </vs-td>
           <vs-td>
-            <p class="text-gray-600">{{ tr.time }}</p>
-          </vs-td>
-          <vs-td v-if="$auth()">
             <div class="text-center">
               <vs-dropdown>
                 <i class="el-icon-more-outline"></i>
                 <vs-dropdown-menu class="w-24">
                   <vs-dropdown-item
-                    v-auth
                     class="text-center"
                     @click="addNewDataSidebar = true, sidebarTitle = '编辑更新信息', sidebarData = tr"
                   >
@@ -69,9 +61,8 @@
                     <span>编辑</span>
                   </vs-dropdown-item>
                   <vs-dropdown-item
-                    v-auth
                     divider
-                    class="text-center text-danger"
+                    class="text-center danger"
                     @click="deleteData(tr.buying_id)"
                   >
                     <i class="el-icon-delete mr-2"></i>
@@ -101,17 +92,16 @@
 import AddNewDataSidebar from './components/AddNewDataSidebar.vue'
 
 import {
-  getBuyingList,
+  getBeggingList,
   addBuying,
   deleteBuying,
   updateBuying,
-} from '@/request/api/buying'
+} from '@/request/api/begging'
 
 export default {
   data: () => ({
     selected: [],
-    itemsPerPage: 6,
-    buyingList: [],
+    beggingList: [],
     sidebarTitle: '',
     sidebarData: {},
     addNewDataSidebar: false,
@@ -119,15 +109,18 @@ export default {
 
   components: { AddNewDataSidebar },
 
-  mounted() {
-    this.getBuyingList()
+  created() {
+    this.getBeggingList()
   },
 
   methods: {
-    async getBuyingList() {
-      const { code, data } = await getBuyingList()
+    async getBeggingList() {
+      const { code, data } = await getBeggingList({
+        page: 1,
+        page_size: 50,
+      })
       if (code === 2000) {
-        this.buyingList = data.buying_list
+        this.beggingList = data.begging_list
       }
     },
 
