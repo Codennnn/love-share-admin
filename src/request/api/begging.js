@@ -1,9 +1,10 @@
 import request from '../request'
 
-export function getBuyingList() {
+export function getBeggingList(params) {
   return request({
-    url: '/buying/list',
+    url: '/begging/list',
     method: 'get',
+    params,
   })
 }
 
