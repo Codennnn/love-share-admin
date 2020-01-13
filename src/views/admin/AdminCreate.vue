@@ -1,7 +1,7 @@
 <template>
   <div
     id="main"
-    class="mt-6 p-6 base-shadow bg-white rounded-lg vs-con-loading__container"
+    class="mt-6 p-6 base-shadow bg-semi radius vs-con-loading__container"
   >
     <div class="mb-6 flex items-center">
       <!-- 头像 -->
@@ -22,12 +22,9 @@
     </div>
 
     <!-- 权限 -->
-    <div
-      class="mb-5 p-5 rounded-lg"
-      style="border: 1px solid #e4e4e4;"
-    >
+    <div class="mb-5 p-5 radius">
       <div class="flex items-center justify-between">
-        <p class="text-lg text-gray-600">权 限</p>
+        <p class="text-lg text-semi">权 限</p>
         <div>
           <vs-switch v-model="allSelected">
             <span slot="on">全选</span>

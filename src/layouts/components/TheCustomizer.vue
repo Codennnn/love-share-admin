@@ -6,7 +6,7 @@
       class="fixed right-0 rounded-r-none"
       icon="el-icon-loading"
       icon-pack="el-icon"
-      style="top: 50%;"
+      style="top: 50%; z-index: 9999;"
       @click.stop="active = true"
     ></vs-button>
 

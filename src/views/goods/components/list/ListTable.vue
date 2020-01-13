@@ -1,7 +1,7 @@
 <template>
   <div
     id="table-list"
-    class="vs-con-loading__container"
+    class="radius vs-con-loading__container"
   >
     <vs-table
       search
@@ -45,17 +45,17 @@
             v-if="tr.seller"
             :key="i"
           >
-            <vs-td>{{ tr.name }}</vs-td>
+            <vs-td class="text-primary">{{ tr.name }}</vs-td>
             <vs-td>
               <vs-chip
                 v-for="(it, i) in tr.category"
                 :key="i"
               >{{ it.name }}</vs-chip>
             </vs-td>
-            <vs-td class="text-gray-700 font-bold">￥{{ Number(tr.price).toFixed(2) }}</vs-td>
-            <vs-td>{{ tr.collect_num }}</vs-td>
-            <vs-td class="text-gray-700 font-bold">{{ tr.seller.nickname }}</vs-td>
-            <vs-td class="text-gray-600">{{ i + 1 }}</vs-td>
+            <vs-td class="text-gray font-bold">￥{{ Number(tr.price).toFixed(2) }}</vs-td>
+            <vs-td class="text-semi">{{ tr.collect_num }}</vs-td>
+            <vs-td class="text-gray font-bold">{{ tr.seller.nickname }}</vs-td>
+            <vs-td class="text-semi">{{ i + 1 }}</vs-td>
 
             <!-- 展开的内容 -->
             <template slot="expand">
@@ -68,7 +68,7 @@
                       @click="viewUserDetail()"
                     />
                     <div
-                      class="my-2 text-gray-600 hover:text-gray-800 text-base
+                      class="my-2 text-gray text-base
                       font-semibold cursor-pointer"
                       @click="viewUserDetail()"
                     >{{ tr.seller.nickname }}</div>
@@ -230,12 +230,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#table-list::v-deep {
-  .vs-table--thead {
-    color: gray;
-  }
-  .vs-table--pagination {
-    background: white;
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  #table-list .vs-con-table::v-deep {
+    background: themed("bg-color-semi");
+    .vs-table--thead {
+      color: themed("text-color-semi");
+    }
+    .vs-table--tbody-table tr {
+      background: themed("bg-color-semi");
+      .vs-icon {
+        color: themed("text-color-semi");
+      }
+    }
+    .tr-expand {
+      .vs-list--item {
+        color: themed("text-color-semi");
+      }
+    }
   }
 }
 </style>

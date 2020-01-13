@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <div class="mt-4 py-6 px-4 radius bg-semi overflow-hidden">
     <vs-table
       search
       pagination
@@ -10,7 +10,6 @@
       <template slot="thead">
         <vs-th>头像</vs-th>
         <vs-th>昵称</vs-th>
-        <vs-th>ID</vs-th>
         <vs-th>信用度</vs-th>
         <vs-th>乐享值</vs-th>
         <vs-th>注册时间</vs-th>
@@ -20,7 +19,6 @@
         <vs-tr
           v-for="(tr, i) in data"
           :key="i"
-          :data="tr"
         >
           <vs-td>
             <vs-avatar
@@ -28,8 +26,7 @@
               :src="`${tr.avatar_url}?imageView2/2/w/40`"
             />
           </vs-td>
-          <vs-td>{{ tr.nickname }}</vs-td>
-          <vs-td class="text-gray-600">{{ tr.user_id }}</vs-td>
+          <vs-td class="font-bold">{{ tr.nickname }}</vs-td>
           <vs-td>
             <vs-progress
               :height="8"
@@ -42,7 +39,7 @@
             <p class="ml-4 font-bold">{{ tr.share_value }}</p>
           </vs-td>
           <vs-td>
-            <p class="text-gray-600">{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
+            <p>{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
           </vs-td>
           <vs-td>
             <div class="text-center">
@@ -64,7 +61,7 @@
                     <span>查看</span>
                   </vs-dropdown-item>
                   <vs-dropdown-item
-                    class="text-center text-danger"
+                    class="text-center danger"
                     divider
                   >
                     <i class="el-icon-delete mr-2"></i>
@@ -108,9 +105,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.vs-con-table::v-deep {
-  .vs-table--pagination {
-    background: white;
-  }
-}
 </style>

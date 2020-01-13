@@ -1,9 +1,11 @@
 <template>
   <div>
-    <vs-tabs class="p-6 bg-primary">
+    <vs-tabs
+      id="main"
+      class="p-6 bg-primary vs-con-loading__container"
+    >
       <vs-tab
-        id="main"
-        class="px-4 py-10 vs-con-loading__container"
+        class="px-4 py-10"
         icon="el-icon-user"
         icon-pack="el-icon"
         label="账号信息"
@@ -26,11 +28,8 @@
           </div>
         </div>
 
-        <div
-          class="mb-5 p-5 rounded-lg border-primary"
-          style="border: 1px solid;"
-        >
-          <p class="text-lg text-gray-600">权 限</p>
+        <div class="mb-5 p-5 rounded-lg border-primary">
+          <p class="text-lg text-semi">权 限</p>
           <vs-divider />
           <EditPermission
             ref="editPermissions"

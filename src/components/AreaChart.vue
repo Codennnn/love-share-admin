@@ -7,12 +7,12 @@
       >
         <i
           class="iconfont icon"
-          :class="[icon, `text-${color}`]"
+          :class="[icon, color]"
         ></i>
       </div>
       <div>
-        <div class="mt-3 text-2xl font-bold">{{ statistic }}</div>
-        <span class="text-gray-500">{{ label }}</span>
+        <div class="mt-3 text-primary text-2xl font-bold">{{ statistic }}</div>
+        <span class="text-semi">{{ label }}</span>
       </div>
     </div>
     <div :id="chartData.id">

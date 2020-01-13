@@ -2,43 +2,43 @@
   <div>
     <div class="flex mt-3 mb-6">
       <div
-        class="box w-1/4 lg:px-6 px-3"
+        class="box w-1/4 lg:px-6 px-3 radius bg-gray"
         @click="getGoodsListOnSell()"
       >
         <div>
-          <div class="text-3xl text-bg-white">
+          <div class="text-3xl text-primary">
             {{ onSellCount.toLocaleString() }}
           </div>
-          <div class="text-bg-gray">已上架商品</div>
+          <div class="text-semi">已上架商品</div>
         </div>
         <div
           class="rounded-full"
           style="background: rgba(var(--vs-primary), 0.2)"
         >
-          <i class="el-icon-sell p-2 text-3xl text-primary"></i>
+          <i class="el-icon-sell p-2 text-3xl primary"></i>
         </div>
       </div>
 
       <div
-        class="box w-1/4 mx-5 lg:px-6 px-3"
+        class="box w-1/4 mx-5 lg:px-6 px-3 radius bg-gray"
         @click="getGoodsListOffSell()"
       >
         <div>
-          <div class="text-3xl text-bg-white">
+          <div class="text-3xl text-primary">
             {{ offSellCount.toLocaleString() }}
           </div>
-          <div class="text-bg-gray">已下架商品</div>
+          <div class="text-semi">已下架商品</div>
         </div>
         <div
           class="rounded-full"
           style="background: rgba(var(--vs-danger), 0.2)"
         >
-          <i class="el-icon-sold-out p-2 text-3xl text-danger"></i>
+          <i class="el-icon-sold-out p-2 text-3xl danger"></i>
         </div>
       </div>
 
-      <div class="w-2/4 py-3 px-6 rounded-lg bg-gray">
-        <div class="mb-3 text-gray-600">高级操作</div>
+      <div class="w-2/4 py-3 px-6 radius bg-gray">
+        <div class="mb-3 text-semi">高级操作</div>
         <div class="flex items-center justify-between text-sm">
           <div class="sm:w-1/2">
             <vs-input
@@ -60,9 +60,9 @@
       </div>
     </div>
 
-    <!-- 筛选搜索 -->
-    <div class="mb-6 py-4 px-6 rounded-lg base-shadow bg-white">
-      <div class="flex items-center justify-between text-gray-600">
+    <!-- 过滤搜索 -->
+    <div class="mb-6 py-4 px-6 radius base-shadow bg-semi">
+      <div class="flex items-center justify-between text-semi">
         <div>过滤搜索</div>
         <div>
           <i
@@ -293,8 +293,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 0.5rem;
-  background: $bg-gray;
   transition: all 0.4s;
   cursor: pointer;
 

@@ -3,7 +3,7 @@
     <div class="flex flex-wrap w-full">
       <!-- 卡片 1：欢迎卡片 -->
       <div class="lg:w-6/12 lg:pr-3 sm:w-full my-3 min-h-full">
-        <div class="h-full text-white bg-purple rounded-lg shadow-xl">
+        <div class="h-full text-white bg-purple radius shadow-xl">
           <div class="h-full relative flex flex-col justify-center items-center py-4">
             <img
               class="decore-left absolute top-0 left-0"
@@ -29,7 +29,7 @@
       </div>
       <!-- 卡片 2：用户数统计卡片 -->
       <div class="lg:w-3/12 lg:pl-3 lg:pr-3 sm:w-1/2 sm:pr-3 my-3">
-        <div class="bg-white rounded-lg shadow-xl h-full">
+        <div class="h-full bg-semi radius base-shadow overflow-hidden">
           <area-chart
             statistic="2.5K"
             label="用户数"
@@ -42,7 +42,7 @@
       </div>
       <!-- 卡片 3：交易量统计卡片 -->
       <div class="lg:w-3/12 lg:pl-3 sm:w-1/2 sm:pl-3 my-3">
-        <div class="bg-white rounded-lg shadow-xl h-full">
+        <div class="h-full bg-semi radius base-shadow overflow-hidden">
           <area-chart
             statistic="9K"
             label="交易量"
@@ -57,13 +57,13 @@
     <div class="flex flex-wrap w-full">
       <!-- 卡片 4 -->
       <div class="lg:w-6/12 lg:pr-3 sm:w-full my-3">
-        <div class="p-6 bg-white rounded-lg shadow-xl h-full">
+        <div class="h-full p-6 bg-semi radius base-shadow">
           <div class="flex">
             <div class="w-full lg:w-1/2 xl:w-1/2 flex flex-col justify-between pr-4">
               <div>
-                <div class="mb-1 text-2xl font-bold">2.7K</div>
-                <span class="font-medium text-gray-500">平均交易额</span>
-                <p class="mt-2 text-xl font-medium">
+                <div class="mb-1 text-primary text-2xl font-bold">2.7K</div>
+                <span class="font-medium text-semi">平均交易额</span>
+                <p class="mt-2 text-xl text-semi font-medium">
                   <span class='text-success'>+5.2%</span> 最近7天
                 </p>
               </div>
@@ -86,7 +86,7 @@
           <div>
             <div class="flex">
               <div class="w-1/2 mb-3 pr-4">
-                <p class="text-gray-600">Goal: $100000</p>
+                <p class="text-gray">Goal: $100000</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="50"
@@ -94,7 +94,7 @@
                 ></vs-progress>
               </div>
               <div class="w-1/2 mb-3 pl-4">
-                <p class="text-gray-600">Users: 100K</p>
+                <p class="text-gray">Users: 100K</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="60"
@@ -104,7 +104,7 @@
             </div>
             <div class="flex">
               <div class="w-1/2 mb-3 pr-4">
-                <p class="text-gray-600">Retention: 90%</p>
+                <p class="text-gray">Retention: 90%</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="70"
@@ -112,7 +112,7 @@
                 ></vs-progress>
               </div>
               <div class="w-1/2 mb-3 pl-4">
-                <p class="text-gray-600">Duration: 1yr</p>
+                <p class="text-gray">Duration: 1yr</p>
                 <vs-progress
                   class="block mt-1"
                   color="success"
