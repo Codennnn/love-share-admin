@@ -1,17 +1,5 @@
 @import "~@/assets/scss/theme/_themeify.scss";
 
-.text-dark {
-  color: rgba(var(--vs-dark), 1) !important;
-}
-
-.text-bg-gray {
-  color: $text-bg-gray;
-}
-
-.text-bg-white {
-  color: $text-bg-white;
-}
-
 .bg-primary-gradient {
   background: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), .7)) !important;
 }
@@ -32,6 +20,10 @@
 
 .heavy-shadow {
   box-shadow: $heavy-shadow;
+}
+
+.radius {
+  border-radius: 0.8rem;
 }
 
 img {
@@ -81,10 +73,52 @@ img {
   }
 
   .border-primary {
-    color: themed("border-color-primary");
+    border: 1px solid themed("border-color-primary");
   }
 
   .vs-inputx {
+    background: themed("input-bg-color");
+  }
+
+  .vs-divider {
+    .vs-divider-border {
+      border-color: themed("text-color-light") !important;
+    }
+  }
+
+  .vs-con-table {
+    background: themed("bg-color-semi");
+
+    .vs-table--header {
+      padding: 0.5rem 0 1.5rem 0;
+    }
+
+    .vs-table--thead {
+      color: themed("text-color-semi");
+    }
+
+    .vs-table--td {
+      color: themed("text-color-gray");
+    }
+
+    .vs-table--tbody-table tr {
+      background: themed("bg-color-semi");
+
+      .vs-icon {
+        color: themed("text-color-semi");
+      }
+    }
+
+    .tr-expand {
+      .vs-list--item {
+        color: themed("text-color-semi");
+      }
+    }
+  }
+
+  .el-input__inner {
+    color: themed("text-color-primary");
+    border-color: themed("border-color-primary");
     background: themed("input-bg-color");
   }
 }
