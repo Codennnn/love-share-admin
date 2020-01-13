@@ -1,5 +1,9 @@
 @import "~@/assets/scss/theme/_themeify.scss";
 
+.bg-main {
+  background: #6165f7;
+}
+
 .bg-primary-gradient {
   background: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), .7)) !important;
 }
@@ -37,15 +41,15 @@ img {
   }
 
   .success {
-    color: themed("success");
+    color: themed("success") !important;
   }
 
   .danger {
-    color: themed("danger");
+    color: themed("danger") !important;
   }
 
   .warning {
-    color: themed("warning");
+    color: themed("warning") !important;
   }
 
   .text-semi {
@@ -74,6 +78,18 @@ img {
 
   .border-primary {
     border: 1px solid themed("border-color-primary");
+  }
+
+  .notice {
+
+    .notice-header,
+    .vs-dropdown--menu--after {
+      background: themed("notice-header-bg-color");
+    }
+
+    .notice-content {
+      background: themed("notice-content-bg-color");
+    }
   }
 
   .vs-inputx {
@@ -109,6 +125,12 @@ img {
       }
     }
 
+    .not-data-table {
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: themed("text-color-gray");
+    }
+
     .tr-expand {
       .vs-list--item {
         color: themed("text-color-semi");
@@ -120,5 +142,10 @@ img {
     color: themed("text-color-primary");
     border-color: themed("border-color-primary");
     background: themed("input-bg-color");
+
+    .el-range-input {
+      color: themed("text-color-primary");
+      background: themed("input-bg-color");
+    }
   }
 }
