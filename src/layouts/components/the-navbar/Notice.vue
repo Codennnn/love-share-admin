@@ -5,10 +5,10 @@
     </el-badge>
     <vs-dropdown-menu
       id="div-with-loading"
-      class="menu-box"
+      class="notice"
     >
       <div
-        class="w-full table text-center text-white bg-primary cursor-pointer"
+        class="notice-header w-full table text-center text-white cursor-pointer"
         style="height: 65px;"
       >
         <div
@@ -20,7 +20,6 @@
             title="点击刷新 (=・ω・=)"
             class="text-xl"
           >收到 {{ unreadAmount }} 条未读通知</div>
-          <div class="text-sm text-gray-300"></div>
         </div>
       </div>
       <VuePerfectScrollbar
@@ -31,11 +30,11 @@
         }"
       >
         <ul
-          class="vs-con-loading__container"
           v-if="unreadAmount > 0"
+          class="notice-content vs-con-loading__container"
         >
           <li
-            class="notice relative p-4 flex justify-between
+            class="relative p-4 flex justify-between
                     cursor-pointer hover:bg-gray-200"
             style="transition: all 0.3s;"
             v-for="(nt, i) in unreadNotices"
@@ -54,7 +53,7 @@
                     :class="[`text-${noticeType[nt.type].color}`]"
                   >{{ nt.title }}</span>
                   <div
-                    class="text-sm text-gray-600"
+                    class="content text-sm text-gray"
                     v-html="nt.content"
                     :title="nt.content"
                   ></div>
@@ -74,7 +73,7 @@
           </li>
         </ul>
         <div
-          class="h-full flex flex-col items-center justify-center"
+          class="notice-content h-full flex flex-col items-center justify-center"
           v-else
         >
           <vs-icon
@@ -205,17 +204,13 @@ export default {
 }
 
 // 通知菜单
-.vs-dropdown-menu.menu-box::v-deep {
+.vs-dropdown-menu.notice::v-deep {
   width: 365px;
-
   .vs-dropdown--menu {
     padding: 0 !important;
+    border-radius: 0.8rem;
     border: 0;
     overflow: hidden;
-    border-radius: 0.5rem;
-  }
-  .vs-dropdown--menu--after {
-    background: rgba(var(--vs-primary), 1);
   }
   .notice-content {
     overflow: hidden;

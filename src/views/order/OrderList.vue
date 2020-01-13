@@ -2,11 +2,11 @@
   <div>
     <!-- 统计表格 -->
     <div
-      class="flex pt-3 pb-6"
       v-if="initFinished"
+      class="pt-3 pb-6 flex"
     >
       <div class="w-1/3 pr-3">
-        <div class="bg-white rounded-lg shadow-md h-full">
+        <div class="bg-semi radius base-shadow overflow-hidden">
           <area-chart
             statistic="9K"
             label="交易额"
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="w-1/3 px-2">
-        <div class="bg-white rounded-lg shadow-md h-full">
+        <div class="bg-semi radius base-shadow overflow-hidden">
           <area-chart
             statistic="9K"
             label="成交量"
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="w-1/3 pl-3">
-        <div class="bg-white rounded-lg shadow-md h-full">
+        <div class="bg-semi radius base-shadow overflow-hidden">
           <area-chart
             statistic="9K"
             label="订单数"
@@ -50,7 +50,7 @@
     <!-- 订单列表 -->
     <div
       id="table-loading"
-      class="vs-con-loading__container"
+      class="radius vs-con-loading__container"
     >
       <vs-table
         search
@@ -61,7 +61,7 @@
       >
         <template slot="header">
           <div class="w-full flex items-center p-4">
-            <div class="text-xl font-semibold">订单列表</div>
+            <div class="text-xl text-primary font-semibold">订单列表</div>
             <div class="ml-auto">
               <el-date-picker
                 v-model="date"
@@ -77,73 +77,69 @@
           </div>
         </template>
         <template slot="thead">
-          <vs-th>
-            订单编号
-            <span class="ml-1 text-gray-600 font-medium">（点击复制）</span></vs-th>
-          <vs-th>买家昵称</vs-th>
+          <vs-th>商品名称</vs-th>
+          <vs-th>买家</vs-th>
+          <vs-th>卖家</vs-th>
           <vs-th>总价</vs-th>
           <vs-th>创建时间</vs-th>
+          <vs-th>支付方式</vs-th>
           <vs-th>状态</vs-th>
           <vs-th></vs-th>
         </template>
 
         <template slot-scope="{data}">
-          <vs-tr
-            v-for="(tr, i) in data"
-            :key="i"
-            :data="tr"
-            @dblclick.native="viewDetail(tr.order_id)"
-          >
-            <vs-td class="text-gray-500">
-              <span @click.stop="onCopy(tr.order_id)">
-                {{ tr.order_id }}
-              </span>
-            </vs-td>
-
-            <vs-td :data="data[i].buyer_name">
-              {{ tr.buyer_name }}
-            </vs-td>
-
-            <vs-td
-              class="font-semibold"
-              :data="tr.total"
+          <template v-for="(item) in data">
+            <vs-tr
+              v-for="(tr, i) in item.goods_list"
+              :key="i"
+              @dblclick.native="viewDetail(tr._id)"
             >
-              ￥{{ tr.total }}
-            </vs-td>
+              <vs-td>{{ tr.goods.name }}</vs-td>
+              <vs-td :title="`ID: ${tr.goods.buyer._id}`">{{ tr.goods.buyer.nickname }}</vs-td>
+              <vs-td :title="`ID: ${tr.goods.seller._id}`">{{ tr.goods.seller.nickname }}</vs-td>
+              <vs-td class="font-bold">
+                ￥{{ Number(tr.goods.price).toFixed(2) }}
+              </vs-td>
+              <vs-td :title="$dayjs(tr.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
+                {{ timeDiff(tr.goods.created_at) }}
+              </vs-td>
+              <vs-td class="font-bold">{{ payments[item.payment] }}</vs-td>
+              <vs-td>
+                <vs-chip
+                  :style="{background: `rgba(var(--vs-${status[item.status].color}), 0.2)`}"
+                  :class="['font-bold', status[item.status].color]"
+                >
+                  {{ status[item.status].text }}
+                </vs-chip>
+              </vs-td>
 
-            <vs-td :data="tr.time">
-              {{ timeDiff(tr.time) }}
-            </vs-td>
-
-            <vs-td :data="tr.status">
-              <vs-chip
-                :style="{background: `rgba(var(--vs-${status[tr.status].color}), 0.2)`}"
-                :class="['font-bold', `text-${status[tr.status].color}`]"
-              >
-                {{ status[tr.status].text }}
-              </vs-chip>
-            </vs-td>
-
-            <vs-td>
-              <vs-dropdown>
-                <i class="el-icon-more px-2 text-lg text-gray-600"></i>
-                <vs-dropdown-menu>
-                  <vs-dropdown-item>
-                    <div
-                      class="w-24 text-center"
-                      @click="viewDetail(tr.order_id)"
-                    >查看详情</div>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item divider>
-                    <div
-                      class="w-24 text-danger text-center"
-                      @click="deleteOrder(tr.order_id)"
-                    >删除订单</div>
-                  </vs-dropdown-item>
-                </vs-dropdown-menu>
-              </vs-dropdown>
-            </vs-td>
-          </vs-tr>
+              <vs-td>
+                <vs-dropdown>
+                  <i class="el-icon-more px-2 text-lg text-gray"></i>
+                  <vs-dropdown-menu>
+                    <vs-dropdown-item>
+                      <div
+                        class="w-24 text-center"
+                        @click="onCopy(tr._id)"
+                      >复制单号</div>
+                    </vs-dropdown-item>
+                    <vs-dropdown-item>
+                      <div
+                        class="w-24 text-center"
+                        @click="viewDetail(tr._id)"
+                      >查看详情</div>
+                    </vs-dropdown-item>
+                    <vs-dropdown-item divider>
+                      <div
+                        class="w-24 danger text-center"
+                        @click="deleteOrder(tr._id)"
+                      >删除订单</div>
+                    </vs-dropdown-item>
+                  </vs-dropdown-menu>
+                </vs-dropdown>
+              </vs-td>
+            </vs-tr>
+          </template>
         </template>
       </vs-table>
     </div>
@@ -164,6 +160,8 @@ import { timeDiff, areaChartOptions } from '@/utils/util'
 
 export default {
   name: 'OrderList',
+  components: { AreaChart },
+
   data: () => ({
     timeDiff,
     initFinished: false,
@@ -201,23 +199,27 @@ export default {
         },
       }],
     },
+    payments: {
+      huabei: '余额支付',
+      weixin: '微信支付',
+      zhifubao: '支付宝支付',
+      yinlian: '银行卡支付',
+    },
     status: {
-      0: {
+      1: {
         text: '已付款',
         color: 'success',
       },
-      1: {
+      2: {
         text: '待付款',
         color: 'warning',
       },
-      2: {
+      3: {
         text: '支付失败',
         color: 'danger',
       },
     },
   }),
-
-  components: { AreaChart },
 
   mounted() {
     this.initCharts()
@@ -232,7 +234,7 @@ export default {
       const options1 = _cloneDeepWith(areaChartOptions)
       const options2 = _cloneDeepWith(areaChartOptions)
       const options3 = _cloneDeepWith(areaChartOptions)
-      options1.colors = ['#7367F0']
+      options1.colors = ['#6165f7']
       options2.colors = ['#FF9F43']
       options3.colors = ['#5DC76F']
       this.chartData1 = { series: [data1.data], chartOptions: options1 }
@@ -251,7 +253,10 @@ export default {
       })
 
       try {
-        const { code, data } = await getOrderList()
+        const { code, data } = await getOrderList({
+          page: 1,
+          page_size: 100,
+        })
         if (code === 2000) {
           this.orderList = data.order_list
         }
@@ -263,7 +268,7 @@ export default {
     },
 
     onSearch() {
-      this.getOrders()
+      this.getOrderList()
     },
 
     // 按日期获取商品

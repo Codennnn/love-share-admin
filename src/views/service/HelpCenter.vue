@@ -11,33 +11,35 @@
         }"
       >
         <vs-collapse class="section">
-          <vs-collapse-item
-            open
-            v-for="(guide, i) in guideList"
-            :key="i"
-          >
-            <div slot="header">
-              {{ guide.section }}
-            </div>
-            <ul class="ml-2 text-semi">
-              <li
-                class="mb-2"
-                v-for="(article, j) in guide.articles"
-                :key="j"
-                @click="getArticle(guide._id, article._id)"
-              >
-                {{ article.title }}
-              </li>
-              <li
-                class="add-article opacity-0 primary"
-                @click="visible1 = true, payload.section = guide.section, createGuide()"
-              >添加文章</li>
-            </ul>
-          </vs-collapse-item>
+          <template v-for="(guide, i) in guideList">
+            <vs-collapse-item
+              open
+              v-if="guide.articles && guide.articles.length > 0"
+              :key="i"
+            >
+              <div slot="header">
+                {{ guide.section }}
+              </div>
+              <ul class="ml-2 text-semi">
+                <li
+                  class="mb-2"
+                  v-for="(article, j) in guide.articles"
+                  :key="j"
+                  @click="getArticle(guide._id, article._id)"
+                >
+                  {{ article.title }}
+                </li>
+                <li
+                  class="add-article opacity-0 primary"
+                  @click="visible1 = true, payload.section = guide.section, createGuide()"
+                >添加文章</li>
+              </ul>
+            </vs-collapse-item>
+          </template>
         </vs-collapse>
       </VuePerfectScrollbar>
 
-      <div class="text-center">
+      <div>
         <el-popover
           placement="top"
           trigger="manual"
@@ -65,15 +67,26 @@
             >添加</vs-button>
           </div>
 
-          <vs-button
+          <div
             slot="reference"
-            class="mt-4"
-            type="border"
-            @click.native="visible1 = true"
+            class="w-full flex justify-center"
           >
-            <i class="el-icon-plus"></i>
-            添加栏目
-          </vs-button>
+            <div
+              class="mt-5 p-2 flex items-center justify-center bg-main cursor-pointer"
+              style="width: 11rem; color: white; font-size: 0.95rem; border-radius: 0.35rem;"
+              @click="visible1 = true"
+            >
+              <div class="flex-1 text-center">
+                添加栏目
+              </div>
+              <div
+                class="ml-auto px-2 py-1 text-sm rounded"
+                style="background: rgba(121, 131, 255);"
+              >
+                <i class="el-icon-plus"></i>
+              </div>
+            </div>
+          </div>
         </el-popover>
       </div>
     </div>
@@ -264,19 +277,17 @@ export default {
     async createGuide() {
       const { section, articles } = this.payload
       if (section.length > 0 && articles[0].title.length > 0) {
-        const flag = await this.guideList.some(async (el) => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const el of this.guideList) {
           if (el.section === section) {
-            await addArticle({
+            addArticle({
               section_id: el._id,
               title: articles[0].title,
             })
-            return true
+            return
           }
-          return false
-        })
-        if (!flag) {
-          await createGuide(this.payload)
         }
+        await createGuide(this.payload)
         this.getGuideList()
         this.visible1 = false
       }

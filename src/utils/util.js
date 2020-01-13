@@ -1,25 +1,43 @@
 export function timeDiff(time) {
+  let date
   if (typeof time === 'number') {
-    const now = this.$dayjs()
-    const date = this.$dayjs.unix(time)
-    const diff = now.diff(date, 'day')
-    if (diff < 30) {
-      if (diff === 0) {
-        return '今天'
-      }
-      if (diff === 1) {
-        return '昨天'
-      }
-      return `${diff}天前`
+    if (String(time).length === 13) {
+      date = this.$dayjs(time)
+    } else {
+      date = this.$dayjs.unix(time)
     }
-    if (diff >= 30 && diff < 365) {
-      return `${now.diff(date, 'month')}个月前`
-    } if (diff >= 365 && diff < 365 * 2) {
-      return `${now.diff(date, 'year')}年前`
-    }
-    return date.format('YYYY-MM-DD')
+  } if (typeof time === 'string') {
+    date = this.$dayjs(time)
   }
-  return time
+
+  const now = this.$dayjs()
+  const diff = now.diff(date, 'day')
+  if (diff < 30) {
+    if (diff === 0) {
+      const diffHour = now.diff(date, 'hour')
+      if (diffHour < 1) {
+        const diffMin = now.diff(date, 'minute')
+        if (diffMin < 1) {
+          return `${now.diff(date, 'second')}秒前`
+        }
+        return `${diffMin}分钟前`
+      }
+      if (diffHour <= 24) {
+        return `${diffHour}小时前`
+      }
+      return '今天'
+    }
+    if (diff === 1) {
+      return '昨天'
+    }
+    return `${diff}天前`
+  }
+  if (diff >= 30 && diff < 365) {
+    return `${now.diff(date, 'month')}个月前`
+  } if (diff >= 365 && diff < 365 * 2) {
+    return `${now.diff(date, 'year')}年前`
+  }
+  return date.format('YYYY-MM-DD')
 }
 
 export function setCreditColor(val) {
