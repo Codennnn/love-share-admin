@@ -54,7 +54,7 @@
                     class="text-center"
                     @click="$router.push({
                               path: '/user-detail',
-                              query: { id: tr.user_id }
+                              query: { userId: tr._id }
                             })"
                   >
                     <i class="el-icon-news mr-2"></i>

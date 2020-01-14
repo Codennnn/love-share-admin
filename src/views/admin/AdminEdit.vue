@@ -28,7 +28,10 @@
           </div>
         </div>
 
-        <div class="mb-5 p-5 rounded-lg border-primary">
+        <div
+          class="mb-5 p-5 rounded-lg border-primary"
+          style="border-width: 1px; border-style: solid;"
+        >
           <p class="text-lg text-semi">权 限</p>
           <vs-divider />
           <EditPermission

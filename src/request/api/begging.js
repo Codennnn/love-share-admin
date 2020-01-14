@@ -14,3 +14,10 @@ export function addBuying() {
     method: 'post',
   })
 }
+
+export function deleteBegging() {
+  return request({
+    url: '/buying/add',
+    method: 'post',
+  })
+}

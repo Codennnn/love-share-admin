@@ -1,21 +1,5 @@
 import request from '../request'
 
-export function login(data) {
-  return request({
-    url: '/user/login',
-    method: 'post',
-    data,
-  })
-}
-
-export function register(query) {
-  return request({
-    url: '/user/register',
-    method: 'post',
-    params: query,
-  })
-}
-
 export function resetPassword() {
   return request({
     url: '/user/reset_password',
@@ -23,17 +7,19 @@ export function resetPassword() {
   })
 }
 
-export function getUserList() {
+export function getUserList(params) {
   return request({
     url: '/user/list',
     method: 'get',
+    params,
   })
 }
 
-export function getUserDetail() {
+export function getUserDetailByAdmin(params) {
   return request({
-    url: '/user/detail',
+    url: '/user/detail_by_admin',
     method: 'get',
+    params,
   })
 }
 

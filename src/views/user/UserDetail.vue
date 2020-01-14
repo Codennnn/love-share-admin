@@ -1,6 +1,64 @@
 <template>
   <div>
-    <div class="mb-6 bg-white rounded-lg p-5">
+    <div class="flex">
+      <div
+        class="pr-6"
+        style="width: 75%;"
+      >
+        <div class="radius bg-semi"></div>
+      </div>
+
+      <div
+        v-if="detail"
+        class="p-6 flex flex-col justify-center items-center base-shadow radius bg-gray"
+        style="width: 25%;"
+      >
+        <div
+          class="relative"
+          style="width: 100px;"
+        >
+          <div :title="`信用度：${detail.credit_value}`">
+            <SvgCircle
+              :progress="detail.credit_value / 1000"
+              :progressOption="options"
+            />
+          </div>
+          <vs-avatar
+            class="absolute m-0"
+            style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
+            size="80px"
+            :src="detail.avatar_url"
+          />
+        </div>
+        <div class="mt-4 mb-1 text-semi font-bold">{{ detail.nickname }}</div>
+        <div class="text-semi text-sm">{{ detail.school }}</div>
+        <div class="w-full mt-6 flex">
+          <div
+            class="flex-1 flex flex-col items-center border-primary"
+            style="border-width: 0 1px 0 0; border-style: solid"
+          >
+            <div
+              class="w-10 h-10 mb-1 flex justify-center items-center rounded-full"
+              style="background: rgba(var(--vs-primary), 0.2);"
+            >
+              <i class="el-icon-user primary"></i>
+            </div>
+            <p class="font-bold text-primary">{{ detail.fans_num }}</p>
+          </div>
+          <div class="flex-1 flex flex-col items-center">
+            <div
+              class="w-10 h-10 mb-1 flex justify-center items-center rounded-full"
+              style="background: rgba(var(--vs-warning), 0.2);"
+            >
+              <i class="el-icon-view warning"></i>
+            </div>
+            <p class="font-bold text-primary">{{ detail.fans_num }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="mb-6 bg-semi rounded-lg p-5">
       <div class="mb-3 flex items-center">
         <div class="w-1/2 flex items-center">
           <vs-avatar
@@ -73,16 +131,15 @@
             @click="currentComponent = 'UserProfit'"
           >财富收益</vs-button>
           <vs-button
-            v-if="$auth()"
             color="#646464"
             type="flat"
             @click="currentComponent = 'UserChangePassword'"
           >修改密码</vs-button>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <transition
+    <!-- <transition
       enter-active-class="animated fadeIn quickly"
       leave-active-class="animated fadeOut quickly"
       mode="out-in"
@@ -90,15 +147,16 @@
       <keep-alive>
         <component :is="currentComponent" />
       </keep-alive>
-    </transition>
+    </transition> -->
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import UserBaseInfo from './components/UserBaseInfo.vue'
+import SvgCircle from '@/components/SvgCircle.vue'
 
-import { getUserDetail } from '@/request/api/user'
+import { getUserDetailByAdmin } from '@/request/api/user'
 
 const UserDetailInfo = Vue.component(
   'UserDetailInfo',
@@ -115,28 +173,32 @@ const UserChangePassword = Vue.component(
 
 export default {
   name: 'UserDetail',
-  data: () => ({
-    currentComponent: 'UserBaseInfo',
-    userDetail: {},
-  }),
-
   components: {
+    SvgCircle,
     UserBaseInfo,
     UserDetailInfo,
     UserProfit,
     UserChangePassword,
   },
 
+  data: () => ({
+    currentComponent: 'UserBaseInfo',
+    detail: null,
+    options: {
+      radius: 50, strokeWidth: 2, startColor: [157, 161, 248], endColor: [97, 101, 247],
+    },
+  }),
+
   mounted() {
-    this.getUserDetail()
+    this.getUserDetailByAdmin(this.$route.query.userId)
   },
 
   methods: {
-    async getUserDetail() {
+    async getUserDetailByAdmin(user_id) {
       try {
-        const { code, data } = await getUserDetail()
+        const { code, data } = await getUserDetailByAdmin({ user_id })
         if (code === 2000) {
-          this.userDetail = data.user_detail
+          this.detail = data.user_detail
         }
       } catch {
         // TODO
