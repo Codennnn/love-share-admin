@@ -77,7 +77,7 @@ img {
   }
 
   .border-primary {
-    border: 1px solid themed("border-color-primary");
+    border-color: themed("border-color-primary");
   }
 
   .notice {
