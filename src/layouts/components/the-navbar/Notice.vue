@@ -126,7 +126,7 @@ export default {
   }),
 
   created() {
-    this.getUnreadNotices()
+    // this.getUnreadNotices()
   },
 
   mounted() {

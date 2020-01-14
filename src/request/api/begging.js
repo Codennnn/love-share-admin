@@ -14,17 +14,3 @@ export function addBuying() {
     method: 'post',
   })
 }
-
-export function deleteBuying() {
-  return request({
-    url: '/buying/delete',
-    method: 'delete',
-  })
-}
-
-export function updateBuying() {
-  return request({
-    url: '/buying/update',
-    method: 'put',
-  })
-}
