@@ -92,3 +92,11 @@ export function unsubscribe() {
     method: 'post',
   })
 }
+
+export function getUserDailyStatistics(data) {
+  return request({
+    url: '/user/daily_statistics',
+    method: 'post',
+    data,
+  })
+}

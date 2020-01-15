@@ -5,7 +5,7 @@
         search
         pagination
         noDataText="暂无数据"
-        :max-items="itemsPerPage"
+        :max-items="4"
         :data="userList"
       >
         <template slot="thead">
@@ -78,8 +78,18 @@
 
     </div>
 
-    <div class="p-6 radius bg-gray">
-      <LineChart :settings="settings" />
+    <div class="pt-6 pb-4 text-xl text-primary font-bold">
+      日新增用户统计
+    </div>
+    <div class="px-6 radius bg-gray">
+      <div class="pt-6 pb-4">
+        <span class="primary text-sm mr-3">最近一周</span>
+        <span class="text-semi text-sm mr-3">最近15天</span>
+      </div>
+      <LineChart
+        :settings="settings"
+        :series="series"
+      />
     </div>
   </div>
 </template>
@@ -89,7 +99,68 @@ import _cloneDeepWith from 'lodash/cloneDeepWith'
 import { setCreditColor } from '@/utils/util'
 import LineChart from '@/components/LineChart.vue'
 
-import { getUserList } from '@/request/api/user'
+import { getUserList, getUserDailyStatistics } from '@/request/api/user'
+
+const chartSettings = {
+  type: 'line',
+  height: '400px',
+  chartOptions: {
+    chart: {
+      toolbar: {
+        show: false,
+      },
+    },
+    xaxis: {
+      categories: [],
+      axisBorder: {},
+      labels: {
+        style: {
+          colors: [],
+        },
+      },
+    },
+    yaxis: {
+      axisBorder: {},
+      labels: {
+        style: {
+          fontSize: '14px',
+          colors: [],
+        },
+      },
+    },
+    stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
+    grid: {
+      show: true,
+      strokeDashArray: 0,
+      position: 'back',
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      row: {
+        colors: undefined,
+        opacity: 0.5,
+      },
+      column: {
+        colors: undefined,
+        opacity: 0.5,
+      },
+      padding: {
+        top: 0,
+        right: 20,
+        bottom: 0,
+        left: 20,
+      },
+    },
+    colors: ['#6165f7'],
+  },
+}
 
 export default {
   name: 'userList',
@@ -97,89 +168,24 @@ export default {
 
   data: () => ({
     setCreditColor,
-    itemsPerPage: 4,
+    chartSettings,
     userList: [],
-    chartSettings: {
-      type: 'line',
-      height: '400px',
-      chartOptions: {
-        chart: {
-          toolbar: {
-            show: false,
-          },
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997],
-          axisBorder: {},
-          labels: {
-            style: {
-              colors: [],
-            },
-          },
-        },
-        yaxis: {
-          axisBorder: {},
-          labels: {
-            style: {
-              fontSize: '14px',
-              colors: [],
-            },
-          },
-        },
-        stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
-        grid: {
-          show: true,
-          strokeDashArray: 0,
-          position: 'back',
-          xaxis: {
-            lines: {
-              show: true,
-            },
-          },
-          yaxis: {
-            lines: {
-              show: true,
-            },
-          },
-          row: {
-            colors: undefined,
-            opacity: 0.5,
-          },
-          column: {
-            colors: undefined,
-            opacity: 0.5,
-          },
-          padding: {
-            top: 0,
-            right: 20,
-            bottom: 0,
-            left: 20,
-          },
-        },
-        colors: ['#6165f7'],
-      },
-      series: [{
-        name: 'series-1',
-        data: [30, 40, 35, 50, 49, 60, 70],
-      }],
-    },
+    series: [],
   }),
 
   computed: {
     settings() {
       const theme = this.$store.state.themeStyle
       if (theme === 'light') {
-        this.$set(this.chartSettings.chartOptions.chart, 'background', '#fff')
         this.$set(this.chartSettings.chartOptions.grid, 'borderColor', '#ddd')
         this.$set(this.chartSettings.chartOptions.xaxis.axisBorder, 'color', '#ddd')
-        this.$set(this.chartSettings.chartOptions.xaxis.labels.style, 'colors', ['#8b99a8', '#8b99a8', '#8b99a8', '#8b99a8', '#8b99a8', '#8b99a8', '#8b99a8'])
+        this.$set(this.chartSettings.chartOptions.xaxis.labels.style, 'colors', '#8b99a8')
         this.$set(this.chartSettings.chartOptions.yaxis.labels.style, 'color', '#8b99a8')
         return _cloneDeepWith(this.chartSettings)
       }
-      this.$set(this.chartSettings.chartOptions.chart, 'background', '#555')
-      this.$set(this.chartSettings.chartOptions.grid, 'borderColor', '#000')
+      this.$set(this.chartSettings.chartOptions.grid, 'borderColor', '#555')
       this.$set(this.chartSettings.chartOptions.xaxis.axisBorder, 'color', '#000')
-      this.$set(this.chartSettings.chartOptions.xaxis.labels.style, 'colors', ['#aaa', '#aaa', '#aaa', '#aaa', '#aaa', '#aaa', '#aaa'])
+      this.$set(this.chartSettings.chartOptions.xaxis.labels.style, 'colors', '#aaa')
       this.$set(this.chartSettings.chartOptions.yaxis.labels.style, 'color', '#aaa')
       return _cloneDeepWith(this.chartSettings)
     },
@@ -187,6 +193,7 @@ export default {
 
   created() {
     this.getUserList()
+    this.getUserDailyStatistics()
   },
 
   methods: {
@@ -194,6 +201,20 @@ export default {
       const { code, data } = await getUserList()
       if (code === 2000) {
         this.userList = data.user_list
+      }
+    },
+
+    async getUserDailyStatistics() {
+      const dateNow = Date.now()
+      const date_list = [...Array(7)].map((v, i) => this.$dayjs(dateNow).subtract(i, 'day').format('YYYY-MM-DD'))
+      const { code, data } = await getUserDailyStatistics({ date_list: date_list.reverse() })
+      if (code === 2000) {
+        this.$set(this.chartSettings.chartOptions.xaxis, 'categories', date_list)
+        this.series = data.series
+        this.series = [{
+          name: '用户数量',
+          data: [10, 7, 11, 13, 10, 14, 12],
+        }]
       }
     },
   },

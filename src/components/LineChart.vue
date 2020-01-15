@@ -5,7 +5,7 @@
     :width="settings.width"
     :height="settings.height"
     :options="settings.chartOptions"
-    :series="settings.series"
+    :series="series"
   ></vue-apex-charts>
 </template>
 
@@ -19,6 +19,10 @@ export default {
   props: {
     settings: {
       type: Object,
+      required: true,
+    },
+    series: {
+      type: Array,
       required: true,
     },
   },
