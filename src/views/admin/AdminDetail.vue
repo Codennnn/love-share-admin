@@ -33,6 +33,10 @@
                 <td>{{ detail.email || '未填写' }}</td>
               </tr>
               <tr>
+                <td>性 别</td>
+                <td>{{ detail.gender ? '女' : '男' }}</td>
+              </tr>
+              <tr>
                 <td>状 态</td>
                 <td>{{ '令狐少侠' }}</td>
               </tr>

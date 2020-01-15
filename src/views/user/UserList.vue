@@ -74,22 +74,45 @@
         </vs-tr>
       </template>
     </vs-table>
+
+    <div>
+      <LineChart :chartData="chartData" />
+    </div>
   </div>
 </template>
 
 <script>
 import { setCreditColor } from '@/utils/util'
+import LineChart from '@/components/LineChart.vue'
+
 import { getUserList } from '@/request/api/user'
 
 export default {
   name: 'userList',
+  components: { LineChart },
+
   data: () => ({
     setCreditColor,
     itemsPerPage: 4,
     userList: [],
+    chartData: {
+      chartOptions: {
+        chart: {
+          id: 'vuechart-example',
+        },
+        colors: ['#6165f7'],
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+        },
+      },
+      series: [{
+        name: 'series-1',
+        data: [30, 40, 35, 50, 49, 60, 70, 91],
+      }],
+    },
   }),
 
-  mounted() {
+  created() {
     this.getUserList()
   },
 

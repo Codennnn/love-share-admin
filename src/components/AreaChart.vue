@@ -32,6 +32,7 @@
 import VueApexCharts from 'vue-apexcharts'
 
 export default {
+  name: 'AreaChart',
   props: {
     statistic: String,
     label: String,

@@ -1,16 +1,98 @@
 <template>
   <div>
-    <div class="flex">
+    <div class="flex items-start">
       <div
-        class="pr-6"
+        class="pr-8"
         style="width: 75%;"
       >
-        <div class="radius bg-semi"></div>
+        <div class="mb-8 p-5 radius bg-gray">
+          <table class="w-full">
+            <tr>
+              <td class="label text-primary">微 信</td>
+              <td class="value text-gray">{{ detail.wechat }}</td>
+              <td class="label text-primary">邮 箱</td>
+              <td class="value text-gray">{{ detail.email || '未填写' }}</td>
+            </tr>
+            <tr>
+              <td class="label text-primary">Q Q</td>
+              <td class="value text-gray">{{ detail.qq }}</td>
+              <td class="label text-primary">电 话</td>
+              <td class="value text-gray">{{ detail.phone }}</td>
+            </tr>
+            <tr>
+              <td class="label text-primary">真实姓名</td>
+              <td class="value text-gray">{{ detail.real_name }}</td>
+              <td class="label text-primary">性 别</td>
+              <td class="value text-gray">{{ detail.gender === '0' ? '女' : '男' }}</td>
+            </tr>
+            <tr>
+              <td class="label text-primary">个人简介</td>
+              <td class="value text-gray">{{ detail.introduction || '未填写' }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="">
+          <vs-table
+            class="radius"
+            search
+            pagination
+            noDataText="暂无数据"
+            :max-items="5"
+            :data="detail.published_goods || []"
+          >
+            <template slot="header">
+              <div class="w-full flex items-center p-4">
+                <div class="text-xl text-primary font-semibold">发布的商品</div>
+              </div>
+            </template>
+            <template slot="thead">
+              <vs-th>商品名称</vs-th>
+              <vs-th>商品名称</vs-th>
+              <vs-th>价格</vs-th>
+              <vs-th>创建时间</vs-th>
+              <vs-th>最后修改</vs-th>
+              <vs-th>状态</vs-th>
+            </template>
+
+            <template slot-scope="{data}">
+              <vs-tr
+                v-for="(tr, i) in data"
+                :key="i"
+              >
+                <vs-td>
+                  <vs-image
+                    class="w-24 h-24 base-shadow"
+                    :src="`${tr.img_list[0]}?imageView2/2/w/100`"
+                  ></vs-image>
+                </vs-td>
+                <vs-td>{{ tr.name }}</vs-td>
+                <vs-td class="font-bold">
+                  ￥{{ Number(tr.price).toFixed(2) }}
+                </vs-td>
+                <vs-td>
+                  {{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}
+                </vs-td>
+                <vs-td>
+                  {{ $dayjs(tr.updated_at).format('YYYY/MM/DD') }}
+                </vs-td>
+                <vs-td>
+                  <div
+                    class="w-16 py-1 px-2 text-center whitespace-no-wrap"
+                    style="border-radius: 0.4rem;"
+                    :class="status[tr.status].color"
+                    :style="`background: rgba(var(--vs-${status[tr.status].color}), 0.2);`"
+                  >{{ status[tr.status].text }}</div>
+                </vs-td>
+              </vs-tr>
+            </template>
+          </vs-table>
+        </div>
       </div>
 
       <div
-        v-if="detail"
-        class="p-6 flex flex-col justify-center items-center base-shadow radius bg-gray"
+        class="py-10 px-6 flex flex-col items-center radius bg-gray"
         style="width: 25%;"
       >
         <div
@@ -30,12 +112,16 @@
             :src="detail.avatar_url"
           />
         </div>
-        <div class="mt-4 mb-1 text-semi font-bold">{{ detail.nickname }}</div>
-        <div class="text-semi text-sm">{{ detail.school }}</div>
-        <div class="w-full mt-6 flex">
+        <div class="mt-4 mb-1 text-primary font-bold">{{ detail.nickname }}</div>
+        <div
+          v-if="detail.school"
+          class="text-semi text-sm"
+        >{{ detail.school.name }}</div>
+        <div class="w-full my-6 flex">
           <div
-            class="flex-1 flex flex-col items-center border-primary"
-            style="border-width: 0 1px 0 0; border-style: solid"
+            title="粉丝"
+            class="py-2 flex-1 flex flex-col items-center border-primary"
+            style="border-width: 0 1px 0 0; border-style: solid;"
           >
             <div
               class="w-10 h-10 mb-1 flex justify-center items-center rounded-full"
@@ -45,147 +131,97 @@
             </div>
             <p class="font-bold text-primary">{{ detail.fans_num }}</p>
           </div>
-          <div class="flex-1 flex flex-col items-center">
+          <div
+            title="关注的人"
+            class="py-2 flex-1 flex flex-col items-center"
+          >
             <div
               class="w-10 h-10 mb-1 flex justify-center items-center rounded-full"
               style="background: rgba(var(--vs-warning), 0.2);"
             >
               <i class="el-icon-view warning"></i>
             </div>
-            <p class="font-bold text-primary">{{ detail.fans_num }}</p>
+            <p class="font-bold text-primary">{{ detail.follow_num }}</p>
           </div>
         </div>
+        <p class="mb-1 self-start text-primary text-sm">信用度</p>
+        <vs-progress
+          class="mb-4"
+          :title="detail.credit_value"
+          :percent="detail.credit_value / 1000 * 100"
+        ></vs-progress>
+        <p class="mb-1 self-start text-primary text-sm">乐享值</p>
+        <vs-progress
+          :title="detail.share_value"
+          :percent="detail.share_value / 1000 * 100"
+        ></vs-progress>
+        <el-popover
+          class="w-full text-center"
+          placement="top"
+          width="220"
+          trigger="click"
+        >
+          <div>
+            <div class="my-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray-100">
+              <div class="text-center">
+                <i class="el-icon-money text-3xl text-gray-600"></i>
+                <div class="text-gray-600 text-sm">余 额</div>
+              </div>
+              <div class="text-xl font-bold">{{ detail.beans }}</div>
+            </div>
+            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray-100">
+              <div class="text-center">
+                <i class="el-icon-cherry text-3xl text-gray-600"></i>
+                <div class="text-gray-600 text-sm">乐 豆</div>
+              </div>
+              <div class="text-xl font-bold">{{ detail.beans }}</div>
+            </div>
+            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray-100">
+              <div class="-ml-1 text-center">
+                <i class="el-icon-cherry text-3xl text-gray-600"></i>
+                <div class="text-gray-600 text-sm">优惠券</div>
+              </div>
+              <div class="text-xl font-bold">{{ detail.beans }}</div>
+            </div>
+          </div>
+          <vs-button
+            slot="reference"
+            class="w-3/4 mt-8"
+          >财富数据</vs-button>
+        </el-popover>
       </div>
     </div>
-
-    <!-- <div class="mb-6 bg-semi rounded-lg p-5">
-      <div class="mb-3 flex items-center">
-        <div class="w-1/2 flex items-center">
-          <vs-avatar
-            class="mr-6"
-            size="100px"
-            :src="userDetail.avatar_url"
-          />
-          <div>
-            <div class="mb-4">
-              <span class="font-bold text-2xl">{{ userDetail.nickname }}</span>
-              <span>（{{ userDetail.real_name }}）</span>
-            </div>
-            <span
-              class="my-2 py-1 px-3 text-center text-sm text-white"
-              style="border-radius: 0.3rem;background: rgba(var(--vs-primary), 0.9)"
-            >{{ userDetail.school }}</span>
-          </div>
-        </div>
-        <div class="w-1/2 flex justify-around">
-          <div class="flex flex-col items-center justify-center">
-            <div>关注的人</div>
-            <div class="mt-4 text-2xl font-bold">{{ userDetail.follow_num }}</div>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <div>粉丝数</div>
-            <div class="mt-4 text-2xl font-bold">{{ userDetail.fans_num }}</div>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <div>收藏夹</div>
-            <div class="mt-4 text-2xl font-bold">{{ userDetail.collect_num }}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center">
-        <div class="w-1/3">
-          <vs-collapse>
-            <vs-collapse-item :not-arrow="true">
-              <vs-button
-                slot="header"
-                class="text-sm"
-                color="dark"
-                type="line"
-                icon-pack="el-icon"
-                icon="el-icon-chat-line-square"
-              >个人简介</vs-button>
-              <div class="text-gray-600">
-                {{ userDetail.introduction }}
-              </div>
-            </vs-collapse-item>
-          </vs-collapse>
-        </div>
-        <div class="flex justify-end w-2/3">
-          <vs-button
-            class="mr-4"
-            color="#646464"
-            type="flat"
-            @click="currentComponent = 'UserBaseInfo'"
-          >概 况</vs-button>
-          <vs-button
-            class="mr-4"
-            color="#646464"
-            type="flat"
-            @click="currentComponent = 'UserDetailInfo'"
-          >详细资料</vs-button>
-          <vs-button
-            class="mr-4"
-            color="#646464"
-            type="flat"
-            @click="currentComponent = 'UserProfit'"
-          >财富收益</vs-button>
-          <vs-button
-            color="#646464"
-            type="flat"
-            @click="currentComponent = 'UserChangePassword'"
-          >修改密码</vs-button>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <transition
-      enter-active-class="animated fadeIn quickly"
-      leave-active-class="animated fadeOut quickly"
-      mode="out-in"
-    >
-      <keep-alive>
-        <component :is="currentComponent" />
-      </keep-alive>
-    </transition> -->
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import UserBaseInfo from './components/UserBaseInfo.vue'
 import SvgCircle from '@/components/SvgCircle.vue'
 
 import { getUserDetailByAdmin } from '@/request/api/user'
 
-const UserDetailInfo = Vue.component(
-  'UserDetailInfo',
-  () => import('./components/UserDetailInfo.vue'),
-)
-const UserProfit = Vue.component(
-  'UserProfit',
-  () => import('./components/UserProfit.vue'),
-)
-const UserChangePassword = Vue.component(
-  'UserChangePassword',
-  () => import('./components/UserChangePassword.vue'),
-)
-
 export default {
   name: 'UserDetail',
-  components: {
-    SvgCircle,
-    UserBaseInfo,
-    UserDetailInfo,
-    UserProfit,
-    UserChangePassword,
-  },
+  components: { SvgCircle },
 
   data: () => ({
     currentComponent: 'UserBaseInfo',
-    detail: null,
+    detail: {},
     options: {
       radius: 50, strokeWidth: 2, startColor: [157, 161, 248], endColor: [97, 101, 247],
+    },
+    status: {
+      1: {
+        color: 'warning',
+        text: '待出售',
+      },
+      2: {
+        color: 'primary',
+        text: '已出售',
+      },
+      3: {
+        color: 'danger',
+        text: '已下架',
+      },
     },
   }),
 
@@ -209,7 +245,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.quickly {
-  animation-duration: 0.2s;
+table {
+  .label {
+    min-width: 80px;
+  }
+  .value {
+    font-size: 0.9rem;
+  }
 }
 </style>
