@@ -206,7 +206,7 @@ export default {
   data: () => ({
     currentComponent: 'UserBaseInfo',
     detail: {},
-    options: {
+    option: {
       radius: 50, strokeWidth: 2, startColor: [157, 161, 248], endColor: [97, 101, 247],
     },
     status: {
@@ -224,6 +224,16 @@ export default {
       },
     },
   }),
+
+  computed: {
+    options() {
+      const theme = this.$store.state.themeStyle
+      if (theme === 'light') {
+        return { ...this.option, backColor: '#ddd' }
+      }
+      return { ...this.option, backColor: '#555' }
+    },
+  },
 
   mounted() {
     this.getUserDetailByAdmin(this.$route.query.userId)

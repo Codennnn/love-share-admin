@@ -1,9 +1,11 @@
 <template>
   <vue-apex-charts
     ref="lineChart"
-    :type="type"
-    :options="chartData.chartOptions"
-    :series="chartData.series"
+    :type="settings.type"
+    :width="settings.width"
+    :height="settings.height"
+    :options="settings.chartOptions"
+    :series="settings.series"
   ></vue-apex-charts>
 </template>
 
@@ -15,13 +17,9 @@ export default {
   components: { VueApexCharts },
 
   props: {
-    chartData: {
+    settings: {
       type: Object,
       required: true,
-    },
-    type: {
-      type: String,
-      default: 'line',
     },
   },
 
