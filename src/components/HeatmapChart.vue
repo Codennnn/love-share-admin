@@ -1,0 +1,30 @@
+<template>
+  <vue-apex-charts
+    ref="heatmapChart"
+    :type="settings.type"
+    :width="settings.width"
+    :height="settings.height"
+    :options="settings.chartOptions"
+    :series="series"
+  ></vue-apex-charts>
+</template>
+
+<script>
+import VueApexCharts from 'vue-apexcharts'
+
+export default {
+  name: 'HeatmapChart',
+  components: { VueApexCharts },
+
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+    series: {
+      type: Array,
+      required: true,
+    },
+  },
+}
+</script>

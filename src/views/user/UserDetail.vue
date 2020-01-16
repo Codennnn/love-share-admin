@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="flex items-start">
+      <!-- 左侧 -->
       <div
         class="pr-8"
         style="width: 75%;"
@@ -32,6 +33,11 @@
             </tr>
           </table>
         </div>
+
+        <HeatmapChart
+          :settings="chartSettings"
+          :series="series"
+        />
 
         <div class="">
           <vs-table
@@ -91,6 +97,7 @@
         </div>
       </div>
 
+      <!-- 右侧 -->
       <div
         class="py-10 px-6 flex flex-col items-center radius bg-gray"
         style="width: 25%;"
@@ -187,7 +194,7 @@
           <vs-button
             slot="reference"
             class="w-3/4 mt-8"
-          >财富数据</vs-button>
+          >账号安全</vs-button>
         </el-popover>
       </div>
     </div>
@@ -196,31 +203,123 @@
 
 <script>
 import SvgCircle from '@/components/SvgCircle.vue'
+import HeatmapChart from '@/components/LineChart.vue'
 
 import { getUserDetailByAdmin } from '@/request/api/user'
 
+const status = {
+  1: {
+    color: 'warning',
+    text: '待出售',
+  },
+  2: {
+    color: 'primary',
+    text: '已出售',
+  },
+  3: {
+    color: 'danger',
+    text: '已下架',
+  },
+}
+const chartSettings = {
+  type: 'heatmap',
+  height: '400px',
+  chartOptions: {
+    chart: {
+      toolbar: {
+        show: false,
+      },
+    },
+    xaxis: {
+      categories: [],
+      axisBorder: {},
+      labels: {
+        style: {
+          colors: '',
+        },
+      },
+    },
+    yaxis: {
+      axisBorder: {},
+      labels: {
+        style: {
+          fontSize: '14px',
+          colors: '',
+        },
+      },
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0,
+        opacityFrom: 0.4,
+        opacityTo: 0,
+        stops: [0, 100],
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
+    grid: {
+      show: true,
+      strokeDashArray: 0,
+      position: 'back',
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      row: {
+        colors: undefined,
+        opacity: 0.5,
+      },
+      column: {
+        colors: undefined,
+        opacity: 0.5,
+      },
+      padding: {
+        top: 0,
+        right: 20,
+        bottom: 0,
+        left: 20,
+      },
+    },
+    colors: ['#6165f7'],
+  },
+}
+
 export default {
   name: 'UserDetail',
-  components: { SvgCircle },
+  components: { SvgCircle, HeatmapChart },
 
   data: () => ({
-    currentComponent: 'UserBaseInfo',
+    status,
+    chartSettings,
     detail: {},
     option: {
       radius: 50, strokeWidth: 2, startColor: [157, 161, 248], endColor: [97, 101, 247],
     },
-    status: {
-      1: {
-        color: 'warning',
-        text: '待出售',
+    series: [{
+      name: 'Metric1',
+      data: [1, 2, 3],
+    }],
+    chartOptions: {
+      chart: {
+        height: 350,
+        type: 'heatmap',
       },
-      2: {
-        color: 'primary',
-        text: '已出售',
+      dataLabels: {
+        enabled: false,
       },
-      3: {
-        color: 'danger',
-        text: '已下架',
+      colors: ['#008FFB'],
+      title: {
+        text: 'HeatMap Chart (Single color)',
       },
     },
   }),
