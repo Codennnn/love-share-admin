@@ -16,6 +16,7 @@ $themes: (
     text-color-semi: #8b99a8,
     text-color-light: #ddd,
     text-color-primary: #6f8193,
+    text-color-secondary: #6f8193,
     text-color-gray: #8b99a8,
     text-color-gray-500: #a0aec0,
     text-color-gray-600: #718096,
@@ -62,18 +63,26 @@ $themes: (
     gray: #718096,
 
     /* Text Color */
-    text-color-semi: #aaa,
-    text-color-light: #555,
-    text-color-primary: #bbb,
-    text-color-gray: #aaa,
+    // text-color-semi: #aaa,
+    // text-color-light: #555,
+    // text-color-primary: #bbb,
+    // text-color-gray: #aaa,
+    text-color-semi: #bfc0c6,
+    text-color-light: #525465,
+    text-color-primary: #f9f9fa,
+    text-color-secondary: #ededef,
+    text-color-gray: #9c9ea6,
     text-color-gray-500: #c8c8c8,
     text-color-gray-600: #e6e6e6,
     text-color-gray-700: #aaa,
 
     /* Background Color */
-    bg-color-semi: #2c2c2c,
-    bg-color-primary: #232323,
-    bg-color-gray: #2c2c2c,
+    // bg-color-semi: #2c2c2c,
+    // bg-color-primary: #232323,
+    // bg-color-gray: #2c2c2c,
+    bg-color-semi: #424556,
+    bg-color-primary: #333644,
+    bg-color-gray: #424556,
     bg-color-gray-500: #c8c8c8,
     bg-color-gray-600: #e6e6e6,
 
@@ -81,7 +90,7 @@ $themes: (
     nav-icon-color: #ccc,
 
     /* Sidebar Color */
-    sidebar-semi-color: #3b3b3b,
+    sidebar-semi-color: #424556,
     sidebar-semi-text-color: #aaa,
     sidebar-semi-text-active-color: #eee,
     sidebar-text-color: #aaa,
