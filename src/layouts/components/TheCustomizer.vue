@@ -117,16 +117,6 @@
                   style="right: 5px; bottom: 5px;"
                 ></i>
               </li>
-              <!-- <li
-                class="w-10 h-10 mr-4 rounded-lg bg-white border-2 cursor-pointer"
-                :class="{'shadow-outline': menuTheme === 'menu-light'}"
-                @click="switchSidebar('menu-light')"
-              >跟随主题</li> -->
-              <!-- <li
-                class="w-10 h-10 rounded-lg bg-primary cursor-pointer"
-                :class="{'shadow-outline': menuTheme === 'menu-dark'}"
-                @click="switchSidebar('menu-dark')"
-              >突出显示</li> -->
             </ul>
           </div>
 
@@ -201,6 +191,7 @@ export default {
 
 .sidebar-main::v-deep {
   .vs-sidebar {
+    position: fixed;
     max-width: 400px;
   }
   .vs-sidebar--items {

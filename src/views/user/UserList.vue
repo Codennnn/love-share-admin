@@ -102,12 +102,12 @@ import LineChart from '@/components/LineChart.vue'
 import { getUserList, getUserDailyStatistics } from '@/request/api/user'
 
 const chartSettings = {
-  type: 'line',
+  type: 'area',
   height: '400px',
   chartOptions: {
     chart: {
       toolbar: {
-        show: false,
+        download: '<i class="el-icon-more"></i>',
       },
     },
     xaxis: {
@@ -127,6 +127,18 @@ const chartSettings = {
           colors: [],
         },
       },
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0,
+        opacityFrom: 0.4,
+        opacityTo: 0,
+        stops: [0, 100],
+      },
+    },
+    dataLabels: {
+      enabled: false,
     },
     stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
     grid: {
@@ -183,10 +195,10 @@ export default {
         this.$set(this.chartSettings.chartOptions.yaxis.labels.style, 'color', '#8b99a8')
         return _cloneDeepWith(this.chartSettings)
       }
-      this.$set(this.chartSettings.chartOptions.grid, 'borderColor', '#555')
-      this.$set(this.chartSettings.chartOptions.xaxis.axisBorder, 'color', '#000')
-      this.$set(this.chartSettings.chartOptions.xaxis.labels.style, 'colors', '#aaa')
-      this.$set(this.chartSettings.chartOptions.yaxis.labels.style, 'color', '#aaa')
+      this.$set(this.chartSettings.chartOptions.grid, 'borderColor', '#525465')
+      this.$set(this.chartSettings.chartOptions.xaxis.axisBorder, 'color', '#525465')
+      this.$set(this.chartSettings.chartOptions.xaxis.labels.style, 'colors', '#9c9ea6')
+      this.$set(this.chartSettings.chartOptions.yaxis.labels.style, 'color', '#9c9ea6')
       return _cloneDeepWith(this.chartSettings)
     },
   },
