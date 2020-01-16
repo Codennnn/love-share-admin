@@ -45,6 +45,7 @@
           <template v-if="!menuItem.hidden">
             <!-- 嵌套子菜单 -->
             <el-submenu
+              class="multi-menu"
               v-if="menuItem.children && !menuItem.single"
               :key="index"
               :index="index.toString()"
@@ -66,7 +67,7 @@
             <!-- 单个菜单项 -->
             <el-menu-item
               v-else-if="menuItem.children && menuItem.single"
-              class="mt-3"
+              class="single-menu mt-3"
               :key="index"
               :index="menuItem.children[0].path"
             >
@@ -128,9 +129,9 @@ export default {
     },
     menuClass() {
       if (this.menuTheme) {
-        return 'menu-dark'
+        return 'menu-semi'
       }
-      return 'menu-light'
+      return 'menu-default'
     },
     sidebarCollapse() {
       return this.$store.state.sidebarCollapse
@@ -152,8 +153,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/theme/sidebar.scss";
-
 .menu-main {
   position: fixed;
   top: 0;
@@ -255,6 +254,8 @@ export default {
 </style>
 
 <style lang="scss">
+@import "~@/assets/scss/theme/sidebar.scss";
+
 .el-menu--vertical {
   .el-menu--popup {
     padding: 0;

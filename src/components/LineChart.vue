@@ -27,5 +27,12 @@ export default {
     },
   },
 
+  methods: {
+    downloadPNG() {
+      this.$refs.lineChart.dataURI().then((uri) => {
+        this.$emit('downloadPNG', uri)
+      })
+    },
+  },
 }
 </script>

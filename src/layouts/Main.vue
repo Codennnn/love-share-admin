@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-main">
+  <div class="layout-main bg-primary">
 
     <!-- 侧边栏 -->
     <TheSidebar />
@@ -122,14 +122,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/theme/_themeify.scss";
-
-@include themeify {
-  .layout-main {
-    background: themed("bg-color-primary");
-  }
-}
-
 .layout-main {
   position: relative;
   height: 100%;

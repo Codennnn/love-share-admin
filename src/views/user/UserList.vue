@@ -78,17 +78,30 @@
 
     </div>
 
-    <div class="pt-6 pb-4 text-xl text-primary font-bold">
+    <p class="pt-6 pb-4 text-xl text-primary font-bold">
       日新增用户统计
-    </div>
+    </p>
     <div class="px-6 radius bg-gray">
-      <div class="pt-6 pb-4">
-        <span class="primary text-sm mr-3">最近一周</span>
-        <span class="text-semi text-sm mr-3">最近15天</span>
+      <div class="pt-6 pb-4 px-8 flex justify-between">
+        <div>
+          <span class="primary text-sm mr-3 cursor-pointer">最近一周</span>
+          <span class="text-semi text-sm mr-3 cursor-pointer">最近15天</span>
+        </div>
+
+        <vs-dropdown vs-trigger-click>
+          <i class="el-icon-more text-semi"></i>
+          <vs-dropdown-menu class="w-24">
+            <vs-dropdown-item @click="$refs.userChart.downloadPNG()">
+              下载 PNG
+            </vs-dropdown-item>
+          </vs-dropdown-menu>
+        </vs-dropdown>
       </div>
       <LineChart
+        ref="userChart"
         :settings="settings"
         :series="series"
+        @downloadPNG="downloadPNG"
       />
     </div>
   </div>
@@ -107,7 +120,7 @@ const chartSettings = {
   chartOptions: {
     chart: {
       toolbar: {
-        download: '<i class="el-icon-more"></i>',
+        show: false,
       },
     },
     xaxis: {
@@ -115,7 +128,7 @@ const chartSettings = {
       axisBorder: {},
       labels: {
         style: {
-          colors: [],
+          colors: '',
         },
       },
     },
@@ -124,7 +137,7 @@ const chartSettings = {
       labels: {
         style: {
           fontSize: '14px',
-          colors: [],
+          colors: '',
         },
       },
     },
@@ -228,6 +241,13 @@ export default {
           data: [10, 7, 11, 13, 10, 14, 12],
         }]
       }
+    },
+
+    downloadPNG(base64) {
+      const link = document.createElement('a')
+      link.href = base64
+      link.download = '新增用户统计表格.png'
+      link.click()
     },
   },
 }
