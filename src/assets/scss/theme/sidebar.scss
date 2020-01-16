@@ -1,5 +1,105 @@
 @import "~@/assets/scss/theme/_themeify.scss";
 
+// 浅色主题 [默认]
+@include themeify {
+  .menu-default {
+    user-select: none;
+
+    &.menu-main {
+      background: themed("bg-color-primary");
+      box-shadow: 1px 0 15px rgba(0, 0, 0, 0.05) !important;
+
+      .logo {
+        background: themed("bg-color-primary");
+        box-shadow: 0 15px 20px themed("bg-color-primary") !important;
+      }
+
+      .el-menu.main {
+        background: themed("bg-color-primary");
+      }
+
+      // 有子菜单
+      .multi-menu {
+        .el-submenu__title {
+          span {
+            color: themed("sidebar-text-color");
+          }
+
+          &:hover {
+            background: themed("bg-color-gray");
+          }
+
+          .menu-icon {
+            color: themed("sidebar-text-color");
+          }
+        }
+
+        &.is-opened {
+          .el-submenu__title {
+            background: themed("sidebar-item-active-color");
+          }
+        }
+
+        &.is-active {
+          .el-menu {
+            .el-menu-item.is-active {
+              span {
+                color: themed("sidebar-text-color");
+              }
+
+              background: themed("sidebar-item-hover-color");
+            }
+          }
+
+          .el-submenu__title {
+            background: themed("sidebar-item-active-color");
+
+            span {
+              color: themed("sidebar-text-color");
+            }
+          }
+        }
+
+        .el-menu-item-group {
+          background: themed("bg-color-primary");
+
+          .el-menu-item:not(.is-active) {
+            color: themed("sidebar-text-color");
+          }
+        }
+      }
+
+      // 无子菜单
+      .single-menu {
+
+        // 鼠标悬浮样式
+        &:hover {
+          background: themed("bg-color-gray");
+        }
+
+        .menu-icon {
+          color: themed("sidebar-text-color");
+        }
+
+        span {
+          color: themed("sidebar-text-color");
+        }
+      }
+
+      .el-menu-item.is-active {
+
+        .menu-icon,
+        span {
+          color: themed("sidebar-text-active-color");
+        }
+
+        box-shadow: 0 0 10px $sb-color-dark;
+        background: themed("sidebar-item-active-gradient");
+      }
+    }
+  }
+}
+
 // 深色主题
 @include themeify {
   .menu-semi {
@@ -145,106 +245,6 @@
         }
 
         background: themed("sidebar-semi-item-hover-color");
-      }
-    }
-  }
-}
-
-// 浅色主题 [默认]
-@include themeify {
-  .menu-default {
-    user-select: none;
-
-    &.menu-main {
-      background: themed("bg-color-primary");
-      box-shadow: 1px 0 15px rgba(0, 0, 0, 0.05) !important;
-
-      .logo {
-        background: themed("bg-color-primary");
-        box-shadow: 0 15px 20px themed("bg-color-primary") !important;
-      }
-
-      .el-menu.main {
-        background: themed("bg-color-primary");
-      }
-
-      // 有子菜单
-      .multi-menu {
-        .el-submenu__title {
-          span {
-            color: themed("sidebar-text-color");
-          }
-
-          &:hover {
-            background: themed("bg-color-gray");
-          }
-
-          .menu-icon {
-            color: themed("sidebar-text-color");
-          }
-        }
-
-        &.is-opened {
-          .el-submenu__title {
-            background: themed("sidebar-item-active-color");
-          }
-        }
-
-        &.is-active {
-          .el-menu {
-            .el-menu-item.is-active {
-              span {
-                color: themed("sidebar-text-color");
-              }
-
-              background: themed("sidebar-item-hover-color");
-            }
-          }
-
-          .el-submenu__title {
-            background: themed("sidebar-item-active-color");
-
-            span {
-              color: themed("sidebar-text-color");
-            }
-          }
-        }
-
-        .el-menu-item-group {
-          background: themed("bg-color-primary");
-
-          .el-menu-item:not(.is-active) {
-            color: themed("sidebar-text-color");
-          }
-        }
-      }
-
-      // 无子菜单
-      .single-menu {
-
-        // 鼠标悬浮样式
-        &:hover {
-          background: themed("bg-color-gray");
-        }
-
-        .menu-icon {
-          color: themed("sidebar-text-color");
-        }
-
-        span {
-          color: themed("sidebar-text-color");
-        }
-      }
-
-      .el-menu-item.is-active {
-
-        .menu-icon,
-        span {
-          color: themed("sidebar-text-active-color");
-        }
-
-        box-shadow: 0 0 10px $sb-color-dark;
-        background: themed("sidebar-item-active-gradient");
       }
     }
   }
