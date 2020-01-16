@@ -35,9 +35,12 @@ $themes: (
     sidebar-semi-color: #6165f7,
     sidebar-semi-text-color: #eee,
     sidebar-semi-text-active-color: #6165f7,
+    sidebar-semi-item-hover-color: rgba(238, 238, 238, 0.15),
     sidebar-text-color: #666,
     sidebar-text-active-color: #eee,
     sidebar-item-active-color: #f6f7f8,
+    sidebar-item-hover-color: rgba(238, 238, 238, 0.15),
+    sidebar-item-active-gradient: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), .7)) !important,
 
     /* Notice Color */
     notice-header-bg-color: #6165f7,
@@ -93,9 +96,12 @@ $themes: (
     sidebar-semi-color: #424556,
     sidebar-semi-text-color: #aaa,
     sidebar-semi-text-active-color: #eee,
+    sidebar-semi-item-hover-color: rgba(170, 170, 170, 0.15),
     sidebar-text-color: #aaa,
-    sidebar-text-active-rgb(7, 5, 5)r: #6165f7,
-    sidebar-item-active-color: #333,
+    sidebar-text-active-color: #eee,
+    sidebar-item-active-color: rgba(150, 150, 150, 0.15),
+    sidebar-item-hover-color: rgba(170, 170, 170, 0.15),
+    sidebar-item-active-gradient: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), .7)) !important,
 
     /* Notice Color */
     notice-header-bg-color: #555,

@@ -2,7 +2,7 @@
 
 // 深色主题
 @include themeify {
-  .menu-dark::v-deep {
+  .menu-semi {
     user-select: none;
 
     &.menu-main {
@@ -62,12 +62,12 @@
       }
 
       // 有子菜单
-      .el-submenu {
+      .multi-menu {
         .el-submenu__title {
           color: themed("sidebar-semi-text-color");
 
           &:hover {
-            background-color: $sb-item-hover-color-dark;
+            background: themed("sidebar-item-hover-color");
           }
 
           .menu-icon {
@@ -81,7 +81,7 @@
 
         &.is-opened {
           .el-submenu__title {
-            background: $sb-item-hover-color-dark;
+            background: themed("sidebar-item-hover-color");
           }
         }
 
@@ -89,8 +89,6 @@
           .el-submenu__icon-arrow {
             color: themed("sidebar-semi-text-active-color");
           }
-
-          color: themed("sidebar-semi-text-active-color");
 
           .el-submenu__title {
             position: relative;
@@ -103,25 +101,33 @@
           .menu-icon {
             color: themed("sidebar-semi-text-active-color");
           }
+
+          .el-menu {
+            .el-menu-item.is-active {
+              background: themed("sidebar-semi-item-hover-color");
+            }
+          }
         }
 
         .el-menu-item-group {
           background: themed("sidebar-semi-color");
 
           .el-menu-item {
+            color: themed("sidebar-semi-text-color");
+
             &:hover {
-              background: $sb-item-hover-color-dark;
+              background: themed("sidebar-semi-item-hover-color");
             }
           }
         }
       }
 
       // 无子菜单
-      .el-menu-item {
+      .single-menu {
 
         // 鼠标悬浮样式
         &:hover {
-          background: $sb-item-hover-color-dark;
+          background: themed("sidebar-semi-item-hover-color");
         }
 
         color: themed("sidebar-semi-text-color");
@@ -132,16 +138,21 @@
       }
 
       .el-menu-item.is-active {
-        color: #fff;
-        background: $sb-menu-active-bg-dark;
+        color: themed("sidebar-semi-text-color");
+
+        .menu-icon {
+          color: themed("sidebar-semi-text-color");
+        }
+
+        background: themed("sidebar-semi-item-hover-color");
       }
     }
   }
 }
 
-// 浅色主题
+// 浅色主题 [默认]
 @include themeify {
-  .menu-light::v-deep {
+  .menu-default {
     user-select: none;
 
     &.menu-main {
@@ -158,7 +169,7 @@
       }
 
       // 有子菜单
-      .el-submenu {
+      .multi-menu {
         .el-submenu__title {
           span {
             color: themed("sidebar-text-color");
@@ -180,15 +191,19 @@
         }
 
         &.is-active {
-          .el-submenu__title {
-            background: themed("sidebar-item-active-color");
+          .el-menu {
+            .el-menu-item.is-active {
+              span {
+                color: themed("sidebar-text-color");
+              }
 
-            span {
-              color: themed("sidebar-text-color");
+              background: themed("sidebar-item-hover-color");
             }
           }
 
-          .el-menu-item.is-active {
+          .el-submenu__title {
+            background: themed("sidebar-item-active-color");
+
             span {
               color: themed("sidebar-text-color");
             }
@@ -205,7 +220,7 @@
       }
 
       // 无子菜单
-      .el-menu-item {
+      .single-menu {
 
         // 鼠标悬浮样式
         &:hover {
@@ -229,7 +244,7 @@
         }
 
         box-shadow: 0 0 10px $sb-color-dark;
-        background: $sb-menu-active-bg-light;
+        background: themed("sidebar-item-active-gradient");
       }
     }
   }
