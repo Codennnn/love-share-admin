@@ -6,7 +6,7 @@
         class="pr-8"
         style="width: 75%;"
       >
-        <div class="mb-8 p-5 radius bg-gray">
+        <div class="mb-6 p-5 radius bg-gray">
           <table class="w-full">
             <tr>
               <td class="label text-primary">微 信</td>
@@ -34,10 +34,40 @@
           </table>
         </div>
 
-        <HeatmapChart
-          :settings="chartSettings"
-          :series="series"
-        />
+        <div class="flex">
+          <div class="w-1/4">
+            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
+              <div class="text-center">
+                <i class="el-icon-money text-3xl text-gray"></i>
+                <div class="text-gray text-sm">余 额</div>
+              </div>
+              <div class="text-semi text-xl font-bold">{{ detail.beans }}</div>
+            </div>
+            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
+              <div class="text-center">
+                <i class="el-icon-cherry text-3xl text-gray"></i>
+                <div class="text-gray text-sm">乐 豆</div>
+              </div>
+              <div class="text-semi text-xl font-bold">{{ detail.beans }}</div>
+            </div>
+            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
+              <div class="-ml-1 text-center">
+                <i class="el-icon-cherry text-3xl text-gray"></i>
+                <div class="text-gray text-sm">优惠券</div>
+              </div>
+              <div class="text-semi text-xl font-bold">{{ detail.beans }}</div>
+            </div>
+          </div>
+
+          <div class="w-3/4 pl-6">
+            <p class="text-primary text-xl font-bold">签到表</p>
+            <p class="text-gray text-sm">已累计签到 {{ '13' }} 天</p>
+            <HeatmapChart
+              :settings="chartSettings"
+              :series="series"
+            />
+          </div>
+        </div>
 
         <div class="">
           <vs-table
@@ -162,40 +192,10 @@
           :title="detail.share_value"
           :percent="detail.share_value / 1000 * 100"
         ></vs-progress>
-        <el-popover
-          class="w-full text-center"
-          placement="top"
-          width="220"
-          trigger="click"
-        >
-          <div>
-            <div class="my-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray-100">
-              <div class="text-center">
-                <i class="el-icon-money text-3xl text-gray-600"></i>
-                <div class="text-gray-600 text-sm">余 额</div>
-              </div>
-              <div class="text-xl font-bold">{{ detail.beans }}</div>
-            </div>
-            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray-100">
-              <div class="text-center">
-                <i class="el-icon-cherry text-3xl text-gray-600"></i>
-                <div class="text-gray-600 text-sm">乐 豆</div>
-              </div>
-              <div class="text-xl font-bold">{{ detail.beans }}</div>
-            </div>
-            <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray-100">
-              <div class="-ml-1 text-center">
-                <i class="el-icon-cherry text-3xl text-gray-600"></i>
-                <div class="text-gray-600 text-sm">优惠券</div>
-              </div>
-              <div class="text-xl font-bold">{{ detail.beans }}</div>
-            </div>
-          </div>
-          <vs-button
-            slot="reference"
-            class="w-3/4 mt-8"
-          >账号安全</vs-button>
-        </el-popover>
+        <vs-button
+          slot="reference"
+          class="w-3/4 mt-8"
+        >账号安全</vs-button>
       </div>
     </div>
   </div>
@@ -223,71 +223,48 @@ const status = {
 }
 const chartSettings = {
   type: 'heatmap',
-  height: '400px',
+  width: 450,
+  height: 200,
   chartOptions: {
     chart: {
+      offsetX: -20,
+      offsetY: -12,
       toolbar: {
         show: false,
       },
     },
     xaxis: {
-      categories: [],
-      axisBorder: {},
+      axisBorder: { show: false },
+      tooltip: { enabled: false },
       labels: {
-        style: {
-          colors: '',
-        },
+        show: false,
       },
     },
     yaxis: {
-      axisBorder: {},
       labels: {
-        style: {
-          fontSize: '14px',
-          colors: '',
-        },
-      },
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 0,
-        opacityFrom: 0.4,
-        opacityTo: 0,
-        stops: [0, 100],
+        show: false,
       },
     },
     dataLabels: {
       enabled: false,
     },
-    stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
-    grid: {
-      show: true,
-      strokeDashArray: 0,
-      position: 'back',
-      xaxis: {
-        lines: {
-          show: true,
+    states: {
+      hover: {
+        filter: {
+          type: 'none',
         },
       },
-      yaxis: {
-        lines: {
-          show: true,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    plotOptions: {
+      heatmap: {
+        radius: 4,
+        colorScale: {
+          min: 1,
+          max: 10,
         },
-      },
-      row: {
-        colors: undefined,
-        opacity: 0.5,
-      },
-      column: {
-        colors: undefined,
-        opacity: 0.5,
-      },
-      padding: {
-        top: 0,
-        right: 20,
-        bottom: 0,
-        left: 20,
       },
     },
     colors: ['#6165f7'],
@@ -307,21 +284,17 @@ export default {
     },
     series: [{
       name: 'Metric1',
-      data: [1, 2, 3],
+      data: [1, 1, 1, 5, 1, 5, 5, 1, 1],
+    }, {
+      name: 'Metric2',
+      data: [1, 1, 1, 5, 1, 5, 1, 1, 5],
+    }, {
+      name: 'Metric3',
+      data: [1, 1, 1, 5, 5, 1, 5, 1, 5],
+    }, {
+      name: 'Metric4',
+      data: [1, 1, 1, 5, 5, 1, 1, 5, 1],
     }],
-    chartOptions: {
-      chart: {
-        height: 350,
-        type: 'heatmap',
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      colors: ['#008FFB'],
-      title: {
-        text: 'HeatMap Chart (Single color)',
-      },
-    },
   }),
 
   computed: {
