@@ -75,7 +75,7 @@
               vs-justify="flex-end"
               vs-w="2"
             >
-              <div>
+              <div v-if="!todo.is_trashed">
                 <i
                   class="todo-mark__icon el-icon-collection-tag text-semi"
                   :class="{success: todo.is_important}"
@@ -89,6 +89,18 @@
                 <i
                   class="todo-mark__icon el-icon-delete text-semi"
                   @click.stop="toggleType(todo._id, 'is_trashed', !todo.is_trashed)"
+                ></i>
+              </div>
+              <div v-else>
+                <i
+                  title="还原"
+                  class="todo-mark__icon el-icon-upload2"
+                  @click.stop="toggleType(todo._id, 'is_trashed', !todo.is_trashed)"
+                ></i>
+                <i
+                  title="永久删除"
+                  class="todo-mark__icon el-icon-close"
+                  @click.stop="$store.dispatch('todo/deleteTodo', todo._id)"
                 ></i>
               </div>
             </vs-col>

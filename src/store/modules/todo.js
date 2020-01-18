@@ -40,8 +40,8 @@ const actions = {
     }
   },
 
-  async deleteTodo({ dispatch }, data) {
-    const { code } = await deleteTodo(data)
+  async deleteTodo({ dispatch }, todo_id) {
+    const { code } = await deleteTodo({ todo_id })
     if (code === 2000) {
       dispatch('getTodoList')
     }
