@@ -1,7 +1,4 @@
 const mutations = {
-  SET_LOCKED(state, isLocked) {
-    state.isLocked = isLocked
-  },
   SET_THEME_STYLE(state, theme) {
     state.themeStyle = theme
   },

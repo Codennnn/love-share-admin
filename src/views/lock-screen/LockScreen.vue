@@ -11,8 +11,8 @@ export default {
 
   methods: {
     unLocked() {
-      this.$store.commit('SET_LOCKED', false)
-      this.$router.go(-1)
+      localStorage.setItem('screen_lock', JSON.stringify({ isLocked: false }))
+      this.$router.replace('/')
     },
   },
 }

@@ -20,7 +20,11 @@ router.beforeEach(async (to, from, next) => {
   const hasToken = !!getToken()
 
   if (hasToken) {
-    if (to.path === '/sign') {
+    const isLocked = JSON.parse(localStorage.getItem('screen_lock'))?.isLocked
+    if (isLocked && to.path !== '/lock-screen') {
+      next({ path: '/lock-screen' })
+      NProgress.done()
+    } else if (to.path === '/sign') {
       // 如果已经有了token再访问登录页的话，将会被重定向到首页
       next({ path: '/' })
     } else {

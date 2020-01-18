@@ -73,8 +73,8 @@ export default {
     },
 
     lock() {
-      // this.$router.push('/lock-screen')
-      this.$store.commit('SET_LOCKED', true)
+      this.$router.push('/lock-screen')
+      localStorage.setItem('screen_lock', JSON.stringify({ isLocked: true }))
     },
 
     // 退出登录

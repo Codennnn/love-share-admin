@@ -23,6 +23,13 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/NotFound.vue'),
     meta: { title: '404 not found' },
   },
+  {
+    path: '/lock-screen',
+    name: 'LockScreen',
+    hidden: true,
+    component: () => import('@/views/lock-screen/LockScreen.vue'),
+    meta: { title: '屏幕锁定' },
+  },
 ]
 
 export const asyncRoutes = [
@@ -288,13 +295,6 @@ export const asyncRoutes = [
         },
       },
     ],
-  },
-  {
-    path: '/lock-screen',
-    name: 'LockScreen',
-    hidden: true,
-    component: () => import('@/views/lock-screen/LockScreen.vue'),
-    meta: { title: '屏幕锁定' },
   },
 
   { path: '*', redirect: '/not-found', hidden: true },
