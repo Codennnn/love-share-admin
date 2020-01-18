@@ -3,15 +3,19 @@
 .bg-main {
   background: $primary;
 }
+
 .bg-success {
   background: $success;
 }
+
 .bg-warning {
   background: $warning;
 }
+
 .bg-danger {
   background: $danger;
 }
+
 .bg-dark {
   background: $dark;
 }
@@ -108,9 +112,18 @@ img {
     }
   }
 
-  .vs-inputx {
-    background: themed("input-bg-color");
+  .vs-input {
+    .vs-inputx {
+      background: themed("input-bg-color");
+    }
+
+    .vs-input--placeholder,
+    .vs-input--icon {
+      color: themed("text-color-semi");
+    }
   }
+
+
 
   .vs-divider {
     .vs-divider-border {
