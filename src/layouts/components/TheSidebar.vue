@@ -190,10 +190,11 @@ export default {
   }
   &.side-bar-menu {
     padding: 0 18px;
+    transition: $side-bar-collapse-transition;
   }
 }
 
-.el-submenu::v-deep {
+.multi-menu::v-deep {
   margin-bottom: 10px;
   .el-submenu__title {
     &:hover {
@@ -231,7 +232,7 @@ export default {
   }
 }
 
-.el-menu-item {
+.single-menu {
   line-height: 40px;
   height: 40px;
   &:hover {

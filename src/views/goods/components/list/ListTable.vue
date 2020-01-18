@@ -14,7 +14,7 @@
         <div class="w-full flex items-center p-4">
           <div
             class="text-xl font-semibold"
-            :class="tableTitle === '已上架商品' ? 'text-primary' : 'text-danger'"
+            :class="tableTitle === '已上架商品' ? 'primary' : 'danger'"
           >{{ tableTitle }}</div>
           <div class="ml-auto">
             <el-date-picker

@@ -3,13 +3,11 @@
     <div class="flex flex-wrap w-full">
       <!-- 卡片 1：欢迎卡片 -->
       <div class="lg:w-6/12 lg:pr-3 sm:w-full my-3 min-h-full">
-        <div class="h-full text-white bg-purple radius shadow-xl">
+        <div class="h-full text-white bg-primary-gradient radius">
           <div class="h-full relative flex flex-col justify-center items-center py-4">
             <img
               class="decore-left absolute top-0 left-0"
-              style="user-select: none;"
               width="200"
-              draggable="false"
               src="@/assets/images/pages/dashboard/decore_left.png"
             >
             <img
@@ -19,8 +17,11 @@
               draggable="false"
               src="@/assets/images/pages/dashboard/decore_right.png"
             >
-            <div class="circle flex justify-center items-center rounded-full">
-              <i class="iconfont icon-safety"></i>
+            <div
+              class="w-20 h-20 flex justify-center items-center rounded-full"
+              style="background: rgba(var(--vs-primary), 0.5);"
+            >
+              <i class="el-icon-trophy-1 text-3xl"></i>
             </div>
             <p class="my-4 text-2xl font-medium">欢迎你，令狐聪</p>
             <p>上次登录时间为：{{ $dayjs().format('YYYY-MM-DD hh:mm') }}</p>
@@ -64,19 +65,19 @@
                 <div class="mb-1 text-primary text-2xl font-bold">2.7K</div>
                 <span class="font-medium text-semi">平均交易额</span>
                 <p class="mt-2 text-xl text-semi font-medium">
-                  <span class='text-success'>+5.2%</span> 最近7天
+                  最近7天<span class="success"> +5.2%</span>
                 </p>
               </div>
               <vs-button
                 icon="chevron_right"
                 icon-after
-                class="shadow-md w-full lg:mt-0 mt-4"
+                class="w-full lg:mt-0 mt-4"
               >查看详细</vs-button>
             </div>
             <div class="w-full lg:w-1/2 xl:w-1/2 flex flex-col lg:mb-0 mb-base px-2">
               <vue-apex-charts
                 type="bar"
-                height=200
+                height="200"
                 :options="salesBar.chartOptions"
                 :series="salesBar.series"
               />
@@ -157,24 +158,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg-purple {
-  background: linear-gradient(
-    to right,
-    rgba(var(--vs-primary), 1),
-    rgba(var(--vs-primary), 0.7)
-  );
-}
-
-.circle {
-  width: 70px;
-  height: 70px;
-  background: rgba(120, 108, 240, 0.8);
-
-  .iconfont {
-    font-size: 30px;
-  }
-}
-
 @media (max-width: 576px) {
   .decore-left,
   .decore-right {

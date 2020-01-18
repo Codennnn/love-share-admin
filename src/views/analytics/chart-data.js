@@ -180,17 +180,10 @@ export const ordersGained = {
 
 export const salesBar = {
   series: [{
-    name: 'Sessions',
+    name: '交易额',
     data: [75, 125, 225, 175, 125, 75, 25],
   }],
   chartOptions: {
-    grid: {
-      show: false,
-      padding: {
-        left: 0,
-        right: 0,
-      },
-    },
     chart: {
       type: 'bar',
       sparkline: { enabled: true },
@@ -201,13 +194,12 @@ export const salesBar = {
         filter: 'none',
       },
     },
-    colors: ['#e6edf7', '#e6edf7', '#7367f0', '#e6edf7', '#e6edf7', '#e6edf7'],
+    colors: ['#e6edf7', '#e6edf7', '#6165f7', '#e6edf7', '#e6edf7', '#e6edf7'],
     plotOptions: {
       bar: {
         columnWidth: '45%',
         distributed: true,
-        // endingShape: 'rounded', // Deprecated
-        // borderRadius: '20px', // Coming Soon
+        endingShape: 'rounded',
       },
     },
     tooltip: {
