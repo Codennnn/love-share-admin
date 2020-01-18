@@ -82,20 +82,20 @@
       日新增用户统计
     </p>
     <div class="px-6 radius bg-gray">
-      <div class="pt-6 pb-4 px-8 flex justify-between">
+      <div class="pt-6 pb-4 px-8 flex justify-between items-center">
         <div>
           <span class="primary text-sm mr-3 cursor-pointer">最近一周</span>
           <span class="text-semi text-sm mr-3 cursor-pointer">最近15天</span>
         </div>
 
-        <vs-dropdown vs-trigger-click>
-          <i class="el-icon-more text-semi"></i>
-          <vs-dropdown-menu class="w-24">
-            <vs-dropdown-item @click="$refs.userChart.downloadPNG()">
-              下载 PNG
-            </vs-dropdown-item>
-          </vs-dropdown-menu>
-        </vs-dropdown>
+        <div
+          title="导出为 PNG"
+          class="py-2 px-3 rounded-lg cursor-pointer"
+          style="background: rgba(var(--vs-primary), 0.1);"
+          @click="$refs.userChart.downloadPNG()"
+        >
+          <i class="el-icon-download text-lg primary"></i>
+        </div>
       </div>
       <LineChart
         ref="userChart"

@@ -81,12 +81,19 @@
         </template>
       </el-menu>
     </VuePerfectScrollbar>
+
+    <SidebarFooter
+      class="mt-8"
+      :sidebar-collapse="sidebarCollapse"
+    />
   </div>
 </template>
 
 <script>
 import _debounce from 'lodash/debounce' // 引入防抖函数
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { mapState } from 'vuex'
+import SidebarFooter from './the-sidebar/SidebarFooter.vue'
 
 const logoLight = require('@/assets/images/logo-light.png')
 const logoDark = require('@/assets/images/logo-dark.png')
@@ -95,7 +102,7 @@ const logoTextLight = require('@/assets/images/logo-text-light.png')
 
 export default {
   name: 'TheSidebar',
-  components: { VuePerfectScrollbar },
+  components: { SidebarFooter, VuePerfectScrollbar },
 
   mounted() {
     window.onresize = _debounce(() => {
@@ -133,12 +140,8 @@ export default {
       }
       return 'menu-default'
     },
-    sidebarCollapse() {
-      return this.$store.state.sidebarCollapse
-    },
-    sidebarList() {
-      return this.$store.state.permission.routes
-    },
+    ...mapState(['sidebarCollapse']),
+    ...mapState('permission', { sidebarList: 'routes' }),
   },
 
   methods: {
@@ -169,7 +172,7 @@ export default {
 
 // 滚动区域
 .menu-scroll-wrapper {
-  height: calc(100% - 64px);
+  height: calc(100% - 64px - 100px);
   padding-bottom: 4rem;
   overflow: hidden;
 }

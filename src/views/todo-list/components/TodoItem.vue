@@ -8,14 +8,24 @@
       }"
     >
       <!-- 搜索框 -->
-      <vs-input
-        class="search-input sticky top-0 z-40 w-full radius bg-gray overflow-hidden"
-        icon="search"
-        size="large"
-        icon-no-border
-        placeholder="搜索..."
-        v-model="search"
-      />
+      <div
+        class="w-full radius overflow-hidden flex"
+        style="background: rgba(var(--vs-primary), 0.065);"
+      >
+        <div
+          class="h-full flex items-center justify-center radius"
+          style="width: 50px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
+        >
+          <i class="el-icon-search primary text-xl"></i>
+        </div>
+        <vs-input
+          class="search-input sticky top-0 z-40 w-full"
+          style="background: transparent;"
+          size="large"
+          placeholder="搜索..."
+          v-model="search"
+        />
+      </div>
 
       <!-- Todo项 -->
       <transition-group
@@ -152,17 +162,11 @@ export default {
 .search-input::v-deep {
   // 重设输入框样式
   .vs-inputx {
-    padding-left: 2.4rem;
     border: none !important;
     box-shadow: none;
   }
   .input-span-placeholder {
-    padding-left: 2.5rem;
-  }
-  .vs-input--icon {
-    top: 0.7rem;
-    left: 0.5rem;
-    font-size: 25px;
+    padding-top: 0.9rem;
   }
 }
 
@@ -172,7 +176,7 @@ export default {
   text-overflow: ellipsis;
   word-wrap: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 

@@ -57,8 +57,8 @@
     </div>
     <div class="flex flex-wrap w-full">
       <!-- 卡片 4 -->
-      <div class="lg:w-6/12 lg:pr-3 sm:w-full my-3">
-        <div class="h-full p-6 bg-semi radius base-shadow">
+      <div class="lg:w-1/2 lg:pr-3 sm:w-full my-3">
+        <div class="p-6 bg-semi radius base-shadow">
           <div class="flex">
             <div class="w-full lg:w-1/2 xl:w-1/2 flex flex-col justify-between pr-4">
               <div>
@@ -124,6 +124,14 @@
           </div>
         </div>
       </div>
+
+      <!-- 卡片 5 -->
+      <div class="lg:w-1/2 lg:pl-3 sm:w-full my-3">
+        <div class="h-full py-3 px-4 base-shadow bg-semi radius overflow-hidden">
+          <p class="mb-2 text-primary text-xl font-bold">任务追踪</p>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -135,6 +143,11 @@ import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
 
 export default {
   name: 'Analytics',
+  components: {
+    VueApexCharts,
+    AreaChart,
+  },
+
   data() {
     return {
       subscribersGained,
@@ -144,12 +157,10 @@ export default {
     }
   },
 
-  components: {
-    VueApexCharts,
-    AreaChart,
-  },
-
-  mounted() {
+  computed: {
+    todoList() {
+      return this.$store.state.todo.todoList
+    },
   },
 
   methods: {
