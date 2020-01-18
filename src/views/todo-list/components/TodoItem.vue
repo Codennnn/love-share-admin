@@ -36,7 +36,7 @@
               <div class="todo-item__header flex justify-between items-center">
                 <div class="flex justify-between items-center">
                   <vs-checkbox
-                    v-model="todo.is_important"
+                    v-model="todo.is_done"
                     @click.stop
                   ></vs-checkbox>
                   <div class="todo-item__title mr-3">{{ todo.title }}</div>
@@ -69,12 +69,12 @@
                 <i
                   class="todo-mark__icon el-icon-collection-tag text-semi"
                   :class="{success: todo.is_important}"
-                  @click.stop="toggleIsImportant(todo.id)"
+                  @click.stop="toggleTag(todo._id, 'is_important')"
                 ></i>
                 <i
                   class="todo-mark__icon el-icon-star-off text-semi"
                   :class="{warning: todo.is_starred}"
-                  @click.stop="toggleIsStarred(todo.id)"
+                  @click.stop="toggleTag(todo._id, 'is_starred')"
                 ></i>
                 <i class="todo-mark__icon el-icon-delete text-semi"></i>
               </div>
@@ -82,8 +82,8 @@
             <!-- end -->
           </vs-row>
           <!-- todo项内容区域 -->
-          <div class="todo-item__content">
-            <p>{{ todo.content }}</p>
+          <div class="p-2">
+            <p class="text-gray">{{ todo.content }}</p>
           </div>
         </li>
       </transition-group>
@@ -133,30 +133,8 @@ export default {
   },
 
   methods: {
-    // 设为重要事项
-    toggleIsImportant(id) {
-      this.todoItems.some((el) => {
-        if (el.id === id) {
-          el.isImportant = !el.isImportant
-          return true
-        }
-        return false
-      })
-    },
-
-    // 设为星号标记
-    toggleIsStarred(id) {
-      this.todoItems.some((el) => {
-        if (el.id === id) {
-          el.isStarred = !el.isStarred
-          return true
-        }
-        return false
-      })
-    },
-
-    moveToTrash() {
-      this.isTrashed = !this.isTrashed
+    toggleTag(id, tag) {
+      this.$store.commit('todo/TOGGLE_TAG', { id, tag })
     },
   },
 }
@@ -210,11 +188,6 @@ export default {
     font-size: 18px;
     transition: all 0.2s;
     cursor: pointer;
-  }
-  // 主内容区域
-  .todo-item__content {
-    margin: 10px 0 0 5px;
-    color: #7c7c7c;
   }
 }
 </style>

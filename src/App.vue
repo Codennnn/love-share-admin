@@ -17,6 +17,7 @@ export default {
   created() {
     this.$store.dispatch('getCategoryList')
     this.$store.dispatch('getSchoolList')
+    this.$store.dispatch('todo/getTodoList')
   },
 
   methods: {

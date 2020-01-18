@@ -63,10 +63,3 @@ export function replaceAvatar(data) {
     data,
   })
 }
-
-export function getTodoList() {
-  return request({
-    url: '/admin/todo/list',
-    method: 'get',
-  })
-}

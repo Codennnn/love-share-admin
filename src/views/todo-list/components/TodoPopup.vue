@@ -81,17 +81,16 @@
       </vs-col>
     </vs-row>
 
-    <div class="todo-button mt-2">
+    <div class="mt-2 flex justify-end">
       <vs-button
         color="#848484"
         type="flat"
-        @click="isPopupActive = false"
+        @click="isPopupActiveLocal = false"
       >取消</vs-button>
       <vs-button
-        style="margin-left: .5rem"
-        color="primary"
-        type="filled"
-        :disabled="task.title && task.title.length === 0"
+        id="confirmBtn"
+        class="vs-con-loading__container"
+        :disabled="disabled || loading"
         @click="confirm"
       >{{ task._id ? '完成修改' : '添加任务' }}</vs-button>
     </div>
@@ -99,7 +98,6 @@
 </template>
 
 <script>
-import _isEqual from 'lodash/isEqual'
 import _cloneDeepWith from 'lodash/cloneDeepWith'
 
 const tags = {
@@ -140,64 +138,91 @@ export default {
   data: () => ({
     tags,
     task: null,
-    tempTodo: '',
+    loading: false,
     isPopupActiveLocal: false,
   }),
 
   watch: {
-    isPopupActive: {
-      handler(v) {
-        this.isPopupActiveLocal = v
-      },
-      immediate: true,
-    },
     todo: {
       handler(v) {
         this.task = _cloneDeepWith(v)
       },
       immediate: true,
     },
-    isPopupActiveLocal: {
+    isPopupActive: {
       handler(v) {
-        if (!v) {
-          this.$emit('hidePopup')
-        }
+        this.isPopupActiveLocal = v
       },
       immediate: true,
+    },
+    isPopupActiveLocal(v) {
+      if (!v) {
+        this.$emit('hidePopup')
+      }
+    },
+  },
+
+  computed: {
+    disabled() {
+      return this.task.title?.length <= 0
     },
   },
 
   methods: {
     confirm() {
-      /* eslint-disable */
-      this.task && this.task.id ? this.editTodo() : this.addTodo();
-    },
-
-    addTodo() {
-      Bus.$emit('getAddedTodo', this.task);
-    },
-
-    // 编辑修改 todo 项
-    editTodo() {
-      if (!_isEqual(this.task, this.refTodo)) {
-        // 判断是否相等，如果否，说明有修改过，触发下面的 Bus.$emit
+      if (this.task?._id) {
+        this.updateTodo()
       } else {
-        this.isPopupActive = false;
+        this.addTodo()
+      }
+    },
+
+    async addTodo() {
+      this.loading = true
+      this.$vs.loading({
+        background: 'primary',
+        color: '#fff',
+        container: '#confirmBtn',
+        scale: 0.45,
+      })
+      try {
+        await this.$store.dispatch('todo/addTodo', this.task)
+        this.isPopupActiveLocal = false
+      } finally {
+        this.$vs.loading.close('#confirmBtn > .con-vs-loading')
+        this.loading = false
+      }
+    },
+
+    async updateTodo() {
+      this.loading = true
+      this.$vs.loading({
+        background: 'primary',
+        color: '#fff',
+        container: '#confirmBtn',
+        scale: 0.45,
+      })
+      try {
+        await this.$store.dispatch('todo/updateTodo', this.task)
+        this.isPopupActiveLocal = false
+      } finally {
+        this.$vs.loading.close('#confirmBtn > .con-vs-loading')
+        this.loading = false
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
+// 重设弹出框的宽度
 .todo-popup::v-deep {
-  // 重设弹出框的宽度
   .vs-popup {
     width: 450px;
   }
 }
 
-// 弹出框的mark标签
+// 弹出框的 mark 标签
 .todo-tag__group {
   height: 30px;
   .task-tag {
@@ -217,15 +242,5 @@ export default {
     transition: all 0.2s;
     color: #848484;
   }
-}
-
-// .vs-dropdown-menu::v-deep .material-icons {
-//   font-size: inherit;
-// }
-
-// 弹出框底部的按钮
-.todo-button {
-  display: flex;
-  justify-content: flex-end;
 }
 </style>

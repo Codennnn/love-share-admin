@@ -1,18 +1,9 @@
-import { getTodoList } from '@/request/api/admin'
+import {
+  getTodoList, addTodo, deleteTodo, updateTodo,
+} from '@/request/api/todo'
 
 const state = {
-  todoList: [
-    {
-      _id: 1,
-      title: '...',
-      content: '123',
-      is_one: true,
-      is_important: true,
-      is_starred: false,
-      is_trashed: false,
-      tags: [1, 2],
-    },
-  ],
+  todoList: [],
   currentSelected: {},
 }
 
@@ -23,6 +14,15 @@ const mutations = {
   SET_TODO_LIST(state, list) {
     state.todoList = list
   },
+  TOGGLE_TAG(state, { id, tag }) {
+    state.todoList.some((el) => {
+      if (el._id === id) {
+        el[tag] = !el[tag]
+        return true
+      }
+      return false
+    })
+  },
 }
 
 const actions = {
@@ -30,6 +30,27 @@ const actions = {
     const { code, data } = await getTodoList()
     if (code === 2000) {
       commit('SET_TODO_LIST', data.todo_list)
+    }
+  },
+
+  async addTodo({ dispatch }, data) {
+    const { code } = await addTodo(data)
+    if (code === 2000) {
+      dispatch('getTodoList')
+    }
+  },
+
+  async deleteTodo({ dispatch }, data) {
+    const { code } = await deleteTodo(data)
+    if (code === 2000) {
+      dispatch('getTodoList')
+    }
+  },
+
+  async updateTodo({ dispatch }, data) {
+    const { code } = await updateTodo(data)
+    if (code === 2000) {
+      dispatch('getTodoList')
     }
   },
 }
@@ -42,7 +63,6 @@ export default {
   getters: {
     adminId: state => state.info._id,
     filterItems: state => ({ type, value }) => {
-      console.log(type, value)
       if (type === 'filter') {
         return state.todoList.filter(el => el[value])
       }
