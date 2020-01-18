@@ -2,23 +2,23 @@
   <vs-popup
     class="todo-popup"
     v-if="task"
-    :title="task.id ? '编辑任务' : '添加任务'"
-    :active.sync="isPopupActive"
+    :title="task._id ? '编辑任务' : '添加任务'"
+    :active.sync="isPopupActiveLocal"
   >
     <vs-row class="todo-tag flex items-center justify-center">
       <vs-col vs-w="9">
         <div class="todo-tag__group flex items-center">
-          <template v-for="(tag, index) in task.tags">
+          <template v-for="(tag, i) in task.tags">
             <div
               class="task-tag flex items-center"
               v-if="tag"
-              :key="index"
+              :key="i"
             >
               <span
-                class="dot"
-                :style="{ 'background-color': tagColor[tag] }"
+                class="w-2 h-2 mr-2 rounded-full"
+                :class="`bg-${tags[tag].color}`"
               ></span>
-              <span>{{ tag }}</span>
+              <span>{{ tags[tag].text }}</span>
             </div>
           </template>
         </div>
@@ -31,27 +31,27 @@
         <div class="todo-icon__group">
           <i
             class="icon el-icon-collection-tag cursor-pointer"
-            :class="{ important: task.isImportant }"
-            @click="task.isImportant = !task.isImportant"
+            :class="{success: task.is_important}"
+            @click="task.is_important = !task.is_important"
           ></i>
           <i
             class="icon el-icon-star-off cursor-pointer"
-            :class="{ star: task.isStarred }"
-            @click="task.isStarred = !task.isStarred"
+            :class="{warning: task.is_starred}"
+            @click="task.is_starred = !task.is_starred"
           ></i>
           <!-- 选择任务的标签 -->
           <vs-dropdown>
             <i class="icon el-icon-price-tag"></i>
             <vs-dropdown-menu>
               <vs-dropdown-item
-                v-for="(tag, index) in tags"
-                :key="index"
+                v-for="(tag, i) in tags"
+                :key="i"
               >
                 <vs-checkbox
-                  :vs-value="tag"
+                  :vs-value="tag.type"
                   v-model="task.tags"
                   @click.stop
-                >{{ tag }}</vs-checkbox>
+                >{{ tag.text }}</vs-checkbox>
               </vs-dropdown-item>
             </vs-dropdown-menu>
           </vs-dropdown>
@@ -66,16 +66,16 @@
         <div class="w-full">
           <!-- 输入标题框 -->
           <vs-input
+            class="w-full"
             label-placeholder="标题"
             v-model.trim="task.title"
-            class="w-full"
           />
         </div>
         <!-- 任务描述框 -->
         <vs-textarea
-          v-model="task.content"
-          style="margin-top: 15px"
+          class="mt-4"
           label="任务描述"
+          v-model="task.content"
           :height="String(150)"
         />
       </vs-col>
@@ -91,9 +91,9 @@
         style="margin-left: .5rem"
         color="primary"
         type="filled"
-        :disabled="task.title.length === 0"
+        :disabled="task.title && task.title.length === 0"
         @click="confirm"
-      >{{ task.id ? '完成修改' : '添加任务' }}</vs-button>
+      >{{ task._id ? '完成修改' : '添加任务' }}</vs-button>
     </div>
   </vs-popup>
 </template>
@@ -101,32 +101,70 @@
 <script>
 import _isEqual from 'lodash/isEqual'
 import _cloneDeepWith from 'lodash/cloneDeepWith'
-import Bus from '@/utils/eventBus'
 
+const tags = {
+  1: {
+    text: '前端',
+    color: 'main',
+    type: 1,
+  },
+  2: {
+    text: '后端',
+    color: 'warning',
+    type: 2,
+  },
+  3: {
+    text: '其它',
+    color: 'success',
+    type: 3,
+  },
+  4: {
+    text: 'BUG',
+    color: 'danger',
+    type: 4,
+  },
+}
 export default {
-  data() {
-    const tagColor = {
-      前端: '#7367f0',
-      后端: '#ff9f39',
-      其它: '#67c23a',
-      BUG: '#f56c6c',
-    }
-    return {
-      isPopupActive: false, // 是否弹框
-      task: null,
-      tags: ['前端', '后端', '其它', 'BUG'],
-      tagColor,
-      tempTodo: '',
-    }
+  name: 'TodoPopup',
+  props: {
+    isPopupActive: {
+      type: Boolean,
+      required: true,
+    },
+    todo: {
+      type: Object,
+      required: true,
+    },
   },
 
-  mounted() {
-    Bus.$on('openPopup', () => { this.isPopupActive = true })
-    Bus.$on('closePopup', () => { this.isPopupActive = false })
-    Bus.$on('getTodo', (todo) => {
-      this.refTodo = todo // 将原 todo 存起来以便后面使用
-      this.task = _cloneDeepWith(todo) // 深拷贝 todo 对象
-    })
+  data: () => ({
+    tags,
+    task: null,
+    tempTodo: '',
+    isPopupActiveLocal: false,
+  }),
+
+  watch: {
+    isPopupActive: {
+      handler(v) {
+        this.isPopupActiveLocal = v
+      },
+      immediate: true,
+    },
+    todo: {
+      handler(v) {
+        this.task = _cloneDeepWith(v)
+      },
+      immediate: true,
+    },
+    isPopupActiveLocal: {
+      handler(v) {
+        if (!v) {
+          this.$emit('hidePopup')
+        }
+      },
+      immediate: true,
+    },
   },
 
   methods: {
@@ -143,7 +181,6 @@ export default {
     editTodo() {
       if (!_isEqual(this.task, this.refTodo)) {
         // 判断是否相等，如果否，说明有修改过，触发下面的 Bus.$emit
-        Bus.$emit('getEditedTodo', this.task);
       } else {
         this.isPopupActive = false;
       }
@@ -153,9 +190,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.todo-popup {
+.todo-popup::v-deep {
   // 重设弹出框的宽度
-  &::v-deep .vs-popup {
+  .vs-popup {
     width: 450px;
   }
 }
@@ -169,13 +206,6 @@ export default {
     border-radius: 10px;
     font-size: 14px;
     background-color: #e6e6e6;
-    .dot {
-      width: 7px;
-      height: 7px;
-      margin-right: 5px;
-      border-radius: 3px;
-      background-color: #858585;
-    }
   }
 }
 
@@ -187,17 +217,11 @@ export default {
     transition: all 0.2s;
     color: #848484;
   }
-  .important {
-    color: $success;
-  }
-  .star {
-    color: #ff9f39;
-  }
 }
 
-.vs-dropdown-menu::v-deep .material-icons {
-  font-size: inherit;
-}
+// .vs-dropdown-menu::v-deep .material-icons {
+//   font-size: inherit;
+// }
 
 // 弹出框底部的按钮
 .todo-button {

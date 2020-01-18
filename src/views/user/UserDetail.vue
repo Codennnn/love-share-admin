@@ -129,27 +129,29 @@
 
       <!-- 右侧 -->
       <div
-        class="py-10 px-6 flex flex-col items-center radius bg-gray"
+        class="pt-5 pb-10 px-6 flex flex-col items-center radius bg-gray"
         style="width: 25%;"
       >
+        <!-- 头像 -->
         <div
           class="relative"
-          style="width: 100px;"
+          style="width: 190px;"
         >
-          <div :title="`信用度：${detail.credit_value}`">
-            <SvgCircle
-              :progress="detail.credit_value / 1000"
-              :progressOption="options"
-            />
-          </div>
+          <vue-apex-charts
+            type="radialBar"
+            width="100%"
+            :options="radialBarOptions"
+            :series="radialBarValue"
+          ></vue-apex-charts>
           <vs-avatar
             class="absolute m-0"
-            style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
+            style="top: 50%; left: 50%; transform: translate(-50%, -65%);"
             size="80px"
             :src="detail.avatar_url"
           />
         </div>
-        <div class="mt-4 mb-1 text-primary font-bold">{{ detail.nickname }}</div>
+
+        <div class="mb-1 text-primary font-bold">{{ detail.nickname }}</div>
         <div
           v-if="detail.school"
           class="text-semi text-sm"
@@ -202,7 +204,7 @@
 </template>
 
 <script>
-import SvgCircle from '@/components/SvgCircle.vue'
+import VueApexCharts from 'vue-apexcharts'
 import HeatmapChart from '@/components/LineChart.vue'
 
 import { getUserDetailByAdmin } from '@/request/api/user'
@@ -273,7 +275,7 @@ const chartSettings = {
 
 export default {
   name: 'UserDetail',
-  components: { SvgCircle, HeatmapChart },
+  components: { HeatmapChart, VueApexCharts },
 
   data: () => ({
     status,
@@ -295,6 +297,32 @@ export default {
       name: 'Metric4',
       data: [1, 1, 1, 5, 5, 1, 1, 5, 1],
     }],
+    radialBarOptions: {
+      tooltip: {
+        enabled: true,
+        fillSeriesColor: false,
+        theme: 'dark',
+      },
+      plotOptions: {
+        radialBar: {
+          hollow: {
+            margin: 15,
+            size: '72%',
+            background: 'transparent',
+            dropShadow: {
+              enabled: true,
+              top: 0,
+              left: 0,
+              blur: 3,
+              opacity: 1,
+            },
+          },
+          dataLabels: { show: false },
+        },
+      },
+      stroke: { lineCap: 'round' },
+      colors: ['#6165f7'],
+    },
   }),
 
   computed: {
@@ -305,6 +333,10 @@ export default {
       }
       return { ...this.option, backColor: '#555' }
     },
+    radialBarValue() {
+      const value = this.detail.credit_value / 1000 * 100 || 0
+      return [value]
+    },
   },
 
   mounted() {
@@ -313,13 +345,9 @@ export default {
 
   methods: {
     async getUserDetailByAdmin(user_id) {
-      try {
-        const { code, data } = await getUserDetailByAdmin({ user_id })
-        if (code === 2000) {
-          this.detail = data.user_detail
-        }
-      } catch {
-        // TODO
+      const { code, data } = await getUserDetailByAdmin({ user_id })
+      if (code === 2000) {
+        this.detail = data.user_detail
       }
     },
   },

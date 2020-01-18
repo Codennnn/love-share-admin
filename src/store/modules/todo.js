@@ -1,92 +1,55 @@
+import { getTodoList } from '@/request/api/admin'
+
+const state = {
+  todoList: [
+    {
+      _id: 1,
+      title: '...',
+      content: '123',
+      is_one: true,
+      is_important: true,
+      is_starred: false,
+      is_trashed: false,
+      tags: [1, 2],
+    },
+  ],
+  currentSelected: {},
+}
+
+const mutations = {
+  SET_CURRENT_SELECTED(state, selected) {
+    state.currentSelected = selected
+  },
+  SET_TODO_LIST(state, list) {
+    state.todoList = list
+  },
+}
+
+const actions = {
+  async getTodoList({ commit }) {
+    const { code, data } = await getTodoList()
+    if (code === 2000) {
+      commit('SET_TODO_LIST', data.todo_list)
+    }
+  },
+}
+
 export default {
-  state: {
-    todos: [
-      {
-        id: 1,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 2,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 3,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 4,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 5,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 6,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 7,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-      {
-        id: 8,
-        title: '...',
-        content: '123',
-        isDone: true,
-        isImportant: true,
-        isStarred: false,
-        isTrashed: false,
-        tags: ['前端', '后端', '其它', 'BUG'],
-      },
-    ],
-  },
-
-  mutations: {
-  },
-
+  namespaced: true,
+  state,
+  mutations,
+  actions,
   getters: {
+    adminId: state => state.info._id,
+    filterItems: state => ({ type, value }) => {
+      console.log(type, value)
+      if (type === 'filter') {
+        return state.todoList.filter(el => el[value])
+      }
+      if (type === 'tag') {
+        return state.todoList.filter(el => el.tags.includes(value))
+      }
+      return state.todoList.filter(el => !el.is_trashed)
+    },
   },
 }

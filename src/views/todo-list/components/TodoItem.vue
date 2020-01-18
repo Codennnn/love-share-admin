@@ -2,7 +2,10 @@
   <div class="todo-items">
     <VuePerfectScrollbar
       class="scroll-area"
-      :settings="settings"
+      :settings="{
+        maxScrollbarLength: 200,
+        wheelSpeed: 0.60,
+      }"
     >
       <!-- 搜索框 -->
       <vs-input
@@ -23,9 +26,9 @@
       >
         <li
           class="todo-item w-full cursor-pointer"
-          v-for="todo in filterTodoItems"
-          :key="todo.id"
-          @click="activePopup(todo)"
+          v-for="todo in filterItems"
+          :key="todo._id"
+          @click="$emit('editTodo', todo)"
         >
           <vs-row>
             <!-- todo项头部左侧 -->
@@ -33,26 +36,24 @@
               <div class="todo-item__header flex justify-between items-center">
                 <div class="flex justify-between items-center">
                   <vs-checkbox
-                    v-model="todo.isDone"
+                    v-model="todo.is_important"
                     @click.stop
                   ></vs-checkbox>
-                  <div class="todo-item__title mr-2">{{ todo.title }}</div>
-                  <template v-if="todo.tags.length !== 0">
-                    <template v-for="(tag, index) in todo.tags">
-                      <div
-                        class="todo-item__tag
-                      flex justify-between items-center
-                      rounded-full py-1 px-3 bg-gray-300 mr-1"
-                        :key="index"
-                      >
-                        <!-- 标签胶囊前面的颜色点 -->
-                        <span
-                          class="dot rounded-full w-2 h-2 mr-2"
-                          :style="{'background-color': tagColor[tag]}"
-                        ></span>
-                        <span class="text-gray-700 text-xs">{{ tag }}</span>
-                      </div>
-                    </template>
+                  <div class="todo-item__title mr-3">{{ todo.title }}</div>
+                  <template v-if="todo.tags.length > 0">
+                    <div
+                      class="mr-1 flex justify-between items-center
+                      rounded-full py-1 px-3 bg-gray"
+                      v-for="tag in todo.tags"
+                      :key="tag"
+                    >
+                      <!-- 标签胶囊前面的颜色点 -->
+                      <span
+                        class="w-2 h-2 mr-2 rounded-full"
+                        :class="`bg-${tags[tag].color}`"
+                      ></span>
+                      <span class="text-gray text-xs">{{ tags[tag].text }}</span>
+                    </div>
                   </template>
                 </div>
               </div>
@@ -66,16 +67,16 @@
             >
               <div>
                 <i
-                  class="todo-mark__icon el-icon-collection-tag"
-                  :class="{important: todo.isImportant}"
+                  class="todo-mark__icon el-icon-collection-tag text-semi"
+                  :class="{success: todo.is_important}"
                   @click.stop="toggleIsImportant(todo.id)"
                 ></i>
                 <i
-                  class="todo-mark__icon el-icon-star-off"
-                  :class="{star: todo.isStarred}"
+                  class="todo-mark__icon el-icon-star-off text-semi"
+                  :class="{warning: todo.is_starred}"
                   @click.stop="toggleIsStarred(todo.id)"
                 ></i>
-                <i class="todo-mark__icon el-icon-delete"></i>
+                <i class="todo-mark__icon el-icon-delete text-semi"></i>
               </div>
             </vs-col>
             <!-- end -->
@@ -93,86 +94,45 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
-import _last from 'lodash/last'
-import Bus from '@/utils/eventBus'
-
-const tagColor = {
-  前端: '#7367f0',
-  后端: '#ff9f39',
-  其它: '#67c23a',
-  BUG: '#f56c6c',
+const tags = {
+  1: {
+    text: '前端',
+    color: 'main',
+  },
+  2: {
+    text: '后端',
+    color: 'warning',
+  },
+  3: {
+    text: '其它',
+    color: 'success',
+  },
+  4: {
+    text: 'BUG',
+    color: 'danger',
+  },
 }
-
 export default {
+  name: 'TodoItem',
+  components: { VuePerfectScrollbar },
+
   data() {
     return {
+      tags,
       search: '',
-      currentAcive: 'all',
-      todoItems: [],
-      settings: {
-        maxScrollbarLength: 200,
-        wheelSpeed: 0.60,
-      },
-      tagColor,
     }
   },
 
-  components: { VuePerfectScrollbar },
-
-  mounted() {
-    // 获取全部的 todo 项
-    this.todoItems = this.$store.state.todo.todos
-    console.log(this.todoItems)
-
-    // 接收 TodoBar 中的事件，获知当前激活的菜单项
-    Bus.$on('getActive', (current) => {
-      this.currentAcive = current
-    })
-
-    Bus.$on('getAddedTodo', (newTodo) => {
-      console.log(_last(this.todoItems).id)
-      newTodo.id = _last(this.todoItems).id + 1
-      this.todoItems.push(newTodo)
-      Bus.$emit('closePopup')
-    })
-
-    Bus.$on('getEditedTodo', (newTodo) => {
-      this.todoItems.some((item) => {
-        if (item.id === newTodo.id) {
-          const indexOfItem = this.todoItems.indexOf(item)
-          this.$set(this.todoItems, indexOfItem, newTodo)
-          Bus.$emit('closePopup')
-          return true
-        }
-        return false
-      })
-    })
-  },
-
   computed: {
-    // 返回过滤后的 todo 项
-    filterTodoItems() {
-      const current = this.currentAcive || 'all'
-      console.log(current)
-      if (current === 'all') {
-        return this.todoItems
-      }
-
-      if (['前端', '后端', '其它', 'BUG'].includes(current)) {
-        return this.todoItems.filter(todo => todo.tags.includes(current))
-      }
-
-      return this.todoItems.filter(todo => todo[current] === true)
+    currentSelected() {
+      return this.$store.state.todo.currentSelected
+    },
+    filterItems() {
+      return this.$store.getters['todo/filterItems'](this.currentSelected)
     },
   },
 
   methods: {
-    // 显示弹出框
-    activePopup(todo) {
-      Bus.$emit('openPopup')
-      Bus.$emit('getTodo', todo)
-    },
-
     // 设为重要事项
     toggleIsImportant(id) {
       this.todoItems.some((el) => {
@@ -240,23 +200,16 @@ export default {
 .todo-item {
   padding: 14px 28px;
   &:hover {
-    box-shadow: 0 3px 10px 0 #ccc;
+    // box-shadow: 0 3px 10px 0 #ccc;
     transform: translateY(-4px);
     transition: all 0.2s;
   }
   // 标记的图标样式
   .todo-mark__icon {
-    cursor: pointer;
     padding: 6px;
     font-size: 18px;
-    color: #858585;
     transition: all 0.2s;
-    &.important {
-      color: #67c23a;
-    }
-    &.star {
-      color: #ff9f39;
-    }
+    cursor: pointer;
   }
   // 主内容区域
   .todo-item__content {

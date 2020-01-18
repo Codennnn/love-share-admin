@@ -23,7 +23,7 @@
             >
               <i class="el-icon-trophy-1 text-3xl"></i>
             </div>
-            <p class="my-4 text-2xl font-medium">欢迎你，令狐聪</p>
+            <p class="my-4 text-2xl font-medium">欢迎你，{{ $store.state.admin.info.nickname }}</p>
             <p>上次登录时间为：{{ $dayjs().format('YYYY-MM-DD hh:mm') }}</p>
           </div>
         </div>

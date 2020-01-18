@@ -1,43 +1,63 @@
 <template>
-  <div class="pt-3">
+  <div class="pt-8">
     <div class="flex">
       <!-- 待办事项操作栏 -->
       <div class="todo-bar">
-        <TodoBar />
+        <TodoBar @addNewTodo="addNewTodo" />
       </div>
 
       <!-- 待办事项列表 -->
       <div class="todo-item">
-        <TodoItem />
+        <TodoItem @editTodo="editTodo" />
       </div>
-      <TodoPopup />
+
     </div>
+
+    <TodoPopup
+      :is-popup-active="showPopup"
+      :todo="todo"
+      @hidePopup="showPopup = false"
+    />
+
   </div>
 </template>
 
 <script>
-import Bus from '@/utils/eventBus' // 事件总线
-
 import TodoBar from './components/TodoBar.vue'
 import TodoItem from './components/TodoItem.vue'
 import TodoPopup from './components/TodoPopup.vue'
 
 export default {
   name: 'TodoList',
-
-  destroyed() {
-    // 移除 Bus 中监听的事件，防止事件多次触发
-    Bus.$off('openPopup')
-    Bus.$off('closePopup')
-    Bus.$off('getTodo')
-    Bus.$off('getActive')
-    Bus.$off('getEditedTodo')
-  },
-
   components: {
     TodoBar,
     TodoItem,
     TodoPopup,
+  },
+
+  data: () => ({
+    showPopup: false,
+    todo: {},
+  }),
+
+  methods: {
+    addNewTodo() {
+      this.showPopup = true
+      this.todo = {
+        title: '',
+        content: '',
+        tags: [],
+        is_done: false,
+        is_important: false,
+        is_starred: false,
+        is_trashed: false,
+      }
+    },
+
+    editTodo(todo) {
+      this.showPopup = true
+      this.todo = todo
+    },
   },
 }
 </script>
