@@ -1,7 +1,19 @@
 @import "~@/assets/scss/theme/_themeify.scss";
 
 .bg-main {
-  background: #6165f7;
+  background: $primary;
+}
+.bg-success {
+  background: $success;
+}
+.bg-warning {
+  background: $warning;
+}
+.bg-danger {
+  background: $danger;
+}
+.bg-dark {
+  background: $dark;
 }
 
 .bg-primary-gradient {
