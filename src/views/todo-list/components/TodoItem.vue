@@ -9,7 +9,7 @@
     >
       <!-- 搜索框 -->
       <vs-input
-        class="search-input sticky top-0 z-40 w-full"
+        class="search-input sticky top-0 z-40 w-full radius bg-gray overflow-hidden"
         icon="search"
         size="large"
         icon-no-border
@@ -25,7 +25,7 @@
         leave-active-class="animated fadeOutDown faster"
       >
         <li
-          class="todo-item w-full cursor-pointer"
+          class="todo-item p-3 w-full cursor-pointer"
           v-for="todo in filterItems"
           :key="todo._id"
           @click="$emit('editTodo', todo)"
@@ -85,8 +85,8 @@
             <!-- end -->
           </vs-row>
           <!-- todo项内容区域 -->
-          <div class="p-2">
-            <p class="text-gray">{{ todo.content }}</p>
+          <div class="p-2 pr-16">
+            <p class="content-overflow text-gray">{{ todo.content }}</p>
           </div>
         </li>
       </transition-group>
@@ -146,21 +146,23 @@ export default {
 <style lang="scss" scoped>
 .scroll-area {
   position: relative;
-  height: 673px;
+  height: 686px;
 }
 
-.search-input {
+.search-input::v-deep {
   // 重设输入框样式
-  &::v-deep {
-    .vs-inputx {
-      border: none !important;
-      box-shadow: none;
-      border-radius: 0;
-    }
-    .vs-icon {
-      top: 0.7rem;
-      font-size: 25px;
-    }
+  .vs-inputx {
+    padding-left: 2.4rem;
+    border: none !important;
+    box-shadow: none;
+  }
+  .input-span-placeholder {
+    padding-left: 2.5rem;
+  }
+  .vs-input--icon {
+    top: 0.7rem;
+    left: 0.5rem;
+    font-size: 25px;
   }
 }
 
@@ -174,12 +176,21 @@ export default {
   -webkit-box-orient: vertical;
 }
 
+.content-overflow {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .flip-list-move {
   transition: transform 1s;
 }
 
 .todo-item {
-  padding: 14px 28px;
   &:hover {
     // box-shadow: 0 3px 10px 0 #ccc;
     transform: translateY(-4px);

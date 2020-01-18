@@ -72,10 +72,13 @@ export default {
     adminId: state => state.info._id,
     filterItems: state => ({ type, value }) => {
       if (type === 'filter') {
-        return state.todoList.filter(el => el[value])
+        if (value === 'is_trashed') {
+          return state.todoList.filter(el => el[value])
+        }
+        return state.todoList.filter(el => el[value] && !el.is_trashed)
       }
       if (type === 'tag') {
-        return state.todoList.filter(el => el.tags.includes(value))
+        return state.todoList.filter(el => el.tags.includes(value) && !el.is_trashed)
       }
       return state.todoList.filter(el => !el.is_trashed)
     },

@@ -1,11 +1,10 @@
 <template>
   <vs-popup
     class="todo-popup"
-    v-if="task"
     :title="task._id ? '编辑任务' : '添加任务'"
     :active.sync="isPopupActiveLocal"
   >
-    <vs-row class="todo-tag flex items-center justify-center">
+    <vs-row class="flex items-center justify-center">
       <vs-col vs-w="9">
         <div class="todo-tag__group flex items-center">
           <template v-for="(tag, i) in task.tags">
@@ -58,6 +57,7 @@
         </div>
       </vs-col>
     </vs-row>
+
     <vs-row>
       <vs-col
         class="pt-3"

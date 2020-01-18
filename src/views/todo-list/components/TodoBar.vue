@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 bg-primary">
+  <div class="px-6 py-2 bg-primary">
     <!-- 添加任务按钮 -->
     <div class="text-center">
       <vs-button
