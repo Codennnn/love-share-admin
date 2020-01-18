@@ -289,6 +289,13 @@ export const asyncRoutes = [
       },
     ],
   },
+  {
+    path: '/lock-screen',
+    name: 'LockScreen',
+    hidden: true,
+    component: () => import('@/views/lock-screen/LockScreen.vue'),
+    meta: { title: '屏幕锁定' },
+  },
 
   { path: '*', redirect: '/not-found', hidden: true },
 ]

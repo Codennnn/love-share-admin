@@ -173,7 +173,6 @@ export default {
 // 滚动区域
 .menu-scroll-wrapper {
   height: calc(100% - 64px - 100px);
-  padding-bottom: 4rem;
   overflow: hidden;
 }
 

@@ -3,6 +3,7 @@ const state = {
   menuTheme: 'menu-light',
   navbarType: 'fixed',
 
+  isLocked: false,
   sidebarCollapse: false,
   categoryList: [],
   schoolList: [],
