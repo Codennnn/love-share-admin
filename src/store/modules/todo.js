@@ -1,5 +1,5 @@
 import {
-  getTodoList, addTodo, deleteTodo, updateTodo,
+  getTodoList, addTodo, deleteTodo, updateTodo, updateTodoType,
 } from '@/request/api/todo'
 
 const state = {
@@ -49,6 +49,14 @@ const actions = {
 
   async updateTodo({ dispatch }, data) {
     const { code } = await updateTodo(data)
+    if (code === 2000) {
+      dispatch('getTodoList')
+    }
+  },
+
+  async updateTodoType({ dispatch, commit }, { todo_id, type, flag }) {
+    commit('TOGGLE_TAG', { todo_id, type })
+    const { code } = await updateTodoType({ todo_id, type, flag })
     if (code === 2000) {
       dispatch('getTodoList')
     }

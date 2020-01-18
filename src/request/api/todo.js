@@ -30,3 +30,11 @@ export function updateTodo(data) {
     data,
   })
 }
+
+export function updateTodoType(data) {
+  return request({
+    url: '/admin/todo/update_type',
+    method: 'put',
+    data,
+  })
+}

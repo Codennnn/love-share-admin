@@ -37,7 +37,7 @@
                 <div class="flex justify-between items-center">
                   <vs-checkbox
                     v-model="todo.is_done"
-                    @click.stop
+                    @click.stop="toggleType(todo._id, 'is_done', !todo.is_done)"
                   ></vs-checkbox>
                   <div class="todo-item__title mr-3">{{ todo.title }}</div>
                   <template v-if="todo.tags.length > 0">
@@ -69,14 +69,17 @@
                 <i
                   class="todo-mark__icon el-icon-collection-tag text-semi"
                   :class="{success: todo.is_important}"
-                  @click.stop="toggleTag(todo._id, 'is_important')"
+                  @click.stop="toggleType(todo._id, 'is_important', !todo.is_important)"
                 ></i>
                 <i
                   class="todo-mark__icon el-icon-star-off text-semi"
                   :class="{warning: todo.is_starred}"
-                  @click.stop="toggleTag(todo._id, 'is_starred')"
+                  @click.stop="toggleType(todo._id, 'is_starred', !todo.is_starred)"
                 ></i>
-                <i class="todo-mark__icon el-icon-delete text-semi"></i>
+                <i
+                  class="todo-mark__icon el-icon-delete text-semi"
+                  @click.stop="toggleType(todo._id, 'is_trashed', !todo.is_trashed)"
+                ></i>
               </div>
             </vs-col>
             <!-- end -->
@@ -133,8 +136,8 @@ export default {
   },
 
   methods: {
-    toggleTag(id, tag) {
-      this.$store.commit('todo/TOGGLE_TAG', { id, tag })
+    toggleType(todo_id, type, flag) {
+      this.$store.dispatch('todo/updateTodoType', { todo_id, type, flag })
     },
   },
 }
