@@ -93,7 +93,7 @@
           color: themed("sidebar-text-active-color");
         }
 
-        box-shadow: 0 0 10px $sb-color-dark;
+        box-shadow: 0 0 10px rgba(var(--vs-primary), 1);
         background: themed("sidebar-item-active-gradient");
       }
     }

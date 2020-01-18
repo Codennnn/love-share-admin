@@ -14,25 +14,13 @@ $heavy-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
 $text-bg-gray: rgb(139, 153, 168) !important;
 $text-bg-white: rgb(28, 57, 86) !important;
 $bg-gray: rgb(248,
-249,
-250) !important;
+  249,
+  250) !important;
 $bg-primary-gradient: linear-gradient(to right,
   rgba(var(--vs-primary), 1),
   rgba(var(--vs-primary), 0.7)) !important;
 
 // Sidebar
-$sb-color-dark: rgba(var(--vs-primary), 1) !important;
-$sb-item-hover-color-dark: rgba(255, 255, 255, 0.1) !important;
-$sb-menu-icon-color-dark: #fff !important;
-$sb-menu-active-bg-dark: rgba(255, 255, 255, 0.1) !important;
-
-$sb-color-light: #fff !important;
-$sb-item-hover-color-light: #f4f4f4 !important;
-$sb-menu-icon-color-light: #545454;
-$sb-menu-active-bg-light: linear-gradient(to right,
-  rgba(var(--vs-primary), 1),
-  rgba(var(--vs-primary), 0.7)) !important;
-
 $side-bar-collapse-transition: all 0.3s !important;
 $side-bar-width: 260px;
 

@@ -5,7 +5,7 @@
 }
 
 .bg-primary-gradient {
-  background: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), .7)) !important;
+  background: $bg-primary-gradient;
 }
 
 .text-overflow {
