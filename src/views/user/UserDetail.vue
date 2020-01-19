@@ -10,13 +10,13 @@
           <table class="w-full">
             <tr>
               <td class="label text-primary">微 信</td>
-              <td class="value text-gray">{{ detail.wechat }}</td>
+              <td class="value text-gray">{{ detail.wechat || '未填写' }}</td>
               <td class="label text-primary">邮 箱</td>
               <td class="value text-gray">{{ detail.email || '未填写' }}</td>
             </tr>
             <tr>
               <td class="label text-primary">Q Q</td>
-              <td class="value text-gray">{{ detail.qq }}</td>
+              <td class="value text-gray">{{ detail.qq || '未填写' }}</td>
               <td class="label text-primary">电 话</td>
               <td class="value text-gray">{{ detail.phone }}</td>
             </tr>

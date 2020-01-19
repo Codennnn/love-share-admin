@@ -207,10 +207,9 @@ export default {
 }
 
 .todo-item {
+  transition: all 0.2s;
   &:hover {
-    // box-shadow: 0 3px 10px 0 #ccc;
     transform: translateY(-4px);
-    transition: all 0.2s;
   }
   // 标记的图标样式
   .todo-mark__icon {

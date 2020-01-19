@@ -67,7 +67,7 @@
         >
           <div
             class="text-gray"
-            @click.stop="$router.push('/todo-list')"
+            @click.stop="viewAll()"
           >
             <span class="text-sm">查看全部</span>
             <i class="el-icon-arrow-right text-sm"></i>
@@ -112,6 +112,13 @@ export default {
 
   computed: {
     ...mapState('todo', ['todoList']),
+  },
+
+  methods: {
+    viewAll() {
+      this.$router.push('/todo-list')
+      this.isTaskOpen = false
+    },
   },
 }
 </script>
