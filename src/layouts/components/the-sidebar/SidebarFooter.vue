@@ -35,7 +35,7 @@
         >
           <p class="mb-2 text-xl text-primary font-bold">今日任务</p>
           <VuePerfectScrollbar
-            class="h-48 overflow-y-hidden"
+            class="h-48 overflow-hidden"
             :settings="{
               maxScrollbarLength: 160,
               wheelSpeed: 0.60,
@@ -118,7 +118,6 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-  transition: all 0.3s;
   .task {
     transition: all 0.3s;
     width: 95%;

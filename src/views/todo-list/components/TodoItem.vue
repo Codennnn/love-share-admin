@@ -13,7 +13,7 @@
         style="background: rgba(var(--vs-primary), 0.065);"
       >
         <div
-          class="h-full flex items-center justify-center radius"
+          class="h-full flex items-center justify-center radius cursor-pointer"
           style="width: 50px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
         >
           <i class="el-icon-search primary text-xl"></i>
