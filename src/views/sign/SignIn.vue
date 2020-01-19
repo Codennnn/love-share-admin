@@ -64,6 +64,8 @@ export default {
     signInError: false,
     signInErrorText: '账号或密码有误，请确认是否已注册',
     signInDisable: false,
+
+    position: {},
   }),
 
   methods: {
@@ -78,8 +80,15 @@ export default {
         this.signInDisable = true
 
         const [account, password] = [this.signInInput[0].value, this.signInInput[1].value]
+        const position = await this.getPosition()
+        const device = navigator.userAgent
 
-        const code = await this.$store.dispatch('admin/signIn', { account, password })
+        const code = await this.$store.dispatch('admin/signIn', {
+          account,
+          password,
+          position,
+          device,
+        })
 
         // 4001 - 账号未注册，4003 - 密码错误
         if (code === 2000) {
@@ -109,6 +118,41 @@ export default {
     switchToReset() {
       this.$emit('switchComponent', 'ForgetPassword')
       document.title = '重置密码 - 乐享校园'
+    },
+
+    getPosition() {
+      /* 地理位置服务可用 */
+      if ('geolocation' in navigator) {
+        return new Promise((resolve) => {
+          navigator.geolocation.getCurrentPosition(
+            ({ coords: { latitude, longitude }, timestamp }) => {
+              resolve({
+                code: 1,
+                latitude,
+                longitude,
+                timestamp,
+              })
+            },
+            ({ message }) => {
+              resolve({
+                code: 2,
+                message,
+              })
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 0,
+            },
+          )
+        })
+      }
+
+      /* 地理位置服务不可用 */
+      return {
+        code: 3,
+        message: 'Geolocation Service Is Unavailable',
+      }
     },
   },
 }

@@ -34,6 +34,7 @@ const actions = {
   },
 
   async SignOut({ commit }) {
+    localStorage.removeItem('screen_lock')
     localStorage.removeItem('vuex')
     commit('SET_TOKEN', '')
     removeToken() // 移除本地token缓存

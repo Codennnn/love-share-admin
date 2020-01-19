@@ -23,8 +23,13 @@
             >
               <i class="el-icon-trophy-1 text-3xl"></i>
             </div>
-            <p class="my-4 text-2xl font-medium">欢迎你，{{ $store.state.admin.info.nickname }}</p>
-            <p>上次登录时间为：{{ $dayjs().format('YYYY-MM-DD hh:mm') }}</p>
+            <p class="my-4 text-2xl font-medium">欢迎你，{{ nickname }}</p>
+            <p
+              v-if="log"
+              class="text-sm"
+            >
+              上次登录时间为：{{ $dayjs(log.created_at).format('YYYY-MM-DD HH:mm') }}
+            </p>
           </div>
         </div>
       </div>
@@ -138,6 +143,7 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
+import { mapState } from 'vuex'
 import AreaChart from '@/components/AreaChart.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
 
@@ -158,9 +164,10 @@ export default {
   },
 
   computed: {
-    todoList() {
-      return this.$store.state.todo.todoList
-    },
+    ...mapState({
+      nickname: state => state.admin.info.nickname,
+      log: state => state.admin.info.sign_log[1],
+    }),
   },
 
   methods: {
