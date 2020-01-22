@@ -163,6 +163,7 @@ export default {
 .nav-wrapper {
   width: calc(100% - #{$side-bar-width});
   min-width: 900px;
+  padding: 1.2rem $router-view-padding;
   box-sizing: border-box;
   transition: $side-bar-collapse-transition;
 

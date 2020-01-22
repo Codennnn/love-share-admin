@@ -35,7 +35,7 @@
       </div>
       <!-- 卡片 2：用户数统计卡片 -->
       <div class="lg:w-3/12 lg:pl-3 lg:pr-3 sm:w-1/2 sm:pr-3 my-3">
-        <div class="h-full bg-semi radius base-shadow overflow-hidden">
+        <div class="h-full bg-semi radius light-shadow overflow-hidden">
           <area-chart
             statistic="2.5K"
             label="用户数"
@@ -48,7 +48,7 @@
       </div>
       <!-- 卡片 3：交易量统计卡片 -->
       <div class="lg:w-3/12 lg:pl-3 sm:w-1/2 sm:pl-3 my-3">
-        <div class="h-full bg-semi radius base-shadow overflow-hidden">
+        <div class="h-full bg-semi radius light-shadow overflow-hidden">
           <area-chart
             statistic="9K"
             label="交易量"

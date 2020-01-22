@@ -13,32 +13,32 @@
           <div class="flex-1">
             <table>
               <tr>
-                <td>管理员账号</td>
-                <td>{{ detail.account }}</td>
+                <td class="text-semi">管理员账号</td>
+                <td class="text-gray">{{ detail.account }}</td>
               </tr>
               <tr>
-                <td>昵 称</td>
-                <td>{{ detail.nickname }}</td>
+                <td class="text-semi">昵 称</td>
+                <td class="text-gray">{{ detail.nickname }}</td>
               </tr>
               <tr>
-                <td>真实姓名</td>
-                <td>{{ detail.real_name || '未填写' }}</td>
+                <td class="text-semi">真实姓名</td>
+                <td class="text-gray">{{ detail.real_name || '未填写' }}</td>
               </tr>
             </table>
           </div>
           <div class="flex-1">
             <table>
               <tr>
-                <td>电子邮箱</td>
-                <td>{{ detail.email || '未填写' }}</td>
+                <td class="text-semi">电子邮箱</td>
+                <td class="text-gray">{{ detail.email || '未填写' }}</td>
               </tr>
               <tr>
-                <td>性 别</td>
-                <td>{{ detail.gender ? '女' : '男' }}</td>
+                <td class="text-semi">性 别</td>
+                <td class="text-gray">{{ detail.gender ? '女' : '男' }}</td>
               </tr>
               <tr>
-                <td>状 态</td>
-                <td>{{ '令狐少侠' }}</td>
+                <td class="text-semi">状 态</td>
+                <td class="text-gray">{{ '令狐少侠' }}</td>
               </tr>
             </table>
           </div>
@@ -106,10 +106,10 @@ export default {
   }
   td:nth-child(1) {
     font-weight: 600;
-    color: #626262;
+    // color: #626262;
   }
   td:nth-child(2) {
-    color: rgb(150, 150, 150);
+    // color: rgb(150, 150, 150);
   }
 }
 </style>
