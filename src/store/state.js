@@ -4,6 +4,7 @@ const state = {
   navbarType: 'fixed',
 
   sidebarCollapse: false,
+  showNavbar: true,
   categoryList: [],
   schoolList: [],
 }

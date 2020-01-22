@@ -21,10 +21,13 @@
         </BackToTop>
 
         <!-- 头部 -->
-        <TheNavbar />
+        <TheNavbar v-show="showNavbar" />
 
         <div class="router-view">
-          <div class="router-content pt-24">
+          <div
+            class="router-content"
+            :class="{'router-content--hidden': !showNavbar}"
+          >
             <!-- 面包屑导航 -->
             <transition
               enter-active-class="animated zoomIn faster"
@@ -94,6 +97,7 @@
 
 <script>
 import BackToTop from 'vue-backtotop'
+import { mapState } from 'vuex'
 import TheSidebar from './components/TheSidebar.vue'
 import TheNavbar from './components/TheNavbar.vue'
 import TheFooter from './components/TheFooter.vue'
@@ -114,9 +118,7 @@ export default {
   }),
 
   computed: {
-    sidebarCollapse() {
-      return this.$store.state.sidebarCollapse
-    },
+    ...mapState(['sidebarCollapse', 'showNavbar']),
   },
 }
 </script>
@@ -162,6 +164,11 @@ export default {
   padding: 0 $router-view-padding;
   .router-content {
     min-height: calc(100vh - #{$footer-height});
+    padding-top: 6rem;
+    transition: all 0.3s;
+    &.router-content--hidden {
+      padding-top: 0;
+    }
   }
   .router-footer {
     height: $footer-height;
