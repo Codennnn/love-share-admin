@@ -79,11 +79,17 @@
                   v-model="navbarType"
                 >固定</vs-radio>
               </li>
-              <li>
+              <li class="mr-6">
                 <vs-radio
                   vs-value="scroll"
                   v-model="navbarType"
                 >随页面滚动</vs-radio>
+              </li>
+              <li>
+                <vs-radio
+                  vs-value="hidden"
+                  v-model="navbarType"
+                >隐藏</vs-radio>
               </li>
             </ul>
           </div>

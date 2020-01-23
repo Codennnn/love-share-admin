@@ -21,12 +21,12 @@
         </BackToTop>
 
         <!-- 头部 -->
-        <TheNavbar v-show="showNavbar" />
+        <TheNavbar />
 
         <div class="router-view">
           <div
             class="router-content"
-            :class="{'router-content--hidden': !showNavbar}"
+            :class="{'router-content--hidden': navbarType === 'hidden'}"
           >
             <!-- 面包屑导航 -->
             <transition
@@ -118,7 +118,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(['sidebarCollapse', 'showNavbar']),
+    ...mapState(['sidebarCollapse', 'navbarType']),
   },
 }
 </script>
