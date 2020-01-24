@@ -13,6 +13,11 @@ export default {
 
   created() {
     this.$store.commit('SET_NAV_TYPE', 'hidden')
+    this.$store.commit('SWITCH_SIDEBAR_COLLAPSE', true)
+  },
+
+  destroyed() {
+    this.$store.commit('SET_NAV_TYPE', 'fixed')
     this.$store.commit('SWITCH_SIDEBAR_COLLAPSE', false)
   },
 

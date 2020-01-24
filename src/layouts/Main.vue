@@ -90,6 +90,7 @@
           <div
             class=" p-6 bg-gray"
             style="width: 320px;"
+            v-show="$route.path === '/profile'"
           >
             123456
           </div>

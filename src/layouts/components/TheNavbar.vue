@@ -1,73 +1,80 @@
 <template>
-  <div
-    class="nav-wrapper"
-    :class="[{ collapse: sidebarCollapse }, navbarType]"
+  <transition
+    enter-active-class="animated fadeIn"
+    leave-active-class="animated fadeOut"
+    mode="out-in"
   >
-    <div class="nav-bar rounded-lg">
-      <div>
-        <router-link
-          v-for="(item, index) in navIcons"
-          :key="index"
-          :to="item.route"
-        >
-          <el-tooltip
-            :open-delay="100"
-            :content="item.tip"
-            effect="light"
+    <div
+      class="nav-wrapper"
+      v-show="navbarType !== 'hidden'"
+      :class="[{ collapse: sidebarCollapse }, navbarType]"
+    >
+      <div class="nav-bar rounded-lg">
+        <div>
+          <router-link
+            v-for="(item, index) in navIcons"
+            :key="index"
+            :to="item.route"
           >
-            <i
-              class="nav-icon mr-3"
-              :class="item.icon"
-            ></i>
-          </el-tooltip>
-        </router-link>
-      </div>
-      <div class="nav-right">
-        <div class="flex items-center">
+            <el-tooltip
+              :open-delay="100"
+              :content="item.tip"
+              effect="light"
+            >
+              <i
+                class="nav-icon mr-3"
+                :class="item.icon"
+              ></i>
+            </el-tooltip>
+          </router-link>
+        </div>
+        <div class="nav-right">
+          <div class="flex items-center">
 
-          <!-- 搜索图标 -->
-          <el-tooltip
-            :open-delay="100"
-            :content="showSearchInput ? '关闭搜索' : '全站搜索'"
-            effect="light"
-          >
-            <i
-              class="nav-icon ml-3"
-              :class="[showSearchInput ? 'el-icon-close' : 'el-icon-search']"
-              @click="showSearchInput = !showSearchInput"
-            ></i>
-          </el-tooltip>
-          <vs-input
-            class="nav-search overflow-hidden"
-            :class="[showSearchInput ? 'w-48': 'w-0']"
-            placeholder="搜索你想要的宝贝"
-            @keyup.esc="showSearchInput = false"
-            @keyup.enter="search"
-            v-model="searchText"
-          />
+            <!-- 搜索图标 -->
+            <el-tooltip
+              :open-delay="100"
+              :content="showSearchInput ? '关闭搜索' : '全站搜索'"
+              effect="light"
+            >
+              <i
+                class="nav-icon ml-3"
+                :class="[showSearchInput ? 'el-icon-close' : 'el-icon-search']"
+                @click="showSearchInput = !showSearchInput"
+              ></i>
+            </el-tooltip>
+            <vs-input
+              class="nav-search overflow-hidden"
+              :class="[showSearchInput ? 'w-48': 'w-0']"
+              placeholder="搜索你想要的宝贝"
+              @keyup.esc="showSearchInput = false"
+              @keyup.enter="search"
+              v-model="searchText"
+            />
 
-          <!-- 全屏图标 -->
-          <el-tooltip
-            :open-delay="100"
-            content="切换全屏"
-            effect="light"
-          >
-            <i
-              class="nav-icon mx-3"
-              :class="[isFullScreen ? 'el-icon-crop' : 'el-icon-full-screen']"
-              @click="screenfull"
-            ></i>
-          </el-tooltip>
+            <!-- 全屏图标 -->
+            <el-tooltip
+              :open-delay="100"
+              content="切换全屏"
+              effect="light"
+            >
+              <i
+                class="nav-icon mx-3"
+                :class="[isFullScreen ? 'el-icon-crop' : 'el-icon-full-screen']"
+                @click="screenfull"
+              ></i>
+            </el-tooltip>
 
-          <!-- 通知图标 -->
-          <Notice />
+            <!-- 通知图标 -->
+            <Notice />
 
-          <!-- 头像图标 -->
-          <Avatar class="ml-4" />
+            <!-- 头像图标 -->
+            <Avatar class="ml-4" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
