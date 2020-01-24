@@ -92,7 +92,11 @@
             style="width: 320px;"
             v-show="$route.path === '/profile'"
           >
-            123456
+            <vs-avatar
+              size="80px"
+              :src="info.avatar_url"
+            />
+            <h3>{{ info.nickname }}</h3>
           </div>
         </div>
       </div>
@@ -128,6 +132,7 @@ export default {
 
   computed: {
     ...mapState(['sidebarCollapse', 'navbarType']),
+    ...mapState('admin', ['info']),
   },
 }
 </script>

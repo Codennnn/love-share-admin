@@ -63,3 +63,10 @@ export function replaceAvatar(data) {
     data,
   })
 }
+
+export function getSignLog() {
+  return request({
+    url: '/admin/sign_log',
+    method: 'get',
+  })
+}
