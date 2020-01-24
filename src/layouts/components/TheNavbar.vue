@@ -96,17 +96,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(['sidebarCollapse']),
-    navbarType() {
-      const { navbarType } = this.$store.state
-      if (navbarType === 'fixed') {
-        return 'nav-fixed'
-      }
-      if (navbarType === 'scroll') {
-        return 'nav-scroll'
-      }
-      return 'nav-hidden'
-    },
+    ...mapState(['sidebarCollapse', 'navbarType']),
   },
 
   mounted() {

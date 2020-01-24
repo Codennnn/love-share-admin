@@ -294,6 +294,14 @@ export const asyncRoutes = [
           ],
         },
       },
+      {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('@/views/profile/Profile.vue'),
+        meta: {
+          title: '个人中心',
+        },
+      },
     ],
   },
 

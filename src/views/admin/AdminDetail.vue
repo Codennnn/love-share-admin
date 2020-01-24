@@ -106,10 +106,6 @@ export default {
   }
   td:nth-child(1) {
     font-weight: 600;
-    // color: #626262;
-  }
-  td:nth-child(2) {
-    // color: rgb(150, 150, 150);
   }
 }
 </style>

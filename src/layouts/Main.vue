@@ -23,68 +23,76 @@
         <!-- 头部 -->
         <TheNavbar />
 
-        <div class="router-view">
-          <div
-            class="router-content"
-            :class="{'router-content--hidden': navbarType === 'hidden'}"
-          >
-            <!-- 面包屑导航 -->
-            <transition
-              enter-active-class="animated zoomIn faster"
-              leave-active-class="animated zoomOut faster"
-              mode="out-in"
+        <div class="flex">
+          <div class="router-view flex-1">
+            <div
+              class="router-content flex-1"
+              :class="{'router-content--hidden': navbarType === 'hidden'}"
             >
-              <div
-                class="flex items-center mt-1 ml-1 mb-3"
-                v-if="$route.meta && $route.meta.breadcrumb"
+              <!-- 面包屑导航 -->
+              <transition
+                enter-active-class="animated zoomIn faster"
+                leave-active-class="animated zoomOut faster"
+                mode="out-in"
               >
-                <i
-                  title="返回"
-                  class="iconfont icon-back text-semi cursor-pointer"
-                  style="font-size: 25px;"
-                  @click="$router.go(-1)"
-                ></i>
-                <vs-breadcrumb>
-                  <template v-for="(br, i) in $route.meta.breadcrumb">
-                    <li
-                      class="text-sm"
-                      :class="{'pointer-events-none': br.active}"
-                      :key="i"
-                    >
-                      <router-link
-                        class="text-semi"
-                        :class="{'primary': br.active}"
-                        :to="String(br.to)"
-                      >{{ br.title }}</router-link>
-                      <span
-                        v-if="!br.active"
-                        class="vs-breadcrum--separator"
+                <div
+                  class="flex items-center mt-1 ml-1 mb-3"
+                  v-if="$route.meta && $route.meta.breadcrumb"
+                >
+                  <i
+                    title="返回"
+                    class="iconfont icon-back text-semi cursor-pointer"
+                    style="font-size: 25px;"
+                    @click="$router.go(-1)"
+                  ></i>
+                  <vs-breadcrumb>
+                    <template v-for="(br, i) in $route.meta.breadcrumb">
+                      <li
+                        class="text-sm"
+                        :class="{'pointer-events-none': br.active}"
+                        :key="i"
                       >
-                        <i class="el-icon-arrow-right text-semi"></i>
-                      </span>
-                    </li>
-                  </template>
-                </vs-breadcrumb>
-              </div>
-            </transition>
+                        <router-link
+                          class="text-semi"
+                          :class="{'primary': br.active}"
+                          :to="String(br.to)"
+                        >{{ br.title }}</router-link>
+                        <span
+                          v-if="!br.active"
+                          class="vs-breadcrum--separator"
+                        >
+                          <i class="el-icon-arrow-right text-semi"></i>
+                        </span>
+                      </li>
+                    </template>
+                  </vs-breadcrumb>
+                </div>
+              </transition>
 
-            <!-- 主区域 -->
-            <transition
-              enter-active-class="animated fadeIn faster"
-              leave-active-class="animated fadeOut faster"
-              mode="out-in"
-            >
-              <keep-alive
-                :include="alivePages"
-                :max="5"
+              <!-- 主区域 -->
+              <transition
+                enter-active-class="animated fadeIn faster"
+                leave-active-class="animated fadeOut faster"
+                mode="out-in"
               >
-                <router-view />
-              </keep-alive>
-            </transition>
-          </div>
+                <keep-alive
+                  :include="alivePages"
+                  :max="5"
+                >
+                  <router-view />
+                </keep-alive>
+              </transition>
+            </div>
 
-          <!-- 页脚 -->
-          <TheFooter class="router-footer" />
+            <!-- 页脚 -->
+            <TheFooter class="router-footer" />
+          </div>
+          <div
+            class=" p-6 bg-gray"
+            style="width: 320px;"
+          >
+            123456
+          </div>
         </div>
       </div>
     </div>
