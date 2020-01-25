@@ -100,8 +100,8 @@ import _debounce from 'lodash/debounce' // 引入防抖函数
 import { mapState } from 'vuex'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import {
-  ActivityIcon, UsersIcon, ShoppingBagIcon, MapIcon,
-  PackageIcon, MonitorIcon, AtSignIcon, ClipboardIcon, ListIcon,
+  ActivityIcon, UsersIcon, ShoppingBagIcon, MapIcon, PackageIcon,
+  MonitorIcon, AtSignIcon, ClipboardIcon, ListIcon,
 } from 'vue-feather-icons'
 import SidebarFooter from './the-sidebar/SidebarFooter.vue'
 

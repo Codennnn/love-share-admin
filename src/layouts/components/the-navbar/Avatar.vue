@@ -16,16 +16,19 @@
       </div>
       <vs-dropdown-menu>
         <vs-dropdown-item
-          class="w-32 flex justify-center items-center"
+          class="w-32"
           v-for="(pop, i) in popItems"
           :key="i"
           @click="routeTo(pop.route, pop.text)"
         >
-          <i
-            class="inner-icon text-base font-medium"
-            :class="pop.icon"
-          ></i>
-          <span class="inner-text ml-3">{{ pop.text }}</span>
+          <div class="flex justify-center items-center">
+            <component
+              size="1x"
+              stroke-width="1.8px"
+              :is="pop.icon"
+            ></component>
+            <span class="inner-text ml-2 text-sm">{{ pop.text }}</span>
+          </div>
         </vs-dropdown-item>
       </vs-dropdown-menu>
     </vs-dropdown>
@@ -35,14 +38,22 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import {
+  UserIcon, MessageSquareIcon, LockIcon, LogOutIcon,
+} from 'vue-feather-icons'
+
 const popItems = [
-  { icon: 'el-icon-user', text: '个人中心', route: '/profile' },
-  { icon: 'el-icon-message', text: '我的消息', route: '/my-club' },
-  { icon: 'el-icon-lock', text: '锁定后台' },
-  { icon: 'el-icon-switch-button', text: '退出登录' },
+  { icon: 'UserIcon', text: '个人中心', route: '/profile' },
+  { icon: 'MessageSquareIcon', text: '我的消息', route: '/my-club' },
+  { icon: 'LockIcon', text: '锁定后台' },
+  { icon: 'LogOutIcon', text: '退出登录' },
 ]
 export default {
   name: 'Avatar',
+  components: {
+    UserIcon, MessageSquareIcon, LockIcon, LogOutIcon,
+  },
+
   data: () => ({
     popItems,
   }),

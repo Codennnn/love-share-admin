@@ -1,7 +1,11 @@
 <template>
   <vs-dropdown vs-custom-content>
     <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
-      <i class="nav-icon el-icon-bell"></i>
+      <BellIcon
+        class="nav-icon"
+        size="1x"
+        stroke-width="1.8px"
+      ></BellIcon>
     </el-badge>
     <vs-dropdown-menu
       id="div-with-loading"
@@ -103,8 +107,10 @@
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { mapState, mapGetters } from 'vuex'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+
+import { BellIcon } from 'vue-feather-icons'
 
 import { setNoticeRead, setAllNoticesRead } from '@/request/api/notice'
 import { timeDiff } from '@/utils/util'
@@ -118,7 +124,7 @@ const noticeType = {
 
 export default {
   name: 'Notice',
-  components: { VuePerfectScrollbar },
+  components: { VuePerfectScrollbar, BellIcon },
 
   data: () => ({
     timeDiff,

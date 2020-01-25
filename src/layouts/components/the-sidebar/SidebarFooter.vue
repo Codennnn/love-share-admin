@@ -19,14 +19,20 @@
           class="absolute w-full flex items-center"
           style="top: 14px;"
         >
-          <i class="el-icon-files mr-3 text-xl"></i>
+          <LayersIcon
+            size="1.2x"
+            class="mx-3"
+          ></LayersIcon>
           <div>我的任务</div>
           <div
             v-show="isTaskOpen"
             class="ml-auto mr-8 w-8 h-8 rounded-full flex items-center justify-center bg-gray"
             @click.stop="isTaskOpen = false"
           >
-            <i class="el-icon-arrow-down mt-1 text-xl cursor-pointer"></i>
+            <ChevronDownIcon
+              stroke-width="1.6px"
+              class="mt-1 cursor-pointer"
+            ></ChevronDownIcon>
           </div>
         </div>
         <div
@@ -66,11 +72,11 @@
           style="bottom: 10px; right: 10px;"
         >
           <div
-            class="text-gray"
+            class="flex items-center text-gray"
             @click.stop="viewAll()"
           >
-            <span class="text-sm">查看全部</span>
-            <i class="el-icon-arrow-right text-sm"></i>
+            <span class="mr-1 text-sm">查看全部</span>
+            <ChevronRightIcon size="1x"></ChevronRightIcon>
           </div>
         </div>
       </div>
@@ -91,12 +97,16 @@
 
 <script>
 import { mapState } from 'vuex'
-import { MessageSquareIcon } from 'vue-feather-icons'
+import {
+  MessageSquareIcon, LayersIcon, ChevronRightIcon, ChevronDownIcon,
+} from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
   name: 'SidebarFooter',
-  components: { VuePerfectScrollbar, MessageSquareIcon },
+  components: {
+    VuePerfectScrollbar, MessageSquareIcon, LayersIcon, ChevronRightIcon, ChevronDownIcon,
+  },
 
   props: {
     sidebarCollapse: Boolean,

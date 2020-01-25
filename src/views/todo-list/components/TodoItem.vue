@@ -16,7 +16,10 @@
           class="h-full flex items-center justify-center radius cursor-pointer"
           style="width: 50px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
         >
-          <i class="el-icon-search primary text-xl"></i>
+          <SearchIcon
+            size="1.4x"
+            class="primary"
+          ></SearchIcon>
         </div>
         <vs-input
           class="search-input sticky top-0 z-40 w-full"
@@ -36,7 +39,7 @@
         leave-active-class="animated fadeOutDown faster"
       >
         <li
-          class="todo-item p-3 w-full cursor-pointer"
+          class="todo-item p-3 w-full"
           v-for="todo in filterItems"
           :key="todo._id"
           @click="$emit('editTodo', todo)"
@@ -76,21 +79,27 @@
               vs-justify="flex-end"
               vs-w="2"
             >
-              <div v-if="!todo.is_trashed">
-                <i
-                  class="todo-mark__icon el-icon-collection-tag text-semi"
+              <div
+                v-if="!todo.is_trashed"
+                class="flex items-center"
+              >
+                <BookmarkIcon
+                  size="1.2x"
+                  class="todo-mark__icon mr-2"
                   :class="{success: todo.is_important}"
                   @click.stop="toggleType(todo._id, 'is_important', !todo.is_important)"
-                ></i>
-                <i
-                  class="todo-mark__icon el-icon-star-off text-semi"
+                />
+                <StarIcon
+                  size="1.2x"
+                  class="todo-mark__icon mr-2"
                   :class="{warning: todo.is_starred}"
                   @click.stop="toggleType(todo._id, 'is_starred', !todo.is_starred)"
-                ></i>
-                <i
-                  class="todo-mark__icon el-icon-delete text-semi"
+                ></StarIcon>
+                <Trash2Icon
+                  size="1.2x"
+                  class="todo-mark__icon"
                   @click.stop="toggleType(todo._id, 'is_trashed', !todo.is_trashed)"
-                ></i>
+                ></Trash2Icon>
               </div>
               <div v-else>
                 <i
@@ -119,6 +128,9 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import {
+  SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
+} from 'vue-feather-icons'
 
 const tags = {
   1: {
@@ -140,7 +152,9 @@ const tags = {
 }
 export default {
   name: 'TodoItem',
-  components: { VuePerfectScrollbar },
+  components: {
+    VuePerfectScrollbar, SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
+  },
 
   data() {
     return {
@@ -202,8 +216,6 @@ export default {
   }
   // 标记的图标样式
   .todo-mark__icon {
-    padding: 6px;
-    font-size: 18px;
     transition: all 0.2s;
     cursor: pointer;
   }

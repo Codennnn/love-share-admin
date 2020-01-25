@@ -27,20 +27,28 @@
         vs-justify="flex-end"
         vs-w="3"
       >
-        <div class="todo-icon__group">
-          <i
-            class="icon el-icon-collection-tag cursor-pointer"
+        <div class="todo-icon__group flex items-center">
+          <BookmarkIcon
+            size="1.4x"
+            stroke-width="1.5px"
+            class="mr-2 text-gray cursor-pointer"
             :class="{success: task.is_important}"
             @click="task.is_important = !task.is_important"
-          ></i>
-          <i
-            class="icon el-icon-star-off cursor-pointer"
+          />
+          <StarIcon
+            size="1.4x"
+            stroke-width="1.5px"
+            class="mr-2 text-gray cursor-pointer"
             :class="{warning: task.is_starred}"
             @click="task.is_starred = !task.is_starred"
-          ></i>
+          />
           <!-- 选择任务的标签 -->
           <vs-dropdown>
-            <i class="icon el-icon-price-tag"></i>
+            <TagIcon
+              size="1.4x"
+              stroke-width="1.5px"
+              class="text-gray"
+            />
             <vs-dropdown-menu>
               <vs-dropdown-item
                 v-for="(tag, i) in tags"
@@ -99,6 +107,7 @@
 
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
+import { BookmarkIcon, StarIcon, TagIcon } from 'vue-feather-icons'
 
 const tags = {
   1: {
@@ -124,6 +133,7 @@ const tags = {
 }
 export default {
   name: 'TodoPopup',
+  components: { BookmarkIcon, StarIcon, TagIcon },
   props: {
     isPopupActive: {
       type: Boolean,

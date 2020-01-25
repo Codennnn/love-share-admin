@@ -14,7 +14,10 @@
         :class="{'primary': !currentSelected.type}"
         @click="setActive()"
       >
-        <i class="el-icon-files text-xl"></i>
+        <LayersIcon
+          class="mr-2"
+          stroke-width="1.5px"
+        />
         <span class="label-text">所有任务</span>
       </div>
     </div>
@@ -31,11 +34,12 @@
         :class="{'primary': currentSelected.value === item.value}"
         @click="setActive('filter', item.value)"
       >
-        <i
-          class="text-xl"
-          :class="item.icon"
-        ></i>
-        <span class="ml-2">{{ item.text }}</span>
+        <component
+          class="mr-2"
+          stroke-width="1.5px"
+          :is="item.icon"
+        ></component>
+        <span>{{ item.text }}</span>
       </div>
     </div>
 
@@ -63,24 +67,28 @@
 </template>
 
 <script>
+import {
+  LayersIcon, BookmarkIcon, StarIcon, CheckSquareIcon, Trash2Icon,
+} from 'vue-feather-icons'
+
 const labelItems = [
   {
-    icon: 'el-icon-collection-tag',
+    icon: 'BookmarkIcon',
     text: '重要事项',
     value: 'is_important',
   },
   {
-    icon: 'el-icon-star-off',
+    icon: 'StarIcon',
     text: '星号标记',
     value: 'is_starred',
   },
   {
-    icon: 'el-icon-finished',
+    icon: 'CheckSquareIcon',
     text: '已完成',
     value: 'is_done',
   },
   {
-    icon: 'el-icon-delete',
+    icon: 'Trash2Icon',
     text: '丢弃的',
     value: 'is_trashed',
   },
@@ -94,6 +102,10 @@ const labelMarks = [
 
 export default {
   name: 'TodoBar',
+  components: {
+    LayersIcon, BookmarkIcon, StarIcon, CheckSquareIcon, Trash2Icon,
+  },
+
   data: () => ({
     labelItems,
     labelMarks,

@@ -22,7 +22,7 @@
               effect="light"
             >
               <component
-                class="nav-icon mr-3"
+                class="nav-icon mr-4"
                 size="1x"
                 stroke-width="1.8px"
                 :is="item.icon"
@@ -39,13 +39,9 @@
               :content="showSearchInput ? '关闭搜索' : '全站搜索'"
               effect="light"
             >
-              <!-- <i
-                class="nav-icon ml-3"
-                :class="[showSearchInput ? 'el-icon-close' : 'el-icon-search']"
-                @click="showSearchInput = !showSearchInput"
-              ></i> -->
               <component
-                class="nav-icon ml-3"
+                class="nav-icon"
+                size="1x"
                 :is="showSearchInput ? 'XIcon' : 'SearchIcon'"
                 @click="showSearchInput = !showSearchInput"
               ></component>
@@ -66,7 +62,8 @@
               effect="light"
             >
               <component
-                class="nav-icon mx-3"
+                class="nav-icon mx-4"
+                size="1x"
                 :is="isFullScreen ? 'MinimizeIcon' : 'MaximizeIcon'"
                 @click="screenfull"
               ></component>
@@ -76,7 +73,7 @@
             <Notice />
 
             <!-- 头像图标 -->
-            <Avatar class="ml-4" />
+            <Avatar class="ml-5" />
           </div>
         </div>
       </div>

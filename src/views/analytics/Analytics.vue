@@ -18,10 +18,13 @@
               src="@/assets/images/pages/dashboard/decore_right.png"
             >
             <div
-              class="w-20 h-20 flex justify-center items-center rounded-full"
-              style="background: rgba(var(--vs-primary), 0.5);"
+              class="flex justify-center items-center rounded-full"
+              style="width: 4.5rem; height: 4.5rem; background: rgba(var(--vs-primary), 0.5);"
             >
-              <i class="el-icon-trophy-1 text-3xl"></i>
+              <AwardIcon
+                stroke-width="1.8px"
+                size="1.8x"
+              ></AwardIcon>
             </div>
             <p class="my-4 text-2xl font-medium">欢迎你，{{ nickname }}</p>
             <p
@@ -142,8 +145,9 @@
 </template>
 
 <script>
-import VueApexCharts from 'vue-apexcharts'
 import { mapState } from 'vuex'
+import { AwardIcon } from 'vue-feather-icons'
+import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
 
@@ -152,6 +156,7 @@ export default {
   components: {
     VueApexCharts,
     AreaChart,
+    AwardIcon,
   },
 
   data() {
