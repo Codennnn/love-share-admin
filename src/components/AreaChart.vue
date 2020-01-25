@@ -5,10 +5,7 @@
         class="flex items-center justify-center w-12 h-12 rounded-full"
         :style="{ background: `rgba(var(--vs-${color}), .15)` }"
       >
-        <i
-          class="iconfont icon"
-          :class="[icon, color]"
-        ></i>
+        <slot name="icon"></slot>
       </div>
       <div>
         <div class="mt-3 text-primary text-2xl font-bold">{{ statistic }}</div>

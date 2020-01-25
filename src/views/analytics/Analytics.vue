@@ -42,11 +42,16 @@
           <area-chart
             statistic="2.5K"
             label="用户数"
-            icon="el-icon-user"
+            icon="UserIcon"
             color="primary"
             type="area"
             :chartData="subscribersGained"
-          ></area-chart>
+          >
+            <UserIcon
+              slot="icon"
+              class="primary"
+            />
+          </area-chart>
         </div>
       </div>
       <!-- 卡片 3：交易量统计卡片 -->
@@ -59,7 +64,12 @@
             color="warning"
             type="area"
             :chartData="ordersRecevied"
-          ></area-chart>
+          >
+            <UserIcon
+              slot="icon"
+              class="warning"
+            />
+          </area-chart>
         </div>
       </div>
     </div>
@@ -146,7 +156,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { AwardIcon } from 'vue-feather-icons'
+import { AwardIcon, UserIcon } from 'vue-feather-icons'
 import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
@@ -157,6 +167,7 @@ export default {
     VueApexCharts,
     AreaChart,
     AwardIcon,
+    UserIcon,
   },
 
   data() {
