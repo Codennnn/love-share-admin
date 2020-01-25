@@ -46,6 +46,19 @@
   border-radius: 0.8rem;
 }
 
+.flex-row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 img {
   user-select: none;
   -webkit-user-drag: none;

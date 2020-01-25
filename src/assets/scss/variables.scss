@@ -6,6 +6,7 @@ $dark: #1E1E1E;
 $gray: #718096;
 
 // Page
+$content-area-min-width: 900px;
 $router-view-padding: 2rem;
 
 // Shadow
@@ -38,3 +39,13 @@ $footer-height: 65px;
 $text-gray-500: #a0aec0;
 $text-gray-600: #718096;
 $text-gray-700: #4a5569;
+
+@mixin textOverflow($width, $line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  max-width: $width;
+}
