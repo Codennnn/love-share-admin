@@ -5,7 +5,7 @@
   >
     <div class="w-full mb-5 flex justify-between items-center text-semi">
       <span>个人中心</span>
-      <vs-dropdown>
+      <vs-dropdown vs-trigger-click>
         <MoreVerticalIcon size="1.2x"></MoreVerticalIcon>
         <vs-dropdown-menu class="w-24">
           <vs-dropdown-item class="text-sm text-center">
@@ -35,11 +35,8 @@
         ></i>
       </div>
     </div>
-    <h3 class="my-2 text-xl text-primary">{{ info.nickname }}</h3>
-
-    <div>
-      <h4>登录信息</h4>
-    </div>
+    <h3 class="mt-1 text-xl text-primary">{{ info.nickname }}</h3>
+    <h4 class="text-semi text-xs">{{ info.email }}</h4>
   </div>
 </template>
 

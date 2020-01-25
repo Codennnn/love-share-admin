@@ -24,7 +24,7 @@
           <div class="flex justify-center items-center">
             <component
               size="1x"
-              stroke-width="1.8px"
+              stroke-width="1.5px"
               :is="pop.icon"
             ></component>
             <span class="inner-text ml-2 text-sm">{{ pop.text }}</span>

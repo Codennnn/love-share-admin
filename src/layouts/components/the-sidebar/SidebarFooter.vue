@@ -88,7 +88,7 @@
          background: rgba(var(--vs-primary), 0.1);"
     >
       <MessageSquareIcon
-        stroke-width="1.6px"
+        size="1.3x"
         class="primary"
       ></MessageSquareIcon>
     </div>

@@ -37,7 +37,7 @@
         unique-opened
         class="main"
         :default-active="$route.path"
-        :class="{ 'side-bar-menu': !sidebarCollapse }"
+        :class="{'side-bar-menu': !sidebarCollapse}"
         :collapse="sidebarCollapse"
       >
         <!-- 菜单主内容 -->
@@ -75,13 +75,15 @@
               :key="index"
               :index="menuItem.children[0].path"
             >
-              <component
-                class="menu-icon"
-                size="1x"
-                stroke-width="1.8px"
-                :is="menuItem.children[0].meta.icon"
-              ></component>
-              <span slot="title">{{ menuItem.children[0].meta.title }}</span>
+              <div class="flex items-center">
+                <component
+                  class="menu-icon"
+                  size="1x"
+                  stroke-width="1.8px"
+                  :is="menuItem.children[0].meta.icon"
+                ></component>
+                <span slot="title">{{ menuItem.children[0].meta.title }}</span>
+              </div>
             </el-menu-item>
           </template>
         </template>
@@ -260,6 +262,8 @@ export default {
 .single-menu {
   line-height: 40px;
   height: 40px;
+  display: flex;
+  align-items: center;
   &:hover {
     border-radius: 5px;
   }
@@ -276,6 +280,11 @@ export default {
   .menu-icon {
     color: inherit;
   }
+}
+
+.el-submenu::v-deep .el-submenu__title {
+  display: flex;
+  align-items: center;
 }
 </style>
 
