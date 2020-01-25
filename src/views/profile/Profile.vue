@@ -1,5 +1,26 @@
 <template>
   <div>
+    <div class="w-1/2">
+      <div class="flex justify-between items-center">
+        <div class="text-primary text-lg font-bold">任务列表</div>
+        <div
+          class="w-10 h-10 flex justify-center items-center primary radius cursor-pointer"
+          style="background: rgba(var(--vs-primary), 0.1);"
+        >
+          <i class="el-icon-plus"></i>
+        </div>
+      </div>
+      <ul>
+        <li
+          v-for="(it, i) in todoList"
+          :key="i"
+        >
+          <div>{{ it.title }}</div>
+          <p></p>
+        </li>
+      </ul>
+    </div>
+
     <ul>
       <li
         class="text-gray text-sm"
@@ -10,7 +31,7 @@
         <div v-else>未记录位置</div>
         <div>
           <span>登录设备</span>
-          <span>{{ it.device }}</span>
+          <span class="text-xs">{{ it.device }}</span>
         </div>
         <div>
           <span>时间</span>
@@ -22,6 +43,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { getSignLog } from '@/request/api/admin'
 
 export default {
@@ -30,6 +52,7 @@ export default {
   }),
 
   computed: {
+    ...mapState('todo', ['todoList']),
   },
 
   created() {

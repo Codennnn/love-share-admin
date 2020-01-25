@@ -183,23 +183,11 @@ export default {
 }
 
 .todo-item__title {
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  @include textOverflow($width: 200px, $line: 1);
 }
 
 .content-overflow {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  @include textOverflow($width: 500px, $line: 2);
 }
 
 .flip-list-move {

@@ -118,7 +118,6 @@ export default {
     }
   },
 
-
   methods: {
     // 网页全屏
     screenfull() {
@@ -163,7 +162,7 @@ export default {
 
 .nav-wrapper {
   width: calc(100% - #{$side-bar-width});
-  min-width: 900px;
+  min-width: $content-area-min-width;
   padding: 1.2rem $router-view-padding;
   box-sizing: border-box;
   transition: $side-bar-collapse-transition;

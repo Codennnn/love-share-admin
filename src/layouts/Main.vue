@@ -87,17 +87,8 @@
             <!-- 页脚 -->
             <TheFooter class="router-footer" />
           </div>
-          <div
-            class=" p-6 bg-gray"
-            style="width: 320px;"
-            v-show="$route.path === '/profile'"
-          >
-            <vs-avatar
-              size="80px"
-              :src="info.avatar_url"
-            />
-            <h3>{{ info.nickname }}</h3>
-          </div>
+
+          <TheProfileBar v-show="$route.path === '/profile'" />
         </div>
       </div>
     </div>
@@ -115,6 +106,7 @@ import TheSidebar from './components/TheSidebar.vue'
 import TheNavbar from './components/TheNavbar.vue'
 import TheFooter from './components/TheFooter.vue'
 import TheCustomizer from './components/TheCustomizer.vue'
+import TheProfileBar from './TheProfileBar.vue'
 
 export default {
   name: 'Main',
@@ -123,6 +115,7 @@ export default {
     TheNavbar,
     TheFooter,
     TheCustomizer,
+    TheProfileBar,
     BackToTop,
   },
 
@@ -132,7 +125,6 @@ export default {
 
   computed: {
     ...mapState(['sidebarCollapse', 'navbarType']),
-    ...mapState('admin', ['info']),
   },
 }
 </script>
@@ -161,7 +153,7 @@ export default {
 
 #content-area {
   min-height: 100%;
-  min-width: 900px;
+  min-width: $content-area-min-width;
   margin-left: $side-bar-width;
   transition: margin-left 0.5s;
   &.content-area-full {
