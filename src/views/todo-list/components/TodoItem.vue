@@ -31,6 +31,7 @@
       <transition-group
         tag="ul"
         name="flip-list"
+        class="pt-4"
         enter-active-class="animated fadeInUp faster"
         leave-active-class="animated fadeOutDown faster"
       >

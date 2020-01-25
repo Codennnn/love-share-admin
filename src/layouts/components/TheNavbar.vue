@@ -10,7 +10,7 @@
       :class="[{ collapse: sidebarCollapse }, navbarType]"
     >
       <div class="nav-bar rounded-lg">
-        <div>
+        <div class="flex items-center">
           <router-link
             v-for="(item, index) in navIcons"
             :key="index"
@@ -21,10 +21,12 @@
               :content="item.tip"
               effect="light"
             >
-              <i
+              <component
                 class="nav-icon mr-3"
-                :class="item.icon"
-              ></i>
+                size="1x"
+                stroke-width="1.8px"
+                :is="item.icon"
+              ></component>
             </el-tooltip>
           </router-link>
         </div>
@@ -37,11 +39,16 @@
               :content="showSearchInput ? '关闭搜索' : '全站搜索'"
               effect="light"
             >
-              <i
+              <!-- <i
                 class="nav-icon ml-3"
                 :class="[showSearchInput ? 'el-icon-close' : 'el-icon-search']"
                 @click="showSearchInput = !showSearchInput"
-              ></i>
+              ></i> -->
+              <component
+                class="nav-icon ml-3"
+                :is="showSearchInput ? 'XIcon' : 'SearchIcon'"
+                @click="showSearchInput = !showSearchInput"
+              ></component>
             </el-tooltip>
             <vs-input
               class="nav-search overflow-hidden"
@@ -58,11 +65,11 @@
               content="切换全屏"
               effect="light"
             >
-              <i
+              <component
                 class="nav-icon mx-3"
-                :class="[isFullScreen ? 'el-icon-crop' : 'el-icon-full-screen']"
+                :is="isFullScreen ? 'MinimizeIcon' : 'MaximizeIcon'"
                 @click="screenfull"
-              ></i>
+              ></component>
             </el-tooltip>
 
             <!-- 通知图标 -->
@@ -81,19 +88,35 @@
 import screenfull from 'screenfull'
 import { mapState } from 'vuex'
 
+import {
+  PackageIcon, UsersIcon, ShoppingBagIcon, ClipboardIcon,
+  SearchIcon, XIcon, MaximizeIcon, MinimizeIcon,
+} from 'vue-feather-icons'
+
 import Notice from './the-navbar/Notice.vue'
 import Avatar from './the-navbar/Avatar.vue'
 
 const navIcons = [
-  { tip: '商品列表', icon: 'el-icon-box', route: '/goods-list' },
-  { tip: '订单列表', icon: 'el-icon-files', route: '/order-list' },
-  { tip: '用户列表', icon: 'el-icon-user', route: '/user-list' },
-  { tip: '求购列表', icon: 'el-icon-sell', route: '/buying-list' },
+  { tip: '商品列表', icon: 'PackageIcon', route: '/goods-list' },
+  { tip: '订单列表', icon: 'ClipboardIcon', route: '/order-list' },
+  { tip: '用户列表', icon: 'UsersIcon', route: '/user-list' },
+  { tip: '求购列表', icon: 'ShoppingBagIcon', route: '/buying-list' },
 ]
 
 export default {
   name: 'TheNavBar',
-  components: { Notice, Avatar },
+  components: {
+    Notice,
+    Avatar,
+    PackageIcon,
+    UsersIcon,
+    ShoppingBagIcon,
+    ClipboardIcon,
+    SearchIcon,
+    XIcon,
+    MaximizeIcon,
+    MinimizeIcon,
+  },
 
   data: () => ({
     navIcons,

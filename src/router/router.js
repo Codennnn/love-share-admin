@@ -54,7 +54,7 @@ export const asyncRoutes = [
         meta: { title: '测试' },
       },
     ],
-    meta: { title: '数据分析', icon: 'el-icon-data-analysis' },
+    meta: { title: '数据分析', icon: 'ActivityIcon' },
   },
 
   /*
@@ -77,7 +77,7 @@ export const asyncRoutes = [
         meta: { title: '商品分类', roles: ['super_admin'] },
       },
     ],
-    meta: { title: '商品管理', icon: 'el-icon-box' },
+    meta: { title: '商品管理', icon: 'PackageIcon' },
   },
 
   /*
@@ -94,7 +94,7 @@ export const asyncRoutes = [
         meta: { title: '订单列表' },
       },
     ],
-    meta: { title: '订单管理', icon: 'el-icon-files' },
+    meta: { title: '订单管理', icon: 'ClipboardIcon' },
   },
 
   /*
@@ -111,7 +111,7 @@ export const asyncRoutes = [
         meta: { title: '用户列表' },
       },
     ],
-    meta: { title: '用户管理', icon: 'el-icon-user' },
+    meta: { title: '用户管理', icon: 'UsersIcon' },
   },
 
   /*
@@ -128,11 +128,11 @@ export const asyncRoutes = [
         meta: { title: '求购列表' },
       },
     ],
-    meta: { title: '求购管理', icon: 'el-icon-sell' },
+    meta: { title: '求购管理', icon: 'ShoppingBagIcon' },
   },
 
   /*
-   * 用户管理
+   * 留言管理
    */
   {
     path: '',
@@ -145,7 +145,7 @@ export const asyncRoutes = [
         meta: { title: '用户列表' },
       },
     ],
-    meta: { title: '留言管理', icon: 'el-icon-chat-line-square' },
+    meta: { title: '留言管理', icon: 'AtSignIcon' },
   },
 
   /*
@@ -168,7 +168,7 @@ export const asyncRoutes = [
         meta: { title: '常见问题' },
       },
     ],
-    meta: { title: '资讯管理', icon: 'el-icon-thumb' },
+    meta: { title: '资讯管理', icon: 'MapIcon' },
   },
 
   /*
@@ -191,9 +191,12 @@ export const asyncRoutes = [
         meta: { title: '创建管理员' },
       },
     ],
-    meta: { title: '网站管理', icon: 'el-icon-monitor' },
+    meta: { title: '网站管理', icon: 'MonitorIcon' },
   },
 
+  /*
+   * 任务列表
+   */
   {
     path: '',
     single: true,
@@ -203,10 +206,14 @@ export const asyncRoutes = [
         path: '/todo-list',
         name: 'TodoList',
         component: TodoList,
-        meta: { title: '任务列表', icon: 'el-icon-collection' },
+        meta: { title: '任务列表', icon: 'ListIcon' },
       },
     ],
   },
+
+  /*
+   * 聊天
+   */
   {
     path: '',
     single: true,
@@ -216,7 +223,7 @@ export const asyncRoutes = [
         path: '/chat',
         name: 'Chat',
         component: () => import('@/views/chat/Chat.vue'),
-        meta: { title: '在线沟通', icon: 'el-icon-chat-round' },
+        meta: { title: '在线沟通', icon: 'MapIcon' },
       },
     ],
   },

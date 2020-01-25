@@ -5,7 +5,17 @@
   >
     <div class="w-full mb-5 flex justify-between items-center text-semi">
       <span>个人中心</span>
-      <i class="el-icon-setting text-lg cursor-pointer"></i>
+      <vs-dropdown>
+        <MoreVerticalIcon size="1.2x"></MoreVerticalIcon>
+        <vs-dropdown-menu class="w-24">
+          <vs-dropdown-item class="text-sm text-center">
+            编辑信息
+          </vs-dropdown-item>
+          <vs-dropdown-item class="text-sm text-center">
+            退出登录
+          </vs-dropdown-item>
+        </vs-dropdown-menu>
+      </vs-dropdown>
     </div>
 
     <div class="relative">
@@ -26,16 +36,21 @@
       </div>
     </div>
     <h3 class="my-2 text-xl text-primary">{{ info.nickname }}</h3>
+
+    <div>
+      <h4>登录信息</h4>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { MoreVerticalIcon } from 'vue-feather-icons'
 
 export default {
   name: 'TheProfileBar',
+  components: { MoreVerticalIcon },
   data: () => ({
-
   }),
 
   computed: {

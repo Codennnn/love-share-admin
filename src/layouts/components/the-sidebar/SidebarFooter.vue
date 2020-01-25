@@ -81,18 +81,22 @@
       style="height: 50px; width: 50px; margin-left: 0.4rem;
          background: rgba(var(--vs-primary), 0.1);"
     >
-      <i class="el-icon-chat-round text-xl primary"></i>
+      <MessageSquareIcon
+        stroke-width="1.6px"
+        class="primary"
+      ></MessageSquareIcon>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { MessageSquareIcon } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
   name: 'SidebarFooter',
-  components: { VuePerfectScrollbar },
+  components: { VuePerfectScrollbar, MessageSquareIcon },
 
   props: {
     sidebarCollapse: Boolean,

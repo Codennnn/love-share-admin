@@ -51,11 +51,15 @@
               :index="index.toString()"
             >
               <template slot="title">
-                <i
-                  class="menu-icon"
-                  :class="menuItem.meta.icon"
-                ></i>
-                <span slot="title">{{ menuItem.meta.title }}</span>
+                <div class="flex items-center">
+                  <component
+                    class="menu-icon"
+                    size="1x"
+                    stroke-width="1.8px"
+                    :is="menuItem.meta.icon"
+                  ></component>
+                  <span slot="title">{{ menuItem.meta.title }}</span>
+                </div>
               </template>
               <el-menu-item-group
                 v-for="(subItem, index, key) in menuItem.children"
@@ -67,14 +71,16 @@
             <!-- 单个菜单项 -->
             <el-menu-item
               v-else-if="menuItem.children && menuItem.single"
-              class="single-menu mt-3"
+              class="single-menu mt-3 flex items-center"
               :key="index"
               :index="menuItem.children[0].path"
             >
-              <i
+              <component
                 class="menu-icon"
-                :class="menuItem.children[0].meta.icon"
-              ></i>
+                size="1x"
+                stroke-width="1.8px"
+                :is="menuItem.children[0].meta.icon"
+              ></component>
               <span slot="title">{{ menuItem.children[0].meta.title }}</span>
             </el-menu-item>
           </template>
@@ -91,9 +97,14 @@
 
 <script>
 import _debounce from 'lodash/debounce' // 引入防抖函数
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { mapState } from 'vuex'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import {
+  ActivityIcon, UsersIcon, ShoppingBagIcon, MapIcon,
+  PackageIcon, MonitorIcon, AtSignIcon, ClipboardIcon, ListIcon,
+} from 'vue-feather-icons'
 import SidebarFooter from './the-sidebar/SidebarFooter.vue'
+
 
 const logoLight = require('@/assets/images/logo-light.png')
 const logoDark = require('@/assets/images/logo-dark.png')
@@ -102,7 +113,19 @@ const logoTextLight = require('@/assets/images/logo-text-light.png')
 
 export default {
   name: 'TheSidebar',
-  components: { SidebarFooter, VuePerfectScrollbar },
+  components: {
+    SidebarFooter,
+    VuePerfectScrollbar,
+    UsersIcon,
+    ActivityIcon,
+    ShoppingBagIcon,
+    MapIcon,
+    PackageIcon,
+    MonitorIcon,
+    AtSignIcon,
+    ClipboardIcon,
+    ListIcon,
+  },
 
   mounted() {
     window.onresize = _debounce(() => {
