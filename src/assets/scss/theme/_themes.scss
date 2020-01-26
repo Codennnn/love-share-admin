@@ -45,6 +45,7 @@ $themes: (
     /* Notice Color */
     notice-header-bg-color: #6165f7,
     notice-content-bg-color: #fff,
+    notice-hover-color: #f8f9fa,
 
     /* Border Color */
     border-color-primary: #ddd,
@@ -66,10 +67,6 @@ $themes: (
     gray: #718096,
 
     /* Text Color */
-    // text-color-semi: #aaa,
-    // text-color-light: #555,
-    // text-color-primary: #bbb,
-    // text-color-gray: #aaa,
     text-color-semi: #bfc0c6,
     text-color-light: #525465,
     text-color-primary: #f9f9fa,
@@ -80,9 +77,6 @@ $themes: (
     text-color-gray-700: #aaa,
 
     /* Background Color */
-    // bg-color-semi: #2c2c2c,
-    // bg-color-primary: #232323,
-    // bg-color-gray: #2c2c2c,
     bg-color-semi: #424556,
     bg-color-primary: #333644,
     bg-color-gray: #424556,
@@ -104,8 +98,9 @@ $themes: (
     sidebar-item-active-gradient: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), .7)) !important,
 
     /* Notice Color */
-    notice-header-bg-color: #555,
-    notice-content-bg-color: #666,
+    notice-header-bg-color: #424556,
+    notice-content-bg-color: #424556,
+    notice-hover-color: #424556,
 
     /* Border Color */
     border-color-primary: #444,

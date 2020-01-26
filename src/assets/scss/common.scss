@@ -107,18 +107,6 @@ img {
     border-color: themed("border-color-primary");
   }
 
-  .notice {
-
-    .notice-header,
-    .vs-dropdown--menu--after {
-      background: themed("notice-header-bg-color");
-    }
-
-    .notice-content {
-      background: themed("notice-content-bg-color");
-    }
-  }
-
   .vs-input {
     .vs-inputx {
       background: themed("input-bg-color");
@@ -129,8 +117,6 @@ img {
       color: themed("text-color-semi");
     }
   }
-
-
 
   .vs-divider {
     .vs-divider-border {
