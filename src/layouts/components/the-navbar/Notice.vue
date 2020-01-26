@@ -1,5 +1,8 @@
 <template>
-  <vs-dropdown vs-custom-content>
+  <vs-dropdown
+    vs-trigger-click
+    vs-custom-content
+  >
     <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
       <BellIcon
         size="1x"
@@ -36,8 +39,7 @@
           v-if="unreadAmount > 0"
         >
           <li
-            class="notice relative p-4 flex justify-between
-                    cursor-pointer hover:bg-gray-200"
+            class="notice relative p-4 flex justify-between cursor-pointer"
             style="transition: all 0.3s;"
             v-for="(nt, i) in unreadNotices"
             :key="i"
@@ -45,17 +47,15 @@
             <div class="flex items-start">
               <component
                 size="1.2x"
+                style="margin-top: 2px;"
                 :class="noticeType[nt.type].color"
                 :is="noticeType[nt.type].icon"
               ></component>
-              <div class="mx-2">
+              <div class="mx-2 flex-1">
                 <div>
-                  <span
-                    class="text-semi font-bold block"
-                    :class="[`text-${noticeType[nt.type].color}`]"
-                  >{{ nt.title }}</span>
+                  <div :class="[`${noticeType[nt.type].color}`]">{{ nt.title }}</div>
                   <div
-                    class="text-sm text-gray"
+                    class="notice-content text-sm text-gray"
                     v-html="nt.content"
                     :title="nt.content"
                   ></div>
@@ -65,14 +65,14 @@
             <small class="text-gray whitespace-no-wrap">{{ timeDiff(nt.created_at) }}</small>
             <i
               title="不再通知"
-              class="read el-icon-close-notification absolute bottom-0 mr-3 mb-1 text-lg
-              text-sm text-gray-500 hover:text-blue-500"
+              class="read el-icon-close-notification absolute bottom-0 mr-3 mb-1
+              text-sm text-gray"
               @click="setNoticeRead(nt._id)"
             ></i>
           </li>
         </ul>
         <div
-          class="h-full flex flex-col items-center justify-center"
+          class="h-full flex flex-col items-center justify-center bg-primary"
           v-else
         >
           <vs-icon
@@ -85,15 +85,15 @@
       </VuePerfectScrollbar>
       <div
         class="w-full py-2 px-4 flex justify-between items-center text-sm
-        bg-gray-100 hover:bg-gray-200"
+        bg-gray"
         style="transition: all 0.3s;"
       >
         <span
-          class="text-gray-600 cursor-pointer"
+          class="text-gray cursor-pointer"
           @click="setAllNoticesRead()"
         >全部已读</span>
         <span
-          class="text-primary cursor-pointer"
+          class="primary cursor-pointer"
           @click="$router.push('/message')"
         >查看全部通知</span>
       </div>
@@ -209,6 +209,12 @@ export default {
     .vs-dropdown--menu--after {
       background: themed("notice-header-bg-color");
     }
+    .notice {
+      background: themed("notice-content-bg-color");
+      &:hover {
+        background: themed("notice-hover-color");
+      }
+    }
   }
 }
 
@@ -236,7 +242,7 @@ export default {
     border-radius: 0.5rem;
   }
   .notice-content {
-    @include textOverflow($width: 90%, $line: 2);
+    @include textOverflow($width: 240px, $line: 2);
   }
 }
 </style>
