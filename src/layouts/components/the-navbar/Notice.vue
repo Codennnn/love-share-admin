@@ -2,22 +2,20 @@
   <vs-dropdown vs-custom-content>
     <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
       <BellIcon
-        class="nav-icon"
         size="1x"
-        stroke-width="1.8px"
-      ></BellIcon>
+        class="nav-icon"
+      />
     </el-badge>
     <vs-dropdown-menu
       id="div-with-loading"
-      class="notice"
+      class="menu-box"
     >
       <div
-        class="notice-header w-full table text-center text-white cursor-pointer"
+        class="notice-header w-full text-center text-white cursor-pointer"
         style="height: 65px;"
       >
         <div
-          class="table-cell"
-          style="vertical-align: middle;"
+          class="h-full flex justify-center items-center"
           @click="noticesRefresh()"
         >
           <div
@@ -34,40 +32,37 @@
         }"
       >
         <ul
+          class="vs-con-loading__container"
           v-if="unreadAmount > 0"
-          class="notice-content vs-con-loading__container"
         >
           <li
-            class="relative p-4 flex justify-between
+            class="notice relative p-4 flex justify-between
                     cursor-pointer hover:bg-gray-200"
             style="transition: all 0.3s;"
             v-for="(nt, i) in unreadNotices"
             :key="i"
           >
             <div class="flex items-start">
-              <vs-icon
-                size="small"
-                :icon="noticeType[nt.type].icon"
-                :color="noticeType[nt.type].color"
-              ></vs-icon>
+              <component
+                size="1.2x"
+                :class="noticeType[nt.type].color"
+                :is="noticeType[nt.type].icon"
+              ></component>
               <div class="mx-2">
                 <div>
                   <span
-                    class="font-medium block"
+                    class="text-semi font-bold block"
                     :class="[`text-${noticeType[nt.type].color}`]"
                   >{{ nt.title }}</span>
                   <div
-                    class="content text-sm text-gray"
+                    class="text-sm text-gray"
                     v-html="nt.content"
                     :title="nt.content"
                   ></div>
                 </div>
               </div>
             </div>
-            <small
-              class="whitespace-no-wrap"
-              style="color: #989898;"
-            >{{ timeDiff(nt.time) }}</small>
+            <small class="text-gray whitespace-no-wrap">{{ timeDiff(nt.created_at) }}</small>
             <i
               title="不再通知"
               class="read el-icon-close-notification absolute bottom-0 mr-3 mb-1 text-lg
@@ -77,7 +72,7 @@
           </li>
         </ul>
         <div
-          class="notice-content h-full flex flex-col items-center justify-center"
+          class="h-full flex flex-col items-center justify-center"
           v-else
         >
           <vs-icon
@@ -107,24 +102,34 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { mapState, mapGetters } from 'vuex'
 
-import { BellIcon } from 'vue-feather-icons'
+import {
+  BellIcon, MailIcon, MessageSquareIcon, CheckCircleIcon, HelpCircleIcon, AlertTriangleIcon,
+} from 'vue-feather-icons'
 
 import { setNoticeRead, setAllNoticesRead } from '@/request/api/notice'
 import { timeDiff } from '@/utils/util'
 
 const noticeType = {
-  1: { icon: 'chat_bubble_outline', color: 'primary' },
-  2: { icon: 'done_outline', color: 'success' },
-  3: { icon: 'help_outline', color: 'warning' },
-  4: { icon: 'error_outline', color: 'danger' },
+  1: { icon: 'MessageSquareIcon', color: 'primary' },
+  2: { icon: 'CheckCircleIcon', color: 'success' },
+  3: { icon: 'HelpCircleIcon', color: 'warning' },
+  4: { icon: 'AlertTriangleIcon', color: 'danger' },
 }
 
 export default {
   name: 'Notice',
-  components: { VuePerfectScrollbar, BellIcon },
+  components: {
+    VuePerfectScrollbar,
+    BellIcon,
+    MailIcon,
+    MessageSquareIcon,
+    CheckCircleIcon,
+    HelpCircleIcon,
+    AlertTriangleIcon,
+  },
 
   data: () => ({
     timeDiff,
@@ -132,11 +137,11 @@ export default {
   }),
 
   created() {
-    // this.getUnreadNotices()
+    this.getUnreadNotices()
   },
 
   mounted() {
-    this.sockets.subscribe(`receiveNotice${this.adminId}`, (notice) => {
+    this.sockets.subscribe(`receiveNotice${this.userId}`, (notice) => {
       this.$vs.notify({
         title: '消息提醒',
         text: '收到一条新的通知，请注意查看',
@@ -150,7 +155,6 @@ export default {
   computed: {
     ...mapState('notice', ['unreadNotices']),
     ...mapGetters('notice', ['unreadAmount']),
-    ...mapGetters('admin', 'adminId'),
   },
 
   methods: {
@@ -195,6 +199,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/scss/theme/_themeify.scss";
+
+@include themeify {
+  .vs-dropdown-menu.menu-box::v-deep {
+    .notice-header {
+      background: themed("notice-header-bg-color");
+    }
+    .vs-dropdown--menu--after {
+      background: themed("notice-header-bg-color");
+    }
+  }
+}
+
 .notice {
   .read {
     right: -30px;
@@ -209,22 +226,17 @@ export default {
   }
 }
 
-// 通知菜单
-.vs-dropdown-menu.notice::v-deep {
+.vs-dropdown-menu.menu-box::v-deep {
   width: 365px;
+
   .vs-dropdown--menu {
     padding: 0 !important;
-    border-radius: 0.8rem;
     border: 0;
     overflow: hidden;
+    border-radius: 0.5rem;
   }
   .notice-content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    color: #989898;
+    @include textOverflow($width: 90%, $line: 2);
   }
 }
 </style>

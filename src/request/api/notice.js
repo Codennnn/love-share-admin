@@ -2,7 +2,7 @@ import request from '../request'
 
 export function getNoticeList(params) {
   return request({
-    url: '/notice/list',
+    url: '/admin/notice/list',
     method: 'get',
     params,
   })
@@ -10,14 +10,14 @@ export function getNoticeList(params) {
 
 export function getUnreadNotices() {
   return request({
-    url: '/notice/unread',
+    url: '/admin/notice/unread',
     method: 'get',
   })
 }
 
 export function setNoticeRead(data) {
   return request({
-    url: '/notice/set_read',
+    url: '/admin/notice/set_read',
     method: 'put',
     data,
   })
@@ -25,7 +25,7 @@ export function setNoticeRead(data) {
 
 export function setAllNoticesRead(data) {
   return request({
-    url: '/notice/set_all_read',
+    url: '/admin/notice/set_all_read',
     method: 'put',
     data,
   })
@@ -33,7 +33,7 @@ export function setAllNoticesRead(data) {
 
 export function deleteNotice(data) {
   return request({
-    url: '/notice/delete',
+    url: '/admin/notice/delete',
     method: 'delete',
     data,
   })
@@ -41,7 +41,7 @@ export function deleteNotice(data) {
 
 export function deleteManyNotices(data) {
   return request({
-    url: '/notice/delete_many',
+    url: '/admin/notice/delete_many',
     method: 'delete',
     data,
   })

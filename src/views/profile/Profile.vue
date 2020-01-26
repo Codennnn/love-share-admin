@@ -126,10 +126,6 @@ export default {
     width: 200%;
     transform: translateX(-20%);
     box-shadow: 0 0 25px 20px themed("bg-color-primary");
-    // background-image: linear-gradient(
-    //   rgba(255, 255, 255, 0.2),
-    //   rgba(255, 255, 255, 1)
-    // );
   }
 }
 
