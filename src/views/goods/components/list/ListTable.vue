@@ -230,8 +230,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/theme/_themeify.scss";
-
 @include themeify {
   #table-list .vs-con-table::v-deep {
     background: themed("bg-color-semi");

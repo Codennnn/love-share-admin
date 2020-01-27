@@ -9,11 +9,11 @@
     >
       <!-- 搜索框 -->
       <div
-        class="w-full radius overflow-hidden flex"
+        class="relative w-full radius overflow-hidden flex"
         style="background: rgba(var(--vs-primary), 0.065);"
       >
         <div
-          class="h-full flex items-center justify-center radius cursor-pointer"
+          class="absolute left-0 z-50 h-full flex items-center justify-center radius cursor-pointer"
           style="width: 50px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
         >
           <SearchIcon
@@ -81,7 +81,7 @@
             >
               <div
                 v-if="!todo.is_trashed"
-                class="flex items-center"
+                class="flex items-center text-gray"
               >
                 <BookmarkIcon
                   size="1.2x"
@@ -191,9 +191,11 @@ export default {
   .vs-inputx {
     border: none !important;
     box-shadow: none;
+    padding-left: 4rem;
   }
   .input-span-placeholder {
     padding-top: 0.9rem;
+    padding-left: 4rem;
   }
 }
 

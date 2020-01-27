@@ -1,5 +1,8 @@
 <template>
-  <vs-dropdown vs-custom-content>
+  <vs-dropdown
+    vs-trigger-click
+    vs-custom-content
+  >
     <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
       <BellIcon
         size="1x"
@@ -25,6 +28,7 @@
         </div>
       </div>
       <VuePerfectScrollbar
+        class="bg-primary"
         style="height: 350px;"
         :settings="{
           maxScrollbarLength: 160,
@@ -77,7 +81,7 @@
             icon="blur_on"
             color="#718096"
           ></vs-icon>
-          <div class="mt-4 text-gray-600 text-sm">暂无更多新的通知</div>
+          <div class="mt-4 text-gray text-sm">暂无更多新的通知</div>
         </div>
       </VuePerfectScrollbar>
       <div
@@ -196,8 +200,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/theme/_themeify.scss";
-
 @include themeify {
   .vs-dropdown-menu.menu-box::v-deep {
     .notice-header {
@@ -207,7 +209,7 @@ export default {
       background: themed("notice-header-bg-color");
     }
     .notice {
-      background: themed("notice-content-bg-color");
+      // background: themed("notice-content-bg-color");
       &:hover {
         background: themed("notice-hover-color");
       }

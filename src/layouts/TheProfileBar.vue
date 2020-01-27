@@ -1,7 +1,7 @@
 <template>
   <div
-    class="p-6 flex flex-col items-center bg-gray"
-    style="width: 320px;"
+    class="p-6 flex flex-col items-center bg-primary"
+    style="width: 320px; box-shadow: -1px 0 15px rgba(0, 0, 0, 0.05);"
   >
     <div class="w-full mb-5 flex justify-between items-center text-semi">
       <span>个人中心</span>
@@ -38,38 +38,136 @@
     <h3 class="mt-1 text-xl text-primary">{{ info.nickname }}</h3>
     <h4 class="text-semi text-xs">{{ info.email }}</h4>
 
-    <VuePerfectScrollbar
-      class="pb-6 overflow-hidden"
-      style="max-height: 350px;"
-      :settings="{
-        maxScrollbarLength: 200,
-        wheelSpeed: 0.60,
-      }"
+    <div
+      v-if="unreadAmount > 0"
+      class="relative w-full mt-auto overflow-hidden"
     >
-      <ul></ul>
-    </VuePerfectScrollbar>
+      <div class="mb-4 flex justify-between items-center text-primary">
+        <div>消息提醒</div>
+        <div class="relative">
+          <BellIcon
+            size="1.1x"
+            class="opacity-50"
+          />
+          <div class="dot absolute bg-danger"></div>
+        </div>
+      </div>
+      <VuePerfectScrollbar
+        class="overflow-hidden"
+        style="max-height: 250px;"
+        :settings="{
+          maxScrollbarLength: 200,
+          wheelSpeed: 0.60,
+        }"
+      >
+        <ul>
+          <li
+            class="mb-3 flex items-center"
+            v-for="(it, i) in fewNotices"
+            :key="i"
+          >
+            <div class="mr-2">
+              <div
+                class="w-10 h-10 flex-row-center"
+                style="border-radius: 0.5rem;"
+                :style="`background: rgba(var(--vs-${noticeType[it.type].color}), 0.1);`"
+              >
+                <component
+                  size="1x"
+                  style="margin-top: 2px;"
+                  :class="noticeType[it.type].color"
+                  :is="noticeType[it.type].icon"
+                ></component>
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between items-center">
+                <span class="text-primary">{{ it.title }}</span>
+                <span class="text-xs text-gray">{{ timeDiff(it.created_at) }}</span>
+              </div>
+              <div class="text-overflow text-gray text-xs">{{ it.content }}</div>
+            </div>
+          </li>
+          <li
+            v-if="unreadAmount > fewNotices.length"
+            class="mb-12 flex justify-center"
+          >
+            <div class="py-1 px-5 flex items-center text-sm text-gray
+             bg-gray radius cursor-pointer">
+              查看全部
+            </div>
+          </li>
+        </ul>
+      </VuePerfectScrollbar>
+      <div
+        v-if="unreadAmount > fewNotices.length"
+        class="shadow-hidden absolute bottom-0 py-3 bg-primary"
+        style="width: 280px;"
+      ></div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { MoreVerticalIcon } from 'vue-feather-icons'
+import { mapState, mapGetters } from 'vuex'
+import {
+  BellIcon, MoreVerticalIcon, MessageSquareIcon, CheckCircleIcon, HelpCircleIcon, AlertTriangleIcon,
+} from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import { timeDiff } from '@/utils/util'
 
+const noticeType = {
+  1: { icon: 'MessageSquareIcon', color: 'primary' },
+  2: { icon: 'CheckCircleIcon', color: 'success' },
+  3: { icon: 'HelpCircleIcon', color: 'warning' },
+  4: { icon: 'AlertTriangleIcon', color: 'danger' },
+}
 export default {
   name: 'TheProfileBar',
-  components: { VuePerfectScrollbar, MoreVerticalIcon },
+  components: {
+    VuePerfectScrollbar,
+    BellIcon,
+    MoreVerticalIcon,
+    MessageSquareIcon,
+    CheckCircleIcon,
+    HelpCircleIcon,
+    AlertTriangleIcon,
+  },
   data: () => ({
+    timeDiff,
+    noticeType,
   }),
 
   computed: {
     ...mapState('admin', ['info']),
+    ...mapGetters('notice', ['unreadAmount']),
     genderColor() {
       return this.info.gender ? 'danger' : 'primary'
+    },
+    fewNotices() {
+      return this.$store.getters['notice/getFewNotices'](5)
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+@include themeify {
+  .dot {
+    border-color: themed("bg-color-primary");
+  }
+}
+
+.dot {
+  top: -2px;
+  right: -1px;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 3px solid;
+  border-radius: 50%;
+}
+
+.text-overflow {
+  @include textOverflow($width: 220px, $line: 1);
+}
 </style>

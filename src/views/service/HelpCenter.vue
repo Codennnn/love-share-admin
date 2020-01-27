@@ -356,8 +356,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/theme/_themeify.scss";
-
 @include themeify {
   .scroll-area {
     background: themed("bg-color-gray");

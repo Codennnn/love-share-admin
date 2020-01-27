@@ -27,12 +27,6 @@
               ></AwardIcon>
             </div>
             <p class="my-4 text-2xl font-medium">欢迎你，{{ nickname }}</p>
-            <p
-              v-if="log"
-              class="text-sm"
-            >
-              上次登录时间为：{{ $dayjs(log.created_at).format('YYYY-MM-DD HH:mm') }}
-            </p>
           </div>
         </div>
       </div>
@@ -182,7 +176,6 @@ export default {
   computed: {
     ...mapState({
       nickname: state => state.admin.info.nickname,
-      log: state => state.admin.info.sign_log[1],
     }),
   },
 

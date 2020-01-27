@@ -1,8 +1,8 @@
 <template>
   <div
     id="chat-app"
-    class="relative border border-solid shadow-xl overflow-hidden"
-    style="border-color: #dae1e7; border-radius: 1rem;"
+    class="relative border border-solid base-shadow border-primary overflow-hidden"
+    style="border-radius: 1rem;"
   >
     <vs-sidebar
       id="chat-list-sidebar"
@@ -11,7 +11,7 @@
       :click-not-close="true"
       :hidden-background="clickNotClose"
     >
-      <div class="flex items-center px-4 py-3">
+      <div class="flex items-center px-4 py-3 bg-primary">
         <div class="relative inline-flex">
           <vs-avatar
             class="m-0"
@@ -36,7 +36,7 @@
       <vs-divider class="m-0" />
 
       <VuePerfectScrollbar
-        class="chat-scroll-area"
+        class="chat-scroll-area bg-primary"
         :settings="{
           maxScrollbarLength: 60,
           wheelSpeed: 0.70,
@@ -70,7 +70,7 @@
           </ul>
           <div
             v-else
-            class="h-full py-40 flex flex-col items-center justify-center text-gray-500"
+            class="h-full py-40 flex flex-col items-center justify-center text-gray"
           >
             <i class="el-icon-chat-dot-round mb-4 text-4xl"></i>
             <p class="text-sm">暂无联系人</p>
@@ -84,7 +84,7 @@
       class="chat-bg relative"
       :class="{'sidebar-spacer--wide': clickNotClose}"
     >
-      <div class="chat-navbar ">
+      <div class="chat-navbar">
         <ChatNavbar
           :nickname="activeChatNickname"
           :isSidebarCollapsed="!clickNotClose"
@@ -263,12 +263,19 @@ export default {
 // 联系人侧边栏宽度
 $sidebar-width: 310px;
 
+@include themeify {
+  #chat-list-sidebar::v-deep {
+    .vs-sidebar {
+      border-right: 1px solid themed("border-color-primary");
+    }
+  }
+}
+
 #chat-app::v-deep {
   #chat-list-sidebar,
   #chat-profile-sidebar {
     .vs-sidebar {
       max-width: $sidebar-width;
-      border-right: 1px solid #dae1e7;
     }
     .vs-sidebar--background {
       position: absolute;

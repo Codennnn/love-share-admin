@@ -166,7 +166,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/scss/theme/navbar.scss";
-@import "~@/assets/scss/theme/_themeify.scss";
 
 @include themeify {
   .nav-bar::v-deep {

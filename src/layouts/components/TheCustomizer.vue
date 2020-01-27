@@ -175,8 +175,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/theme/_themeify.scss";
-
 @include themeify {
   .sidebar-main::v-deep {
     color: themed("text-color-primary");

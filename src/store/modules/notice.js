@@ -40,5 +40,6 @@ export default {
   getters: {
     unreadAmount: state => state.unreadNotices.length,
     isUnread: state => id => state.unreadNotices.some(el => el._id === id),
+    getFewNotices: state => num => state.unreadNotices.slice(0, num),
   },
 }
