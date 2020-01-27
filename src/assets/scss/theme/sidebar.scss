@@ -97,6 +97,14 @@
         background: themed("sidebar-item-active-gradient");
       }
     }
+
+    .chat {
+      background: rgba(var(--vs-primary), 0.1);
+
+      .chat-icon {
+        color: $primary;
+      }
+    }
   }
 }
 
@@ -245,6 +253,14 @@
         }
 
         background: themed("sidebar-semi-item-hover-color");
+      }
+    }
+
+    .chat {
+      background: rgba(255, 255, 255, 0.15);
+
+      .chat-icon {
+        color: #fff;
       }
     }
   }
