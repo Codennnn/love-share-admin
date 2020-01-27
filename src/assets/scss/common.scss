@@ -1,5 +1,3 @@
-@import "~@/assets/scss/theme/_themeify.scss";
-
 .bg-main {
   background: $primary;
 }
@@ -105,6 +103,10 @@ img {
 
   .border-primary {
     border-color: themed("border-color-primary");
+  }
+
+  .shadow-hidden {
+    box-shadow: 0 0 25px 20px themed("bg-color-primary");
   }
 
   .vs-input {
