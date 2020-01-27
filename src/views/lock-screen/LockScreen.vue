@@ -37,6 +37,14 @@
           </el-tooltip>
         </div>
       </div>
+      <div class="w-64 mt-4">
+        <vs-alert
+          :active.sync="showAlert"
+          color="danger"
+          closable
+          close-icon="close"
+        >{{ alertText }}</vs-alert>
+      </div>
     </div>
 
     <div
@@ -62,20 +70,30 @@ export default {
   components: { UnlockIcon, LogOutIcon },
 
   data: () => ({
+    showAlert: false,
+    alertText: '',
     password: '',
   }),
 
   computed: {
     info() {
-      const { avatar_url, nickname } = this.$store.state.admin.info
-      return { avatar_url, nickname }
+      const { avatar_url, nickname, lock_password } = this.$store.state.admin.info
+      return { avatar_url, nickname, lock_password }
     },
   },
 
   methods: {
     unLocked() {
-      localStorage.setItem('screen_lock', JSON.stringify({ isLocked: false }))
-      this.$router.replace('/')
+      if (this.password.length <= 0) {
+        this.showAlert = true
+        this.alertText = '请填写解锁密码'
+      } else if (this.password !== this.info.lock_password) {
+        this.showAlert = true
+        this.alertText = '密码有误'
+      } else if (this.password === this.info.lock_password) {
+        localStorage.setItem('screen_lock', JSON.stringify({ isLocked: false }))
+        this.$router.replace('/')
+      }
     },
 
     async logout() {

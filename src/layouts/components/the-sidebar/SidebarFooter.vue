@@ -83,13 +83,12 @@
     </div>
 
     <div
-      class="flex justify-center items-center radius cursor-pointer"
-      style="height: 50px; width: 50px; margin-left: 0.4rem;
-         background: rgba(var(--vs-primary), 0.1);"
+      class="chat flex justify-center items-center radius cursor-pointer"
+      style="height: 50px; width: 50px; margin-left: 0.4rem;"
     >
       <MessageSquareIcon
         size="1.3x"
-        class="primary"
+        class="chat-icon"
       ></MessageSquareIcon>
     </div>
   </div>

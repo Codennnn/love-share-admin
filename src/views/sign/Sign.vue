@@ -1,7 +1,17 @@
 <template>
-  <div class="h-screen px-10 flex justify-center items-center bg-white">
-    <div class="h-screen flex flex-col justify-center items-center overflow-auto">
-      <div style="width: 20rem; margin: 2.5rem 0;">
+  <div
+    class="relative h-screen flex justify-center items-center bg-white"
+    style="min-width: 1300px;"
+  >
+    <img
+      class="absolute left-0 h-full"
+      src="@/assets/images/sign-bg.png"
+    >
+    <div
+      class="absolute h-screen flex flex-col justify-center items-center overflow-auto"
+      style="left: 50%;"
+    >
+      <div style="width: 20rem;">
         <transition
           enter-active-class="animated fadeIn quickly"
           leave-active-class="animated fadeOut quickly"
@@ -15,17 +25,12 @@
           </keep-alive>
         </transition>
       </div>
-      <img
-        :style="{ display: imgStyle }"
-        src="@/assets/images/sign_bg.jpg"
-      >
     </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import _debounce from 'lodash/debounce'
 import SignIn from './SignIn.vue'
 
 const ForgetPassword = Vue.component(
@@ -44,20 +49,6 @@ export default {
 
   created() {
     this.currentComponent = 'SignIn'
-  },
-
-  mounted() {
-    window.onresize = _debounce(() => {
-      if (document.body.clientHeight <= 666) {
-        this.imgStyle = 'none'
-      } else {
-        this.imgStyle = 'block'
-      }
-    }, 400)
-  },
-
-  beforeDestroy() {
-    window.onresize = null
   },
 
   methods: {

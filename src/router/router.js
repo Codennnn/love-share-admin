@@ -212,23 +212,6 @@ export const asyncRoutes = [
   },
 
   /*
-   * 聊天
-   */
-  {
-    path: '',
-    single: true,
-    component: Layout,
-    children: [
-      {
-        path: '/chat',
-        name: 'Chat',
-        component: () => import('@/views/chat/Chat.vue'),
-        meta: { title: '在线沟通', icon: 'MapIcon' },
-      },
-    ],
-  },
-
-  /*
    * 不显示在侧边栏的路由
    */
   {
@@ -305,6 +288,14 @@ export const asyncRoutes = [
         path: '/profile',
         name: 'Profile',
         component: () => import('@/views/profile/Profile.vue'),
+        meta: {
+          title: '个人中心',
+        },
+      },
+      {
+        path: '',
+        name: 'Chat',
+        component: () => import('@/views/chat/Chat.vue'),
         meta: {
           title: '个人中心',
         },

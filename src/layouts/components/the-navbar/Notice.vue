@@ -1,8 +1,5 @@
 <template>
-  <vs-dropdown
-    vs-trigger-click
-    vs-custom-content
-  >
+  <vs-dropdown vs-custom-content>
     <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
       <BellIcon
         size="1x"
@@ -158,7 +155,7 @@ export default {
   },
 
   methods: {
-    // 获取购物车
+    // 获取未读通知
     async getUnreadNotices() {
       await this.$store.dispatch('notice/getUnreadNotices')
     },

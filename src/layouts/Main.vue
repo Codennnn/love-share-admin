@@ -88,6 +88,23 @@
             <TheFooter class="router-footer" />
           </div>
 
+          <!-- 在线聊天 -->
+          <transition
+            enter-active-class="animated zoomIn quickly"
+            leave-active-class="animated zoomOutLeft faster"
+            mode="out-in"
+          >
+            <template>
+              <div
+                id="chat-container"
+                v-show="showChatbox"
+              >
+                <Chat />
+              </div>
+            </template>
+          </transition>
+
+          <!-- 个人中心 -->
           <TheProfileBar v-show="$route.path === '/profile'" />
         </div>
       </div>
@@ -107,6 +124,7 @@ import TheNavbar from './components/TheNavbar.vue'
 import TheFooter from './components/TheFooter.vue'
 import TheCustomizer from './components/TheCustomizer.vue'
 import TheProfileBar from './TheProfileBar.vue'
+import Chat from '@/views/chat/Chat.vue'
 
 export default {
   name: 'Main',
@@ -116,7 +134,14 @@ export default {
     TheFooter,
     TheCustomizer,
     TheProfileBar,
+    Chat,
     BackToTop,
+  },
+
+  sockets: {
+    connect() {
+      this.$socket.emit('setOnline')
+    },
   },
 
   data: () => ({
@@ -125,6 +150,7 @@ export default {
 
   computed: {
     ...mapState(['sidebarCollapse', 'navbarType']),
+    ...mapState('chat', ['showChatbox']),
   },
 }
 </script>

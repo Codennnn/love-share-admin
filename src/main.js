@@ -3,6 +3,9 @@ import animated from 'animate.css' // css 动画库
 import VueClipboard from 'vue-clipboard2' // 粘贴板
 import dayjs from 'dayjs' // 日期格式化
 import VueSocketIO from 'vue-socket.io' // socket.io
+// import VContentmenu from 'v-contextmenu' // 右键菜单
+// import 'v-contextmenu/dist/index.css' // 右键菜单样式
+
 import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
@@ -18,6 +21,7 @@ Vue.use(new VueSocketIO({
   connection: 'http://127.0.0.1:7001',
 }))
 
+// Vue.use(VContentmenu)
 Vue.use(animated)
 Vue.use(VueClipboard)
 Vue.prototype.$dayjs = dayjs

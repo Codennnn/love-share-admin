@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full">
+  <div
+    class="w-full"
+    style="transform: translateY(-20%);"
+  >
     <p class="pb-4 text-2xl font-bold text-gray-700">
       欢迎登录
     </p>
