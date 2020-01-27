@@ -30,24 +30,11 @@ export function getGoodsListInfo() {
   })
 }
 
-export function getPublished() {
-  return request({
-    url: '/goods/published',
-    method: 'get',
-  })
-}
-
-export function getBought() {
-  return request({
-    url: '/goods/bought',
-    method: 'get',
-  })
-}
-
-export function getGoodsDetail() {
+export function getGoodsDetail(params) {
   return request({
     url: '/goods/detail',
     method: 'get',
+    params,
   })
 }
 
@@ -107,23 +94,18 @@ export function cancelDismountGoods() {
   })
 }
 
-export function getCartList() {
+export function getGoodsSeller(params) {
   return request({
-    url: '/goods/cart_list',
+    url: '/goods/seller',
     method: 'get',
+    params,
   })
 }
 
-export function addCartItem() {
+export function getGoodsComments(params) {
   return request({
-    url: '/goods/cart_item/add',
-    method: 'post',
-  })
-}
-
-export function removeCartItem() {
-  return request({
-    url: '/goods/cart_item/remove',
-    method: 'delete',
+    url: '/goods/comments',
+    method: 'get',
+    params,
   })
 }

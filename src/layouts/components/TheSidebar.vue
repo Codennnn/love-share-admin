@@ -103,7 +103,7 @@ import { mapState } from 'vuex'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import {
   ActivityIcon, UsersIcon, ShoppingBagIcon, MapIcon, PackageIcon,
-  MonitorIcon, AtSignIcon, ClipboardIcon, ListIcon,
+  MonitorIcon, AtSignIcon, ClipboardIcon, ListIcon, ServerIcon,
 } from 'vue-feather-icons'
 import SidebarFooter from './the-sidebar/SidebarFooter.vue'
 
@@ -127,6 +127,7 @@ export default {
     AtSignIcon,
     ClipboardIcon,
     ListIcon,
+    ServerIcon,
   },
 
   mounted() {

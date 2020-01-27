@@ -182,6 +182,23 @@ export const asyncRoutes = [
         path: '/admin-list',
         name: 'AdminList',
         component: () => import('@/views/admin/AdminList.vue'),
+        meta: { title: '广告牌' },
+      },
+    ],
+    meta: { title: '网站管理', icon: 'MonitorIcon' },
+  },
+
+  /*
+   * 系统管理
+   */
+  {
+    path: '',
+    component: Layout,
+    children: [
+      {
+        path: '/admin-list',
+        name: 'AdminList',
+        component: () => import('@/views/admin/AdminList.vue'),
         meta: { title: '管理员列表' },
       },
       {
@@ -191,7 +208,7 @@ export const asyncRoutes = [
         meta: { title: '创建管理员' },
       },
     ],
-    meta: { title: '网站管理', icon: 'MonitorIcon' },
+    meta: { title: '系统管理', icon: 'ServerIcon' },
   },
 
   /*
