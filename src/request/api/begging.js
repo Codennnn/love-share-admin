@@ -15,6 +15,13 @@ export function addBuying() {
   })
 }
 
+export function updateBegging() {
+  return request({
+    url: '/buying/add',
+    method: 'post',
+  })
+}
+
 export function deleteBegging() {
   return request({
     url: '/buying/add',

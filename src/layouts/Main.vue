@@ -207,4 +207,14 @@ export default {
     line-height: $footer-height;
   }
 }
+
+#chat-container {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  z-index: 9999;
+}
+.quickly {
+  animation-duration: 0.3s;
+}
 </style>

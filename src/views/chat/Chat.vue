@@ -16,7 +16,7 @@
           <vs-avatar
             class="m-0"
             size="40px"
-            :src="`${$store.state.user.info.avatar_url}?imageView2/2/w/60`"
+            :src="`${$store.state.admin.info.avatar_url}?imageView2/2/w/60`"
           />
         </div>
         <vs-input
@@ -260,6 +260,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// 联系人侧边栏宽度
 $sidebar-width: 310px;
 
 #chat-app::v-deep {

@@ -85,6 +85,7 @@
     <div
       class="chat flex justify-center items-center radius cursor-pointer"
       style="height: 50px; width: 50px; margin-left: 0.4rem;"
+      @click="$store.commit('chat/SET_CHAT_OPEN')"
     >
       <MessageSquareIcon
         size="1.3x"

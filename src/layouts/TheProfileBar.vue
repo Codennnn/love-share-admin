@@ -37,16 +37,28 @@
     </div>
     <h3 class="mt-1 text-xl text-primary">{{ info.nickname }}</h3>
     <h4 class="text-semi text-xs">{{ info.email }}</h4>
+
+    <VuePerfectScrollbar
+      class="pb-6 overflow-hidden"
+      style="max-height: 350px;"
+      :settings="{
+        maxScrollbarLength: 200,
+        wheelSpeed: 0.60,
+      }"
+    >
+      <ul></ul>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { MoreVerticalIcon } from 'vue-feather-icons'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
   name: 'TheProfileBar',
-  components: { MoreVerticalIcon },
+  components: { VuePerfectScrollbar, MoreVerticalIcon },
   data: () => ({
   }),
 

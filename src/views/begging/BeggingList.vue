@@ -1,9 +1,10 @@
 <template>
-  <div class="data-list mt-4">
+  <div class="mt-4">
     <vs-table
       search
       pagination
       noDataText="暂无数据"
+      class="p-4"
       :max-items="10"
       :data="beggingList"
     >
@@ -91,6 +92,7 @@ import AddNewDataSidebar from './components/AddNewDataSidebar.vue'
 
 import {
   getBeggingList,
+  updateBegging,
   deleteBegging,
 } from '@/request/api/begging'
 
@@ -120,10 +122,12 @@ export default {
       }
     },
 
-    async deleteBegging() {
+    async updateBegging() {
+      await updateBegging()
     },
 
-    async updateBegging() {
+    async deleteBegging() {
+      await deleteBegging()
     },
   },
 }
