@@ -109,20 +109,20 @@
           </span>
         </div>
         <vs-divider border-style="dashed" />
-        <div class="flex items-center mt-6">
-          <vs-input-number
-            class="mr-4"
-            v-model="amount"
-            :min="1"
-            :max="goods.quantity"
-          />
-          <div v-if="goods.status === 3">
-            <vs-button
-              color="danger"
-              size="small"
-              :disabled="true"
-            >该商品已下架</vs-button>
-          </div>
+        <div>
+          <vs-button
+            v-if="goods.status === 1"
+            color="success"
+          >出售中</vs-button>
+          <vs-button
+            v-if="goods.status === 2"
+            color="warning"
+          >已售出</vs-button>
+          <vs-button
+            v-if="goods.status === 3"
+            color="danger"
+            :disabled="true"
+          >该商品已下架</vs-button>
         </div>
       </div>
     </div>
@@ -151,26 +151,13 @@ import { timeDiff } from '@/utils/util'
 export default {
   name: 'DetailInfo',
   components: { ElImageViewer },
+
   props: { goods: Object, goodsId: String },
 
   data: () => ({
     timeDiff,
     showViewer: false,
-    addCartDisable: false,
-
-    amount: 1, // 购买的数量
-    isCollected: false,
   }),
-
-  watch: {
-    amount(v) {
-      this.$emit('setAmount', v)
-    },
-  },
-
-  deactivated() {
-    this.showViewer = false
-  },
 }
 </script>
 
@@ -220,42 +207,6 @@ export default {
   b,
   strong {
     font-weight: bolder !important;
-  }
-}
-
-.btn-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  button {
-    height: 38px;
-    line-height: 38px;
-    margin: 0px !important;
-    &.btnx {
-      padding: 0 15px;
-      margin-left: 10px !important;
-      border-radius: 5px 0px 0px 5px;
-    }
-    &.btn-drop {
-      font-size: 16px;
-      border-radius: 0px 5px 5px 0px;
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
-    }
-  }
-}
-
-.collect-btn {
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s;
-  cursor: pointer;
-  &:hover {
-    &.is-collected {
-      background: rgba(var(--vs-warning), 0.1);
-    }
-    &.not-collected {
-      background: rgba(var(--vs-success), 0.1);
-    }
   }
 }
 </style>

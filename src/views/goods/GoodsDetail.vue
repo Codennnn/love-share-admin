@@ -65,8 +65,6 @@ export default {
       fans: [],
       published_goods: [],
     },
-
-    amount: 1,
   }),
 
   mounted() {

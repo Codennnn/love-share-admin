@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="p-3 text-center bg-semi base-shadow radius">
+    <div class="mb-5 p-3 text-center bg-semi base-shadow radius">
       <vs-avatar
         size="90px"
         :src="`${seller.avatar_url}?imageView2/2/w/100`"
@@ -12,12 +12,8 @@
       >
         <span class="text-primary">{{ seller.nickname }}</span>
         <i
-          class="el-icon-male ml-1 text-primary"
-          v-if="seller.gender === '1'"
-        ></i>
-        <i
-          class="el-icon-female ml-1 text-danger"
-          v-else-if="seller.gender === '2'"
+          class="ml-1"
+          :class="seller.gender === '1' ? 'el-icon-male primary' : 'el-icon-female danger'"
         ></i>
       </div>
       <div class="my-1 text-sm text-gray">
@@ -40,8 +36,8 @@
     </div>
     <div class="hover-light cursor-pointer">
       <div
-        class="mt-5 p-2 flex justify-center items-center text-center text-white
-          bg-primary-gradient rounded"
+        class="p-2 flex justify-center items-center text-center text-white
+          bg-primary-gradient rounded-lg"
         @click="contactSeller()"
       >
         联系卖家

@@ -74,9 +74,9 @@
     </VuePerfectScrollbar>
     <p
       v-else
-      class="mt-6 p-2 text-center text-sm text-gray-500 bg-gray-100 rounded-lg"
+      class="p-3 text-center text-sm text-gray bg-gray rounded-lg"
     >
-      还没有留言，快来抢沙发吧！
+      暂时还没有留言
     </p>
     <div v-if="showComments && !hideComment">
       <vs-pagination
@@ -119,7 +119,7 @@ export default {
   data: () => ({
     timeDiff,
     counterDanger: true,
-    maxHeight: 550,
+    maxHeight: 500,
 
     placeholder: '',
     textContent: '', // 留言内容
@@ -142,11 +142,6 @@ export default {
     })
   },
 
-  deactivated() {
-    this.maxHeight = 595
-    this.showComments = false
-  },
-
   methods: {
     showMoreComments() {
       this.maxHeight = 10000
@@ -157,9 +152,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+body[data-theme="light"] {
+  .msg {
+    .name {
+      color: #8b99a8;
+    }
+  }
+  .hide-comment {
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+}
+body[data-theme="dark"] {
+  .msg {
+    .name {
+      color: #bfc0c6;
+    }
+  }
+  .hide-comment {
+    background-image: linear-gradient(
+      rgba(51, 54, 68, 0.1) 0%,
+      rgba(51, 54, 68, 1) 100%
+    );
+  }
+}
+
 .msg {
   .name {
-    // color: #718096;
     font-size: 0.875rem;
     font-weight: bold;
   }
@@ -171,41 +192,12 @@ export default {
     color: rgba(var(--vs-primary), 1);
     background: rgba(var(--vs-primary), 0.15);
   }
-  .reply {
-    top: 6px;
-    right: -30px;
-    font-size: 0.9rem;
-    // color: #999;
-    transition: all 0.3s;
-    opacity: 0;
-  }
-  &:hover {
-    .reply {
-      right: 8px;
-      opacity: 1;
-      &:hover {
-        color: rgba(var(--vs-primary), 0.9);
-      }
-    }
-  }
 }
 
 .hide-comment {
   height: 60px;
   line-height: 80px;
   background-size: 200%;
-  transition: background-position 0.5s linear;
   cursor: pointer;
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  &:hover {
-    background-position: 100% 0;
-    background-image: linear-gradient(
-      rgba(231, 238, 255, 0) 0%,
-      rgba(231, 238, 255, 1) 100%
-    );
-  }
 }
 </style>

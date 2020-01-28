@@ -16,7 +16,24 @@
             class="text-xl font-semibold"
             :class="tableTitle === '已上架商品' ? 'primary' : 'danger'"
           >{{ tableTitle }}</div>
-          <div class="ml-auto">
+          <div class="ml-auto flex items-center">
+            <div
+              @click="exportExcel()"
+              class="w-10 h-10 mr-5 flex justify-center items-center rounded-lg cursor-pointer"
+              style="background: rgba(var(--vs-primary), 0.1);"
+            >
+              <el-tooltip
+                content="导出列表数据"
+                effect="light"
+              >
+                <DownloadIcon
+                  size="1.3x"
+                  stroke-width="1.6px"
+                  class="primary"
+                />
+              </el-tooltip>
+
+            </div>
             <el-date-picker
               v-model="date"
               type="daterange"
@@ -36,7 +53,7 @@
         <vs-th>单价</vs-th>
         <vs-th>收藏数</vs-th>
         <vs-th>卖家昵称</vs-th>
-        <vs-th>#</vs-th>
+        <vs-th></vs-th>
       </template>
 
       <template slot-scope="{data}">
@@ -55,7 +72,13 @@
             <vs-td class="text-gray font-bold">￥{{ Number(tr.price).toFixed(2) }}</vs-td>
             <vs-td class="text-semi">{{ tr.collect_num }}</vs-td>
             <vs-td class="text-gray font-bold">{{ tr.seller.nickname }}</vs-td>
-            <vs-td class="text-semi">{{ i + 1 }}</vs-td>
+            <vs-td
+              title="查看详情"
+              class="text-semi cursor-pointer"
+              @click.native.stop="viewGoodsDetail(tr._id)"
+            >
+              <LogInIcon size="1.2x" />
+            </vs-td>
 
             <!-- 展开的内容 -->
             <template slot="expand">
@@ -138,8 +161,11 @@
 </template>
 
 <script>
+import { DownloadIcon, LogInIcon } from 'vue-feather-icons'
+
 export default {
   name: 'ListTable',
+  components: { DownloadIcon, LogInIcon },
   props: {
     goodsList: {
       type: Array,
@@ -224,6 +250,31 @@ export default {
 
     formatTime(time) {
       return this.$dayjs(time).format('YYYY/MM/DD HH:mm:ss')
+    },
+
+    // 导出为 Excel 表格
+    exportExcel() {
+      import('@/vendor/Export2Excel').then((excel) => {
+        const header = ['商品 ID', '商品名称', '价格', '卖家昵称', '卖家姓名', '发布时间']
+        const filterVal = ['_id', 'name', 'price', 'seller.nickname', 'seller.real_name', 'created_at']
+        const data = this.formatJson(filterVal, this.goodsList)
+        excel.export_json_to_excel({
+          header,
+          data,
+          filename: '乐享校园_商品列表',
+          autoWidth: true,
+          bookType: 'xlsx',
+        })
+      })
+    },
+    formatJson(filterVal, goodsList) {
+      return goodsList.map(obj => filterVal.map((keyStr) => {
+        const key = keyStr.split('.')
+        if (key.length === 1) {
+          return obj[key[0]]
+        }
+        return obj[key[0]][key[1]]
+      }))
     },
   },
 }

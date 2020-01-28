@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="w-2/4 py-3 px-6 radius bg-gray">
+      <div class="w-2/4 py-6 px-6 radius bg-gray">
         <div class="mb-3 text-semi">高级操作</div>
         <div class="flex items-center justify-between text-sm">
           <div class="sm:w-1/2">
@@ -49,13 +49,13 @@
               @keyup.enter="onSearchByID"
             />
           </div>
-          <div class="sm:w-1/2 text-right">
+          <!-- <div class="sm:w-1/2 text-right">
             <vs-button
               color="primary"
               type="border"
               @click="exportExcel"
             >导出列表数据</vs-button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div
-        class="pt-8 pb-4 flex justify-around items-center flex-wrap overflow-hidden"
+        class="pt-8 pb-2 flex justify-around items-center flex-wrap overflow-hidden"
         style="transition: all 0.4s ease;"
         :style="inputStyle"
       >
@@ -201,7 +201,7 @@ export default {
     },
   },
 
-  activated() {
+  created() {
     this.getGoodsListOnSell()
     this.getGoodsListInfo()
   },
@@ -259,30 +259,6 @@ export default {
       if (this.searchText.length > 0) {
         this.getGoodsListOffSell()
       }
-    },
-
-    // 导出为 Excel 表格
-    exportExcel() {
-      import('@/vendor/Export2Excel').then((excel) => {
-        const header = ['商品 ID', '商品名称', '价格', '卖家姓名', '发布时间']
-        const filterVal = ['_id', 'name', 'price', 'real_name', 'time']
-        const data = this.formatJson(filterVal, this.goodsList)
-        excel.export_json_to_excel({
-          header,
-          data,
-          filename: '乐享校园_商品列表',
-          autoWidth: true,
-          bookType: 'xlsx',
-        })
-      })
-    },
-    formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map((j) => {
-        if (j === 'timestamp') {
-          return this.$dayjs.unix(v[j]).format('YYYY-MM-DD HH:mm:ss')
-        }
-        return v[j]
-      }))
     },
   },
 }
