@@ -181,7 +181,7 @@ export const asyncRoutes = [
       {
         path: '/website',
         name: 'Website',
-        component: () => import('@/views/admin/AdminList.vue'),
+        component: () => import('@/views/website/Billboard.vue'),
         meta: { title: '广告牌' },
       },
     ],

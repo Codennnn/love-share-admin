@@ -15,6 +15,7 @@ const mutations = {
     localStorage.setItem('sidebar_collapse', status)
     state.sidebarCollapse = status
   },
+
   SET_CATEGORY_LIST(state, list) {
     state.categoryList = list
   },
