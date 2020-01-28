@@ -327,8 +327,8 @@ export default {
 
   computed: {
     options() {
-      const theme = this.$store.state.themeStyle
-      if (theme === 'light') {
+      const { themeStyle } = this.$store.state
+      if (themeStyle === 'light') {
         return { ...this.option, backColor: '#ddd' }
       }
       return { ...this.option, backColor: '#555' }

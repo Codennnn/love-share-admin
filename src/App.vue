@@ -27,8 +27,11 @@ export default {
   }),
 
   watch: {
-    '$store.state.themeStyle'(val) {
-      this.switchBodyDataset(val)
+    '$store.state.themeStyle': {
+      handler(theme) {
+        document.body.dataset.theme = theme
+      },
+      immediate: true,
     },
   },
 
@@ -45,12 +48,6 @@ export default {
     window.addEventListener('offline', () => {
       this.isOffline = true
     })
-  },
-
-  methods: {
-    switchBodyDataset(theme) {
-      document.body.dataset.theme = theme
-    },
   },
 }
 </script>

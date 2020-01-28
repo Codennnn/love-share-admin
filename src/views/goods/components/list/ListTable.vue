@@ -17,23 +17,19 @@
             :class="tableTitle === '已上架商品' ? 'primary' : 'danger'"
           >{{ tableTitle }}</div>
           <div class="ml-auto flex items-center">
-            <div
-              @click="exportExcel()"
-              class="w-10 h-10 mr-5 flex justify-center items-center rounded-lg cursor-pointer"
-              style="background: rgba(var(--vs-primary), 0.1);"
-            >
-              <el-tooltip
-                content="导出列表数据"
-                effect="light"
+            <el-tooltip content="导出列表数据">
+              <div
+                @click="exportExcel()"
+                class="w-10 h-10 mr-5 flex justify-center items-center rounded-lg cursor-pointer"
+                style="background: rgba(var(--vs-primary), 0.1);"
               >
                 <DownloadIcon
                   size="1.3x"
                   stroke-width="1.6px"
                   class="primary"
                 />
-              </el-tooltip>
-
-            </div>
+              </div>
+            </el-tooltip>
             <el-date-picker
               v-model="date"
               type="daterange"

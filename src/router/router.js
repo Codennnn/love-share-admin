@@ -74,7 +74,7 @@ export const asyncRoutes = [
         path: '/goods-category',
         name: 'GoodsCategory',
         component: () => import('@/views/goods/GoodsCategory.vue'),
-        meta: { title: '商品分类', roles: ['super_admin'] },
+        meta: { title: '商品分类' },
       },
     ],
     meta: { title: '商品管理', icon: 'PackageIcon' },
@@ -179,8 +179,8 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: '/admin-list',
-        name: 'AdminList',
+        path: '/website',
+        name: 'Website',
         component: () => import('@/views/admin/AdminList.vue'),
         meta: { title: '广告牌' },
       },
