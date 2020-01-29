@@ -30,7 +30,7 @@
             <el-image
               class="h-full mr-3 rounded-lg"
               style="width: 150px;"
-              :src="it.url"
+              :src="`${it.url}?imageView2/2/w/200`"
               :preview-src-list="[it.url]"
             >
             </el-image>
