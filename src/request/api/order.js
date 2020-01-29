@@ -8,10 +8,11 @@ export function getOrderList(params) {
   })
 }
 
-export function getOrderDetail() {
+export function getOrderDetail(params) {
   return request({
     url: '/order/detail',
     method: 'get',
+    params,
   })
 }
 

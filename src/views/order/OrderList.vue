@@ -120,19 +120,19 @@
                     <vs-dropdown-item>
                       <div
                         class="w-24 text-center"
-                        @click="onCopy(tr._id)"
+                        @click="onCopy(item._id)"
                       >复制单号</div>
                     </vs-dropdown-item>
                     <vs-dropdown-item>
                       <div
                         class="w-24 text-center"
-                        @click="viewDetail(tr._id)"
+                        @click="viewDetail(item._id)"
                       >查看详情</div>
                     </vs-dropdown-item>
                     <vs-dropdown-item divider>
                       <div
                         class="w-24 danger text-center"
-                        @click="deleteOrder(tr._id)"
+                        @click="deleteOrder(item._id)"
                       >删除订单</div>
                     </vs-dropdown-item>
                   </vs-dropdown-menu>
@@ -280,7 +280,7 @@ export default {
     viewDetail(id) {
       this.$router.push({
         path: '/order-detail',
-        query: { orderID: id },
+        query: { orderId: id },
       })
     },
 
