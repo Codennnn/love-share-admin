@@ -21,11 +21,11 @@
       </div>
       <div class="flex justify-around mt-3">
         <div>
-          <div class="text-semi font-bold">{{ seller.published_goods.length }}</div>
+          <div class="text-semi font-bold">{{ seller.published_num }}</div>
           <div class="text-gray text-sm">已发布</div>
         </div>
         <div>
-          <div class="text-semi font-bold">{{ seller.fans.length }}</div>
+          <div class="text-semi font-bold">{{ seller.fans_num }}</div>
           <div class="text-gray text-sm">关注者</div>
         </div>
         <div>

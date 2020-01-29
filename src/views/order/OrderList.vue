@@ -10,11 +10,15 @@
           <area-chart
             statistic="9K"
             label="交易额"
-            icon="el-icon-coin"
             color="primary"
             type="area"
             :chartData="chartData1"
-          ></area-chart>
+          >
+            <DollarSignIcon
+              slot="icon"
+              class="primary"
+            />
+          </area-chart>
         </div>
       </div>
       <div class="w-1/3 px-2">
@@ -22,11 +26,15 @@
           <area-chart
             statistic="9K"
             label="成交量"
-            icon="el-icon-finished"
             color="warning"
             type="area"
             :chartData="chartData2"
-          ></area-chart>
+          >
+            <CheckCircleIcon
+              slot="icon"
+              class="warning"
+            />
+          </area-chart>
         </div>
       </div>
       <div class="w-1/3 pl-3">
@@ -34,11 +42,15 @@
           <area-chart
             statistic="9K"
             label="订单数"
-            icon="el-icon-collection"
             color="success"
             type="area"
             :chartData="chartData3"
-          ></area-chart>
+          >
+            <BarChart2Icon
+              slot="icon"
+              class="success"
+            />
+          </area-chart>
         </div>
       </div>
     </div>
@@ -148,6 +160,7 @@
 
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
+import { DollarSignIcon, CheckCircleIcon, BarChart2Icon } from 'vue-feather-icons'
 import AreaChart from '@/components/AreaChart.vue'
 
 import {
@@ -160,7 +173,9 @@ import { areaChartOptions } from '@/utils/util'
 
 export default {
   name: 'OrderList',
-  components: { AreaChart },
+  components: {
+    AreaChart, DollarSignIcon, CheckCircleIcon, BarChart2Icon,
+  },
 
   data: () => ({
     initFinished: false,

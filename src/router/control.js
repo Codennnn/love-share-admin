@@ -25,19 +25,19 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/lock-screen' })
       NProgress.done()
     } else if (to.path === '/sign') {
-      // 如果已经有了token再访问登录页的话，将会被重定向到首页
+      // 如果已经有了 token 再访问登录页的话，将会被重定向到首页
       next({ path: '/' })
     } else {
-      const hasRoles = !!(store.getters['admin/roles']?.length > 0)
+      const hasPermissions = !!(store.state.admin.info?.permissions?.length > 0)
 
-      if (hasRoles) {
+      if (hasPermissions) {
         next()
       } else {
-        const { roles } = await store.dispatch('admin/getAdminInfo')
+        const { permissions } = await store.dispatch('admin/getAdminInfo')
           .catch(() => {
             next('/sign')
           })
-        const accessedRoutes = await store.dispatch('permission/generateRoutes', roles)
+        const accessedRoutes = await store.dispatch('permission/generateRoutes', permissions)
         // 动态添加路由
         router.addRoutes(accessedRoutes)
         next({ ...to, replace: true })

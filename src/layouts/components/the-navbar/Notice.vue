@@ -140,20 +140,25 @@ export default {
   },
 
   mounted() {
-    this.sockets.subscribe(`receiveNotice${this.userId}`, (notice) => {
+    this.sockets.subscribe(`receiveNotice${this.adminId}`, (notice) => {
       this.$vs.notify({
-        title: '消息提醒',
-        text: '收到一条新的通知，请注意查看',
+        title: notice.title,
+        text: `${notice.content.substring(0, 10)}...`,
         icon: 'chat',
+        color: ['primary', 'success', 'warning', 'danger'][notice.type - 1],
         position: 'top-right',
+        time: 5000,
       })
-      this.$store.commit('notice/ADD_UNREAD_ITEM', notice)
+      this.$store.dispatch('notice/getUnreadNotices')
     })
   },
 
   computed: {
     ...mapState('notice', ['unreadNotices']),
     ...mapGetters('notice', ['unreadAmount']),
+    adminId() {
+      return this.$store.state.admin.info._id
+    },
   },
 
   methods: {
@@ -207,7 +212,6 @@ export default {
       background: themed("notice-header-bg-color");
     }
     .notice {
-      // background: themed("notice-content-bg-color");
       &:hover {
         background: themed("notice-hover-color");
       }

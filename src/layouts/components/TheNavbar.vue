@@ -58,7 +58,7 @@
             <!-- 全屏图标 -->
             <el-tooltip
               :open-delay="100"
-              content="切换全屏"
+              :content="isFullScreen ? '退出全屏' : '进入全屏'"
               effect="light"
             >
               <component

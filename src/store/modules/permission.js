@@ -1,23 +1,28 @@
 import { constantRoutes, asyncRoutes } from '@/router/router'
 
 // 检测是否能对应上相应路由的角色权限
-function hasPermission(roles, route) {
-  if (route.meta?.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
+function hasPermission(permissions, { meta }) {
+  if (meta?.permission) {
+    return permissions.some((el) => {
+      if (el.module === meta.permission.moduleName) {
+        return meta.permission.purviews.every(it => el.purview.indexOf(it) > -1)
+      }
+      return false
+    })
   }
-  // 默认是具有 admin 权限的，所以返回 true
+  // 默认是具有权限的，所以返回 true
   return true
 }
 
 // 过滤没有角色权限的路由
-export function filterAsyncRoutes(routes, roles) {
+export function filterAsyncRoutes(routes, permissions) {
   const res = []
 
   routes.forEach((route) => {
     const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
+    if (hasPermission(permissions, tmp)) {
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
+        tmp.children = filterAsyncRoutes(tmp.children, permissions)
       }
       res.push(tmp)
     }
@@ -30,12 +35,6 @@ const state = {
   routes: [],
 }
 
-const getters = {
-  sidebar(state) {
-    return state.routes
-  },
-}
-
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.routes = constantRoutes.concat(routes)
@@ -43,14 +42,14 @@ const mutations = {
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
-    let accessedRoutes
-    if (roles.includes('super_admin')) {
-      // 如果权限为 “超级管理员” 则拥有所有路由的权限
-      accessedRoutes = asyncRoutes || []
-    } else {
-      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-    }
+  generateRoutes({ commit }, permissions) {
+    // let accessedRoutes
+    // if (permissions.includes('super_admin')) {
+    //   // 如果权限为 “超级管理员” 则拥有所有路由的权限
+    //   accessedRoutes = asyncRoutes || []
+    // } else {
+    const accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+    // }
     commit('SET_ROUTES', accessedRoutes)
     return accessedRoutes
   },
@@ -59,7 +58,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  getters,
   mutations,
   actions,
 }

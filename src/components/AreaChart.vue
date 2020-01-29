@@ -30,6 +30,8 @@ import VueApexCharts from 'vue-apexcharts'
 
 export default {
   name: 'AreaChart',
+  components: { VueApexCharts },
+
   props: {
     statistic: String,
     label: String,
@@ -44,15 +46,5 @@ export default {
       default: 'line',
     },
   },
-
-  components: {
-    VueApexCharts,
-  },
 }
 </script>
-
-<style lang="scss" scoped>
-.icon {
-  font-size: 1.5rem;
-}
-</style>

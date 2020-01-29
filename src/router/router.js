@@ -68,7 +68,7 @@ export const asyncRoutes = [
         path: '/goods-list',
         name: 'GoodsList',
         component: () => import('@/views/goods/GoodsList.vue'),
-        meta: { title: '商品列表' },
+        meta: { title: '商品列表', permission: { moduleName: 'goods', purviews: ['read'] } },
       },
       {
         path: '/goods-category',
@@ -108,7 +108,7 @@ export const asyncRoutes = [
         path: '/user-list',
         name: 'UserList',
         component: () => import('@/views/user/UserList.vue'),
-        meta: { title: '用户列表' },
+        meta: { title: '用户列表', permission: { moduleName: 'user', purviews: ['read'] } },
       },
     ],
     meta: { title: '用户管理', icon: 'UsersIcon' },
