@@ -53,7 +53,10 @@
                     v-model="todo.is_done"
                     @click.stop="toggleType(todo._id, 'is_done', !todo.is_done)"
                   ></vs-checkbox>
-                  <div class="text-overflow mr-3 w-48">{{ todo.title }}</div>
+                  <div
+                    class="text-overflow mr-3"
+                    style="max-width: 12rem;"
+                  >{{ todo.title }}</div>
                   <template v-if="todo.tags.length > 0">
                     <div
                       class="mr-1 flex justify-between items-center
@@ -117,9 +120,25 @@
             <!-- end -->
           </vs-row>
           <!-- todo项内容区域 -->
-          <div class="p-2 pr-16">
-            <p class="content-overflow text-gray">{{ todo.content }}</p>
+          <div class="p-2 flex justify-between">
+            <p class="content-overflow pr-5 text-gray">{{ todo.content }}</p>
+            <div class="text-xs text-gray">
+              {{ $dayjs(todo.complete_time[0]).format('YYYY-MM-DD') }}
+              至
+              {{ $dayjs(todo.complete_time[1]).format('YYYY-MM-DD') }}
+            </div>
           </div>
+        </li>
+
+        <li
+          key="1"
+          v-if="filterItems.length === 0"
+          class="p-10 text-center text-gray"
+        >
+          <p>
+            (｡•ˇ‸ˇ•｡) <br>
+            无数据
+          </p>
         </li>
       </transition-group>
     </VuePerfectScrollbar>

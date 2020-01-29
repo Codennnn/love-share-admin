@@ -84,8 +84,21 @@
           class="mt-4"
           label="任务描述"
           v-model="task.content"
-          :height="String(150)"
+          :height="String(80)"
         />
+        <!-- 计划完成日期 -->
+        <div>
+          <div class="mb-1 text-gray text-xs">计划完成日期</div>
+          <el-date-picker
+            type="daterange"
+            value-format="timestamp"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            v-model="task.complete_time"
+          >
+          </el-date-picker>
+        </div>
       </vs-col>
     </vs-row>
 
@@ -154,8 +167,8 @@ export default {
 
   watch: {
     todo: {
-      handler(v) {
-        this.task = _cloneDeepWith(v)
+      handler(todo) {
+        this.task = _cloneDeepWith(todo)
       },
       immediate: true,
     },
@@ -174,7 +187,7 @@ export default {
 
   computed: {
     disabled() {
-      return this.task.title?.length <= 0
+      return !((this.task.title?.length > 0) && (this.task.complete_time?.length > 0))
     },
   },
 
@@ -252,5 +265,11 @@ export default {
     transition: all 0.2s;
     color: #848484;
   }
+}
+</style>
+
+<style>
+.el-picker-panel {
+  z-index: 99999 !important;
 }
 </style>

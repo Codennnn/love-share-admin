@@ -50,7 +50,7 @@
             <ul class="h-full">
               <li
                 class="px-2 py-1 flex"
-                v-for="(it, i) in filterItems"
+                v-for="(it, i) in todayTask"
                 :key="i"
               >
                 <i class="el-icon-news mt-1 mr-3 primary text-2xl"></i>
@@ -126,6 +126,14 @@ export default {
   computed: {
     filterItems() {
       return this.$store.getters['todo/filterItems']({})
+    },
+    todayTask() {
+      return this.filterItems.filter((it) => {
+        const start = this.$dayjs(it.complete_time[0])
+        const end = this.$dayjs(it.complete_time[1])
+        return this.$dayjs().isAfter(start, 'day')
+         && (this.$dayjs().isSame(end, 'day') || this.$dayjs().isBefore(end, 'day'))
+      })
     },
   },
 

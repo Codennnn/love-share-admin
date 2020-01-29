@@ -51,6 +51,7 @@ export default {
         is_important: false,
         is_starred: false,
         is_trashed: false,
+        complete_time: [Date.now(), Date.now()],
       }
     },
 
