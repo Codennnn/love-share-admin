@@ -11,8 +11,9 @@
       </div>
     </div>
     <VuePerfectScrollbar
-      class="pb-6 overflow-hidden"
+      class="overflow-hidden"
       style="max-height: 300px;"
+      :class="{'pb-6': filterItems.length > 5}"
       :settings="{
         maxScrollbarLength: 200,
         wheelSpeed: 0.60,
@@ -21,7 +22,7 @@
       <ul>
         <li
           class="mb-4 flex"
-          v-for="(it, i) in todoList"
+          v-for="(it, i) in filterItems"
           :key="i"
         >
           <div class="mr-2">
@@ -32,8 +33,18 @@
           </div>
           <div style="width: 90%;">
             <div class="text-semi font-bold">{{ it.title }}</div>
-            <p class="text-overflow text-sm text-gray">{{ it.content }}</p>
+            <p class="content-overflow text-sm text-gray">{{ it.content }}</p>
           </div>
+        </li>
+
+        <li
+          v-if="filterItems.length === 0"
+          class="p-5 flex-row-center bg-gray radius text-semi"
+        >
+          <p class="text-center">
+            ✧*｡٩(ˊωˋ*)و✧*｡ <br />
+            <span class="text-sm">没有任务</span>
+          </p>
         </li>
       </ul>
     </VuePerfectScrollbar>
@@ -47,7 +58,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { PlusIcon } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
@@ -74,13 +84,15 @@ export default {
   }),
 
   computed: {
-    ...mapState('todo', ['todoList']),
+    filterItems() {
+      return this.$store.getters['todo/filterItems']({})
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.text-overflow {
+.content-overflow {
   @include textOverflow($width: 300px, $line: 2);
 }
 </style>

@@ -1,10 +1,13 @@
 <template>
   <div class="py-6">
-    <ProfileTodo class="w-1/2" />
+    <ProfileTodo class="w-1/2 mb-5" />
 
-    <ProfileLog class="w-1/2" />
+    <ProfileLog class="w-1/2 mb-5" />
 
-    <EditPermission :permissions="permissions" />
+    <div>
+      <h2 class="mb-2 text-primary text-lg font-bold">管理权限</h2>
+      <EditPermission :permissions="permissions" />
+    </div>
   </div>
 </template>
 

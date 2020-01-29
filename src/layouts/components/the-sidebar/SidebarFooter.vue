@@ -50,7 +50,7 @@
             <ul class="h-full">
               <li
                 class="px-2 py-1 flex"
-                v-for="(it, i) in todoList"
+                v-for="(it, i) in filterItems"
                 :key="i"
               >
                 <i class="el-icon-news mt-1 mr-3 primary text-2xl"></i>
@@ -96,7 +96,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import {
   MessageSquareIcon, LayersIcon, ChevronRightIcon, ChevronDownIcon,
 } from 'vue-feather-icons'
@@ -125,7 +124,9 @@ export default {
   },
 
   computed: {
-    ...mapState('todo', ['todoList']),
+    filterItems() {
+      return this.$store.getters['todo/filterItems']({})
+    },
   },
 
   methods: {

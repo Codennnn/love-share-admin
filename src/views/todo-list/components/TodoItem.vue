@@ -53,7 +53,7 @@
                     v-model="todo.is_done"
                     @click.stop="toggleType(todo._id, 'is_done', !todo.is_done)"
                   ></vs-checkbox>
-                  <div class="todo-item__title mr-3">{{ todo.title }}</div>
+                  <div class="text-overflow mr-3 w-48">{{ todo.title }}</div>
                   <template v-if="todo.tags.length > 0">
                     <div
                       class="mr-1 flex justify-between items-center
@@ -104,7 +104,7 @@
               <div v-else>
                 <i
                   title="还原"
-                  class="todo-mark__icon el-icon-upload2"
+                  class="todo-mark__icon mr-2 el-icon-upload2"
                   @click.stop="toggleType(todo._id, 'is_trashed', !todo.is_trashed)"
                 ></i>
                 <i
@@ -197,10 +197,6 @@ export default {
     padding-top: 0.9rem;
     padding-left: 4rem;
   }
-}
-
-.todo-item__title {
-  @include textOverflow($width: 200px, $line: 1);
 }
 
 .content-overflow {
