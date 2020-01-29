@@ -42,7 +42,7 @@
                 <vs-td class="font-semibold">￥{{ tr.price }}</vs-td>
 
                 <vs-td>
-                  <div class="whitespace-no-wrap">{{ timeDiff(data[i].time) }}</div>
+                  <div class="whitespace-no-wrap">{{ $timeDiff(data[i].time) }}</div>
                 </vs-td>
 
                 <vs-td>
@@ -93,7 +93,7 @@
                 <vs-td>{{ tr.name }}</vs-td>
                 <vs-td class="font-semibold">￥{{ tr.price }}</vs-td>
                 <vs-td>
-                  <div class="whitespace-no-wrap">{{ timeDiff(tr.time) }}</div>
+                  <div class="whitespace-no-wrap">{{ $timeDiff(tr.time) }}</div>
                 </vs-td>
 
                 <vs-td>
@@ -171,14 +171,12 @@
 <script>
 import ElImageViewer from 'element-ui/packages/image/src/image-viewer.vue'
 
-import { timeDiff } from '@/utils/util'
 import { getRecentContacts } from '@/request/api/user'
 import { getPublished, getBought } from '@/request/api/goods'
 
 export default {
   name: 'UserBaseInfo',
   data: () => ({
-    timeDiff,
     userID: '',
     showViewer: false,
     imgUrls: [],

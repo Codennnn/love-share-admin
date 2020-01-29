@@ -101,7 +101,7 @@
                 ￥{{ Number(tr.goods.price).toFixed(2) }}
               </vs-td>
               <vs-td :title="$dayjs(tr.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
-                {{ timeDiff(tr.goods.created_at) }}
+                {{ $timeDiff(tr.goods.created_at) }}
               </vs-td>
               <vs-td class="font-bold">{{ payments[item.payment] }}</vs-td>
               <vs-td>
@@ -156,14 +156,13 @@ import {
   getOrderVolume,
   getOrderNum,
 } from '@/request/api/order'
-import { timeDiff, areaChartOptions } from '@/utils/util'
+import { areaChartOptions } from '@/utils/util'
 
 export default {
   name: 'OrderList',
   components: { AreaChart },
 
   data: () => ({
-    timeDiff,
     initFinished: false,
     chartData1: {},
     chartData2: {},

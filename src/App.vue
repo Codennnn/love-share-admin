@@ -35,12 +35,6 @@ export default {
     },
   },
 
-  created() {
-    this.$store.dispatch('getCategoryList')
-    this.$store.dispatch('getSchoolList')
-    this.$store.dispatch('todo/getTodoList')
-  },
-
   mounted() {
     window.addEventListener('online', () => {
       this.isOffline = false

@@ -28,8 +28,8 @@
             :id="`billboard-item-${i}`"
           >
             <el-image
-              class="mr-3 rounded-lg"
-              style="width: 100px; height: 100px"
+              class="h-full mr-3 rounded-lg"
+              style="width: 150px;"
               :src="it.url"
               :preview-src-list="[it.url]"
             >
@@ -58,7 +58,7 @@
         ref="fileUpload"
         action="/api/billboard/upload"
         text="图片上传（JPG、PNG）"
-        fileName="img"
+        fileName="billboard"
         accept="image/jpeg,image/jpg,image/png"
         :limit="6"
         :headers="headers"

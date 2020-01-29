@@ -7,28 +7,28 @@
         style="width: 75%;"
       >
         <div class="mb-6 p-5 radius bg-gray">
-          <table class="w-full">
+          <table class="info-table w-full">
             <tr>
-              <td class="label text-primary">微 信</td>
-              <td class="value text-gray">{{ detail.wechat || '未填写' }}</td>
-              <td class="label text-primary">邮 箱</td>
-              <td class="value text-gray">{{ detail.email || '未填写' }}</td>
+              <td>微 信</td>
+              <td>{{ detail.wechat || '未填写' }}</td>
+              <td>邮 箱</td>
+              <td>{{ detail.email || '未填写' }}</td>
             </tr>
             <tr>
-              <td class="label text-primary">Q Q</td>
-              <td class="value text-gray">{{ detail.qq || '未填写' }}</td>
-              <td class="label text-primary">电 话</td>
-              <td class="value text-gray">{{ detail.phone }}</td>
+              <td>Q Q</td>
+              <td>{{ detail.qq || '未填写' }}</td>
+              <td>电 话</td>
+              <td>{{ detail.phone }}</td>
             </tr>
             <tr>
-              <td class="label text-primary">真实姓名</td>
-              <td class="value text-gray">{{ detail.real_name }}</td>
-              <td class="label text-primary">性 别</td>
-              <td class="value text-gray">{{ detail.gender === '0' ? '女' : '男' }}</td>
+              <td>真实姓名</td>
+              <td>{{ detail.real_name }}</td>
+              <td>性 别</td>
+              <td>{{ detail.gender === '0' ? '女' : '男' }}</td>
             </tr>
             <tr>
-              <td class="label text-primary">个人简介</td>
-              <td class="value text-gray">{{ detail.introduction || '未填写' }}
+              <td>个人简介</td>
+              <td>{{ detail.introduction || '未填写' }}
               </td>
             </tr>
           </table>
@@ -37,25 +37,27 @@
         <div class="flex">
           <div class="w-1/4">
             <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
-              <div class="text-center">
-                <i class="el-icon-money text-3xl text-gray"></i>
+              <div class="flex-col-center">
+                <DollarSignIcon class="mb-1 text-gray" />
                 <div class="text-gray text-sm">余 额</div>
               </div>
-              <div class="text-semi text-xl font-bold">{{ detail.beans }}</div>
+              <div class="text-semi text-xl font-bold">
+                {{ detail.beans ? Number(detail.beans).toFixed(2) : 0.00 }}
+              </div>
             </div>
             <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
-              <div class="text-center">
+              <div class="flex-col-center">
                 <i class="el-icon-cherry text-3xl text-gray"></i>
                 <div class="text-gray text-sm">乐 豆</div>
               </div>
-              <div class="text-semi text-xl font-bold">{{ detail.beans }}</div>
+              <div class="text-semi text-xl font-bold">{{ detail.beans || 0 }}</div>
             </div>
             <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
-              <div class="-ml-1 text-center">
-                <i class="el-icon-cherry text-3xl text-gray"></i>
+              <div class="-ml-1 flex-col-center">
+                <ArchiveIcon class="mb-1 text-gray" />
                 <div class="text-gray text-sm">优惠券</div>
               </div>
-              <div class="text-semi text-xl font-bold">{{ detail.beans }}</div>
+              <div class="text-semi text-xl font-bold">{{ detail.beans || 0  }}</div>
             </div>
           </div>
 
@@ -163,10 +165,13 @@
             style="border-width: 0 1px 0 0; border-style: solid;"
           >
             <div
-              class="w-10 h-10 mb-1 flex justify-center items-center rounded-full"
-              style="background: rgba(var(--vs-primary), 0.2);"
+              class="w-12 h-12 mb-1 flex-row-center rounded-full"
+              style="background: rgba(var(--vs-primary), 0.15);"
             >
-              <i class="el-icon-user primary"></i>
+              <UserCheckIcon
+                size="1.3x"
+                class="primary"
+              />
             </div>
             <p class="font-bold text-primary">{{ detail.fans_num }}</p>
           </div>
@@ -175,10 +180,13 @@
             class="py-2 flex-1 flex flex-col items-center"
           >
             <div
-              class="w-10 h-10 mb-1 flex justify-center items-center rounded-full"
-              style="background: rgba(var(--vs-warning), 0.2);"
+              class="w-12 h-12 mb-1 flex-row-center rounded-full"
+              style="background: rgba(var(--vs-warning), 0.15);"
             >
-              <i class="el-icon-view warning"></i>
+              <EyeIcon
+                size="1.3x"
+                class="warning"
+              />
             </div>
             <p class="font-bold text-primary">{{ detail.follow_num }}</p>
           </div>
@@ -205,7 +213,11 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
+import {
+  DollarSignIcon, ArchiveIcon, UserCheckIcon, EyeIcon,
+} from 'vue-feather-icons'
 import HeatmapChart from '@/components/LineChart.vue'
+
 
 import { getUserDetailByAdmin } from '@/request/api/user'
 
@@ -275,12 +287,15 @@ const chartSettings = {
 
 export default {
   name: 'UserDetail',
-  components: { HeatmapChart, VueApexCharts },
+  components: {
+    HeatmapChart, VueApexCharts, DollarSignIcon, ArchiveIcon, UserCheckIcon, EyeIcon,
+  },
 
   data: () => ({
     status,
     chartSettings,
     detail: {},
+
     option: {
       radius: 50, strokeWidth: 2, startColor: [157, 161, 248], endColor: [97, 101, 247],
     },
@@ -355,11 +370,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-table {
-  .label {
-    min-width: 80px;
+@include themeify {
+  .info-table {
+    td:nth-child(odd) {
+      color: themed("text-color-primary") !important;
+    }
+    td:nth-child(even) {
+      color: themed("text-color-semi") !important;
+    }
   }
-  .value {
+}
+
+.info-table {
+  td:nth-child(odd) {
+    width: 120px;
+  }
+  td:nth-child(even) {
+    width: 180px;
     font-size: 0.9rem;
   }
 }

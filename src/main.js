@@ -5,6 +5,7 @@ import dayjs from 'dayjs' // 日期格式化
 import VueSocketIO from 'vue-socket.io' // socket.io
 // import VContentmenu from 'v-contextmenu' // 右键菜单
 // import 'v-contextmenu/dist/index.css' // 右键菜单样式
+import { timeDiff } from '@/utils/util'
 
 import App from './App.vue'
 import router from './router/router'
@@ -26,6 +27,8 @@ Vue.use(animated)
 Vue.use(VueClipboard)
 Vue.prototype.$dayjs = dayjs
 dayjs.locale('zh-cn')
+
+Vue.prototype.$timeDiff = timeDiff
 
 Vue.config.productionTip = false
 

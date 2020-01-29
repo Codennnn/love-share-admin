@@ -30,7 +30,7 @@
       >
         <p class="text-primary text-lg font-bold">{{ goods.name }}</p>
         <div class="my-2 flex items-center justify-between text-gray text-sm">
-          <p>发布于 {{ timeDiff(goods.created_at) }}</p>
+          <p>发布于 {{ $timeDiff(goods.created_at) }}</p>
           <div class="flex items-center">
             <span class="ml-2 text-sm text-gray">{{ goods.collect_num }} 人收藏</span>
           </div>
@@ -146,7 +146,6 @@
 
 <script>
 import ElImageViewer from 'element-ui/packages/image/src/image-viewer.vue'
-import { timeDiff } from '@/utils/util'
 
 export default {
   name: 'DetailInfo',
@@ -155,7 +154,6 @@ export default {
   props: { goods: Object, goodsId: String },
 
   data: () => ({
-    timeDiff,
     showViewer: false,
   }),
 }

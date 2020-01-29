@@ -152,6 +152,12 @@ export default {
     ...mapState(['sidebarCollapse', 'navbarType']),
     ...mapState('chat', ['showChatbox']),
   },
+
+  created() {
+    this.$store.dispatch('getCategoryList')
+    this.$store.dispatch('getSchoolList')
+    this.$store.dispatch('todo/getTodoList')
+  },
 }
 </script>
 

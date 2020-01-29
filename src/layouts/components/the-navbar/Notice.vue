@@ -63,7 +63,7 @@
                 </div>
               </div>
             </div>
-            <small class="text-gray whitespace-no-wrap">{{ timeDiff(nt.created_at) }}</small>
+            <small class="text-gray whitespace-no-wrap">{{ $timeDiff(nt.created_at) }}</small>
             <i
               title="不再通知"
               class="read el-icon-close-notification absolute bottom-0 mr-3 mb-1
@@ -111,7 +111,6 @@ import {
 } from 'vue-feather-icons'
 
 import { setNoticeRead, setAllNoticesRead } from '@/request/api/notice'
-import { timeDiff } from '@/utils/util'
 
 const noticeType = {
   1: { icon: 'MessageSquareIcon', color: 'primary' },
@@ -133,7 +132,6 @@ export default {
   },
 
   data: () => ({
-    timeDiff,
     noticeType,
   }),
 

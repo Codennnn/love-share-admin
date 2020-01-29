@@ -43,7 +43,7 @@
       class="relative w-full mt-auto overflow-hidden"
     >
       <div class="mb-4 flex justify-between items-center text-primary">
-        <div>消息提醒</div>
+        <div>新消息</div>
         <div class="relative">
           <BellIcon
             size="1.1x"
@@ -83,9 +83,9 @@
             <div class="flex-1">
               <div class="flex justify-between items-center">
                 <span class="text-primary">{{ it.title }}</span>
-                <span class="text-xs text-gray">{{ timeDiff(it.created_at) }}</span>
+                <span class="text-xs text-gray">{{ $timeDiff(it.created_at) }}</span>
               </div>
-              <div class="text-overflow text-gray text-xs">{{ it.content }}</div>
+              <div class="w-48 text-overflow text-gray text-xs">{{ it.content }}</div>
             </div>
           </li>
           <li
@@ -114,7 +114,6 @@ import {
   BellIcon, MoreVerticalIcon, MessageSquareIcon, CheckCircleIcon, HelpCircleIcon, AlertTriangleIcon,
 } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { timeDiff } from '@/utils/util'
 
 const noticeType = {
   1: { icon: 'MessageSquareIcon', color: 'primary' },
@@ -134,7 +133,6 @@ export default {
     AlertTriangleIcon,
   },
   data: () => ({
-    timeDiff,
     noticeType,
   }),
 
@@ -167,7 +165,7 @@ export default {
   border-radius: 50%;
 }
 
-.text-overflow {
-  @include textOverflow($width: 220px, $line: 1);
-}
+// .text-overflow {
+//   @include textOverflow($width: 220px, $line: 1);
+// }
 </style>

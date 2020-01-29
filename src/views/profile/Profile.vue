@@ -4,22 +4,31 @@
 
     <ProfileLog class="w-1/2" />
 
+    <EditPermission :permissions="permissions" />
   </div>
 </template>
 
 <script>
 import ProfileTodo from './components/ProfileTodo.vue'
 import ProfileLog from './components/ProfileLog.vue'
+import EditPermission from '@/views/admin/edit/EditPermission.vue'
 
 export default {
   name: 'Profile',
   components: {
     ProfileTodo,
     ProfileLog,
+    EditPermission,
   },
 
   data: () => ({
   }),
+
+  computed: {
+    permissions() {
+      return this.$store.state.admin.info.permissions
+    },
+  },
 
   created() {
     this.$store.commit('SET_NAV_TYPE', 'hidden')

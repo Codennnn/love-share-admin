@@ -34,7 +34,7 @@
               class="owner ml-1"
             >主人</p>
             <p class="ml-2 text-xs text-gray">
-              {{ timeDiff(cm.created_at) }}
+              {{ $timeDiff(cm.created_at) }}
             </p>
           </div>
           <p class="ml-8 text-sm text-gray">{{ cm.content }}</p>
@@ -98,7 +98,6 @@
 <script>
 import elementResizeDetectorMaker from 'element-resize-detector'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { timeDiff } from '@/utils/util'
 
 export default {
   name: 'DetailComment',
@@ -117,7 +116,6 @@ export default {
   },
 
   data: () => ({
-    timeDiff,
     counterDanger: true,
     maxHeight: 500,
 
