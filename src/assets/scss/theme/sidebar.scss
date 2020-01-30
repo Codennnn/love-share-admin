@@ -36,6 +36,12 @@
           .el-submenu__title {
             background: themed("sidebar-item-active-color");
           }
+
+          .el-menu-item {
+            &:hover {
+              background: themed("bg-color-gray");
+            }
+          }
         }
 
         &.is-active {
