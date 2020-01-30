@@ -95,7 +95,7 @@
         >全部已读</span>
         <span
           class="primary cursor-pointer"
-          @click="$router.push('/message')"
+          @click="$router.push('/notice')"
         >查看全部通知</span>
       </div>
     </vs-dropdown-menu>

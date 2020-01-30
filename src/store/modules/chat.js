@@ -14,7 +14,7 @@ const state = {
 }
 
 const mutations = {
-  SET_ACTIVE_CHAT_USER(state, { _id = '', nickname = '', avatar_url = '' }) {
+  SET_ACTIVE_CHAT_USER(state, { _id = '', nickname = '' }) {
     state.activeChatUser = _id
     state.activeChatNickname = nickname
   },

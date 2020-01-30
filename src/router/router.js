@@ -310,11 +310,11 @@ export const asyncRoutes = [
         },
       },
       {
-        path: '',
-        name: 'Chat',
-        component: () => import('@/views/chat/Chat.vue'),
+        path: '/notice',
+        name: 'Notice',
+        component: () => import('@/views/notice/Notice.vue'),
         meta: {
-          title: '个人中心',
+          title: '通知中心',
         },
       },
     ],
