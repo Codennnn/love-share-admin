@@ -3,7 +3,7 @@
     <!-- 用户名称 -->
     <div class="user-text mr-2 text-right">
       <div class="text-right text-lg">{{ nickname }}</div>
-      <small>管理员</small>
+      <small>系统管理员</small>
     </div>
 
     <!-- 头像 -->

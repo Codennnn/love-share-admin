@@ -93,3 +93,19 @@ export function getUserInfo(params) {
     params,
   })
 }
+
+export function updatePassword(data) {
+  return request({
+    url: '/admin/update_password',
+    method: 'put',
+    data,
+  })
+}
+
+export function updateLockPassword(data) {
+  return request({
+    url: '/admin/update_lock_password',
+    method: 'put',
+    data,
+  })
+}

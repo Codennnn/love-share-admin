@@ -1,8 +1,8 @@
 <template>
   <div style="width: 320px;">
     <VuePerfectScrollbar
-      class="fixed right-0 h-screen bg-primary overflow-hidden"
-      style="max-height: 100%; width: 320px; box-shadow: -1px 0 15px rgba(0, 0, 0, 0.05);"
+      class="fixed right-0 h-screen max-h-full bg-primary overflow-hidden"
+      style="width: 320px; box-shadow: -1px 0 15px rgba(0, 0, 0, 0.05);"
       :settings="{
         maxScrollbarLength: 200,
         wheelSpeed: 0.60,
@@ -16,6 +16,12 @@
             <vs-dropdown-menu class="w-24">
               <vs-dropdown-item class="text-sm text-center">
                 编辑信息
+              </vs-dropdown-item>
+              <vs-dropdown-item
+                class="text-sm text-center"
+                @click="activeAccountSecurity = true, showPopup = true"
+              >
+                账号安全
               </vs-dropdown-item>
               <vs-dropdown-item class="text-sm text-center">
                 退出登录
@@ -55,7 +61,7 @@
           <ul class="avatar-line flex">
             <li
               class="avatar"
-              v-for="(it, i) in contactList"
+              v-for="(it, i) in firstFewContacts"
               :key="i"
             >
               <el-tooltip
@@ -66,9 +72,22 @@
                   size="32px"
                   class="m-0 border-2 border-solid border-white"
                   :src="`${it.avatar_url}?imageView2/2/w/80`"
+                  @click="$router.push({
+                    path: '/user-detail',
+                    query: { userId: it._id }
+                  })"
                 />
               </el-tooltip>
-
+            </li>
+            <li
+              v-if="firstFewContacts.length > 6"
+              class="avatar"
+            >
+              <vs-avatar
+                size="32px"
+                class="m-0 border-2 border-solid border-white"
+                :text="`+${contactList - firstFewContacts.length}`"
+              />
             </li>
           </ul>
         </div>
@@ -99,7 +118,7 @@
             <ul>
               <li
                 class="mb-3 flex items-center"
-                v-for="(it, i) in fewNotices"
+                v-for="(it, i) in firstFewNotices"
                 :key="i"
               >
                 <div class="mr-2">
@@ -125,33 +144,45 @@
                 </div>
               </li>
               <li
-                v-if="unreadAmount > fewNotices.length"
+                v-if="unreadAmount > firstFewNotices.length"
                 class="mb-12 flex justify-center"
               >
                 <div class="py-1 px-5 flex items-center text-sm text-gray
              bg-gray radius cursor-pointer">
-                  查看全部
+                  查看全部 +{{ unreadAmount - firstFewNotices.length }}
                 </div>
               </li>
             </ul>
           </VuePerfectScrollbar>
           <div
-            v-if="unreadAmount > fewNotices.length"
+            v-if="unreadAmount > firstFewNotices.length"
             class="shadow-hidden absolute bottom-0 py-3 bg-primary"
             style="width: 280px;"
           ></div>
         </div>
       </div>
     </VuePerfectScrollbar>
+
+    <AccountSecurity
+      v-if="activeAccountSecurity"
+      :show-popup="showPopup"
+      @onClose="showPopup = false"
+    />
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 import {
   BellIcon, MoreVerticalIcon, MessageSquareIcon, CheckCircleIcon, HelpCircleIcon, AlertTriangleIcon,
 } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+
+const AccountSecurity = Vue.component(
+  'AccountSecurity',
+  () => import('@/components/AccountSecurity.vue'),
+)
 
 const noticeType = {
   1: { icon: 'MessageSquareIcon', color: 'primary' },
@@ -162,6 +193,7 @@ const noticeType = {
 export default {
   name: 'TheProfileBar',
   components: {
+    AccountSecurity,
     VuePerfectScrollbar,
     BellIcon,
     MoreVerticalIcon,
@@ -173,17 +205,22 @@ export default {
 
   data: () => ({
     noticeType,
+    activeAccountSecurity: false,
+    showPopup: false,
   }),
 
   computed: {
     ...mapState('admin', ['info']),
     ...mapState('chat', ['contactList']),
     ...mapGetters('notice', ['unreadAmount']),
+    firstFewContacts() {
+      return this.contactList.slice(0, 5)
+    },
+    firstFewNotices() {
+      return this.$store.getters['notice/getFewNotices'](5)
+    },
     genderColor() {
       return this.info.gender ? 'danger' : 'primary'
-    },
-    fewNotices() {
-      return this.$store.getters['notice/getFewNotices'](5)
     },
   },
 }
