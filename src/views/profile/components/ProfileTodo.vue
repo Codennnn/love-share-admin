@@ -51,7 +51,6 @@
 
     <TodoPopup
       :is-popup-active="showPopup"
-      :todo="todo"
       @hidePopup="showPopup = false"
     />
   </div>
@@ -71,15 +70,6 @@ export default {
   },
 
   data: () => ({
-    todo: {
-      title: '',
-      content: '',
-      tags: [],
-      is_done: false,
-      is_important: false,
-      is_starred: false,
-      is_trashed: false,
-    },
     showPopup: false,
   }),
 

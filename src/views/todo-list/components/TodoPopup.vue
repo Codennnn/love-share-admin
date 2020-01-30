@@ -32,14 +32,14 @@
             size="1.4x"
             stroke-width="1.5px"
             class="mr-2 text-gray cursor-pointer"
-            :class="{success: task.is_important}"
+            :class="{'success': task.is_important}"
             @click="task.is_important = !task.is_important"
           />
           <StarIcon
             size="1.4x"
             stroke-width="1.5px"
             class="mr-2 text-gray cursor-pointer"
-            :class="{warning: task.is_starred}"
+            :class="{'warning': task.is_starred}"
             @click="task.is_starred = !task.is_starred"
           />
           <!-- 选择任务的标签 -->
@@ -154,7 +154,16 @@ export default {
     },
     todo: {
       type: Object,
-      required: true,
+      default: () => ({
+        title: '',
+        content: '',
+        tags: [],
+        is_done: false,
+        is_important: false,
+        is_starred: false,
+        is_trashed: false,
+        complete_time: [Date.now(), Date.now()],
+      }),
     },
   },
 

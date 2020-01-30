@@ -1,7 +1,12 @@
 <template>
   <div class="py-6">
-    <ProfileTodo class="w-1/2 mb-5" />
+    <div class="flex">
+      <ProfileTodo class="w-1/2 mb-5" />
 
+      <div class="w-1/2 pl-4">
+        <ProfileBind class="" />
+      </div>
+    </div>
     <ProfileLog class="w-1/2 mb-5" />
 
     <div>
@@ -14,6 +19,7 @@
 <script>
 import ProfileTodo from './components/ProfileTodo.vue'
 import ProfileLog from './components/ProfileLog.vue'
+import ProfileBind from './components/ProfileBind.vue'
 import EditPermission from '@/views/admin/edit/EditPermission.vue'
 
 export default {
@@ -21,6 +27,7 @@ export default {
   components: {
     ProfileTodo,
     ProfileLog,
+    ProfileBind,
     EditPermission,
   },
 

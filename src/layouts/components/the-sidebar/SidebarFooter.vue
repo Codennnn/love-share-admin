@@ -49,18 +49,24 @@
           >
             <ul class="h-full">
               <li
-                class="px-2 py-1 flex"
+                class="todo-item relative px-2 py-1 flex"
                 v-for="(it, i) in todayTask"
                 :key="i"
               >
-                <i class="el-icon-news mt-1 mr-3 primary text-2xl"></i>
+                <i
+                  class="el-icon-news mt-1 mr-3 text-2xl cursor-pointer"
+                  :class="it.is_done ? 'text-gray' : 'primary'"
+                  @click.stop="toggleType(it._id, 'is_done', !it.is_done)"
+                ></i>
                 <div class="flex-1">
-                  <div class="text-semi font-bold">{{ it.title }}</div>
-                  <div class="text-xs text-gray">
-                    {{ $dayjs(it.created_at).format('YYYY-MM-DD') }}
+                  <div
+                    class="flex items-center"
+                    :class="it.is_done ? 'text-gray' : 'text-primary'"
+                  >
+                    {{ it.title }}
                   </div>
+                  <div class="w-64 text-overflow text-semi text-xs">{{ it.content }}</div>
                 </div>
-                <!-- <div class="text-semi text-sm">{{ it.content }}</div> -->
               </li>
             </ul>
           </VuePerfectScrollbar>
@@ -141,6 +147,10 @@ export default {
     viewAll() {
       this.$router.push('/todo-list')
       this.isTaskOpen = false
+    },
+
+    toggleType(todo_id, type, flag) {
+      this.$store.dispatch('todo/updateTodoType', { todo_id, type, flag })
     },
   },
 }
