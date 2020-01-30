@@ -72,27 +72,6 @@ export function modifyAddress() {
   })
 }
 
-export function getContactList() {
-  return request({
-    url: '/user/contact_list',
-    method: 'get',
-  })
-}
-
-export function subscribe() {
-  return request({
-    url: '/user/subscribe',
-    method: 'post',
-  })
-}
-
-export function unsubscribe() {
-  return request({
-    url: '/user/unsubscribe',
-    method: 'post',
-  })
-}
-
 export function getUserDailyStatistics(data) {
   return request({
     url: '/user/daily_statistics',

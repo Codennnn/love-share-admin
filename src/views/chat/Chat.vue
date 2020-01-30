@@ -4,6 +4,7 @@
     class="relative border border-solid base-shadow border-primary overflow-hidden"
     style="border-radius: 1rem;"
   >
+    <!-- 左侧 -->
     <vs-sidebar
       id="chat-list-sidebar"
       parent="#chat-app"
@@ -14,9 +15,10 @@
       <div class="flex items-center px-4 py-3 bg-primary">
         <div class="relative inline-flex">
           <vs-avatar
+            v-if="userId"
             class="m-0"
             size="40px"
-            :src="`${$store.state.admin.info.avatar_url}?imageView2/2/w/60`"
+            :src="`${$store.state.admin.info.user.avatar_url}?imageView2/2/w/60`"
           />
         </div>
         <vs-input
@@ -54,18 +56,17 @@
               @click="updateActiveChatUser(contact)"
             >
               <ChatContact
-                v-contextmenu:contextmenu
                 :contact="contact"
                 :lastMessaged="chatLastMessaged(contact._id)"
                 :isActiveChatUser="isActiveChatUser(contact._id)"
               />
-              <v-contextmenu
+              <!-- <v-contextmenu
                 ref="contextmenu"
                 theme="bright"
                 @contextmenu="(e) => deleteContactId = e.componentOptions.propsData.contact._id"
               >
                 <v-contextmenu-item @click="deleteContact()">删除联系人</v-contextmenu-item>
-              </v-contextmenu>
+              </v-contextmenu> -->
             </li>
           </ul>
           <div
@@ -81,7 +82,7 @@
 
     <!-- 右侧 -->
     <div
-      class="chat-bg relative"
+      class="relative bg-gray"
       :class="{'sidebar-spacer--wide': clickNotClose}"
     >
       <div class="chat-navbar">
@@ -113,7 +114,7 @@
       <!-- 输入框 -->
       <div
         v-if="activeChatUser"
-        class="chat-input flex items-center p-4 bg-white"
+        class="chat-input flex items-center p-4 bg-primary"
       >
         <vs-input
           class="flex-1"
@@ -132,7 +133,7 @@
 
 <script>
 import _debounce from 'lodash/debounce'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import ChatContact from './components/ChatContact.vue'
@@ -173,7 +174,7 @@ export default {
     }, 400)
 
     // 监听自身 ID， 订阅消息
-    this.sockets.subscribe(this.userId, (msg) => {
+    this.sockets.subscribe(this.adminId, (msg) => {
       this.$store.dispatch('chat/receiveMessage', msg)
     })
   },
@@ -184,9 +185,7 @@ export default {
 
   computed: {
     ...mapState('chat', ['activeChatUser', 'activeChatNickname', 'activeChatAvatar']),
-    userId() {
-      return this.$store.getters['user/getUserId']
-    },
+    ...mapGetters('admin', ['adminId', 'userId']),
     // 全部联系人
     contactList() {
       return this.$store.getters['chat/getContactList']
@@ -311,10 +310,6 @@ $sidebar-width: 310px;
         }
       }
     }
-  }
-
-  .chat-bg {
-    background: rgb(231, 238, 255);
   }
 
   .sidebar-spacer--wide {

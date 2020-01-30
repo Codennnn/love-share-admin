@@ -1,8 +1,8 @@
 <template>
   <div
+    v-if="chatData"
     id="component-chat-log"
     class="m-8"
-    v-if="chatData"
   >
     <div
       v-for="(msg, index) in chatData.msg"
@@ -55,7 +55,7 @@ export default {
   methods: {
     setAvatar(isSent) {
       if (isSent) {
-        return `${this.$store.state.user.info.avatar_url}?imageView2/2/w/60`
+        return `${this.$store.state.admin.info.user.avatar_url}?imageView2/2/w/60`
       }
       return `${this.avatar}?imageView2/2/w/60`
     },

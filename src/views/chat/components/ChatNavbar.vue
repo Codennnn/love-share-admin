@@ -8,7 +8,7 @@
       v-if="isSidebarCollapsed"
       @click.stop="$emit('openContactsSidebar')"
     ></i>
-    <div class="text-xl text-gray-600">{{ nickname }}</div>
+    <div class="text-xl text-primary">{{ nickname }}</div>
     <i
       class="el-icon-close ml-auto mr-2 text-2xl text-gray cursor-pointer"
       @click.stop="$store.commit('chat/SET_CHAT_CLOSE')"

@@ -62,7 +62,7 @@ export default {
   actions,
   getters: {
     adminId: state => state.info._id,
-    roles: state => state.info.roles,
+    userId: state => state.info?.user?._id,
     nickname: state => state.info.nickname,
     avatar: state => state.info.avatar_url,
   },

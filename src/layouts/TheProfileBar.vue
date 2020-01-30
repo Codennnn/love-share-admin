@@ -24,26 +24,44 @@
           </vs-dropdown>
         </div>
 
-        <div class="relative">
-          <vs-avatar
-            size="90px"
-            :src="info.avatar_url"
-          />
-          <div
-            class="absolute w-6 h-6 flex-row-center rounded-full"
-            style="bottom: 10px; right: 10px;"
-            :style="`background: rgba(var(--vs-${genderColor}), 0.8);`"
-          >
-            <i
-              class="text-white"
-              :class="info.gender === 0 ? 'el-icon-male' : 'el-icon-female'"
-              style="font-size: 0.85rem;"
-            ></i>
+        <div class="text-center">
+          <div class="relative">
+            <vs-avatar
+              size="90px"
+              :src="info.avatar_url"
+            />
+            <div
+              class="absolute w-6 h-6 flex-row-center rounded-full"
+              style="bottom: 10px; right: 30px;"
+              :style="`background: rgba(var(--vs-${genderColor}), 0.8);`"
+            >
+              <i
+                class="text-white"
+                :class="info.gender === 0 ? 'el-icon-male' : 'el-icon-female'"
+                style="font-size: 0.85rem;"
+              ></i>
+            </div>
           </div>
+          <h3 class="mt-1 text-xl text-primary">{{ info.nickname }}</h3>
+          <h4 class="mb-10 text-semi text-xs">{{ info.email }}</h4>
         </div>
-        <h3 class="mt-1 text-xl text-primary">{{ info.nickname }}</h3>
-        <h4 class="mb-10 text-semi text-xs">{{ info.email }}</h4>
 
+        <!-- 联系人 -->
+        <div v-if="contactList.length > 0">
+          <ul class="flex">
+            <li
+              v-for="(it, i) in contactList"
+              :key="i"
+            >
+              <vs-avatar
+                size="30px"
+                :src="`${it.avatar_url}?imageView2/2/w/80`"
+              />
+            </li>
+          </ul>
+        </div>
+
+        <!-- 新通知 -->
         <div
           v-if="unreadAmount > 0"
           class="relative w-full mt-auto overflow-hidden"
@@ -140,12 +158,14 @@ export default {
     HelpCircleIcon,
     AlertTriangleIcon,
   },
+
   data: () => ({
     noticeType,
   }),
 
   computed: {
     ...mapState('admin', ['info']),
+    ...mapState('chat', ['contactList']),
     ...mapGetters('notice', ['unreadAmount']),
     genderColor() {
       return this.info.gender ? 'danger' : 'primary'

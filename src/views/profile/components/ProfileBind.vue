@@ -41,23 +41,32 @@
 
     <template v-else>
       <div>
-        <vs-avatar
-          size="80px"
-          class=" base-shadow"
-          :src="info.avatar_url"
+        <el-image
+          class="w-24 mr-4 radius base-shadow"
+          :src="`${info.avatar_url}?imageView2/2/w/150`"
         />
       </div>
       <div>
-        <div class="text-lg text-primary">
+        <div class="text-lg text-primary font-bold">
           {{ info.nickname }}
         </div>
-        <div>
+        <div class="my-1 text-xs text-gray">
           {{ info.school.name }}
         </div>
         <div
-          class="primary text-sm cursor-pointer"
+          class="danger text-sm cursor-pointer"
           @click="unbindUser()"
         >解除绑定</div>
+      </div>
+      <div class="ml-auto">
+        <vs-button
+          icon="el-icon-right"
+          icon-pack="el-icon"
+          @click="$router.push({
+            path: '/user-detail',
+            query: { userId },
+          })"
+        ></vs-button>
       </div>
     </template>
   </div>
@@ -79,7 +88,7 @@ export default {
 
   computed: {
     userId() {
-      return this.$store.state.admin.info?.user?._id
+      return this.$store.getters['admin/userId']
     },
   },
 
@@ -102,6 +111,8 @@ export default {
       const { code } = await bindUser({ phone: this.phone })
       if (code === 2000) {
         await this.$store.dispatch('admin/getAdminInfo')
+        this.$store.dispatch('chat/getContactList')
+        this.$store.dispatch('chat/getChatData')
         this.getUserInfo()
       }
     },

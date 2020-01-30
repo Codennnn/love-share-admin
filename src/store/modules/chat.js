@@ -74,17 +74,23 @@ const actions = {
     commit('SET_ACTIVE_CHAT_USER', state.contactList[0])
   },
 
-  async getContactList({ commit }) {
-    const { code, data } = await getContactList()
-    if (code === 2000) {
-      commit('SET_CONTACT_LIST', data.contact_list)
+  async getContactList({ commit, rootGetters }) {
+    const user_id = rootGetters['admin/userId']
+    if (user_id) {
+      const { code, data } = await getContactList({ user_id })
+      if (code === 2000) {
+        commit('SET_CONTACT_LIST', data.contact_list)
+      }
     }
   },
 
-  async getChatData({ commit }) {
-    const { code, data } = await getChatData()
-    if (code === 2000) {
-      commit('SET_CHAT_DATA', data.chats)
+  async getChatData({ commit, rootGetters }) {
+    const user_id = rootGetters['admin/userId']
+    if (user_id) {
+      const { code, data } = await getChatData({ user_id })
+      if (code === 2000) {
+        commit('SET_CHAT_DATA', data.chats)
+      }
     }
   },
 

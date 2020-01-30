@@ -2,7 +2,7 @@ import request from '../request'
 
 export function addContact(data) {
   return request({
-    url: '/admin/chat/contact/add',
+    url: '/chat/contact/add',
     method: 'post',
     data,
   })
@@ -10,29 +10,31 @@ export function addContact(data) {
 
 export function deleteContact(data) {
   return request({
-    url: '/admin/chat/contact/delete',
+    url: '/chat/contact/delete',
     method: 'delete',
     data,
   })
 }
 
-export function getContactList() {
+export function getContactList(params) {
   return request({
-    url: '/admin/chat/contact/list',
+    url: '/chat/contact/list',
     method: 'get',
+    params,
   })
 }
 
-export function getChatData() {
+export function getChatData(params) {
   return request({
-    url: '/admin/chat/chat_data',
+    url: '/chat/chat_data',
     method: 'get',
+    params,
   })
 }
 
 export function getContactInfo(params) {
   return request({
-    url: '/admin/chat/contact_info',
+    url: '/chat/contact_info',
     method: 'get',
     params,
   })

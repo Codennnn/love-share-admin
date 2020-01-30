@@ -157,19 +157,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  .task {
-    transition: all 0.3s;
-    width: 95%;
-    height: 50px;
-    max-height: 100%;
-    &.is-open {
-      width: 450px;
-      height: 600px;
-      max-height: 600px;
-      box-shadow: $base-shadow;
-      cursor: default;
-    }
+.task {
+  transition: all 0.3s;
+  width: 95%;
+  height: 50px;
+  max-height: 100%;
+  &.is-open {
+    width: 450px;
+    height: 600px;
+    max-height: 600px;
+    box-shadow: $base-shadow;
+    cursor: default;
   }
 }
 </style>

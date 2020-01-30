@@ -3,7 +3,7 @@
     <!-- 用户名称 -->
     <div class="user-text mr-2 text-right">
       <div class="text-right text-lg">{{ nickname }}</div>
-      <small>{{ setTitle(roles) }}</small>
+      <small>管理员</small>
     </div>
 
     <!-- 头像 -->
@@ -59,20 +59,10 @@ export default {
   }),
 
   computed: {
-    ...mapGetters('admin', ['nickname', 'roles', 'avatar']),
+    ...mapGetters('admin', ['nickname', 'avatar']),
   },
 
   methods: {
-    setTitle(roles) {
-      if (roles.includes('super_admin')) {
-        return '超级管理员'
-      }
-      if (roles.includes('admin')) {
-        return '普通管理员'
-      }
-      return '身份不明'
-    },
-
     routeTo(route, text) {
       if (text === '锁定后台') {
         this.lock()

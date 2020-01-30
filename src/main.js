@@ -14,7 +14,7 @@ import store from './store/store'
 import 'dayjs/locale/zh-cn' // dayjs 语言包
 import './router/control' // 路由控制
 import '@/layouts/theme' // 网站主题，样式
-import '@/directives' // 自定义指令
+// import '@/directives' // 自定义指令
 
 // import '@/request/mock/mock' // 本地 mock 模拟请求数据
 
