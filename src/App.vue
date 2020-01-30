@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- 网络状态检测 -->
     <div
       v-show="isOffline"
       class="fixed top-0 w-full h-16 flex justify-center items-center"
@@ -16,6 +17,7 @@
         </span>
       </vs-alert>
     </div>
+
     <router-view />
   </div>
 </template>
@@ -48,12 +50,6 @@ export default {
 </script>
 
 <style lang="scss">
-@include themeify {
-  .scroll-area {
-    color: themed("text-color-primary");
-  }
-}
-
 #app {
   height: 100%;
   background-color: rgb(245, 245, 245);

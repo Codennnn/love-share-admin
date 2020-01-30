@@ -7,7 +7,6 @@ import {
 const state = {
   activeChatUser: '',
   activeChatNickname: '',
-  activeChatAvatar: '',
   contactList: [],
   chatSearchQuery: '',
   chats: {},
@@ -18,7 +17,6 @@ const mutations = {
   SET_ACTIVE_CHAT_USER(state, { _id = '', nickname = '', avatar_url = '' }) {
     state.activeChatUser = _id
     state.activeChatNickname = nickname
-    state.activeChatAvatar = avatar_url
   },
 
   SET_CONTACT_LIST(state, contactList) {

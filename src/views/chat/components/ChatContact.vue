@@ -13,17 +13,17 @@
       <div class="contact__info flex flex-col truncate w-5/6">
         <div
           class="text-base"
-          :class="{'text-white': isActiveChatUser, 'text-gray-700': !isActiveChatUser}"
+          :class="{'text-white': isActiveChatUser, 'text-semi': !isActiveChatUser}"
         >{{ contact.nickname }}</div>
         <span
           class="truncate text-sm"
-          :class="{'text-white': isActiveChatUser, 'text-gray-500': !isActiveChatUser}"
+          :class="{'text-white': isActiveChatUser, 'text-gray': !isActiveChatUser}"
         >{{ lastMessaged.msg || '' }}</span>
       </div>
 
       <span
         class="whitespace-no-wrap text-xs"
-        :class="{'text-white': isActiveChatUser, 'text-gray-600': !isActiveChatUser}"
+        :class="{'text-white': isActiveChatUser, 'text-gray': !isActiveChatUser}"
       >{{ $dayjs(lastMessaged.time).format('YYYY-MM-DD') || '' }}</span>
     </div>
   </div>

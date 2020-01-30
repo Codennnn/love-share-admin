@@ -104,10 +104,7 @@
         }"
       >
         <div ref="chatLog">
-          <ChatLog
-            :contactId="activeChatUser"
-            :avatar="activeChatAvatar"
-          />
+          <ChatLog :contactId="activeChatUser" />
         </div>
       </VuePerfectScrollbar>
 
@@ -184,7 +181,7 @@ export default {
   },
 
   computed: {
-    ...mapState('chat', ['activeChatUser', 'activeChatNickname', 'activeChatAvatar']),
+    ...mapState('chat', ['activeChatUser', 'activeChatNickname']),
     ...mapGetters('admin', ['adminId', 'userId']),
     // 全部联系人
     contactList() {
