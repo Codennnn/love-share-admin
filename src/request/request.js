@@ -59,8 +59,8 @@ service.interceptors.response.use(
     const { code, msg } = data
     if (code !== 2000) {
       errorHandler.errorNotify({
-        title: '操作失常 〒▽〒',
-        message: `错误代码：${code} - ${msg}`,
+        title: `错误代码 - ${code}`,
+        message: msg,
         duration: 0,
       })
     }

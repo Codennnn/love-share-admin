@@ -70,3 +70,26 @@ export function getSignLog() {
     method: 'get',
   })
 }
+
+export function bindUser(data) {
+  return request({
+    url: '/admin/bind_user',
+    method: 'put',
+    data,
+  })
+}
+
+export function unbindUser() {
+  return request({
+    url: '/admin/unbind_user',
+    method: 'put',
+  })
+}
+
+export function getUserInfo(params) {
+  return request({
+    url: '/user/other/info',
+    method: 'get',
+    params,
+  })
+}
