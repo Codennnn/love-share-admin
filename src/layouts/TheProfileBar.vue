@@ -47,16 +47,28 @@
         </div>
 
         <!-- 联系人 -->
-        <div v-if="contactList.length > 0">
-          <ul class="flex">
+        <div
+          v-if="contactList.length > 0"
+          class="w-full"
+        >
+          <div class="mb-2 text-primary">最近联系</div>
+          <ul class="avatar-line flex">
             <li
+              class="avatar"
               v-for="(it, i) in contactList"
               :key="i"
             >
-              <vs-avatar
-                size="30px"
-                :src="`${it.avatar_url}?imageView2/2/w/80`"
-              />
+              <el-tooltip
+                :open-delay="200"
+                :content="it.nickname"
+              >
+                <vs-avatar
+                  size="32px"
+                  class="m-0 border-2 border-solid border-white"
+                  :src="`${it.avatar_url}?imageView2/2/w/80`"
+                />
+              </el-tooltip>
+
             </li>
           </ul>
         </div>
@@ -64,7 +76,7 @@
         <!-- 新通知 -->
         <div
           v-if="unreadAmount > 0"
-          class="relative w-full mt-auto overflow-hidden"
+          class="relative w-full mt-6 overflow-hidden"
         >
           <div class="mb-4 flex justify-between items-center text-primary">
             <div>新消息</div>
@@ -180,16 +192,32 @@ export default {
 <style lang="scss" scoped>
 @include themeify {
   .dot {
+    top: -2px;
+    right: -1px;
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 3px solid;
+    border-radius: 50%;
     border-color: themed("bg-color-primary");
   }
 }
 
-.dot {
-  top: -2px;
-  right: -1px;
-  width: 0.7rem;
-  height: 0.7rem;
-  border: 3px solid;
-  border-radius: 50%;
+.avatar-line {
+  .avatar {
+    transition: all 0.2s;
+    &:first-child {
+      &:hover {
+        transform: translateY(-6px);
+        z-index: 50;
+      }
+    }
+    &:not(:first-child) {
+      transform: translateX(-10px);
+      &:hover {
+        transform: translate(-10px, -6px);
+        z-index: 50;
+      }
+    }
+  }
 }
 </style>
