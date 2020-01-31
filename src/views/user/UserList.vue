@@ -89,12 +89,15 @@
         </div>
 
         <div
-          title="导出为 PNG"
+          title="导出统计图"
           class="py-2 px-3 rounded-lg cursor-pointer"
           style="background: rgba(var(--vs-primary), 0.1);"
           @click="$refs.userChart.downloadPNG()"
         >
-          <i class="el-icon-download text-lg primary"></i>
+          <DownloadIcon
+            size="1.3x"
+            class="primary"
+          />
         </div>
       </div>
       <LineChart
@@ -109,6 +112,7 @@
 
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
+import { DownloadIcon } from 'vue-feather-icons'
 import { setCreditColor } from '@/utils/util'
 import LineChart from '@/components/LineChart.vue'
 
@@ -189,7 +193,7 @@ const chartSettings = {
 
 export default {
   name: 'userList',
-  components: { LineChart },
+  components: { DownloadIcon, LineChart },
 
   data: () => ({
     setCreditColor,
@@ -243,6 +247,7 @@ export default {
       }
     },
 
+    // 导出统计图
     downloadPNG(base64) {
       const link = document.createElement('a')
       link.href = base64

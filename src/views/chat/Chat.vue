@@ -156,33 +156,9 @@ export default {
     message: '', // 要发送的消息
   }),
 
-  created() {
-    this.$store.dispatch('chat/getContactList')
-    this.$store.dispatch('chat/getChatData')
-  },
-
-  mounted() {
-    window.onresize = _debounce(() => {
-      if (document.body.clientWidth <= 1000) {
-        this.setSidebarActive(false)
-      } else {
-        this.setSidebarActive(true)
-      }
-    }, 400)
-
-    // 监听自身 ID， 订阅消息
-    this.sockets.subscribe(this.adminId, (msg) => {
-      this.$store.dispatch('chat/receiveMessage', msg)
-    })
-  },
-
-  beforeDestroy() {
-    window.onresize = null
-  },
-
   computed: {
     ...mapState('chat', ['activeChatUser', 'activeChatNickname']),
-    ...mapGetters('admin', ['adminId', 'userId']),
+    ...mapGetters('admin', ['userId']),
     // 全部联系人
     contactList() {
       return this.$store.getters['chat/getContactList']
@@ -205,6 +181,30 @@ export default {
     isActiveChatUser() {
       return contactId => contactId === this.activeChatUser
     },
+  },
+
+  created() {
+    this.$store.dispatch('chat/getContactList')
+    this.$store.dispatch('chat/getChatData')
+  },
+
+  mounted() {
+    window.onresize = _debounce(() => {
+      if (document.body.clientWidth <= 1000) {
+        this.setSidebarActive(false)
+      } else {
+        this.setSidebarActive(true)
+      }
+    }, 400)
+
+    // 监听自身 ID 接收消息
+    this.sockets.subscribe(this.userId, (msg) => {
+      this.$store.commit('SEND_CHAT_MESSAGE', msg)
+    })
+  },
+
+  beforeDestroy() {
+    window.onresize = null
   },
 
   methods: {
@@ -230,7 +230,7 @@ export default {
         time: Date.now(),
       }
       this.$socket.emit('sendMessage', message)
-      this.$store.dispatch('chat/sendChatMessage', message)
+      this.$store.commit('SEND_CHAT_MESSAGE', message)
       this.message = ''
       this.$nextTick(() => {
         // 发送消息后聊天框滚动到底部

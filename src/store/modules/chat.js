@@ -92,10 +92,6 @@ const actions = {
     }
   },
 
-  sendChatMessage({ commit }, msg) {
-    commit('SEND_CHAT_MESSAGE', msg)
-  },
-
   async receiveMessage({ getters, commit }, msg) {
     if (!getters.isInChat(msg.target)) {
       const { code, data } = await getContactInfo({ user_id: msg.target })

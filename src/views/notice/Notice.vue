@@ -38,31 +38,17 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
-                :command="{label: '全部消息', type: 0}"
-                icon=""
-              >全部消息</el-dropdown-item>
-              <el-dropdown-item
-                :command="{label: '系统消息', type: 1}"
-                icon="el-icon-chat-square"
-              >系统</el-dropdown-item>
-              <el-dropdown-item
-                :command="{label: '成功消息', type: 2}"
-                icon="el-icon-check"
-              >成功</el-dropdown-item>
-              <el-dropdown-item
-                :command="{label: '提示消息', type: 3}"
-                icon="el-icon-news"
-              >提示</el-dropdown-item>
-              <el-dropdown-item
-                :command="{label: '重要消息', type: 4}"
-                icon="el-icon-warning-outline"
-              >重要</el-dropdown-item>
-              <el-dropdown-item
-                :command="{label: '未读消息', type: 5}"
-                icon="el-icon-bell"
-              >未读</el-dropdown-item>
+                v-for="(it, i) in menuItem"
+                :key="i"
+                :command="it.command"
+                :icon="it.icon"
+              >
+                {{ it.name }}
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
+
+          <!-- 操作栏 -->
           <div class="relative flex items-center">
             <div
               class="action-line absolute flex items-center text-xl text-semi bg-gray"
@@ -97,6 +83,7 @@
               @click.native="showAction = true"
             ></vs-icon>
           </div>
+
           <vs-icon
             class="text-gray cursor-pointer"
             title="刷新"
@@ -156,6 +143,8 @@
             </div>
           </li>
         </ul>
+
+        <!-- 无数据 -->
         <div
           v-if="dataList.length <= 0"
           class="mt-5 py-10 flex-col-center radius bg-gray"
@@ -177,12 +166,16 @@ import {
 } from '@/request/api/notice'
 
 const list = [
-  {
-    title: '系统通知',
-  },
-  {
-    title: '我的消息',
-  },
+  { title: '系统通知' },
+  { title: '我的消息' },
+]
+const menuItem = [
+  { name: '全部消息', command: { label: '全部消息', type: 0 }, icon: '' },
+  { name: '系统', command: { label: '系统消息', type: 1 }, icon: 'el-icon-chat-square' },
+  { name: '成功', command: { label: '成功消息', type: 2 }, icon: 'el-icon-check' },
+  { name: '提示', command: { label: '提示消息', type: 3 }, icon: 'el-icon-news' },
+  { name: '重要', command: { label: '重要消息', type: 4 }, icon: 'el-icon-warning-outline' },
+  { name: '未读', command: { label: '未读消息', type: 5 }, icon: 'el-icon-bell' },
 ]
 const noticeType = {
   1: { icon: 'chat_bubble_outline', color: 'primary' },
@@ -195,6 +188,7 @@ export default {
   name: 'Notice',
   data: () => ({
     list,
+    menuItem,
     noticeType,
     currentActive: '系统通知',
     label: '全部消息',

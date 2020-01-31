@@ -13,7 +13,7 @@
         :class="[{'flex-row-reverse' : msg.is_sent}]"
       >
         <div
-          class="msg break-words relative py-3 px-4 mb-2 max-w-sm"
+          class="msg break-words relative py-2 px-4 mb-2"
           :class="{'right text-white': msg.is_sent,
            'left border border-solid border-primary text-primary bg-primary': !msg.is_sent}"
         >
@@ -45,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .msg {
+  max-width: 18rem;
   &.left {
     border-radius: 1rem 1em 1rem 0.3rem;
   }
