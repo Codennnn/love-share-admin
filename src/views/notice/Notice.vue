@@ -106,24 +106,19 @@
             :key="i"
             :data-id="it._id"
           >
-            <div class="flex-1">
-              <div class="mb-2 flex items-center justify-between">
-                <div class="flex items-center">
-                  <vs-icon
-                    size="small"
-                    :icon="noticeType[it.type].icon"
-                    :color="noticeType[it.type].color"
-                  ></vs-icon>
-                  <span
-                    class="ml-2"
-                    :class="[`${noticeType[it.type].color}`,
+            <div>
+              <div class="mb-2 flex items-center">
+                <vs-icon
+                  size="small"
+                  :icon="noticeType[it.type].icon"
+                  :color="noticeType[it.type].color"
+                ></vs-icon>
+                <span
+                  class="ml-2"
+                  :class="[`${noticeType[it.type].color}`,
                   {'font-bold': isUnread(it._id)}]"
-                  >
-                    {{ it.title }}
-                  </span>
-                </div>
-                <span class="ml-4 text-gray text-xs">
-                  {{ $dayjs(it.created_at).format('YYYY年MM月DD日 HH:mm') }}
+                >
+                  {{ it.title }}
                 </span>
               </div>
               <div
@@ -132,11 +127,12 @@
               >
               </div>
             </div>
-            <div
-              v-show="showCheckBox"
-              class="ml-auto"
-            >
+            <div class="ml-auto">
+              <div class="ml-4 text-gray text-xs">
+                {{ setTime(it.created_at) }}
+              </div>
               <vs-checkbox
+                v-show="showCheckBox"
                 v-model="select"
                 :vs-value="it._id"
               ></vs-checkbox>
@@ -269,6 +265,17 @@ export default {
       }
     },
 
+    // 设置显示时间
+    setTime(time) {
+      const noticeTime = this.$dayjs(time)
+      const diffYear = this.$dayjs().diff(noticeTime, 'year')
+      if (diffYear < 1) {
+        return noticeTime.format('M月DD日')
+      }
+      return noticeTime.format('YYYY年MM月DD日')
+    },
+
+    // 刷新通知列表
     refreshNoticeList() {
       this.label = '全部消息'
       this.page = 1
@@ -322,6 +329,7 @@ export default {
       this.select = []
     },
 
+    // 筛选通知类型
     handleCommand({ label, type }) {
       this.label = label
       if (type === 0) {

@@ -87,7 +87,7 @@
           >
             <div
               class="p-2 flex items-center justify-center bg-main cursor-pointer"
-              style="width: 11rem; color: white; font-size: 0.95rem; border-radius: 0.35rem;"
+              style="width: 11rem; color: white; font-size: 0.95rem; border-radius: 0.4rem;"
               @click="visible1 = true"
             >
               <div class="flex-1 text-center">
@@ -97,7 +97,7 @@
                 class="ml-auto px-2 py-1 text-sm rounded"
                 style="background: rgba(121, 131, 255);"
               >
-                <i class="el-icon-plus"></i>
+                <PlusIcon size="1.3x" />
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
           <div v-if="!showEditor">
             <div class="text-semi text-xl font-bold">{{ article.title }}</div>
             <p class="text-gray text-xs">
-              最后更新于 {{ $dayjs(article.updated_at).format('YYYY-MM-DD HH:mm:ss') }}
+              最后更新于 {{ $dayjs(article.updated_at).format('YYYY年M月DD日 HH:mm:ss') }}
             </p>
           </div>
 
@@ -145,22 +145,20 @@
                   @click="onDeleteArticle()"
                 >确认删除</vs-button>
               </div>
-              <i
+              <span
                 slot="reference"
-                title="删除"
-                class="el-icon-delete ml-4 text-gray cursor-pointer"
-              ></i>
+                class="ml-2 danger text-sm cursor-pointer"
+              >删除</span>
             </el-popover>
           </div>
           <div v-else>
-            <vs-button
-              class="mr-4"
-              size="small"
-              type="flat"
-              color="danger"
-              @click="showEditor = false"
-            >取消</vs-button>
             <vs-button @click="onUpdateArticle()">完成编辑</vs-button>
+            <span
+              class="ml-2 danger text-sm cursor-pointer"
+              @click="showEditor = false"
+            >
+              取消
+            </span>
           </div>
         </div>
         <vs-divider />
@@ -196,6 +194,7 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
+import { PlusIcon } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import {
@@ -239,7 +238,7 @@ const menus = [
 
 export default {
   name: 'HelpCenter',
-  components: { VueEditor, VuePerfectScrollbar },
+  components: { PlusIcon, VueEditor, VuePerfectScrollbar },
 
   data: () => ({
     guideList: [],
@@ -247,12 +246,7 @@ export default {
     menus,
     payload: { // 新建栏目数据源
       section: '',
-      articles: [
-        {
-          title: '',
-          content: '',
-        },
-      ],
+      articles: [{ title: '', content: '' }],
     },
     visible1: false,
     visible2: false,
@@ -268,6 +262,7 @@ export default {
 
   watch: {
     visible1(v) {
+      // 隐藏 “新建栏目” 时重置数据源
       if (!v) {
         this.payload = { section: '', articles: [{ title: '', content: '' }] }
       }
@@ -279,15 +274,17 @@ export default {
   },
 
   methods: {
+    // 获取指引列表
     async getGuideList() {
       const { code, data } = await getGuideList()
       if (code === 2000) {
         this.guideList = data.guide_list
-        const section = this.guideList[0]
-        this.getArticle(section._id, section.articles[0]._id)
+        const { _id, articles } = this.guideList.find(el => el.articles?.length > 0)
+        this.getArticle(_id, articles[0]._id)
       }
     },
 
+    // 创建指引栏目
     async createGuide() {
       const { section, articles } = this.payload
       if (section.length > 0 && articles[0].title.length > 0) {
@@ -306,6 +303,7 @@ export default {
       }
     },
 
+    // 删除指引栏目
     async deleteGuide(section_id) {
       const { code } = await deleteGuide({ section_id })
       if (code === 2000) {
@@ -313,6 +311,7 @@ export default {
       }
     },
 
+    // 获取文章
     async getArticle(section_id, article_id) {
       this.showEditor = false
       this.$vs.loading({
@@ -331,19 +330,24 @@ export default {
       }
     },
 
+    // 点击编辑文章
     onEditArticle() {
       this.showEditor = true
       this.editData = JSON.parse(JSON.stringify(this.article))
     },
 
+    // 更新文章
     async onUpdateArticle() {
-      const { code } = await updateArticle(this.editData)
-      if (code === 2000) {
-        await this.getGuideList()
-        this.showEditor = false
+      if (this.editData.content.length > 0) {
+        const { code } = await updateArticle(this.editData)
+        if (code === 2000) {
+          await this.getGuideList()
+          this.showEditor = false
+        }
       }
     },
 
+    // 删除文章
     async onDeleteArticle() {
       const { code } = await deleteArticle({ article_id: this.article._id })
       if (code === 2000) {
