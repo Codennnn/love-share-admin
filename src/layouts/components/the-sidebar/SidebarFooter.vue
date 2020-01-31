@@ -65,7 +65,7 @@
                   >
                     {{ it.title }}
                   </div>
-                  <div class="w-64 text-overflow text-semi text-xs">{{ it.content }}</div>
+                  <div class="w-64 truncate text-semi text-xs">{{ it.content }}</div>
                 </div>
               </li>
             </ul>

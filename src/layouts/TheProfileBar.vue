@@ -140,7 +140,7 @@
                     <span class="text-primary">{{ it.title }}</span>
                     <span class="text-xs text-gray">{{ $timeDiff(it.created_at) }}</span>
                   </div>
-                  <div class="w-48 text-overflow text-gray text-xs">{{ it.content }}</div>
+                  <div class="w-48 truncate text-gray text-xs">{{ it.content }}</div>
                 </div>
               </li>
               <li

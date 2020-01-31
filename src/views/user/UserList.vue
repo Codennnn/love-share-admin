@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <div class="mt-4 mb-8 py-6 px-4 radius bg-semi overflow-hidden">
+  <div class="pt-6">
+    <!-- 统计卡片 -->
+    <UserStatistics />
+
+    <!-- 用户列表 -->
+    <div class="p-4 radius bg-semi overflow-hidden">
       <vs-table
         search
         pagination
@@ -75,9 +79,9 @@
           </vs-tr>
         </template>
       </vs-table>
-
     </div>
 
+    <!-- 新增用户统计图 -->
     <p class="pt-6 pb-4 text-xl text-primary font-bold">
       日新增用户统计
     </p>
@@ -114,6 +118,7 @@
 import _cloneDeepWith from 'lodash/cloneDeepWith'
 import { DownloadIcon } from 'vue-feather-icons'
 import { setCreditColor } from '@/utils/util'
+import UserStatistics from './components/UserStatistics.vue'
 import LineChart from '@/components/LineChart.vue'
 
 import { getUserList, getUserDailyStatistics } from '@/request/api/user'
@@ -190,10 +195,11 @@ const chartSettings = {
     colors: ['#6165f7'],
   },
 }
-
 export default {
-  name: 'userList',
-  components: { DownloadIcon, LineChart },
+  name: 'UserList',
+  components: {
+    UserStatistics, DownloadIcon, LineChart,
+  },
 
   data: () => ({
     setCreditColor,

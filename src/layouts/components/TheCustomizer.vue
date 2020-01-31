@@ -42,7 +42,7 @@
             <ul class="px-2 flex">
               <li
                 title="明亮模式"
-                class="relative mr-4"
+                class="relative mr-4 cursor-pointer"
                 @click="switchTheme('light')"
               >
 
@@ -55,7 +55,7 @@
               </li>
               <li
                 title="黑暗模式"
-                class="relative"
+                class="relative cursor-pointer"
                 @click="switchTheme('dark')"
               >
                 <img src="@/assets/images/dark.svg">
@@ -101,7 +101,7 @@
             <ul class="px-2 flex">
               <li
                 title="跟随主题"
-                class="relative mr-4"
+                class="relative mr-4 cursor-pointer"
                 @click="switchSidebar('menu-light')"
               >
                 <img src="@/assets/images/sidebar_default.svg">
@@ -113,7 +113,7 @@
               </li>
               <li
                 title="突出显示"
-                class="relative"
+                class="relative cursor-pointer"
                 @click="switchSidebar('menu-dark')"
               >
                 <img src="@/assets/images/sidebar_semi.svg">

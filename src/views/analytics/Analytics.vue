@@ -139,9 +139,30 @@
 
       <!-- 卡片 5 -->
       <div class="lg:w-1/2 lg:pl-3 sm:w-full my-3">
-        <div class="h-full py-3 px-4 base-shadow bg-semi radius overflow-hidden">
-          <p class="mb-2 text-primary text-xl font-bold">任务追踪</p>
-
+        <div class="h-full py-3 px-4 bg-semi radius overflow-hidden">
+          <p class="mb-2 text-primary text-xl font-bold">本周买家榜</p>
+          <ul>
+            <li
+              class="mb-2 flex items-center"
+              v-for="(it, i) in userList"
+              :key="i"
+            >
+              <div class="area relative w-10 h-10 mr-4">
+                <vs-avatar
+                  size="40px"
+                  class="absolute left-0 top-0 z-50 m-0"
+                  :class="{'avatar opacity-0': i <= 2}"
+                  :src="it.avatar_url"
+                />
+                <div
+                  v-if="i <= 2"
+                  class="medal absolute z-20 opacity-100"
+                  :class="`bg-medal${i}`"
+                ></div>
+              </div>
+              <div class="text-primary truncate">{{ it.nickname }}</div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -155,6 +176,8 @@ import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
 
+import { getUserList } from '@/request/api/user'
+
 export default {
   name: 'Analytics',
   components: {
@@ -166,6 +189,7 @@ export default {
   },
 
   data: () => ({
+    userList: [],
     subscribersGained,
     ordersRecevied,
     salesBar,
@@ -177,7 +201,17 @@ export default {
     }),
   },
 
+  activated() {
+    this.getUserList()
+  },
+
   methods: {
+    async getUserList() {
+      const { code, data } = await getUserList()
+      if (code === 2000) {
+        this.userList = data.user_list
+      }
+    },
   },
 }
 </script>
@@ -188,5 +222,40 @@ export default {
   .decore-right {
     width: 140px;
   }
+}
+
+.area {
+  transition: all 0.3s;
+  &:hover {
+    .avatar {
+      transition: all 0.3s;
+      opacity: 1;
+    }
+    .medal {
+      transition: all 0.3s;
+      opacity: 0;
+    }
+  }
+}
+
+@mixin sprite($width, $self, $bgx, $bgy) {
+  width: $width;
+  height: $width;
+  left: calc((-#{$width} / 2) + #{$self});
+  top: calc((-#{$width} / 2) + #{$self});
+  background: url("~@/assets/images/medal_sprites.png") $bgx $bgy;
+  transform: scale(0.1) translate(-50%, -50%);
+}
+.bg-medal0 {
+  @include sprite($width: 407px, $self: 40.7px, $bgx: -10px, $bgy: -442px);
+}
+.bg-medal1 {
+  @include sprite($width: 406px, $self: 40.6px, $bgx: -437px, $bgy: -442px);
+}
+.bg-medal2 {
+  @include sprite($width: 408px, $self: 40.8px, $bgx: -442px, $bgy: -10px);
+}
+.bg-medal3 {
+  @include sprite($width: 412px, $self: 40.8px, $bgx: -10px, $bgy: -10px);
 }
 </style>
