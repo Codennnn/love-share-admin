@@ -182,6 +182,7 @@ export default {
 .nav-wrapper {
   width: calc(100% - #{$side-bar-width});
   min-width: $content-area-min-width;
+  max-width: $router-view-max-width;
   padding: 1.2rem $router-view-padding;
   box-sizing: border-box;
   transition: $side-bar-collapse-transition;

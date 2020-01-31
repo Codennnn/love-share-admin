@@ -54,7 +54,7 @@
                     @click.stop="toggleType(todo._id, 'is_done', !todo.is_done)"
                   ></vs-checkbox>
                   <div
-                    class="text-overflow mr-3"
+                    class="text-overflow mr-3 text-primary"
                     style="max-width: 12rem;"
                   >{{ todo.title }}</div>
                   <template v-if="todo.tags.length > 0">

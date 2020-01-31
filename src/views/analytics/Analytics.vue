@@ -41,7 +41,7 @@
             type="area"
             :chartData="subscribersGained"
           >
-            <UserIcon
+            <UsersIcon
               slot="icon"
               class="primary"
             />
@@ -59,7 +59,7 @@
             type="area"
             :chartData="ordersRecevied"
           >
-            <UserIcon
+            <PocketIcon
               slot="icon"
               class="warning"
             />
@@ -99,7 +99,7 @@
           <div>
             <div class="flex">
               <div class="w-1/2 mb-3 pr-4">
-                <p class="text-gray">Goal: $100000</p>
+                <p class="text-gray">收入: ￥100000</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="50"
@@ -107,7 +107,7 @@
                 ></vs-progress>
               </div>
               <div class="w-1/2 mb-3 pl-4">
-                <p class="text-gray">Users: 100K</p>
+                <p class="text-gray">用户: 100K</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="60"
@@ -150,7 +150,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { AwardIcon, UserIcon } from 'vue-feather-icons'
+import { AwardIcon, UsersIcon, PocketIcon } from 'vue-feather-icons'
 import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
@@ -161,17 +161,15 @@ export default {
     VueApexCharts,
     AreaChart,
     AwardIcon,
-    UserIcon,
+    UsersIcon,
+    PocketIcon,
   },
 
-  data() {
-    return {
-      subscribersGained,
-      ordersRecevied,
-      salesBar,
-      show: true,
-    }
-  },
+  data: () => ({
+    subscribersGained,
+    ordersRecevied,
+    salesBar,
+  }),
 
   computed: {
     ...mapState({

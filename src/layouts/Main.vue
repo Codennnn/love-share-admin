@@ -199,6 +199,7 @@ export default {
 .router-view {
   position: relative;
   min-height: 100vh;
+  max-width: $router-view-max-width;
   padding: 0 $router-view-padding;
   .router-content {
     min-height: calc(100vh - #{$footer-height});
