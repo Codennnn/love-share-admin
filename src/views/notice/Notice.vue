@@ -1,8 +1,8 @@
 <template>
-  <div class="flex">
+  <div class="flex pt-8">
     <!-- 左侧 -->
     <div class="w-1/4 pr-5">
-      <div class="p-2 bg-white rounded-lg">
+      <div class="p-2 bg-gray radius">
         <div class="p-1">
           <div
             class="py-3 text-primary text-lg font-bold cursor-default"
@@ -10,7 +10,7 @@
           >消息中心</div>
           <ul class="pt-4">
             <li
-              class="li-item px-3 py-1 cursor-pointer"
+              class="li-item px-3 py-1 text-gray cursor-pointer"
               v-for="(item, i) in list"
               :key="i"
               :class="{'text-primary': currentActive === item.title}"
@@ -26,14 +26,14 @@
     <div class="w-3/4">
       <div
         id="message-with-loading"
-        class="p-4 bg-white rounded-lg vs-con-loading__container"
+        class="p-4 bg-primary radius vs-con-loading__container"
       >
         <div class="mb-4 flex items-center justify-end">
           <el-dropdown
             class="mr-auto"
             @command="handleCommand"
           >
-            <span class="el-dropdown-link">
+            <span class="el-dropdown-link text-semi">
               {{ label }}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
@@ -65,7 +65,7 @@
           </el-dropdown>
           <div class="relative flex items-center">
             <div
-              class="action-line absolute flex items-center text-xl text-gray-500 bg-gray-100"
+              class="action-line absolute flex items-center text-xl text-semi bg-gray"
               :class="{'show': showAction}"
             >
               <vs-checkbox
@@ -90,20 +90,18 @@
             </div>
             <vs-icon
               v-show="!showAction"
-              class="mx-1 cursor-pointer"
+              class="mx-1 text-gray cursor-pointer"
               title="管理"
               size="25px"
               icon="settings_ethernet"
-              color="#bbb"
               @click.native="showAction = true"
             ></vs-icon>
           </div>
           <vs-icon
-            class="cursor-pointer"
+            class="text-gray cursor-pointer"
             title="刷新"
             size="25px"
             icon="refresh"
-            color="#bbb"
             @click.native="selectAll = false, showAction = false, refreshNoticeList()"
           ></vs-icon>
         </div>
@@ -115,35 +113,34 @@
           :infinite-scroll-disabled="stop"
         >
           <li
-            class="mb-3 p-2 flex items-center rounded-lg hover:bg-gray-100"
+            class="mb-3 p-2 flex items-center radius"
             style="transition: all 0.3s;"
             v-for="(it, i) in dataList"
             :key="i"
             :data-id="it._id"
           >
             <div class="flex-1">
-              <div class="mb-2 flex items-center">
-                <vs-icon
-                  size="small"
-                  :icon="noticeType[it.type].icon"
-                  :color="noticeType[it.type].color"
-                ></vs-icon>
-                <span
-                  class="ml-2"
-                  :class="[`text-${noticeType[it.type].color}`,
+              <div class="mb-2 flex items-center justify-between">
+                <div class="flex items-center">
+                  <vs-icon
+                    size="small"
+                    :icon="noticeType[it.type].icon"
+                    :color="noticeType[it.type].color"
+                  ></vs-icon>
+                  <span
+                    class="ml-2"
+                    :class="[`${noticeType[it.type].color}`,
                   {'font-bold': isUnread(it._id)}]"
-                >
-                  {{ it.title }}
-                </span>
-                <span
-                  class="ml-4 text-gray-500"
-                  style="font-size: 0.7rem;"
-                >
+                  >
+                    {{ it.title }}
+                  </span>
+                </div>
+                <span class="ml-4 text-gray text-xs">
                   {{ $dayjs(it.created_at).format('YYYY年MM月DD日 HH:mm') }}
                 </span>
               </div>
               <div
-                class="px-6 text-gray-600"
+                class="px-8 text-semi"
                 v-html="it.content"
               >
               </div>
@@ -160,10 +157,14 @@
           </li>
         </ul>
         <div
-          v-show="dataList.length <= 0"
-          class="py-4 flex justify-center"
+          v-if="dataList.length <= 0"
+          class="mt-5 py-10 flex-col-center radius bg-gray"
         >
-          <img src="@/assets/images/avatar.jpg">
+          <img
+            class="w-48 mb-5"
+            src="@/assets/images/no_data.svg"
+          >
+          <p class="text-semi">暂无通知</p>
         </div>
       </div>
     </div>

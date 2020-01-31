@@ -142,7 +142,7 @@ export default {
   components: { VuePerfectScrollbar },
 
   data: () => ({
-    active: false,
+    active: false, // 是否显示侧边栏
     navType: 'fixed',
   }),
 
