@@ -124,6 +124,8 @@ img {
   }
 
   .vs-input {
+    color: themed("text-color-primary");
+
     .vs-inputx {
       background: themed("input-bg-color");
     }
