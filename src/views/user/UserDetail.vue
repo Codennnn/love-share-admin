@@ -318,6 +318,7 @@ export default {
         fillSeriesColor: false,
         theme: 'dark',
       },
+      labels: ['信用度'],
       plotOptions: {
         radialBar: {
           hollow: {

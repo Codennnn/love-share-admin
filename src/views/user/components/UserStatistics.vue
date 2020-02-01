@@ -1,23 +1,55 @@
 <template>
   <div class="flex">
-    <div
-      class="card w-64 flex justify-between"
-      style="background: rgba(var(--vs-primary), 0.06);"
-    >
-      <div>
-        <div class="text-primary">今日新增</div>
-        <div class="text-3xl primary font-bold">{{ 298 }}</div>
+    <div class="card card-primary">
+      <div class="flex justify-between">
+        <div>
+          <div class="title text-primary">用户总数</div>
+          <div class="num">{{ 5242 }}</div>
+        </div>
+        <div class="icon">
+          <UsersIcon />
+        </div>
       </div>
-      <div
-        class="w-12 h-12 flex-row-center radius"
-        style="background: rgba(var(--vs-primary), 0.15);
-           box-shadow: 0 0 10px rgba(var(--vs-primary), 0.2);"
-      >
-        <UserPlusIcon class="primary" />
+      <div class="text-sm">
+        <span class="text-gray">最近一月</span>
+        <span class="ml-1 primary font-bold">+4.20%</span>
       </div>
     </div>
 
-    <div class="card ml-4 bg-gray">
+    <div class="card ml-4 card-success">
+      <div class="flex justify-between">
+        <div>
+          <div class="title text-primary">今日新增</div>
+          <div class="num">{{ 298 }}</div>
+        </div>
+        <div class="icon">
+          <UserPlusIcon />
+        </div>
+      </div>
+      <div class="text-sm">
+        <span class="text-gray">相较昨天</span>
+        <span class="ml-1 success font-bold">+2.50%</span>
+      </div>
+    </div>
+
+    <div class="card ml-4 card-danger">
+      <div class="flex justify-between">
+        <div>
+          <div class="title text-primary">黑名单</div>
+          <div class="num">{{ 125 }}</div>
+        </div>
+        <div class="icon">
+          <UserMinusIcon />
+        </div>
+      </div>
+      <div class="text-sm">
+      </div>
+    </div>
+
+    <div
+      class="card ml-4 bg-gray"
+      style="padding: 0 1.25rem;"
+    >
       <vue-apex-charts
         ref="apexChart"
         height="100%"
@@ -31,7 +63,7 @@
 </template>
 
 <script>
-import { UserPlusIcon } from 'vue-feather-icons'
+import { UsersIcon, UserPlusIcon, UserMinusIcon } from 'vue-feather-icons'
 import VueApexCharts from 'vue-apexcharts'
 
 const chartOptions = {
@@ -41,36 +73,68 @@ const chartOptions = {
   dataLabels: {
     enabled: false,
   },
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      chart: {
-        width: 200,
-      },
-      legend: {
-        position: 'bottom',
-      },
+  labels: ['汉纸', '妹纸', '未知'],
+  plotOptions: {
+    pie: {
+      expandOnClick: false,
     },
-  }],
-  colors: ['#6165f7'],
+  },
+  colors: ['#6165f7', '#EA5455', '#bbb'],
 }
 export default {
   name: 'UserStatistics',
   components: {
-    UserPlusIcon, VueApexCharts,
+    UsersIcon, UserPlusIcon, UserMinusIcon, VueApexCharts,
   },
 
   data: () => ({
     chartOptions,
-    series: [44, 55, 41],
+    series: [144, 80, 41],
   }),
 }
 </script>
 
 <style lang="scss" scoped>
+@mixin setColor($color) {
+  background: rgba(var(--vs-#{$color}), 0.06);
+  .num,
+  .icon {
+    color: rgba(var(--vs-#{$color}), 1);
+  }
+  .icon {
+    background: rgba(var(--vs-#{$color}), 0.15);
+    box-shadow: 0 0 10px rgba(var(--vs-#{$color}), 0.2);
+  }
+}
+
 .card {
-  width: 16rem;
+  width: 25%;
+  // width: 16rem;
   padding: 1.25rem;
   border-radius: $large-radius;
+  .title {
+    font-size: 1.125rem;
+  }
+  .num {
+    font-size: 1.875rem;
+    font-weight: bold;
+  }
+  .icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $large-radius;
+  }
+  &.card-primary {
+    @include setColor($color: primary);
+  }
+  &.card-success {
+    @include setColor($color: success);
+  }
+  &.card-danger {
+    @include setColor($color: danger);
+  }
 }
 </style>

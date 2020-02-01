@@ -41,7 +41,9 @@
         >
           <p class="mb-2 text-xl text-primary font-bold">今日任务</p>
           <VuePerfectScrollbar
-            class="h-48 overflow-hidden"
+            v-if="todayTask.length > 0"
+            class="w-full overflow-hidden"
+            style="max-height: 12rem;"
             :settings="{
               maxScrollbarLength: 160,
               wheelSpeed: 0.60,
@@ -70,8 +72,32 @@
               </li>
             </ul>
           </VuePerfectScrollbar>
+          <p v-else>无任务</p>
+
+          <div class="pt-5 flex justify-end">
+            <div class="w-20">
+              <div>
+                <span class="text-sm">今日任务</span>
+                <span class="font-bold"> {{ todayTask.length }}</span>
+              </div>
+              <div>
+                <span class="text-sm">已完成</span>
+                <span class="font-bold"> {{ todayDoneTaskNum }}</span>
+              </div>
+            </div>
+            <div class="w-32">
+              <vue-apex-charts
+                type="radialBar"
+                height="200px"
+                width="200px"
+                :options="radialBarOptions"
+                :series="radialBarValue"
+              ></vue-apex-charts>
+            </div>
+          </div>
         </div>
-        <!-- 尾部 -->
+
+        <!-- 底部 -->
         <div
           v-show="isTaskOpen"
           class="absolute pl-4 pr-3 py-1 flex items-center cursor-pointer bg-gray radius"
@@ -102,15 +128,61 @@
 </template>
 
 <script>
+import _cloneDeepWith from 'lodash/cloneDeepWith'
 import {
   MessageSquareIcon, LayersIcon, ChevronRightIcon, ChevronDownIcon,
 } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import VueApexCharts from 'vue-apexcharts'
 
+const options = {
+  labels: ['完成度'],
+  chart: {
+    offsetY: -30,
+    offsetX: -40,
+  },
+  tooltip: {
+    enabled: false,
+  },
+  plotOptions: {
+    radialBar: {
+      hollow: {
+        size: '55%',
+        background: 'transparent',
+        dropShadow: {
+          enabled: true,
+          top: 0,
+          left: 0,
+          blur: 3,
+          opacity: 1,
+        },
+      },
+      dataLabels: {
+        name: {
+          offsetY: -12,
+          color: '#555',
+          fontSize: '13px',
+        },
+        value: {
+          offsetY: 5,
+          color: '#555',
+          fontSize: '25px',
+        },
+      },
+    },
+  },
+  stroke: { lineCap: 'round' },
+  colors: ['#6165f7'],
+}
 export default {
   name: 'SidebarFooter',
   components: {
-    VuePerfectScrollbar, MessageSquareIcon, LayersIcon, ChevronRightIcon, ChevronDownIcon,
+    VuePerfectScrollbar,
+    VueApexCharts,
+    MessageSquareIcon,
+    LayersIcon,
+    ChevronRightIcon,
+    ChevronDownIcon,
   },
 
   props: {
@@ -130,16 +202,31 @@ export default {
   },
 
   computed: {
-    filterItems() {
-      return this.$store.getters['todo/filterItems']({})
-    },
     todayTask() {
-      return this.filterItems.filter((it) => {
+      const allTask = this.$store.getters['todo/filterItems']({})
+      return allTask.filter((it) => {
         const start = this.$dayjs(it.complete_time[0])
         const end = this.$dayjs(it.complete_time[1])
         return this.$dayjs().isAfter(start, 'day')
          && (this.$dayjs().isSame(end, 'day') || this.$dayjs().isBefore(end, 'day'))
       })
+    },
+    todayDoneTaskNum() {
+      return this.todayTask.filter(el => el.is_done).length
+    },
+    radialBarValue() {
+      const percent = (this.todayDoneTaskNum / this.todayTask.length * 100) || 0
+      return [percent]
+    },
+    radialBarOptions() {
+      const theme = this.$store.state.themeStyle
+      if (theme === 'light') {
+        return options
+      }
+      const opt = _cloneDeepWith(options)
+      opt.plotOptions.radialBar.dataLabels.name.color = '#ccc'
+      opt.plotOptions.radialBar.dataLabels.value.color = '#ccc'
+      return opt
     },
   },
 
