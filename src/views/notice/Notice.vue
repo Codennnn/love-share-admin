@@ -93,7 +93,7 @@
           ></vs-icon>
         </div>
 
-        <ul
+        <FlipList
           v-show="dataList.length > 0"
           style="height: 650px; overflow: auto;"
           v-infinite-scroll="loadMore"
@@ -101,7 +101,7 @@
         >
           <li
             class="mb-3 p-2 flex items-center radius"
-            style="transition: all 0.3s;"
+            style="transition: all 0.5s;"
             v-for="(it, i) in dataList"
             :key="i"
             :data-id="it._id"
@@ -138,7 +138,7 @@
               ></vs-checkbox>
             </div>
           </li>
-        </ul>
+        </FlipList>
 
         <!-- 无数据 -->
         <div
@@ -157,6 +157,8 @@
 </template>
 
 <script>
+import FlipList from '@/components/FlipList.vue'
+
 import {
   getNoticeList, setAllNoticesRead, deleteNotice, deleteManyNotices,
 } from '@/request/api/notice'
@@ -182,6 +184,8 @@ const noticeType = {
 
 export default {
   name: 'Notice',
+  components: { FlipList },
+
   data: () => ({
     list,
     menuItem,

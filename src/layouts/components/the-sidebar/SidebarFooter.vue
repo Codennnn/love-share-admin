@@ -42,7 +42,7 @@
           <p class="mb-2 text-xl text-primary font-bold">今日任务</p>
           <VuePerfectScrollbar
             v-if="todayTask.length > 0"
-            class="w-full overflow-hidden"
+            class="w-full mb-4 overflow-hidden"
             style="max-height: 12rem;"
             :settings="{
               maxScrollbarLength: 160,
@@ -207,7 +207,7 @@ export default {
       return allTask.filter((it) => {
         const start = this.$dayjs(it.complete_time[0])
         const end = this.$dayjs(it.complete_time[1])
-        return this.$dayjs().isAfter(start, 'day')
+        return (this.$dayjs().isSame(end, 'day') || this.$dayjs().isAfter(start, 'day'))
          && (this.$dayjs().isSame(end, 'day') || this.$dayjs().isBefore(end, 'day'))
       })
     },

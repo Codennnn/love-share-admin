@@ -1,7 +1,8 @@
 <template>
   <div class="todo-items">
     <VuePerfectScrollbar
-      class="scroll-area"
+      class="relative"
+      style="height: 686px;"
       :settings="{
         maxScrollbarLength: 200,
         wheelSpeed: 0.60,
@@ -9,7 +10,7 @@
     >
       <!-- 搜索框 -->
       <div
-        class="relative w-full radius overflow-hidden flex"
+        class="relative w-full flex radius overflow-hidden"
         style="background: rgba(var(--vs-primary), 0.065);"
       >
         <div
@@ -31,13 +32,7 @@
       </div>
 
       <!-- Todo项 -->
-      <transition-group
-        tag="ul"
-        name="flip-list"
-        class="pt-4"
-        enter-active-class="animated fadeInUp faster"
-        leave-active-class="animated fadeOutDown faster"
-      >
+      <FlipList class="pt-4">
         <li
           class="todo-item p-3 w-full"
           v-for="todo in filterItems"
@@ -120,7 +115,7 @@
             <!-- end -->
           </vs-row>
           <!-- todo项内容区域 -->
-          <div class="p-2 flex justify-between">
+          <div class="p-2 pr-0 flex justify-between">
             <p class="content-overflow pr-5 text-gray">{{ todo.content }}</p>
             <div class="text-xs text-gray">
               {{ $dayjs(todo.complete_time[0]).format('YYYY-MM-DD') }}
@@ -131,16 +126,16 @@
         </li>
 
         <li
-          key="1"
+          key="123456"
           v-if="filterItems.length === 0"
-          class="p-10 text-center text-gray"
+          class="todo-item w-full p-10 text-center text-gray"
         >
           <p>
             (｡•ˇ‸ˇ•｡) <br>
             无任务
           </p>
         </li>
-      </transition-group>
+      </FlipList>
     </VuePerfectScrollbar>
   </div>
 </template>
@@ -150,6 +145,7 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import {
   SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
 } from 'vue-feather-icons'
+import FlipList from '@/components/FlipList.vue'
 
 const tags = {
   1: {
@@ -172,7 +168,7 @@ const tags = {
 export default {
   name: 'TodoItem',
   components: {
-    VuePerfectScrollbar, SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
+    VuePerfectScrollbar, FlipList, SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
   },
 
   data() {
@@ -200,13 +196,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scroll-area {
-  position: relative;
-  height: 686px;
-}
-
+// 重设输入框样式
 .search-input::v-deep {
-  // 重设输入框样式
   .vs-inputx {
     border: none !important;
     box-shadow: none;
@@ -218,23 +209,19 @@ export default {
   }
 }
 
-.content-overflow {
-  @include textOverflow($width: 500px, $line: 2);
-}
-
-.flip-list-move {
-  transition: transform 1s;
-}
-
 .todo-item {
-  transition: all 0.2s;
+  transition: all 0.5s;
   &:hover {
+    transition: all 0.2s;
     transform: translateY(-4px);
   }
   // 标记的图标样式
   .todo-mark__icon {
     transition: all 0.2s;
     cursor: pointer;
+  }
+  .content-overflow {
+    @include textOverflow($width: 500px, $line: 2);
   }
 }
 </style>
