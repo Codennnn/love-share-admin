@@ -19,7 +19,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'area',
+      default: 'line',
     },
     width: {
       type: String,

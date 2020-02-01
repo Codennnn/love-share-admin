@@ -3,16 +3,25 @@
     <p class="pt-6 pb-4 text-xl text-primary font-bold">
       每日新增用户统计
     </p>
-    <div class="px-6 radius bg-gray">
-      <div class="pt-6 pb-4 px-8 flex justify-between items-center">
-        <div>
+    <div class="px-10 radius bg-gray">
+      <div class="pt-6 pb-4 flex justify-end items-center">
+        <div class="mr-auto">
           <span class="primary text-sm mr-3 cursor-pointer">最近一周</span>
           <span class="text-semi text-sm mr-3 cursor-pointer">最近15天</span>
         </div>
 
+        <div class="w-40 h-10 mr-4 flex-row-center text-sm text-semi
+         bg-primary rounded-lg cursor-pointer">
+          <span>用户数量(人)</span>
+          <feather
+            size="20"
+            type="chevron-down"
+            class="ml-3"
+          ></feather>
+        </div>
         <div
           title="导出统计图"
-          class="py-2 px-3 rounded-lg primary-semi bg-main-10 cursor-pointer"
+          class="w-10 h-10 flex-row-center rounded-lg primary-semi bg-primary cursor-pointer"
           @click="$refs.userChart.downloadPNG()"
         >
           <feather
@@ -24,6 +33,7 @@
       <LineChart
         ref="userChart"
         height="400px"
+        type="area"
         :options="options"
         :series="series"
         @downloadPNG="downloadPNG"
@@ -40,9 +50,7 @@ import { getUserDailyStatistics } from '@/request/api/user'
 
 const chartOptions = {
   chart: {
-    toolbar: {
-      show: false,
-    },
+    toolbar: { show: false },
   },
   xaxis: {
     categories: [],
@@ -71,9 +79,7 @@ const chartOptions = {
       stops: [0, 100],
     },
   },
-  dataLabels: {
-    enabled: false,
-  },
+  dataLabels: { enabled: false },
   stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
   grid: {
     show: true,
@@ -99,9 +105,9 @@ const chartOptions = {
     },
     padding: {
       top: 0,
-      right: 20,
+      right: 0,
       bottom: 0,
-      left: 20,
+      left: 10,
     },
   },
   colors: ['#6165f7'],
@@ -112,20 +118,25 @@ export default {
 
   data: () => ({
     userList: [],
+    categories: [],
     series: [],
   }),
 
   computed: {
+
     options() {
       const opt = _cloneDeepWith(chartOptions)
+      opt.xaxis.categories = this.categories
       const theme = this.$store.state.themeStyle
       if (theme === 'light') {
+        this.$set(opt.chart, 'background', '#fff')
         this.$set(opt.grid, 'borderColor', '#ddd')
         this.$set(opt.xaxis.axisBorder, 'color', '#ddd')
         this.$set(opt.xaxis.labels.style, 'colors', '#8b99a8')
         this.$set(opt.yaxis.labels.style, 'color', '#8b99a8')
         return opt
       }
+      this.$set(opt.chart, 'background', '#333644')
       this.$set(opt.grid, 'borderColor', '#525465')
       this.$set(opt.xaxis.axisBorder, 'color', '#525465')
       this.$set(opt.xaxis.labels.style, 'colors', '#9c9ea6')
@@ -141,10 +152,11 @@ export default {
   methods: {
     async getUserDailyStatistics() {
       const dateNow = Date.now()
-      const date_list = [...Array(7)].map((v, i) => this.$dayjs(dateNow).subtract(i, 'day').format('YYYY-MM-DD'))
+      const date_list = [...Array(7)].map((v, i) => this.$dayjs(dateNow).subtract(i, 'day').format('YYYY-MM-D'))
+      const date = date_list.map(el => this.$dayjs(el).format('M-DD')).reverse()
       const { code, data } = await getUserDailyStatistics({ date_list: date_list.reverse() })
       if (code === 2000) {
-        this.$set(chartOptions.xaxis, 'categories', date_list)
+        this.categories = date
         this.series = data.series
         this.series = [{
           name: '用户数量',

@@ -5,7 +5,6 @@
       class="edit"
       status-icon
       label-position="top"
-      label-width="80px"
       :rules="rules"
       :model="form"
     >
@@ -34,10 +33,12 @@
       >
         <el-input
           type="password"
+          placeholder="请再次输入密码"
           v-model="form.password2"
         ></el-input>
       </el-form-item>
     </el-form>
+    <vs-button @click="submit()">确认修改</vs-button>
   </div>
 </template>
 

@@ -55,7 +55,7 @@
         label="安全设置"
       >
         <div>
-          <EditPassword ref="editPassword" />
+          <EditPassword />
         </div>
       </vs-tab>
     </vs-tabs>
@@ -81,11 +81,12 @@ export default {
     detail: {},
   }),
 
-  mounted() {
+  created() {
     this.getAdminDetail()
   },
 
   methods: {
+    // 获取管理员详细信息
     async getAdminDetail() {
       const {
         code,
@@ -102,6 +103,7 @@ export default {
       }
     },
 
+    // 更新管理员信息
     async onUpdateAmin() {
       if (this.$refs.editForm.submit()) {
         this.$vs.loading({ container: '#main', scale: 1 })
@@ -143,7 +145,11 @@ export default {
 .vs-tabs::v-deep {
   .ul-tabs {
     box-shadow: none;
+    .vs-tabs--li {
+      color: #888;
+    }
   }
+  // "保存设置" 按钮
   .save:hover {
     color: white !important;
   }
