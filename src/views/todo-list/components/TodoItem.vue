@@ -1,20 +1,13 @@
 <template>
-  <div class="todo-items">
-    <VuePerfectScrollbar
-      class="relative"
-      style="height: 686px;"
-      :settings="{
-        maxScrollbarLength: 200,
-        wheelSpeed: 0.60,
-      }"
-    >
+  <div>
+    <div class="flex items-center">
       <!-- 搜索框 -->
       <div
-        class="relative w-full flex radius overflow-hidden"
+        class="relative flex-1 radius overflow-hidden"
         style="background: rgba(var(--vs-primary), 0.065);"
       >
         <div
-          class="absolute left-0 z-50 h-full flex items-center justify-center radius cursor-pointer"
+          class="absolute left-0 z-50 h-full flex-row-center radius cursor-pointer"
           style="width: 50px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
         >
           <SearchIcon
@@ -27,15 +20,33 @@
           style="background: transparent;"
           size="large"
           placeholder="搜索..."
-          v-model="search"
+          v-model.lazy.trim="search"
         />
       </div>
 
+      <div
+        class="ml-4 w-24 py-3 flex-row-center text-sm radius cursor-pointer"
+        style="transition: all 0.3s;"
+        :class="{'primary today': onlyToday, 'text-primary base-shadow ': !onlyToday}"
+        @click="onlyToday = !onlyToday"
+      >
+        今日任务
+      </div>
+    </div>
+
+    <VuePerfectScrollbar
+      class="relative pt-4"
+      style="max-height: 636px;"
+      :settings="{
+        maxScrollbarLength: 200,
+        wheelSpeed: 0.60,
+      }"
+    >
       <!-- Todo项 -->
-      <FlipList class="pt-4">
+      <FlipList>
         <li
           class="todo-item p-3 w-full"
-          v-for="todo in filterItems"
+          v-for="todo in tasks"
           :key="todo._id"
           @click="$emit('editTodo', todo)"
         >
@@ -171,12 +182,11 @@ export default {
     VuePerfectScrollbar, FlipList, SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
   },
 
-  data() {
-    return {
-      tags,
-      search: '',
-    }
-  },
+  data: () => ({
+    tags,
+    search: '',
+    onlyToday: false,
+  }),
 
   computed: {
     currentSelected() {
@@ -185,11 +195,30 @@ export default {
     filterItems() {
       return this.$store.getters['todo/filterItems'](this.currentSelected)
     },
+    queryItems() {
+      if (this.search.length <= 0) {
+        return this.filterItems
+      }
+      return this.filterItems.filter(it => it.title.indexOf(this.search) !== -1)
+    },
+    tasks() {
+      if (this.onlyToday) {
+        return this.queryItems.filter(it => this.isTodayTask(it.complete_time))
+      }
+      return this.queryItems
+    },
   },
 
   methods: {
     toggleType(todo_id, type, flag) {
       this.$store.dispatch('todo/updateTodoType', { todo_id, type, flag })
+    },
+
+    isTodayTask(time) {
+      const start = this.$dayjs(time[0])
+      const end = this.$dayjs(time[1])
+      return (this.$dayjs().isSame(end, 'day') || this.$dayjs().isAfter(start, 'day'))
+         && (this.$dayjs().isSame(end, 'day') || this.$dayjs().isBefore(end, 'day'))
     },
   },
 }
@@ -223,5 +252,10 @@ export default {
   .content-overflow {
     @include textOverflow($width: 500px, $line: 2);
   }
+}
+
+.today {
+  border: 1px solid rgba(var(--vs-primary), 0.1);
+  background: rgba(var(--vs-primary), 0.1);
 }
 </style>
