@@ -33,9 +33,12 @@
             <feather type="chevron-down"></feather>
           </div>
         </div>
+
+        <!-- 今日任务 -->
         <div
           v-show="isTaskOpen"
-          class="mt-6 py-10"
+          class="mt-6 py-10 overflow-hidden"
+          style="height: 420px;"
         >
           <div class="mb-2 flex items-center">
             <p class="text-xl text-primary font-bold">今日任务</p>
@@ -107,6 +110,25 @@
           </div>
         </div>
 
+        <!-- 进度条 -->
+        <div v-show="isTaskOpen">
+          <div class="grid">
+            <div
+              class="text-sm"
+              v-for="(it, i) in progress"
+              :key="i"
+            >
+              {{ it.label }}
+              <vs-progress
+                :title="it.percent"
+                class="mt-0"
+                :color="it.color"
+                :percent="it.percent"
+              ></vs-progress>
+            </div>
+          </div>
+        </div>
+
         <!-- 底部 -->
         <div
           v-show="isTaskOpen"
@@ -150,6 +172,12 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
 import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
 
+const progress = [
+  { label: '前端', color: 'primary', percent: 50 },
+  { label: '后端', color: 'warning', percent: 70 },
+  { label: '其它', color: 'success', percent: 20 },
+  { label: 'BUG', color: 'danger', percent: 10 },
+]
 const options = {
   labels: ['完成度'],
   chart: {
@@ -202,6 +230,7 @@ export default {
   },
 
   data: () => ({
+    progress,
     isTaskOpen: false,
   }),
 
@@ -270,6 +299,13 @@ export default {
     max-height: 600px;
     box-shadow: $base-shadow;
     cursor: default;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
   }
 }
 </style>

@@ -105,7 +105,6 @@
               <div class="w-1/2 mb-3 pr-4">
                 <p class="text-gray">收入: ￥100000</p>
                 <vs-progress
-                  class="block mt-1"
                   :percent="50"
                   color="primary"
                 ></vs-progress>
