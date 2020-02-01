@@ -21,10 +21,11 @@
               class="flex justify-center items-center rounded-full"
               style="width: 4.5rem; height: 4.5rem; background: rgba(var(--vs-primary), 0.5);"
             >
-              <AwardIcon
-                stroke-width="1.8px"
-                size="1.8x"
-              ></AwardIcon>
+              <feather
+                size="26"
+                stroke-width="1.8"
+                type="award"
+              ></feather>
             </div>
             <p class="my-4 text-2xl font-medium">欢迎你，{{ nickname }}</p>
           </div>
@@ -41,10 +42,11 @@
             type="area"
             :chartData="subscribersGained"
           >
-            <UsersIcon
+            <feather
               slot="icon"
               class="primary"
-            />
+              type="users"
+            ></feather>
           </area-chart>
         </div>
       </div>
@@ -59,10 +61,11 @@
             type="area"
             :chartData="ordersRecevied"
           >
-            <PocketIcon
+            <feather
               slot="icon"
               class="warning"
-            />
+              type="pocket"
+            ></feather>
           </area-chart>
         </div>
       </div>
@@ -171,7 +174,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import { AwardIcon, UsersIcon, PocketIcon } from 'vue-feather-icons'
 import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
@@ -183,9 +185,6 @@ export default {
   components: {
     VueApexCharts,
     AreaChart,
-    AwardIcon,
-    UsersIcon,
-    PocketIcon,
   },
 
   data: () => ({

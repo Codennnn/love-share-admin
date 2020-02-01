@@ -22,11 +22,11 @@
           @click="routeTo(pop.route, pop.text)"
         >
           <div class="flex justify-center items-center">
-            <component
-              size="1x"
-              stroke-width="1.5px"
-              :is="pop.icon"
-            ></component>
+            <feather
+              size="15"
+              stroke-width="1.5"
+              :type="pop.icon"
+            ></feather>
             <span class="inner-text ml-2 text-sm">{{ pop.text }}</span>
           </div>
         </vs-dropdown-item>
@@ -38,22 +38,14 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import {
-  UserIcon, MessageSquareIcon, LockIcon, LogOutIcon,
-} from 'vue-feather-icons'
-
 const popItems = [
-  { icon: 'UserIcon', text: '个人中心', route: '/profile' },
-  { icon: 'MessageSquareIcon', text: '我的消息', route: '/my-club' },
-  { icon: 'LockIcon', text: '锁定后台' },
-  { icon: 'LogOutIcon', text: '退出登录' },
+  { icon: 'user', text: '个人中心', route: '/profile' },
+  { icon: 'message-square', text: '我的消息', route: '/my-club' },
+  { icon: 'lock', text: '锁定后台' },
+  { icon: 'log-out', text: '退出登录' },
 ]
 export default {
   name: 'Avatar',
-  components: {
-    UserIcon, MessageSquareIcon, LockIcon, LogOutIcon,
-  },
-
   data: () => ({
     popItems,
   }),

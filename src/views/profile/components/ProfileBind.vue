@@ -17,19 +17,19 @@
             @keyup.enter="bindUser()"
           />
           <div
-            class="btn flex items-center justify-center cursor-pointer"
-            style="height: 40px;"
+            class="btn h-full flex items-center justify-center cursor-pointer"
             @click="onBindUser()"
           >
             <div
               v-if="!showInput"
               class="text-white text-sm"
             >绑定用户</div>
-            <Link2Icon
+            <feather
               v-else
-              size="1.2x"
               class="text-white"
-            />
+              size="22"
+              type="link-2"
+            ></feather>
           </div>
         </div>
       </div>
@@ -73,13 +73,10 @@
 </template>
 
 <script>
-import { Link2Icon } from 'vue-feather-icons'
 import { bindUser, unbindUser, getUserInfo } from '@/request/api/admin'
 
 export default {
   name: 'ProfileLog',
-  components: { Link2Icon },
-
   data: () => ({
     phone: '',
     showInput: false,

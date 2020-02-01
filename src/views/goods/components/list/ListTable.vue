@@ -23,10 +23,11 @@
                 class="w-10 h-10 mr-5 flex justify-center items-center primary-semi
                  rounded-lg bg-main-10 cursor-pointer"
               >
-                <DownloadIcon
-                  size="1.3x"
-                  stroke-width="1.6px"
-                />
+                <feather
+                  size="21"
+                  stroke-width="1.8"
+                  type="download"
+                ></feather>
               </div>
             </el-tooltip>
             <el-date-picker
@@ -72,7 +73,10 @@
               class="text-semi cursor-pointer"
               @click.native.stop="viewGoodsDetail(tr._id)"
             >
-              <LogInIcon size="1.2x" />
+              <feather
+                size="18"
+                type="log-in"
+              ></feather>
             </vs-td>
 
             <!-- 展开的内容 -->
@@ -156,11 +160,8 @@
 </template>
 
 <script>
-import { DownloadIcon, LogInIcon } from 'vue-feather-icons'
-
 export default {
   name: 'ListTable',
-  components: { DownloadIcon, LogInIcon },
   props: {
     goodsList: {
       type: Array,

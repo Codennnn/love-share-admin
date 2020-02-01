@@ -97,7 +97,10 @@
           class="py-2 px-3 rounded-lg primary-semi bg-main-10 cursor-pointer"
           @click="$refs.userChart.downloadPNG()"
         >
-          <DownloadIcon size="1.3x" />
+          <feather
+            size="22"
+            type="download"
+          ></feather>
         </div>
       </div>
       <LineChart
@@ -112,7 +115,6 @@
 
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
-import { DownloadIcon } from 'vue-feather-icons'
 import { setCreditColor } from '@/utils/util'
 import UserStatistics from './components/UserStatistics.vue'
 import LineChart from '@/components/LineChart.vue'
@@ -193,9 +195,7 @@ const chartSettings = {
 }
 export default {
   name: 'UserList',
-  components: {
-    UserStatistics, DownloadIcon, LineChart,
-  },
+  components: { UserStatistics, LineChart },
 
   data: () => ({
     setCreditColor,

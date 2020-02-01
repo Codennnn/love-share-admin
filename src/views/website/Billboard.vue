@@ -42,10 +42,11 @@
               class="close-icon absolute flex-row-center text-primary cursor-pointer"
               @click="deleteBillboard(it.url, i)"
             >
-              <XIcon
-                size="1.2x"
-                stroke-width="2.5px"
-              />
+              <feather
+                size="20"
+                stroke-width="2.5"
+                type="x"
+              ></feather>
             </div>
           </li>
         </ul>
@@ -69,15 +70,12 @@
 </template>
 
 <script>
-import { XIcon } from 'vue-feather-icons'
 import { getToken } from '@/permission/token'
 
 import { getBillboardList, deleteBillboard } from '@/request/api/billboard'
 
 export default {
   name: 'Billboard',
-  components: { XIcon },
-
   data: () => ({
     billboardList: [],
     headers: {

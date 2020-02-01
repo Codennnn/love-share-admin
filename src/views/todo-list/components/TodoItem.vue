@@ -10,10 +10,10 @@
           class="absolute left-0 z-50 h-full flex-row-center radius bg-main-10 cursor-pointer"
           style="width: 50px; height: 50px;"
         >
-          <SearchIcon
-            size="1.4x"
+          <feather
             class="primary-semi"
-          ></SearchIcon>
+            type="search"
+          ></feather>
         </div>
         <vs-input
           class="search-input sticky top-0 z-40 w-full"
@@ -92,23 +92,26 @@
                 v-if="!todo.is_trashed"
                 class="flex items-center text-gray"
               >
-                <BookmarkIcon
-                  size="1.2x"
+                <feather
+                  size="19"
+                  type="bookmark"
                   class="todo-mark__icon mr-2"
                   :class="{success: todo.is_important}"
                   @click.stop="toggleType(todo._id, 'is_important', !todo.is_important)"
-                />
-                <StarIcon
-                  size="1.2x"
+                ></feather>
+                <feather
+                  size="19"
+                  type="star"
                   class="todo-mark__icon mr-2"
                   :class="{warning: todo.is_starred}"
                   @click.stop="toggleType(todo._id, 'is_starred', !todo.is_starred)"
-                ></StarIcon>
-                <Trash2Icon
-                  size="1.2x"
+                ></feather>
+                <feather
+                  size="19"
+                  type="trash-2"
                   class="todo-mark__icon"
                   @click.stop="toggleType(todo._id, 'is_trashed', !todo.is_trashed)"
-                ></Trash2Icon>
+                ></feather>
               </div>
               <div v-else>
                 <i
@@ -153,9 +156,6 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import {
-  SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
-} from 'vue-feather-icons'
 import FlipList from '@/components/FlipList.vue'
 
 const tags = {
@@ -178,9 +178,7 @@ const tags = {
 }
 export default {
   name: 'TodoItem',
-  components: {
-    VuePerfectScrollbar, FlipList, SearchIcon, BookmarkIcon, StarIcon, Trash2Icon,
-  },
+  components: { VuePerfectScrollbar, FlipList },
 
   data: () => ({
     tags,

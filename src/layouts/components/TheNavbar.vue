@@ -21,12 +21,10 @@
               :content="item.tip"
               effect="light"
             >
-              <component
+              <feather
                 class="nav-icon mr-4"
-                size="1x"
-                stroke-width="1.8px"
-                :is="item.icon"
-              ></component>
+                :type="item.icon"
+              ></feather>
             </el-tooltip>
           </router-link>
         </div>
@@ -39,12 +37,11 @@
               :content="showSearchInput ? '关闭搜索' : '全站搜索'"
               effect="light"
             >
-              <component
+              <feather
                 class="nav-icon"
-                size="1x"
-                :is="showSearchInput ? 'XIcon' : 'SearchIcon'"
+                :type="showSearchInput ? 'x' : 'search'"
                 @click="showSearchInput = !showSearchInput"
-              ></component>
+              ></feather>
             </el-tooltip>
             <vs-input
               class="nav-search overflow-hidden"
@@ -61,12 +58,11 @@
               :content="isFullScreen ? '退出全屏' : '进入全屏'"
               effect="light"
             >
-              <component
+              <feather
                 class="nav-icon mx-4"
-                size="1x"
-                :is="isFullScreen ? 'MinimizeIcon' : 'MaximizeIcon'"
+                :type="isFullScreen ? 'minimize' : 'maximize'"
                 @click="screenfull"
-              ></component>
+              ></feather>
             </el-tooltip>
 
             <!-- 通知图标 -->
@@ -85,35 +81,19 @@
 import screenfull from 'screenfull'
 import { mapState } from 'vuex'
 
-import {
-  PackageIcon, UsersIcon, ShoppingBagIcon, ClipboardIcon,
-  SearchIcon, XIcon, MaximizeIcon, MinimizeIcon,
-} from 'vue-feather-icons'
-
 import Notice from './the-navbar/Notice.vue'
 import Avatar from './the-navbar/Avatar.vue'
 
 const navIcons = [
-  { tip: '商品列表', icon: 'PackageIcon', route: '/goods-list' },
-  { tip: '订单列表', icon: 'ClipboardIcon', route: '/order-list' },
-  { tip: '用户列表', icon: 'UsersIcon', route: '/user-list' },
-  { tip: '求购列表', icon: 'ShoppingBagIcon', route: '/buying-list' },
+  { tip: '商品列表', icon: 'package', route: '/goods-list' },
+  { tip: '订单列表', icon: 'clipboard', route: '/order-list' },
+  { tip: '用户列表', icon: 'users', route: '/user-list' },
+  { tip: '求购列表', icon: 'shopping-bag', route: '/buying-list' },
 ]
 
 export default {
   name: 'TheNavBar',
-  components: {
-    Notice,
-    Avatar,
-    PackageIcon,
-    UsersIcon,
-    ShoppingBagIcon,
-    ClipboardIcon,
-    SearchIcon,
-    XIcon,
-    MaximizeIcon,
-    MinimizeIcon,
-  },
+  components: { Notice, Avatar },
 
   data: () => ({
     navIcons,

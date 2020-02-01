@@ -14,10 +14,11 @@
             type="area"
             :chartData="chartData1"
           >
-            <DollarSignIcon
+            <feather
               slot="icon"
               class="primary"
-            />
+              type="dollar-sign"
+            ></feather>
           </area-chart>
         </div>
       </div>
@@ -30,10 +31,11 @@
             type="area"
             :chartData="chartData2"
           >
-            <CheckCircleIcon
+            <feather
               slot="icon"
               class="warning"
-            />
+              type="check-circle"
+            ></feather>
           </area-chart>
         </div>
       </div>
@@ -46,10 +48,11 @@
             type="area"
             :chartData="chartData3"
           >
-            <BarChart2Icon
+            <feather
               slot="icon"
               class="success"
-            />
+              type="bar-chart-2"
+            ></feather>
           </area-chart>
         </div>
       </div>
@@ -160,7 +163,6 @@
 
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
-import { DollarSignIcon, CheckCircleIcon, BarChart2Icon } from 'vue-feather-icons'
 import AreaChart from '@/components/AreaChart.vue'
 
 import {
@@ -173,9 +175,7 @@ import { areaChartOptions } from '@/utils/util'
 
 export default {
   name: 'OrderList',
-  components: {
-    AreaChart, DollarSignIcon, CheckCircleIcon, BarChart2Icon,
-  },
+  components: { AreaChart },
 
   data: () => ({
     initFinished: false,

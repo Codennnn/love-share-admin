@@ -7,7 +7,10 @@
          primary-semi bg-main-10 radius cursor-pointer"
         @click="$store.commit('todo/SET_TODO_POPUP_STATUS', true)"
       >
-        <PlusIcon size="1.4x"></PlusIcon>
+        <feather
+          size="20"
+          type="plus"
+        ></feather>
       </div>
     </div>
     <VuePerfectScrollbar
@@ -52,15 +55,11 @@
 </template>
 
 <script>
-import { PlusIcon } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
   name: 'ProfileTodo',
-  components: {
-    VuePerfectScrollbar,
-    PlusIcon,
-  },
+  components: { VuePerfectScrollbar },
 
   computed: {
     filterItems() {

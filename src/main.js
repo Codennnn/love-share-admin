@@ -4,7 +4,8 @@ import VueClipboard from 'vue-clipboard2' // 粘贴板
 import dayjs from 'dayjs' // 日期格式化
 import VueSocketIO from 'vue-socket.io' // socket.io
 import infiniteScroll from 'vue-infinite-scroll' // 无限滚动
-import { timeDiff } from '@/utils/util'
+import VueFeather from 'vue-feather'
+import { timeDiff } from '@/utils/util' // 时间差工具函数
 
 import App from './App.vue'
 import router from './router/router'
@@ -24,6 +25,7 @@ Vue.use(new VueSocketIO({
 Vue.use(animated)
 Vue.use(VueClipboard)
 Vue.use(infiniteScroll)
+Vue.use(VueFeather)
 
 Vue.prototype.$dayjs = dayjs
 Vue.prototype.$timeDiff = timeDiff

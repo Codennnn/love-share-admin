@@ -7,7 +7,7 @@
           <div class="num">{{ 5242 }}</div>
         </div>
         <div class="icon">
-          <UsersIcon />
+          <feather type="users"></feather>
         </div>
       </div>
       <div class="text-sm">
@@ -23,7 +23,7 @@
           <div class="num">{{ 298 }}</div>
         </div>
         <div class="icon">
-          <UserPlusIcon />
+          <feather type="user-plus"></feather>
         </div>
       </div>
       <div class="text-sm">
@@ -39,7 +39,7 @@
           <div class="num">{{ 125 }}</div>
         </div>
         <div class="icon">
-          <UserMinusIcon />
+          <feather type="user-minus"></feather>
         </div>
       </div>
       <div class="text-sm">
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import { UsersIcon, UserPlusIcon, UserMinusIcon } from 'vue-feather-icons'
 import VueApexCharts from 'vue-apexcharts'
 
 const chartOptions = {
@@ -83,9 +82,7 @@ const chartOptions = {
 }
 export default {
   name: 'UserStatistics',
-  components: {
-    UsersIcon, UserPlusIcon, UserMinusIcon, VueApexCharts,
-  },
+  components: { VueApexCharts },
 
   data: () => ({
     chartOptions,

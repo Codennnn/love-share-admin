@@ -12,7 +12,10 @@
         <div class="w-full mb-5 flex justify-between items-center text-semi">
           <span>个人中心</span>
           <vs-dropdown vs-trigger-click>
-            <MoreVerticalIcon size="1.2x"></MoreVerticalIcon>
+            <feather
+              size="20"
+              type="more-vertical"
+            ></feather>
             <vs-dropdown-menu class="w-24">
               <vs-dropdown-item class="text-sm text-center">
                 编辑信息
@@ -100,10 +103,11 @@
           <div class="mb-4 flex justify-between items-center text-primary">
             <div>新消息</div>
             <div class="relative">
-              <BellIcon
-                size="1.1x"
+              <feather
+                size="18"
                 class="opacity-50"
-              />
+                type="bell"
+              ></feather>
               <div class="dot absolute bg-danger"></div>
             </div>
           </div>
@@ -127,12 +131,11 @@
                     style="border-radius: 0.5rem;"
                     :style="`background: rgba(var(--vs-${noticeType[it.type].color}), 0.1);`"
                   >
-                    <component
-                      size="1x"
-                      style="margin-top: 2px;"
+                    <feather
+                      size="18"
                       :class="noticeType[it.type].color"
-                      :is="noticeType[it.type].icon"
-                    ></component>
+                      :type="noticeType[it.type].icon"
+                    ></feather>
                   </div>
                 </div>
                 <div class="flex-1">
@@ -174,9 +177,6 @@
 <script>
 import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
-import {
-  BellIcon, MoreVerticalIcon, MessageSquareIcon, CheckCircleIcon, HelpCircleIcon, AlertTriangleIcon,
-} from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 const AccountSecurity = Vue.component(
@@ -185,22 +185,16 @@ const AccountSecurity = Vue.component(
 )
 
 const noticeType = {
-  1: { icon: 'MessageSquareIcon', color: 'primary' },
-  2: { icon: 'CheckCircleIcon', color: 'success' },
-  3: { icon: 'HelpCircleIcon', color: 'warning' },
-  4: { icon: 'AlertTriangleIcon', color: 'danger' },
+  1: { icon: 'message-square', color: 'primary' },
+  2: { icon: 'check-circle', color: 'success' },
+  3: { icon: 'help-circle', color: 'warning' },
+  4: { icon: 'alert-triangle', color: 'danger' },
 }
 export default {
   name: 'TheProfileBar',
   components: {
     AccountSecurity,
     VuePerfectScrollbar,
-    BellIcon,
-    MoreVerticalIcon,
-    MessageSquareIcon,
-    CheckCircleIcon,
-    HelpCircleIcon,
-    AlertTriangleIcon,
   },
 
   data: () => ({

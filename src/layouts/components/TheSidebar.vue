@@ -52,12 +52,17 @@
             >
               <template slot="title">
                 <div class="flex items-center">
-                  <component
+                  <!-- <component
                     class="menu-icon"
                     size="1x"
                     stroke-width="1.8px"
                     :is="menuItem.meta.icon"
-                  ></component>
+                  ></component> -->
+                  <feather
+                    class="menu-icon"
+                    size="21"
+                    :type="menuItem.meta.icon"
+                  ></feather>
                   <span slot="title">{{ menuItem.meta.title }}</span>
                 </div>
               </template>
@@ -76,12 +81,11 @@
               :index="menuItem.children[0].path"
             >
               <div class="flex items-center">
-                <component
+                <feather
                   class="menu-icon"
-                  size="1x"
-                  stroke-width="1.8px"
-                  :is="menuItem.children[0].meta.icon"
-                ></component>
+                  size="21"
+                  :type="menuItem.children[0].meta.icon"
+                ></feather>
                 <span slot="title">{{ menuItem.children[0].meta.title }}</span>
               </div>
             </el-menu-item>
@@ -101,10 +105,6 @@
 import _debounce from 'lodash/debounce' // 引入防抖函数
 import { mapState } from 'vuex'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import {
-  ActivityIcon, UsersIcon, ShoppingBagIcon, MapIcon, PackageIcon,
-  MonitorIcon, AtSignIcon, ClipboardIcon, ListIcon, ServerIcon,
-} from 'vue-feather-icons'
 import SidebarFooter from './the-sidebar/SidebarFooter.vue'
 
 
@@ -115,20 +115,7 @@ const logoTextLight = require('@/assets/images/logo-text-light.png')
 
 export default {
   name: 'TheSidebar',
-  components: {
-    SidebarFooter,
-    VuePerfectScrollbar,
-    UsersIcon,
-    ActivityIcon,
-    ShoppingBagIcon,
-    MapIcon,
-    PackageIcon,
-    MonitorIcon,
-    AtSignIcon,
-    ClipboardIcon,
-    ListIcon,
-    ServerIcon,
-  },
+  components: { SidebarFooter, VuePerfectScrollbar },
 
   mounted() {
     window.onresize = _debounce(() => {

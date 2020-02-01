@@ -21,10 +21,11 @@
             @click="$router.push('/admin-create')"
           >
             <div class="flex items-center">
-              <PlusIcon
-                size="1.3x"
+              <feather
                 class="mr-1"
-              />
+                size="20"
+                type="plus"
+              ></feather>
               <span>添加管理员</span>
             </div>
           </vs-button>
@@ -71,53 +72,64 @@
             </vs-td>
             <vs-td>
               <vs-dropdown vs-trigger-click>
-                <MoreHorizontalIcon size="1.4x" />
+                <feather
+                  size="20"
+                  type="more-horizontal"
+                ></feather>
                 <vs-dropdown-menu class="w-24">
                   <vs-dropdown-item class="text-center">
                     <div class="flex justify-center items-center">
-                      <MessageSquareIcon
-                        size="1.1x"
-                        class="mr-2"
-                      />
+                      <feather
+                        class="mr-3"
+                        size="17"
+                        stroke-width="1.6"
+                        type="message-square"
+                      ></feather>
                       <span>联系</span>
                     </div>
                   </vs-dropdown-item>
                   <vs-dropdown-item
                     class="text-center"
                     @click="$router.push({
-                              path: '/admin-detail',
-                              query: { adminId: tr._id }
-                            })"
+                      path: '/admin-detail',
+                      query: { adminId: tr._id }
+                    })"
                   >
                     <div class="flex justify-center items-center">
-                      <NavigationIcon
-                        size="1.1x"
-                        class="mr-2"
-                      />
+                      <feather
+                        class="mr-3"
+                        size="17"
+                        stroke-width="1.6"
+                        type="navigation"
+                      ></feather>
                       <span>查看</span>
                     </div>
                   </vs-dropdown-item>
                   <vs-dropdown-item
                     class="text-center"
                     @click="$router.push({
-                              path: '/admin-edit',
-                              query: { adminId: tr._id }
-                            })"
+                      path: '/admin-edit',
+                      query: { adminId: tr._id }
+                    })"
                   >
                     <div class="flex justify-center items-center">
-                      <Edit3Icon
-                        size="1.1x"
-                        class="mr-2"
-                      />
+                      <feather
+                        class="mr-3"
+                        size="17"
+                        stroke-width="1.6"
+                        type="edit-3"
+                      ></feather>
                       <span>编辑</span>
                     </div>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <div class="flex justify-center items-center danger">
-                      <TrashIcon
-                        size="1.1x"
-                        class="mr-2"
-                      />
+                      <feather
+                        class="mr-3"
+                        size="17"
+                        stroke-width="1.6"
+                        type="trash"
+                      ></feather>
                       <span>删除</span>
                     </div>
                   </vs-dropdown-item>
@@ -132,17 +144,10 @@
 </template>
 
 <script>
-import {
-  PlusIcon, MoreHorizontalIcon, MessageSquareIcon, NavigationIcon, Edit3Icon, TrashIcon,
-} from 'vue-feather-icons'
 import { getAdminList } from '@/request/api/admin'
 
 export default {
   name: 'AdminList',
-  components: {
-    PlusIcon, MoreHorizontalIcon, MessageSquareIcon, NavigationIcon, Edit3Icon, TrashIcon,
-  },
-
   data: () => ({
     selected: [],
     adminList: [],

@@ -38,7 +38,10 @@
           <div class="w-1/4">
             <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
               <div class="flex-col-center">
-                <DollarSignIcon class="mb-1 text-gray" />
+                <feather
+                  class="mb-1 text-gray"
+                  type="dollar-sign"
+                ></feather>
                 <div class="text-gray text-sm">余 额</div>
               </div>
               <div class="text-semi text-xl font-bold">
@@ -54,7 +57,10 @@
             </div>
             <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
               <div class="-ml-1 flex-col-center">
-                <ArchiveIcon class="mb-1 text-gray" />
+                <feather
+                  class="mb-1 text-gray"
+                  type="archive"
+                ></feather>
                 <div class="text-gray text-sm">优惠券</div>
               </div>
               <div class="text-semi text-xl font-bold">{{ detail.beans || 0  }}</div>
@@ -168,10 +174,11 @@
               class="w-12 h-12 mb-1 flex-row-center rounded-full"
               style="background: rgba(var(--vs-primary), 0.15);"
             >
-              <UserCheckIcon
-                size="1.3x"
+              <feather
                 class="primary"
-              />
+                size="22"
+                type="user-check"
+              ></feather>
             </div>
             <p class="font-bold text-primary">{{ detail.fans_num }}</p>
           </div>
@@ -183,10 +190,11 @@
               class="w-12 h-12 mb-1 flex-row-center rounded-full"
               style="background: rgba(var(--vs-warning), 0.15);"
             >
-              <EyeIcon
-                size="1.3x"
+              <feather
                 class="warning"
-              />
+                size="22"
+                type="eye"
+              ></feather>
             </div>
             <p class="font-bold text-primary">{{ detail.follow_num }}</p>
           </div>
@@ -213,9 +221,6 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
-import {
-  DollarSignIcon, ArchiveIcon, UserCheckIcon, EyeIcon,
-} from 'vue-feather-icons'
 import HeatmapChart from '@/components/LineChart.vue'
 
 
@@ -277,9 +282,7 @@ const chartSettings = {
 }
 export default {
   name: 'UserDetail',
-  components: {
-    HeatmapChart, VueApexCharts, DollarSignIcon, ArchiveIcon, UserCheckIcon, EyeIcon,
-  },
+  components: { HeatmapChart, VueApexCharts },
 
   data: () => ({
     status,

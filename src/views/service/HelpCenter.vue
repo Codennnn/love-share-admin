@@ -97,7 +97,10 @@
                 class="ml-auto px-2 py-1 text-sm rounded"
                 style="background: rgba(121, 131, 255);"
               >
-                <PlusIcon size="1.3x" />
+                <feather
+                  size="20"
+                  type="plus"
+                ></feather>
               </div>
             </div>
           </div>
@@ -194,7 +197,6 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
-import { PlusIcon } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import {
@@ -238,7 +240,7 @@ const menus = [
 
 export default {
   name: 'HelpCenter',
-  components: { PlusIcon, VueEditor, VuePerfectScrollbar },
+  components: { VueEditor, VuePerfectScrollbar },
 
   data: () => ({
     guideList: [],

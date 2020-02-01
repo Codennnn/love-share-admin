@@ -29,10 +29,11 @@
               style="width: 60px; height: 50px;"
               @click="unLocked()"
             >
-              <UnlockIcon
-                size="1.3x"
+              <feather
                 class="primary-semi"
-              />
+                size="22"
+                type="unlock"
+              ></feather>
             </div>
           </el-tooltip>
         </div>
@@ -56,19 +57,18 @@
         effect="light"
         content="退出登录"
       >
-        <LogOutIcon class="text-semi" />
+        <feather
+          class="text-semi"
+          type="log-out"
+        ></feather>
       </el-tooltip>
     </div>
   </div>
 </template>
 
 <script>
-import { UnlockIcon, LogOutIcon } from 'vue-feather-icons'
-
 export default {
   name: 'LockScreen',
-  components: { UnlockIcon, LogOutIcon },
-
   data: () => ({
     showAlert: false,
     alertText: '',

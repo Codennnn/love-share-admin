@@ -4,10 +4,11 @@
     vs-custom-content
   >
     <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
-      <BellIcon
-        size="1x"
+      <feather
+        size="22"
         class="nav-icon"
-      />
+        type="bell"
+      ></feather>
     </el-badge>
     <vs-dropdown-menu
       id="div-with-loading"
@@ -46,12 +47,10 @@
             :key="i"
           >
             <div class="flex items-start">
-              <component
-                size="1.2x"
-                style="margin-top: 2px;"
+              <feather
                 :class="noticeType[nt.type].color"
-                :is="noticeType[nt.type].icon"
-              ></component>
+                :type="noticeType[nt.type].icon"
+              ></feather>
               <div class="mx-2 flex-1">
                 <div>
                   <div :class="[`${noticeType[nt.type].color}`]">{{ nt.title }}</div>
@@ -106,30 +105,18 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { mapState, mapGetters } from 'vuex'
 
-import {
-  BellIcon, MailIcon, MessageSquareIcon, CheckCircleIcon, HelpCircleIcon, AlertTriangleIcon,
-} from 'vue-feather-icons'
-
 import { setNoticeRead, setAllNoticesRead } from '@/request/api/notice'
 
 const noticeType = {
-  1: { icon: 'MessageSquareIcon', color: 'primary' },
-  2: { icon: 'CheckCircleIcon', color: 'success' },
-  3: { icon: 'HelpCircleIcon', color: 'warning' },
-  4: { icon: 'AlertTriangleIcon', color: 'danger' },
+  1: { icon: 'message-square', color: 'primary' },
+  2: { icon: 'check-circle', color: 'success' },
+  3: { icon: 'help-circle', color: 'warning' },
+  4: { icon: 'alert-triangle', color: 'danger' },
 }
 
 export default {
   name: 'Notice',
-  components: {
-    VuePerfectScrollbar,
-    BellIcon,
-    MailIcon,
-    MessageSquareIcon,
-    CheckCircleIcon,
-    HelpCircleIcon,
-    AlertTriangleIcon,
-  },
+  components: { VuePerfectScrollbar },
 
   data: () => ({
     noticeType,

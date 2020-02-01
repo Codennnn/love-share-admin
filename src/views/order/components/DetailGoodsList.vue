@@ -44,13 +44,14 @@
                 </el-timeline-item>
               </el-timeline>
             </div>
-            <TruckIcon
+            <feather
               slot="reference"
               title="物流信息"
-              size="1.5x"
-              stroke-width="1.6px"
               class="text-primary cursor-pointer"
-            />
+              size="21"
+              stroke-width="1.7"
+              type="truck"
+            ></feather>
           </el-popover>
 
         </vs-td>
@@ -69,12 +70,8 @@
 </template>
 
 <script>
-import { TruckIcon } from 'vue-feather-icons'
-
 export default {
   name: 'DetailGoodsList',
-  components: { TruckIcon },
-
   props: {
     goodsList: {
       type: Array,

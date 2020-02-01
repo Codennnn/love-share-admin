@@ -19,20 +19,18 @@
           class="absolute w-full flex items-center"
           style="top: 14px;"
         >
-          <LayersIcon
-            size="1.2x"
+          <feather
             class="mx-3"
-          ></LayersIcon>
+            size="21"
+            type="layers"
+          ></feather>
           <div>我的任务</div>
           <div
             v-show="isTaskOpen"
-            class="ml-auto mr-8 w-8 h-8 rounded-full flex items-center justify-center bg-gray"
+            class="ml-auto mr-8 w-8 h-8 rounded-full flex-row-center bg-gray cursor-pointer"
             @click.stop="isTaskOpen = false"
           >
-            <ChevronDownIcon
-              stroke-width="1.6px"
-              class="mt-1 cursor-pointer"
-            ></ChevronDownIcon>
+            <feather type="chevron-down"></feather>
           </div>
         </div>
         <div
@@ -46,7 +44,10 @@
              flex-row-center rounded-lg cursor-pointer"
               @click="$store.commit('todo/SET_TODO_POPUP_STATUS', true)"
             >
-              <PlusIcon size="1x" />
+              <feather
+                size="16"
+                type="plus"
+              ></feather>
             </div>
           </div>
           <VuePerfectScrollbar
@@ -117,7 +118,10 @@
             @click.stop="viewAll()"
           >
             <span class="mr-1 text-sm">查看全部</span>
-            <ChevronRightIcon size="1x"></ChevronRightIcon>
+            <feather
+              size="16"
+              type="chevron-right"
+            ></feather>
           </div>
         </div>
       </div>
@@ -128,10 +132,11 @@
       style="height: 50px; width: 50px; margin-left: 0.4rem;"
       @click="$store.commit('chat/SET_CHAT_OPEN')"
     >
-      <MessageSquareIcon
-        size="1.3x"
+      <feather
         class="chat-icon"
-      ></MessageSquareIcon>
+        size="21"
+        type="message-square"
+      ></feather>
     </div>
 
     <!-- 创建任务模态框 -->
@@ -141,9 +146,6 @@
 
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
-import {
-  MessageSquareIcon, LayersIcon, PlusIcon, ChevronRightIcon, ChevronDownIcon,
-} from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
 import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
@@ -193,11 +195,6 @@ export default {
     VuePerfectScrollbar,
     VueApexCharts,
     TodoPopup,
-    MessageSquareIcon,
-    LayersIcon,
-    PlusIcon,
-    ChevronRightIcon,
-    ChevronDownIcon,
   },
 
   props: {

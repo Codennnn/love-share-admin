@@ -14,10 +14,12 @@
         :class="{'primary': !currentSelected.type}"
         @click="setActive()"
       >
-        <LayersIcon
+        <feather
           class="mr-2"
-          stroke-width="1.5px"
-        />
+          size="22"
+          stroke-width="1.8"
+          type="layers"
+        ></feather>
         <span class="label-text">所有任务</span>
       </div>
     </div>
@@ -34,11 +36,12 @@
         :class="{'primary': currentSelected.value === item.value}"
         @click="setActive('filter', item.value)"
       >
-        <component
+        <feather
           class="mr-2"
-          stroke-width="1.5px"
-          :is="item.icon"
-        ></component>
+          size="22"
+          stroke-width="1.8"
+          :type="item.icon"
+        ></feather>
         <span>{{ item.text }}</span>
       </div>
     </div>
@@ -67,28 +70,24 @@
 </template>
 
 <script>
-import {
-  LayersIcon, BookmarkIcon, StarIcon, CheckSquareIcon, Trash2Icon,
-} from 'vue-feather-icons'
-
 const labelItems = [
   {
-    icon: 'BookmarkIcon',
+    icon: 'bookmark',
     text: '重要事项',
     value: 'is_important',
   },
   {
-    icon: 'StarIcon',
+    icon: 'star',
     text: '星号标记',
     value: 'is_starred',
   },
   {
-    icon: 'CheckSquareIcon',
+    icon: 'check-square',
     text: '已完成',
     value: 'is_done',
   },
   {
-    icon: 'Trash2Icon',
+    icon: 'trash-2',
     text: '丢弃的',
     value: 'is_trashed',
   },
@@ -99,13 +98,8 @@ const labelMarks = [
   { color: 'success', text: '其它', value: 3 },
   { color: 'danger', text: 'BUG', value: 4 },
 ]
-
 export default {
   name: 'TodoBar',
-  components: {
-    LayersIcon, BookmarkIcon, StarIcon, CheckSquareIcon, Trash2Icon,
-  },
-
   data: () => ({
     labelItems,
     labelMarks,

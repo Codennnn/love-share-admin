@@ -54,7 +54,7 @@ export const asyncRoutes = [
         meta: { title: '测试' },
       },
     ],
-    meta: { title: '数据分析', icon: 'ActivityIcon' },
+    meta: { title: '数据分析', icon: 'activity' },
   },
 
   /*
@@ -77,7 +77,7 @@ export const asyncRoutes = [
         meta: { title: '商品分类' },
       },
     ],
-    meta: { title: '商品管理', icon: 'PackageIcon' },
+    meta: { title: '商品管理', icon: 'package' },
   },
 
   /*
@@ -94,7 +94,7 @@ export const asyncRoutes = [
         meta: { title: '订单列表' },
       },
     ],
-    meta: { title: '订单管理', icon: 'ClipboardIcon' },
+    meta: { title: '订单管理', icon: 'clipboard' },
   },
 
   /*
@@ -111,7 +111,7 @@ export const asyncRoutes = [
         meta: { title: '用户列表', permission: { moduleName: 'user', purviews: ['read'] } },
       },
     ],
-    meta: { title: '用户管理', icon: 'UsersIcon' },
+    meta: { title: '用户管理', icon: 'users' },
   },
 
   /*
@@ -128,7 +128,7 @@ export const asyncRoutes = [
         meta: { title: '求购列表' },
       },
     ],
-    meta: { title: '求购管理', icon: 'ShoppingBagIcon' },
+    meta: { title: '求购管理', icon: 'shopping-bag' },
   },
 
   /*
@@ -145,7 +145,7 @@ export const asyncRoutes = [
         meta: { title: '用户列表' },
       },
     ],
-    meta: { title: '留言管理', icon: 'AtSignIcon' },
+    meta: { title: '留言管理', icon: 'at-sign' },
   },
 
   /*
@@ -168,7 +168,7 @@ export const asyncRoutes = [
         meta: { title: '常见问题' },
       },
     ],
-    meta: { title: '资讯管理', icon: 'MapIcon' },
+    meta: { title: '资讯管理', icon: 'map' },
   },
 
   /*
@@ -185,7 +185,7 @@ export const asyncRoutes = [
         meta: { title: '广告牌' },
       },
     ],
-    meta: { title: '网站管理', icon: 'MonitorIcon' },
+    meta: { title: '网站管理', icon: 'monitor' },
   },
 
   /*
@@ -208,7 +208,7 @@ export const asyncRoutes = [
         meta: { title: '创建管理员' },
       },
     ],
-    meta: { title: '系统管理', icon: 'ServerIcon' },
+    meta: { title: '系统管理', icon: 'server' },
   },
 
   /*
@@ -223,7 +223,7 @@ export const asyncRoutes = [
         path: '/todo-list',
         name: 'TodoList',
         component: TodoList,
-        meta: { title: '任务列表', icon: 'ListIcon' },
+        meta: { title: '任务列表', icon: 'list' },
       },
     ],
   },
