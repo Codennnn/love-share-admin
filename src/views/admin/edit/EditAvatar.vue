@@ -1,7 +1,7 @@
 <template>
   <div>
     <img
-      class="base-shadow rounded-lg"
+      class="heavy-shadow radius"
       width="150px"
       :src="avatarUrl"
     >

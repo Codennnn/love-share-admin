@@ -1,10 +1,10 @@
 <template>
   <vue-apex-charts
     ref="lineChart"
-    :type="settings.type"
-    :width="settings.width"
-    :height="settings.height"
-    :options="settings.chartOptions"
+    :type="type"
+    :width="width"
+    :height="height"
+    :options="options"
     :series="series"
   ></vue-apex-charts>
 </template>
@@ -17,7 +17,19 @@ export default {
   components: { VueApexCharts },
 
   props: {
-    settings: {
+    type: {
+      type: String,
+      default: 'area',
+    },
+    width: {
+      type: String,
+      default: '100%',
+    },
+    height: {
+      type: String,
+      default: '100%',
+    },
+    options: {
       type: Object,
       required: true,
     },

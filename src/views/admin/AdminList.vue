@@ -68,7 +68,7 @@
             </vs-td>
             <vs-td class="text-semi cursor-text">{{ tr.account }}</vs-td>
             <vs-td>
-              <p class="text-semi">{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
+              <p class="text-semi">{{ $dayjs(tr.created_at).format('YYYY年M月DD日') }}</p>
             </vs-td>
             <vs-td>
               <vs-dropdown vs-trigger-click>
@@ -109,7 +109,7 @@
                     class="text-center"
                     @click="$router.push({
                       path: '/admin-edit',
-                      query: { adminId: tr._id }
+                      query: {adminId: tr._id}
                     })"
                   >
                     <div class="flex justify-center items-center">

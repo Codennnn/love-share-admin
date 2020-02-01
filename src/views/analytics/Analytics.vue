@@ -70,6 +70,7 @@
         </div>
       </div>
     </div>
+
     <div class="flex flex-wrap w-full">
       <!-- 卡片 4 -->
       <div class="lg:w-1/2 lg:pr-3 sm:w-full my-3">
@@ -169,6 +170,11 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <!-- 新增用户统计图 -->
+      <UserDailyStatistics />
+    </div>
   </div>
 </template>
 
@@ -176,6 +182,7 @@
 import { mapState } from 'vuex'
 import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
+import UserDailyStatistics from './components/UserDailyStatistics.vue'
 import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
 
 import { getUserList } from '@/request/api/user'
@@ -185,6 +192,7 @@ export default {
   components: {
     VueApexCharts,
     AreaChart,
+    UserDailyStatistics,
   },
 
   data: () => ({

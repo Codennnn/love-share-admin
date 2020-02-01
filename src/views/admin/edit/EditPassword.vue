@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-1/2">
     <el-form
       ref="form"
       class="edit"
