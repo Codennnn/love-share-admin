@@ -4,103 +4,92 @@
     :title="task._id ? '编辑任务' : '添加任务'"
     :active.sync="isPopupActiveLocal"
   >
-    <vs-row class="flex items-center justify-center">
-      <vs-col vs-w="9">
-        <div class="todo-tag__group flex items-center">
-          <template v-for="(tag, i) in task.tags">
-            <div
-              class="task-tag flex items-center"
-              v-if="tag"
+    <!-- 选择标签 -->
+    <div class="flex items-center justify-between">
+      <div class="todo-tag__group flex items-center">
+        <template v-for="(tag, i) in task.tags">
+          <div
+            class="task-tag flex items-center"
+            v-if="tag"
+            :key="i"
+          >
+            <span
+              class="w-2 h-2 mr-2 rounded-full"
+              :class="`bg-${tags[tag].color}`"
+            ></span>
+            <span>{{ tags[tag].text }}</span>
+          </div>
+        </template>
+      </div>
+      <div class="todo-icon__group flex items-center">
+        <feather
+          size="19"
+          type="bookmark"
+          class="mr-2 text-gray cursor-pointer"
+          :class="{'success': task.is_important}"
+          @click="task.is_important = !task.is_important"
+        ></feather>
+        <feather
+          size="19"
+          type="star"
+          class="mr-2 text-gray cursor-pointer"
+          :class="{'warning': task.is_starred}"
+          @click="task.is_starred = !task.is_starred"
+        ></feather>
+        <!-- 选择任务的标签 -->
+        <vs-dropdown>
+          <feather
+            size="19"
+            type="tag"
+            class="mt-2 text-gray"
+          ></feather>
+          <vs-dropdown-menu>
+            <vs-dropdown-item
+              v-for="(tag, i) in tags"
               :key="i"
             >
-              <span
-                class="w-2 h-2 mr-2 rounded-full"
-                :class="`bg-${tags[tag].color}`"
-              ></span>
-              <span>{{ tags[tag].text }}</span>
-            </div>
-          </template>
-        </div>
-      </vs-col>
-      <vs-col
-        vs-type="flex"
-        vs-justify="flex-end"
-        vs-w="3"
-      >
-        <div class="todo-icon__group flex items-center">
-          <feather
-            size="19"
-            type="bookmark"
-            class="mr-2 text-gray cursor-pointer"
-            :class="{'success': task.is_important}"
-            @click="task.is_important = !task.is_important"
-          ></feather>
-          <feather
-            size="19"
-            type="star"
-            class="mr-2 text-gray cursor-pointer"
-            :class="{'warning': task.is_starred}"
-            @click="task.is_starred = !task.is_starred"
-          ></feather>
-          <!-- 选择任务的标签 -->
-          <vs-dropdown>
-            <feather
-              size="19"
-              type="tag"
-              class="mt-2 text-gray"
-            ></feather>
-            <vs-dropdown-menu>
-              <vs-dropdown-item
-                v-for="(tag, i) in tags"
-                :key="i"
-              >
-                <vs-checkbox
-                  :vs-value="tag.type"
-                  v-model="task.tags"
-                  @click.stop
-                >{{ tag.text }}</vs-checkbox>
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
-        </div>
-      </vs-col>
-    </vs-row>
+              <vs-checkbox
+                :vs-value="tag.type"
+                v-model="task.tags"
+                @click.stop
+              >{{ tag.text }}</vs-checkbox>
+            </vs-dropdown-item>
+          </vs-dropdown-menu>
+        </vs-dropdown>
+      </div>
+    </div>
 
-    <vs-row>
-      <vs-col
-        class="pt-3"
-        vs-w="12"
+    <!-- 标题输入框 -->
+    <div class="w-full pt-2">
+      <!-- 输入标题框 -->
+      <vs-input
+        class="w-full"
+        label-placeholder="标题"
+        v-model.trim="task.title"
+      />
+    </div>
+
+    <!-- 任务描述框 -->
+    <vs-textarea
+      class="mt-4"
+      label="任务描述"
+      v-model="task.content"
+      :height="String(80)"
+    />
+
+    <!-- 计划完成日期 -->
+    <div>
+      <div class="mb-1 text-gray text-xs">计划完成日期</div>
+      <el-date-picker
+        type="daterange"
+        value-format="timestamp"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        v-model="task.complete_time"
       >
-        <div class="w-full">
-          <!-- 输入标题框 -->
-          <vs-input
-            class="w-full"
-            label-placeholder="标题"
-            v-model.trim="task.title"
-          />
-        </div>
-        <!-- 任务描述框 -->
-        <vs-textarea
-          class="mt-4"
-          label="任务描述"
-          v-model="task.content"
-          :height="String(80)"
-        />
-        <!-- 计划完成日期 -->
-        <div>
-          <div class="mb-1 text-gray text-xs">计划完成日期</div>
-          <el-date-picker
-            type="daterange"
-            value-format="timestamp"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            v-model="task.complete_time"
-          >
-          </el-date-picker>
-        </div>
-      </vs-col>
-    </vs-row>
+      </el-date-picker>
+    </div>
 
     <div class="mt-2 flex justify-end">
       <vs-button

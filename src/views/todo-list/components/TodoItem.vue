@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <div class="flex items-center">
       <!-- 搜索框 -->
       <div
@@ -35,7 +35,7 @@
     </div>
 
     <VuePerfectScrollbar
-      class="relative pt-4"
+      class="relative h-full pt-4"
       style="max-height: 636px;"
       :settings="{
         maxScrollbarLength: 200,

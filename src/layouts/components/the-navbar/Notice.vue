@@ -5,11 +5,11 @@
   >
     <el-badge
       class="nav-icon"
-      style="margin-top: 0.75rem;"
+      style="margin-top: 0.9rem;"
       :value="unreadAmount > 0 ? unreadAmount : ''"
     >
       <feather
-        size="22"
+        size="23"
         type="bell"
       ></feather>
     </el-badge>

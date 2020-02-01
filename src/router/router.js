@@ -214,7 +214,7 @@ export const asyncRoutes = [
         meta: { title: '创建管理员' },
       },
     ],
-    meta: { title: '系统管理', icon: 'server' },
+    meta: { title: '系统管理', icon: 'sliders' },
   },
 
   /*
@@ -229,7 +229,7 @@ export const asyncRoutes = [
         path: '/todo-list',
         name: 'TodoList',
         component: TodoList,
-        meta: { title: '任务列表', icon: 'list' },
+        meta: { title: '任务列表', icon: 'server' },
       },
     ],
   },
