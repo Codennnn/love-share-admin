@@ -11,6 +11,7 @@ $themes: (
     warning:#FF9F43,
     dark: #1E1E1E,
     gray: #718096,
+    primary-semi: #6165f7,
 
     /* Text Color */
     text-color-semi: #8b99a8,
@@ -27,6 +28,7 @@ $themes: (
     bg-color-primary: #fff,
     bg-color-gray: #f8f9fa,
     bg-color-gray-600: #718096,
+    bg-color-main-10: rgba(var(--vs-primary), 0.1),
 
     /* Navbar Color */
     nav-icon-color: #686868,
@@ -67,6 +69,7 @@ $themes: (
     warning:#FF9F43,
     dark: #1E1E1E,
     gray: #718096,
+    primary-semi: #fff,
 
     /* Text Color */
     text-color-semi: #bfc0c6,
@@ -84,6 +87,7 @@ $themes: (
     bg-color-gray: #424556,
     bg-color-gray-500: #c8c8c8,
     bg-color-gray-600: #e6e6e6,
+    bg-color-main-10: rgba(var(--vs-primary), 0.8),
 
     /* Navbar Color */
     nav-icon-color: #ccc,

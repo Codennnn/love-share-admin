@@ -3,8 +3,8 @@
     <div class="mb-6 flex justify-between items-center">
       <div class="text-primary text-lg font-bold">任务列表</div>
       <div
-        class="w-10 h-10 flex justify-center items-center primary radius cursor-pointer"
-        style="background: rgba(var(--vs-primary), 0.1);"
+        class="w-10 h-10 flex justify-center items-center
+         primary-semi bg-main-10 radius cursor-pointer"
         @click="showPopup = true"
       >
         <PlusIcon size="1.4x"></PlusIcon>

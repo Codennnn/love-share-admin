@@ -7,12 +7,12 @@
         style="background: rgba(var(--vs-primary), 0.065);"
       >
         <div
-          class="absolute left-0 z-50 h-full flex-row-center radius cursor-pointer"
-          style="width: 50px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
+          class="absolute left-0 z-50 h-full flex-row-center radius bg-main-10 cursor-pointer"
+          style="width: 50px; height: 50px;"
         >
           <SearchIcon
             size="1.4x"
-            class="primary"
+            class="primary-semi"
           ></SearchIcon>
         </div>
         <vs-input
@@ -27,7 +27,7 @@
       <div
         class="ml-4 w-24 py-3 flex-row-center text-sm radius cursor-pointer"
         style="transition: all 0.3s;"
-        :class="{'primary today': onlyToday, 'text-primary base-shadow ': !onlyToday}"
+        :class="{'primary-semi bg-main-10': onlyToday, 'text-primary base-shadow ': !onlyToday}"
         @click="onlyToday = !onlyToday"
       >
         今日任务
@@ -252,10 +252,5 @@ export default {
   .content-overflow {
     @include textOverflow($width: 500px, $line: 2);
   }
-}
-
-.today {
-  border: 1px solid rgba(var(--vs-primary), 0.1);
-  background: rgba(var(--vs-primary), 0.1);
 }
 </style>

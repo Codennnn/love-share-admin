@@ -79,6 +79,10 @@ img {
     color: themed("warning") !important;
   }
 
+  .primary-semi {
+    color: themed("primary-semi") !important;
+  }
+
   .text-semi {
     color: themed("text-color-semi");
   }
@@ -105,6 +109,10 @@ img {
 
   .bg-primary {
     background: themed("bg-color-primary");
+  }
+
+  .bg-main-10 {
+    background: themed("bg-color-main-10");
   }
 
   .border-primary {

@@ -1,7 +1,7 @@
 <template>
   <div class="pt-6">
     <!-- 统计卡片 -->
-    <UserStatistics />
+    <UserStatistics class="mb-8" />
 
     <!-- 用户列表 -->
     <div class="p-4 radius bg-semi overflow-hidden">
@@ -83,7 +83,7 @@
 
     <!-- 新增用户统计图 -->
     <p class="pt-6 pb-4 text-xl text-primary font-bold">
-      日新增用户统计
+      每日新增用户统计
     </p>
     <div class="px-6 radius bg-gray">
       <div class="pt-6 pb-4 px-8 flex justify-between items-center">
@@ -94,14 +94,10 @@
 
         <div
           title="导出统计图"
-          class="py-2 px-3 rounded-lg cursor-pointer"
-          style="background: rgba(var(--vs-primary), 0.1);"
+          class="py-2 px-3 rounded-lg primary-semi bg-main-10 cursor-pointer"
           @click="$refs.userChart.downloadPNG()"
         >
-          <DownloadIcon
-            size="1.3x"
-            class="primary"
-          />
+          <DownloadIcon size="1.3x" />
         </div>
       </div>
       <LineChart

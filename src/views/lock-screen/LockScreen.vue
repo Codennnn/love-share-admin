@@ -25,13 +25,13 @@
             :open-delay="300"
           >
             <div
-              class="h-full flex items-center justify-center radius cursor-pointer"
-              style="width: 60px; height: 50px; background: rgba(var(--vs-primary), 0.1);"
+              class="h-full flex items-center justify-center radius bg-main-10 cursor-pointer"
+              style="width: 60px; height: 50px;"
               @click="unLocked()"
             >
               <UnlockIcon
                 size="1.3x"
-                class="primary"
+                class="primary-semi"
               />
             </div>
           </el-tooltip>

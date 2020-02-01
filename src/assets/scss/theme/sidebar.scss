@@ -1,5 +1,7 @@
 // 浅色主题 [默认]
 @include themeify {
+
+  // 浅色主题
   .menu-default {
     user-select: none;
 
@@ -103,17 +105,20 @@
     }
 
     .chat {
-      background: rgba(var(--vs-primary), 0.1);
+      background: themed("bg-color-main-10");
 
       .chat-icon {
-        color: $primary;
+        color: themed("primary-semi");
       }
     }
   }
+
+  // 
 }
 
-// 深色主题
 @include themeify {
+
+  // 半色主题
   .menu-semi {
     user-select: none;
 

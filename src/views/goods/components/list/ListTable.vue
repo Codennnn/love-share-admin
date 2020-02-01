@@ -20,13 +20,12 @@
             <el-tooltip content="导出列表数据">
               <div
                 @click="exportExcel()"
-                class="w-10 h-10 mr-5 flex justify-center items-center rounded-lg cursor-pointer"
-                style="background: rgba(var(--vs-primary), 0.1);"
+                class="w-10 h-10 mr-5 flex justify-center items-center primary-semi
+                 rounded-lg bg-main-10 cursor-pointer"
               >
                 <DownloadIcon
                   size="1.3x"
                   stroke-width="1.6px"
-                  class="primary"
                 />
               </div>
             </el-tooltip>

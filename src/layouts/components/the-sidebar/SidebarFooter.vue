@@ -39,7 +39,13 @@
           v-show="isTaskOpen"
           class="mt-6 py-10"
         >
-          <p class="mb-2 text-xl text-primary font-bold">今日任务</p>
+          <div class="mb-2 flex items-center">
+            <p class="text-xl text-primary font-bold">今日任务</p>
+            <div class="ml-3 mt-1 w-6 h-6 primary-semi bg-main-10
+             flex-row-center rounded-lg cursor-pointer">
+              <PlusIcon size="1x" />
+            </div>
+          </div>
           <VuePerfectScrollbar
             v-if="todayTask.length > 0"
             class="w-full mb-4 overflow-hidden"
@@ -130,7 +136,7 @@
 <script>
 import _cloneDeepWith from 'lodash/cloneDeepWith'
 import {
-  MessageSquareIcon, LayersIcon, ChevronRightIcon, ChevronDownIcon,
+  MessageSquareIcon, LayersIcon, PlusIcon, ChevronRightIcon, ChevronDownIcon,
 } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
@@ -181,6 +187,7 @@ export default {
     VueApexCharts,
     MessageSquareIcon,
     LayersIcon,
+    PlusIcon,
     ChevronRightIcon,
     ChevronDownIcon,
   },
