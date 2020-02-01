@@ -3,10 +3,13 @@
     vs-trigger-click
     vs-custom-content
   >
-    <el-badge :value="unreadAmount > 0 ? unreadAmount : ''">
+    <el-badge
+      class="nav-icon"
+      style="margin-top: 0.75rem;"
+      :value="unreadAmount > 0 ? unreadAmount : ''"
+    >
       <feather
         size="22"
-        class="nav-icon"
         type="bell"
       ></feather>
     </el-badge>
@@ -37,8 +40,8 @@
         }"
       >
         <ul
-          class="vs-con-loading__container"
           v-if="unreadAmount > 0"
+          class="vs-con-loading__container"
         >
           <li
             class="notice relative p-4 flex justify-between cursor-pointer"
@@ -63,12 +66,13 @@
               </div>
             </div>
             <small class="text-gray whitespace-no-wrap">{{ $timeDiff(nt.created_at) }}</small>
-            <i
+            <feather
               title="不再通知"
-              class="read el-icon-close-notification absolute bottom-0 mr-3 mb-1
-              text-sm text-gray"
+              type="bell-off"
+              size="15"
+              class="read absolute text-gray"
               @click="setNoticeRead(nt._id)"
-            ></i>
+            ></feather>
           </li>
         </ul>
         <div
@@ -102,8 +106,8 @@
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { mapState, mapGetters } from 'vuex'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import { setNoticeRead, setAllNoticesRead } from '@/request/api/notice'
 
@@ -209,12 +213,13 @@ export default {
 .notice {
   .read {
     right: -30px;
+    bottom: 5px;
     transition: all 0.2s;
     opacity: 0;
   }
   &:hover {
     .read {
-      right: 0;
+      right: 15px;
       opacity: 1;
     }
   }

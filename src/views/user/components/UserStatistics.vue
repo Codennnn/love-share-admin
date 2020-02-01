@@ -10,9 +10,15 @@
           <feather type="users"></feather>
         </div>
       </div>
-      <div class="text-sm">
+      <div class="flex items-center text-sm">
         <span class="text-gray">最近一月</span>
-        <span class="ml-1 primary font-bold">+4.20%</span>
+        <div class="ml-1 flex items-center primary ">
+          <feather
+            size="18"
+            type="arrow-up"
+          ></feather>
+          <span class="font-bold">4.20%</span>
+        </div>
       </div>
     </div>
 
@@ -26,9 +32,15 @@
           <feather type="user-plus"></feather>
         </div>
       </div>
-      <div class="text-sm">
-        <span class="text-gray">相较昨天</span>
-        <span class="ml-1 success font-bold">+2.50%</span>
+      <div class="flex items-center text-sm">
+        <span class="text-gray">相对于昨天</span>
+        <div class="ml-1 flex items-center success ">
+          <feather
+            size="18"
+            type="arrow-up"
+          ></feather>
+          <span class="font-bold">2.50%</span>
+        </div>
       </div>
     </div>
 

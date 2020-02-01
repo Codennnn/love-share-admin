@@ -206,8 +206,9 @@ export default {
 
 <style lang="scss">
 .nav-icon {
-  cursor: pointer;
+  margin-top: 0.5rem;
   font-size: $nav-icon-size;
   font-weight: 500;
+  cursor: pointer;
 }
 </style>
