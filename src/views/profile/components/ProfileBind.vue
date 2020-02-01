@@ -71,7 +71,7 @@
     </template>
   </div>
 </template>
-// style="background: rgba(var(--vs-primary), 0.9)"
+
 <script>
 import { Link2Icon } from 'vue-feather-icons'
 import { bindUser, unbindUser, getUserInfo } from '@/request/api/admin'
@@ -99,6 +99,7 @@ export default {
   },
 
   methods: {
+    // 点击绑定用户按钮
     onBindUser() {
       if (!this.showInput) {
         this.showInput = true
@@ -107,6 +108,7 @@ export default {
       }
     },
 
+    // 绑定用户
     async bindUser() {
       const { code } = await bindUser({ phone: this.phone })
       if (code === 2000) {
@@ -117,6 +119,7 @@ export default {
       }
     },
 
+    // 解除绑定
     async unbindUser() {
       if (this.userId) {
         const { code } = await unbindUser()
@@ -127,6 +130,7 @@ export default {
       }
     },
 
+    // 获取绑定的用户的信息
     async getUserInfo() {
       const { code, data } = await getUserInfo({ user_id: this.userId })
       if (code === 2000) {

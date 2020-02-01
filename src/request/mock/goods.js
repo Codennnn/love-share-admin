@@ -75,7 +75,7 @@ export default {
         goods_id: () => Random.id(),
         'img_list|4': [Random.image('480x300')],
         name: Random.cword(10, 35),
-        description: '123<br />123',
+        description: '123<br>123',
         price: Random.float(0, 100, 2, 2),
         original_price: Random.float(0, 100, 2, 2),
         quantity: 2,

@@ -222,18 +222,9 @@ import HeatmapChart from '@/components/LineChart.vue'
 import { getUserDetailByAdmin } from '@/request/api/user'
 
 const status = {
-  1: {
-    color: 'warning',
-    text: '待出售',
-  },
-  2: {
-    color: 'primary',
-    text: '已出售',
-  },
-  3: {
-    color: 'danger',
-    text: '已下架',
-  },
+  1: { color: 'warning', text: '待出售' },
+  2: { color: 'primary', text: '已出售' },
+  3: { color: 'danger', text: '已下架' },
 }
 const chartSettings = {
   type: 'heatmap',
@@ -284,7 +275,6 @@ const chartSettings = {
     colors: ['#6165f7'],
   },
 }
-
 export default {
   name: 'UserDetail',
   components: {
@@ -296,9 +286,6 @@ export default {
     chartSettings,
     detail: {},
 
-    option: {
-      radius: 50, strokeWidth: 2, startColor: [157, 161, 248], endColor: [97, 101, 247],
-    },
     series: [{
       name: 'Metric1',
       data: [1, 1, 1, 5, 1, 5, 5, 1, 1],
@@ -317,13 +304,17 @@ export default {
         enabled: true,
         fillSeriesColor: false,
         theme: 'dark',
+        y: {
+          formatter: v => v * 10,
+          title: 'Size: ',
+        },
       },
       labels: ['信用度'],
       plotOptions: {
         radialBar: {
           hollow: {
             margin: 15,
-            size: '72%',
+            size: '70%',
             background: 'transparent',
             dropShadow: {
               enabled: true,
@@ -342,16 +333,9 @@ export default {
   }),
 
   computed: {
-    options() {
-      const { themeStyle } = this.$store.state
-      if (themeStyle === 'light') {
-        return { ...this.option, backColor: '#ddd' }
-      }
-      return { ...this.option, backColor: '#555' }
-    },
     radialBarValue() {
-      const value = this.detail.credit_value / 1000 * 100 || 0
-      return [value]
+      const percent = (this.detail.credit_value / 1000 * 100) || 0
+      return [percent]
     },
   },
 

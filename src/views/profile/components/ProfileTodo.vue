@@ -42,7 +42,7 @@
           class="p-5 flex-row-center bg-gray radius text-semi"
         >
           <p class="text-center">
-            ✧*｡٩(ˊωˋ*)و✧*｡ <br />
+            ✧*｡٩(ˊωˋ*)و✧*｡ <br>
             <span class="text-sm">没有任务</span>
           </p>
         </li>

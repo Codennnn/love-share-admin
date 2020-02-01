@@ -11,7 +11,7 @@
       <img
         style="width: 2.6rem;"
         :src="logo"
-      />
+      >
       <transition
         enter-active-class="animated fadeIn faster"
         leave-active-class="animated fadeOut faster"
