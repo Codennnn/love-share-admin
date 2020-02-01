@@ -4,7 +4,7 @@
     <div class="text-center">
       <vs-button
         class="w-48"
-        @click="$emit('addNewTodo')"
+        @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true})"
       >添加任务</vs-button>
     </div>
 

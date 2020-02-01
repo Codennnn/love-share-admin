@@ -150,35 +150,16 @@ export default {
       type: Boolean,
       required: true,
     },
-    todo: {
-      type: Object,
-      default: () => ({
-        title: '',
-        content: '',
-        tags: [],
-        is_done: false,
-        is_important: false,
-        is_starred: false,
-        is_trashed: false,
-        complete_time: [Date.now(), Date.now()],
-      }),
-    },
   },
 
   data: () => ({
     tags,
-    task: null,
+    task: {},
     loading: false,
     isPopupActiveLocal: false,
   }),
 
   watch: {
-    todo: {
-      handler(todo) {
-        this.task = _cloneDeepWith(todo)
-      },
-      immediate: true,
-    },
     isPopupActive: {
       handler(v) {
         this.isPopupActiveLocal = v
@@ -188,12 +169,18 @@ export default {
     isPopupActiveLocal(v) {
       if (!v) {
         // 关闭模态框
-        this.$store.commit('todo/SET_TODO_POPUP_STATUS', false)
+        this.$store.commit('todo/SET_TODO_POPUP_STATUS', { status: false })
       }
+    },
+    todoData(data) {
+      this.task = _cloneDeepWith(data)
     },
   },
 
   computed: {
+    todoData() {
+      return this.$store.state.todo.todoData
+    },
     disabled() {
       return !((this.task.title?.length > 0) && (this.task.complete_time?.length > 0))
     },

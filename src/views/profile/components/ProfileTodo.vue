@@ -5,7 +5,7 @@
       <div
         class="w-10 h-10 flex justify-center items-center
          primary-semi bg-main-10 radius cursor-pointer"
-        @click="$store.commit('todo/SET_TODO_POPUP_STATUS', true)"
+        @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true})"
       >
         <feather
           size="20"

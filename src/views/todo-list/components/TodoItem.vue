@@ -48,7 +48,7 @@
           class="todo-item p-3 w-full"
           v-for="todo in tasks"
           :key="todo._id"
-          @click="$emit('editTodo', todo)"
+          @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true, data: todo})"
         >
           <vs-row>
             <!-- todo项头部左侧 -->
@@ -81,7 +81,6 @@
                 </div>
               </div>
             </vs-col>
-            <!-- end -->
             <!-- todo项头部右侧 -->
             <vs-col
               vs-type="flex"
@@ -126,7 +125,6 @@
                 ></i>
               </div>
             </vs-col>
-            <!-- end -->
           </vs-row>
           <!-- todo项内容区域 -->
           <div class="p-2 pr-0 flex justify-between">
@@ -138,10 +136,9 @@
             </div>
           </div>
         </li>
-
         <li
           key="123456"
-          v-if="filterItems.length === 0"
+          v-if="tasks.length === 0"
           class="todo-item w-full p-10 text-center text-gray"
         >
           <p>

@@ -42,7 +42,7 @@
             <div
               class="ml-3 mt-1 w-6 h-6 primary-semi bg-main-10
              flex-row-center rounded-lg cursor-pointer"
-              @click="$store.commit('todo/SET_TODO_POPUP_STATUS', true)"
+              @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true})"
             >
               <feather
                 size="16"

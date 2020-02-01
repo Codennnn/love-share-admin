@@ -4,6 +4,7 @@ import {
 
 const state = {
   showTodoPopup: false,
+  todoData: {},
   todoList: [],
   currentSelected: {},
 }
@@ -24,8 +25,22 @@ const mutations = {
       return false
     })
   },
-  SET_TODO_POPUP_STATUS(state, status) {
+  SET_TODO_POPUP_STATUS(state, { status, data }) {
     state.showTodoPopup = status
+    if (data) {
+      state.todoData = data
+    } else {
+      state.todoData = {
+        title: '',
+        content: '',
+        tags: [],
+        is_done: false,
+        is_important: false,
+        is_starred: false,
+        is_trashed: false,
+        complete_time: [Date.now(), Date.now()],
+      }
+    }
   },
 }
 

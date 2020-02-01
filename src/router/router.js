@@ -110,6 +110,12 @@ export const asyncRoutes = [
         component: () => import('@/views/user/UserList.vue'),
         meta: { title: '用户列表', permission: { moduleName: 'user', purviews: ['read'] } },
       },
+      {
+        path: '/user-black-list',
+        name: 'UserBlackList',
+        component: () => import('@/views/user/UserBlackList.vue'),
+        meta: { title: '用户黑名单' },
+      },
     ],
     meta: { title: '用户管理', icon: 'users' },
   },
