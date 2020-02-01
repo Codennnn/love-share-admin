@@ -189,7 +189,8 @@ export default {
     },
     isPopupActiveLocal(v) {
       if (!v) {
-        this.$emit('hidePopup')
+        // 关闭模态框
+        this.$store.commit('todo/SET_TODO_POPUP_STATUS', false)
       }
     },
   },

@@ -41,8 +41,11 @@
         >
           <div class="mb-2 flex items-center">
             <p class="text-xl text-primary font-bold">今日任务</p>
-            <div class="ml-3 mt-1 w-6 h-6 primary-semi bg-main-10
-             flex-row-center rounded-lg cursor-pointer">
+            <div
+              class="ml-3 mt-1 w-6 h-6 primary-semi bg-main-10
+             flex-row-center rounded-lg cursor-pointer"
+              @click="$store.commit('todo/SET_TODO_POPUP_STATUS', true)"
+            >
               <PlusIcon size="1x" />
             </div>
           </div>
@@ -130,6 +133,9 @@
         class="chat-icon"
       ></MessageSquareIcon>
     </div>
+
+    <!-- 创建任务模态框 -->
+    <TodoPopup :is-popup-active="showTodoPopup" />
   </div>
 </template>
 
@@ -140,6 +146,7 @@ import {
 } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
+import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
 
 const options = {
   labels: ['完成度'],
@@ -185,6 +192,7 @@ export default {
   components: {
     VuePerfectScrollbar,
     VueApexCharts,
+    TodoPopup,
     MessageSquareIcon,
     LayersIcon,
     PlusIcon,
@@ -209,6 +217,9 @@ export default {
   },
 
   computed: {
+    showTodoPopup() {
+      return this.$store.state.todo.showTodoPopup
+    },
     todayTask() {
       const allTask = this.$store.getters['todo/filterItems']({})
       return allTask.filter((it) => {

@@ -108,8 +108,8 @@
             </div>
           </div>
           <VuePerfectScrollbar
-            class="overflow-hidden"
-            style="max-height: 250px;"
+            class="pb-6 overflow-hidden"
+            style="max-height: 260px;"
             :settings="{
               maxScrollbarLength: 200,
               wheelSpeed: 0.60,
@@ -155,7 +155,7 @@
             </ul>
           </VuePerfectScrollbar>
           <div
-            v-if="unreadAmount > firstFewNotices.length"
+            v-if="firstFewNotices.length >= 5"
             class="shadow-hidden absolute bottom-0 py-3 bg-primary"
             style="width: 280px;"
           ></div>

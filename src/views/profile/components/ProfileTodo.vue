@@ -5,7 +5,7 @@
       <div
         class="w-10 h-10 flex justify-center items-center
          primary-semi bg-main-10 radius cursor-pointer"
-        @click="showPopup = true"
+        @click="$store.commit('todo/SET_TODO_POPUP_STATUS', true)"
       >
         <PlusIcon size="1.4x"></PlusIcon>
       </div>
@@ -48,30 +48,19 @@
         </li>
       </ul>
     </VuePerfectScrollbar>
-
-    <TodoPopup
-      :is-popup-active="showPopup"
-      @hidePopup="showPopup = false"
-    />
   </div>
 </template>
 
 <script>
 import { PlusIcon } from 'vue-feather-icons'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
 
 export default {
   name: 'ProfileTodo',
   components: {
     VuePerfectScrollbar,
     PlusIcon,
-    TodoPopup,
   },
-
-  data: () => ({
-    showPopup: false,
-  }),
 
   computed: {
     filterItems() {

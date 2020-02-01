@@ -3,6 +3,7 @@ import {
 } from '@/request/api/todo'
 
 const state = {
+  showTodoPopup: false,
   todoList: [],
   currentSelected: {},
 }
@@ -22,6 +23,9 @@ const mutations = {
       }
       return false
     })
+  },
+  SET_TODO_POPUP_STATUS(state, status) {
+    state.showTodoPopup = status
   },
 }
 
