@@ -70,10 +70,13 @@
           <div class="w-3/4 pl-6">
             <p class="text-primary text-xl font-bold">签到表</p>
             <p class="text-gray text-sm">已累计签到 {{ '13' }} 天</p>
-            <HeatmapChart
-              :settings="chartSettings"
+            <vue-apex-charts
+              type="heatmap"
+              :width="450"
+              :height="200"
+              :options="heatmapOptions"
               :series="series"
-            />
+            ></vue-apex-charts>
           </div>
         </div>
 
@@ -221,8 +224,6 @@
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
-import HeatmapChart from '@/components/LineChart.vue'
-
 
 import { getUserDetailByAdmin } from '@/request/api/user'
 
@@ -231,108 +232,110 @@ const status = {
   2: { color: 'primary', text: '已出售' },
   3: { color: 'danger', text: '已下架' },
 }
-const chartSettings = {
-  type: 'heatmap',
-  width: 450,
-  height: 200,
-  chartOptions: {
-    chart: {
-      offsetX: -20,
-      offsetY: -12,
-      toolbar: {
-        show: false,
-      },
-    },
-    xaxis: {
-      axisBorder: { show: false },
-      tooltip: { enabled: false },
-      labels: {
-        show: false,
-      },
-    },
-    yaxis: {
-      labels: {
-        show: false,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    states: {
-      hover: {
-        filter: {
-          type: 'none',
-        },
-      },
-    },
-    tooltip: {
-      enabled: false,
-    },
-    plotOptions: {
-      heatmap: {
-        radius: 4,
-        colorScale: {
-          min: 1,
-          max: 10,
-        },
-      },
-    },
-    colors: ['#6165f7'],
+const series = [
+  {
+    name: 'Metric1',
+    data: [1, 1, 1, 5, 1, 5, 5, 1, 1],
+  }, {
+    name: 'Metric2',
+    data: [1, 1, 1, 5, 1, 5, 1, 1, 5],
+  }, {
+    name: 'Metric3',
+    data: [1, 1, 1, 5, 5, 1, 5, 1, 5],
+  }, {
+    name: 'Metric4',
+    data: [1, 1, 1, 5, 5, 1, 1, 5, 1],
   },
+]
+const heatmapOptions = {
+  chart: {
+    offsetX: -20,
+    offsetY: -12,
+    toolbar: {
+      show: false,
+    },
+  },
+  xaxis: {
+    axisBorder: { show: false },
+    tooltip: { enabled: false },
+    labels: {
+      show: false,
+    },
+  },
+  yaxis: {
+    labels: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  states: {
+    hover: {
+      filter: {
+        type: 'none',
+      },
+    },
+  },
+  tooltip: {
+    enabled: false,
+  },
+  plotOptions: {
+    heatmap: {
+      radius: 4,
+      colorScale: {
+        min: 1,
+        max: 10,
+      },
+    },
+  },
+  colors: ['#6165f7'],
+}
+const radialBarOptions = {
+  tooltip: {
+    enabled: true,
+    fillSeriesColor: false,
+    theme: 'dark',
+    y: {
+      formatter: v => v * 10,
+      title: 'Size: ',
+    },
+  },
+  labels: ['信用度'],
+  plotOptions: {
+    radialBar: {
+      hollow: {
+        margin: 15,
+        size: '70%',
+        background: 'transparent',
+        dropShadow: {
+          enabled: true,
+          top: 0,
+          left: 0,
+          blur: 3,
+          opacity: 1,
+        },
+      },
+      track: {
+        background: '#ddd',
+      },
+      dataLabels: { show: false },
+    },
+  },
+  stroke: { lineCap: 'round' },
+  colors: ['#6165f7'],
 }
 export default {
   name: 'UserDetail',
-  components: { HeatmapChart, VueApexCharts },
+  components: { VueApexCharts },
 
   data: () => ({
     status,
-    chartSettings,
-    detail: {},
+    series,
+    heatmapOptions,
+    radialBarOptions,
 
-    series: [{
-      name: 'Metric1',
-      data: [1, 1, 1, 5, 1, 5, 5, 1, 1],
-    }, {
-      name: 'Metric2',
-      data: [1, 1, 1, 5, 1, 5, 1, 1, 5],
-    }, {
-      name: 'Metric3',
-      data: [1, 1, 1, 5, 5, 1, 5, 1, 5],
-    }, {
-      name: 'Metric4',
-      data: [1, 1, 1, 5, 5, 1, 1, 5, 1],
-    }],
-    radialBarOptions: {
-      tooltip: {
-        enabled: true,
-        fillSeriesColor: false,
-        theme: 'dark',
-        y: {
-          formatter: v => v * 10,
-          title: 'Size: ',
-        },
-      },
-      labels: ['信用度'],
-      plotOptions: {
-        radialBar: {
-          hollow: {
-            margin: 15,
-            size: '70%',
-            background: 'transparent',
-            dropShadow: {
-              enabled: true,
-              top: 0,
-              left: 0,
-              blur: 3,
-              opacity: 1,
-            },
-          },
-          dataLabels: { show: false },
-        },
-      },
-      stroke: { lineCap: 'round' },
-      colors: ['#6165f7'],
-    },
+    detail: {},
   }),
 
   computed: {

@@ -39,12 +39,12 @@
                   class="flex items-center mt-1 ml-1 mb-3"
                   v-if="$route.meta && $route.meta.breadcrumb"
                 >
-                  <i
-                    title="返回"
-                    class="iconfont icon-back text-semi cursor-pointer"
-                    style="font-size: 25px;"
+                  <feather
+                    class="text-semi cursor-pointer"
+                    type="arrow-left-circle"
+                    stroke-width="1.5"
                     @click="$router.go(-1)"
-                  ></i>
+                  ></feather>
                   <vs-breadcrumb>
                     <template v-for="(br, i) in $route.meta.breadcrumb">
                       <li
@@ -57,12 +57,10 @@
                           :class="{'primary': br.active}"
                           :to="String(br.to)"
                         >{{ br.title }}</router-link>
-                        <span
+                        <i
                           v-if="!br.active"
-                          class="vs-breadcrum--separator"
-                        >
-                          <i class="el-icon-arrow-right text-semi"></i>
-                        </span>
+                          class="el-icon-arrow-right text-semi vs-breadcrum--separator"
+                        ></i>
                       </li>
                     </template>
                   </vs-breadcrumb>
