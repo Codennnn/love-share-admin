@@ -72,7 +72,6 @@ export default {
     showPopover: false,
     categoryName: '',
     onActive: [],
-    disabled: true,
     leftCheck: [],
   }),
 
@@ -83,30 +82,22 @@ export default {
     showAlert() {
       return this.categoryList.some(el => el.name === this.categoryName)
     },
-    // onActive: {
-    //   get() {
-    //     return this.categoryList.filter(el => el.activation).map(el => el._id)
-    //   },
-    //   set(newVal) {
-    //     this.onActive = newVal
-    //   },
-    // },
+    disabled() {
+      return this.leftCheck.length <= 0
+    },
   },
 
-  // watch: {
-  //   categoryList: {
-  //     handler(v) {
-  //       this.onActive = v.filter(el => !el.activation).map(el => el._id)
-  //     },
-  //     immediate: true,
-  //   },
-  // },
-
-  created() {
-    this.onActive = this.categoryList.filter(el => el.activation).map(el => el._id)
+  watch: {
+    categoryList: {
+      handler(v) {
+        this.onActive = v.filter(el => el.activation).map(el => el._id)
+      },
+      immediate: true,
+    },
   },
 
   methods: {
+    // 添加分类
     async addCategory() {
       if (this.categoryName.length > 0) {
         const { code } = await addCategory({ category_name: this.categoryName })
@@ -118,17 +109,18 @@ export default {
       }
     },
 
+    // 删除分类
     async deleteCategory() {
-      await deleteCategory({ category_id_list: this.leftCheck })
+      try {
+        await deleteCategory({ category_id_list: this.leftCheck })
+        this.$store.dispatch('getCategoryList')
+      } finally {
+        this.leftCheck = []
+      }
     },
 
     leftCheckChange(checked) {
       this.leftCheck = checked
-      if (checked.length > 0) {
-        this.disabled = false
-      } else {
-        this.disabled = true
-      }
     },
 
     // 已上架的分类发生改变时

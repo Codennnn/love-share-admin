@@ -150,6 +150,7 @@ export default {
   },
 
   methods: {
+    // 获取用户每日新增人数数据
     async getUserDailyStatistics() {
       const dateNow = Date.now()
       const date_list = [...Array(7)].map((v, i) => this.$dayjs(dateNow).subtract(i, 'day').format('YYYY-MM-D'))
@@ -160,7 +161,7 @@ export default {
         this.series = data.series
         this.series = [{
           name: '用户数量',
-          data: [10, 7, 11, 13, 10, 14, 12],
+          data: [10, 12, 9, 13, 10, 14, 12],
         }]
       }
     },
