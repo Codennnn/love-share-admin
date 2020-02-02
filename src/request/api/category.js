@@ -7,16 +7,26 @@ export function getCategoryList() {
   })
 }
 
-export function addCategory() {
+export function addCategory(data) {
   return request({
     url: '/category/add',
     method: 'post',
+    data,
   })
 }
 
-export function deleteCategory() {
+export function deleteCategory(data) {
   return request({
     url: '/category/delete',
     method: 'delete',
+    data,
+  })
+}
+
+export function updateCategoryActivation(data) {
+  return request({
+    url: '/category/update_activation',
+    method: 'put',
+    data,
   })
 }

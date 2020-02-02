@@ -45,7 +45,10 @@
         <template slot="header">
           <div class="w-full flex items-center p-4">
             <div class="text-xl text-primary font-semibold">订单列表</div>
-            <div class="ml-auto">
+            <div class="ml-auto mr-4 text-sm text-semi">
+              共查询到 {{ pagination.total }} 条数据
+            </div>
+            <div class="">
               <el-date-picker
                 type="daterange"
                 align="right"
@@ -238,6 +241,7 @@ export default {
         })
         if (code === 2000) {
           this.orderList = data.order_list
+          this.pagination = data.pagination
         }
       } finally {
         this.$vs.loading.close('#table-loading > .con-vs-loading')
@@ -265,6 +269,7 @@ export default {
           })
           if (code === 2000) {
             this.orderList = data.order_list
+            this.pagination = data.pagination
           }
         } finally {
           this.$vs.loading.close('#table-loading > .con-vs-loading')
@@ -283,12 +288,11 @@ export default {
     },
 
     deleteOrder(id) {
-      console.log(id)
-      // this.orderList.forEach((el, i, _) => {
-      //   if (el._id === id) {
-      //     _.splice(i, 1)
-      //   }
-      // })
+      this.orderList.forEach((el, i, _) => {
+        if (el._id === id) {
+          _.splice(i, 1)
+        }
+      })
     },
 
     onCopy(id) {

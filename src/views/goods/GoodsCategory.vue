@@ -1,53 +1,61 @@
 <template>
-  <div class="pt-3">
+  <div class="pt-8">
     <el-transfer
-      v-model="selected"
+      v-model="onActive"
       :data="categoryList"
-      :titles="titles"
-      :props="{key: 'name', lebel: '_id'}"
+      :titles="['可用分类', '已上架分类']"
+      :props="{key: '_id', label: 'name'}"
       @left-check-change="leftCheckChange"
-      @change="change"
+      @change="activeChange"
     >
       <div
         slot="left-footer"
         class="h-full flex-row-center"
       >
         <vs-button
+          slot="reference"
           class="mr-2"
           color="danger"
           size="small"
-          slot="reference"
           :disabled="disabled"
           @click="deleteCategory()"
         >删除选中分类</vs-button>
         <el-popover
-          width="200"
+          width="250"
           trigger="manual"
           v-model="showPopover"
         >
           <div>
             <vs-input
-              class="w-full"
+              class="w-full mb-2"
               label-placeholder="分类名称"
               v-model="categoryName"
               @keyup.enter="addCategory()"
             />
-            <div class="mt-2 flex justify-end">
+            <vs-alert
+              color="danger"
+              :active="showAlert"
+            >已存在分类，请勿重复添加</vs-alert>
+            <div class="flex justify-end">
               <vs-button
+                class="danger text-lg"
                 type="flat"
-                color="#646464"
+                color="danger"
+                icon="close"
                 @click="showPopover = false"
-              >取消</vs-button>
+              ></vs-button>
               <vs-button
+                class="text-lg"
                 type="flat"
+                icon="done"
                 @click="addCategory()"
-              >确定</vs-button>
+              ></vs-button>
             </div>
           </div>
           <vs-button
             size="small"
             slot="reference"
-            @click="showPopover = true"
+            @click="showPopover = !showPopover"
           >添加分类</vs-button>
         </el-popover>
       </div>
@@ -56,47 +64,66 @@
 </template>
 
 <script>
-import { addCategory, deleteCategory } from '@/request/api/category'
+import { addCategory, deleteCategory, updateCategoryActivation } from '@/request/api/category'
 
 export default {
   name: 'GoodsCategory',
   data: () => ({
-    titles: ['可选分类', '已选分类'],
     showPopover: false,
     categoryName: '',
-    selected: [], // 右侧列表
+    onActive: [],
     disabled: true,
+    leftCheck: [],
   }),
 
   computed: {
     categoryList() {
       return this.$store.state.categoryList
     },
+    showAlert() {
+      return this.categoryList.some(el => el.name === this.categoryName)
+    },
+    // onActive: {
+    //   get() {
+    //     return this.categoryList.filter(el => el.activation).map(el => el._id)
+    //   },
+    //   set(newVal) {
+    //     this.onActive = newVal
+    //   },
+    // },
+  },
+
+  // watch: {
+  //   categoryList: {
+  //     handler(v) {
+  //       this.onActive = v.filter(el => !el.activation).map(el => el._id)
+  //     },
+  //     immediate: true,
+  //   },
+  // },
+
+  created() {
+    this.onActive = this.categoryList.filter(el => el.activation).map(el => el._id)
   },
 
   methods: {
-    addCategory() {
+    async addCategory() {
       if (this.categoryName.length > 0) {
-        this.categoryList.push({ value: this.categoryName })
-        this.showPopover = false
-        this.categoryName = ''
-        addCategory()
+        const { code } = await addCategory({ category_name: this.categoryName })
+        if (code === 2000) {
+          this.categoryName = ''
+          this.showPopover = false
+          this.$store.dispatch('getCategoryList')
+        }
       }
     },
 
-    deleteCategory() {
-      this.selected.forEach((it) => {
-        this.categoryList.forEach((el, i, _) => {
-          if (el.value === it) {
-            _.splice(i, 1)
-          }
-        })
-      })
-      this.disabled = true
-      deleteCategory()
+    async deleteCategory() {
+      await deleteCategory({ category_id_list: this.leftCheck })
     },
 
     leftCheckChange(checked) {
+      this.leftCheck = checked
       if (checked.length > 0) {
         this.disabled = false
       } else {
@@ -104,8 +131,17 @@ export default {
       }
     },
 
-    change(e) {
-      console.log(e)
+    // 已上架的分类发生改变时
+    async activeChange(origin, direction, value) {
+      try {
+        if (direction === 'right') {
+          await updateCategoryActivation({ category_id_list: value, activation: true })
+        } else if (direction === 'left') {
+          await updateCategoryActivation({ category_id_list: value, activation: false })
+        }
+      } finally {
+        this.$store.dispatch('getCategoryList')
+      }
     },
   },
 }
