@@ -3,7 +3,7 @@
     <!-- 网络状态检测 -->
     <div
       v-show="isOffline"
-      class="fixed top-0 w-full h-16 flex justify-center items-center"
+      class="fixed top-0 w-full h-16 flex-row-center"
       style="z-index: 99999999; left: 50%; width: 250px; transform: translate(-50%, 0);"
     >
       <vs-alert

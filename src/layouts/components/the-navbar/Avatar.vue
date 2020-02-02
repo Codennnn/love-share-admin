@@ -8,7 +8,7 @@
 
     <!-- 头像 -->
     <vs-dropdown vs-custom-content>
-      <div class="flex items-center justify-center">
+      <div class="flex-row-center">
         <vs-avatar
           size="40px"
           :src="`${avatar}`"
@@ -21,7 +21,7 @@
           :key="i"
           @click="routeTo(pop.route, pop.text)"
         >
-          <div class="flex justify-center items-center">
+          <div class="flex-row-center">
             <feather
               size="15"
               stroke-width="1.5"

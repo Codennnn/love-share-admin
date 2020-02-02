@@ -17,7 +17,7 @@
             @keyup.enter="bindUser()"
           />
           <div
-            class="btn h-full flex items-center justify-center cursor-pointer"
+            class="btn h-full flex-row-center cursor-pointer"
             @click="onBindUser()"
           >
             <div

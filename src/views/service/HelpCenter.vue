@@ -86,7 +86,7 @@
             class="mt-5 w-full flex justify-center"
           >
             <div
-              class="p-2 flex items-center justify-center bg-main cursor-pointer"
+              class="p-2 flex-row-center bg-main cursor-pointer"
               style="width: 11rem; color: white; font-size: 0.95rem; border-radius: 0.4rem;"
               @click="visible1 = true"
             >

@@ -22,7 +22,7 @@
         style="height: 65px;"
       >
         <div
-          class="h-full flex justify-center items-center"
+          class="h-full flex-row-center"
           @click="noticesRefresh()"
         >
           <div

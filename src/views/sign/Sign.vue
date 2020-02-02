@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-screen flex justify-center items-center bg-white"
+    class="relative h-screen flex-row-center bg-primary"
     style="min-width: 1300px;"
   >
     <img

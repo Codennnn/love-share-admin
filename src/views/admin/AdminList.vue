@@ -78,7 +78,7 @@
                 ></feather>
                 <vs-dropdown-menu class="w-24">
                   <vs-dropdown-item class="text-center">
-                    <div class="flex justify-center items-center">
+                    <div class="flex-row-center">
                       <feather
                         class="mr-3"
                         size="17"
@@ -95,7 +95,7 @@
                       query: { adminId: tr._id }
                     })"
                   >
-                    <div class="flex justify-center items-center">
+                    <div class="flex-row-center">
                       <feather
                         class="mr-3"
                         size="17"
@@ -112,7 +112,7 @@
                       query: {adminId: tr._id}
                     })"
                   >
-                    <div class="flex justify-center items-center">
+                    <div class="flex-row-center">
                       <feather
                         class="mr-3"
                         size="17"
@@ -123,7 +123,7 @@
                     </div>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
-                    <div class="flex justify-center items-center danger">
+                    <div class="flex-row-center danger">
                       <feather
                         class="mr-3"
                         size="17"

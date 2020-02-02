@@ -18,7 +18,7 @@
               src="@/assets/images/pages/dashboard/decore_right.png"
             >
             <div
-              class="flex justify-center items-center rounded-full"
+              class="flex-row-center rounded-full"
               style="width: 4.5rem; height: 4.5rem; background: rgba(var(--vs-primary), 0.5);"
             >
               <feather
@@ -39,8 +39,8 @@
             label="用户数"
             icon="UserIcon"
             color="primary"
-            type="area"
-            :chartData="subscribersGained"
+            :options="subscribersGained.chartOptions"
+            :series="subscribersGained.series"
           >
             <feather
               slot="icon"
@@ -58,8 +58,8 @@
             label="交易量"
             icon="el-icon-finished"
             color="warning"
-            type="area"
-            :chartData="ordersRecevied"
+            :options="ordersRecevied.chartOptions"
+            :series="ordersRecevied.series"
           >
             <feather
               slot="icon"
@@ -244,6 +244,7 @@ export default {
   }
 }
 
+// 雪碧图
 @mixin sprite($width, $self, $bgx, $bgy) {
   width: $width;
   height: $width;

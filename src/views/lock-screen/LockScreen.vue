@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex justify-center items-center bg-primary">
+  <div class="h-screen flex-row-center bg-primary">
     <div class="pb-20 flex flex-col justify-center items-center">
       <vs-avatar
         class="base-shadow"
@@ -25,7 +25,7 @@
             :open-delay="300"
           >
             <div
-              class="h-full flex items-center justify-center radius bg-main-10 cursor-pointer"
+              class="h-full flex-row-center radius bg-main-10 cursor-pointer"
               style="width: 60px; height: 50px;"
               @click="unLocked()"
             >

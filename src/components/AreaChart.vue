@@ -2,24 +2,24 @@
   <div class="flex flex-col justify-between h-full">
     <div class="p-6 pb-0">
       <div
-        class="flex items-center justify-center w-12 h-12 rounded-full"
+        class="flex-row-center w-12 h-12 rounded-full"
         :style="{ background: `rgba(var(--vs-${color}), .15)` }"
       >
         <slot name="icon"></slot>
       </div>
       <div>
-        <div class="mt-3 text-primary text-2xl font-bold">{{ statistic }}</div>
+        <div class="mt-3 text-primary text-2xl font-bold">{{ num }}</div>
         <span class="text-semi">{{ label }}</span>
       </div>
     </div>
-    <div :id="chartData.id">
+    <div>
       <vue-apex-charts
         ref="apexChart"
         height=100
         width='100%'
         :type="type"
-        :options="chartData.chartOptions"
-        :series="chartData.series"
+        :options="options"
+        :series="series"
       ></vue-apex-charts>
     </div>
   </div>
@@ -33,17 +33,30 @@ export default {
   components: { VueApexCharts },
 
   props: {
-    statistic: String,
+    statistic: [Number, String],
     label: String,
     icon: String,
     color: String,
-    chartData: {
+    options: {
       type: Object,
+      required: true,
+    },
+    series: {
+      type: Array,
       required: true,
     },
     type: {
       type: String,
-      default: 'line',
+      default: 'area',
+    },
+  },
+
+  computed: {
+    num() {
+      if (typeof this.statistic === 'string') {
+        return this.statistic
+      }
+      return this.statistic.toLocaleString()
     },
   },
 }

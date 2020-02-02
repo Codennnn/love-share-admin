@@ -10,7 +10,7 @@
     >
       <div
         slot="left-footer"
-        class="h-full flex justify-center items-center"
+        class="h-full flex-row-center"
       >
         <vs-button
           class="mr-2"

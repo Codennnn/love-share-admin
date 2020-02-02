@@ -20,7 +20,7 @@
             <el-tooltip content="导出列表数据">
               <div
                 @click="exportExcel()"
-                class="w-10 h-10 mr-5 flex justify-center items-center primary-semi
+                class="w-10 h-10 mr-5 flex-row-center primary-semi
                  rounded-lg bg-main-10 cursor-pointer"
               >
                 <feather
