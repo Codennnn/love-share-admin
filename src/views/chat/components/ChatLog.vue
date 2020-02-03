@@ -1,8 +1,7 @@
 <template>
   <div
     v-if="chatData"
-    id="component-chat-log"
-    class="m-8"
+    class="my-8 mx-4"
   >
     <div
       v-for="(msg, index) in chatData.msg"
@@ -17,7 +16,7 @@
           :class="{'right text-white': msg.is_sent,
            'left border border-solid border-primary text-primary bg-primary': !msg.is_sent}"
         >
-          <span class="text-sm">{{ msg.msg }}</span>
+          <span class="text-sm break-words break-all">{{ msg.msg }}</span>
         </div>
       </div>
     </div>

@@ -243,9 +243,9 @@ export default {
   components: { VueEditor, VuePerfectScrollbar },
 
   data: () => ({
+    menus,
     guideList: [],
     article: {}, // 当前显示的文章
-    menus,
     payload: { // 新建栏目数据源
       section: '',
       articles: [{ title: '', content: '' }],
