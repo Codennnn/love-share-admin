@@ -103,6 +103,7 @@
 
 <script>
 import DetailGoodsList from './components/DetailGoodsList.vue'
+
 import { getOrderDetail } from '@/request/api/order'
 
 export default {

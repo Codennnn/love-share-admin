@@ -272,8 +272,8 @@ export default {
     // 设置显示时间
     setTime(time) {
       const noticeTime = this.$dayjs(time)
-      const diffYear = this.$dayjs().diff(noticeTime, 'year')
-      if (diffYear < 1) {
+      const year = this.$dayjs().year()
+      if (year === noticeTime.year()) {
         return noticeTime.format('M月DD日')
       }
       return noticeTime.format('YYYY年MM月DD日')
