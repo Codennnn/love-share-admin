@@ -57,6 +57,14 @@
   white-space: nowrap;
 }
 
+.transition {
+  transition: all 0.3s;
+}
+
+.quickly {
+  animation-duration: 0.2s;
+}
+
 img {
   user-select: none;
   -webkit-user-drag: none;
