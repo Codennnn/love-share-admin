@@ -219,7 +219,4 @@ export default {
   bottom: 30px;
   z-index: 9999;
 }
-.quickly {
-  animation-duration: 0.3s;
-}
 </style>
