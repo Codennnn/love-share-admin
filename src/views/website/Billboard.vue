@@ -18,39 +18,37 @@
         </el-carousel-item>
       </el-carousel>
 
-      <div>
-        <ul>
-          <li
-            class="billboard-item relative mb-4 p-3 flex radius bg-gray overflow-hidden
+      <ul>
+        <li
+          class="billboard-item relative mb-4 p-3 flex radius bg-gray overflow-hidden
              vs-con-loading__container"
-            v-for="(it, i) in billboardList"
-            :key="i"
-            :id="`billboard-item-${i}`"
+          v-for="(it, i) in billboardList"
+          :key="i"
+          :id="`billboard-item-${i}`"
+        >
+          <el-image
+            class="h-full mr-3 rounded-lg"
+            style="width: 150px;"
+            :src="`${it.url}?imageView2/2/w/200`"
+            :preview-src-list="[it.url]"
           >
-            <el-image
-              class="h-full mr-3 rounded-lg"
-              style="width: 150px;"
-              :src="`${it.url}?imageView2/2/w/200`"
-              :preview-src-list="[it.url]"
-            >
-            </el-image>
-            <div class="text-sm">
-              <div class="text-semi">URL：{{ it.url }}</div>
-              <div class="text-semi">上传时间：{{ $dayjs(it.created_at).format('YYYY-MM-DD') }}</div>
-            </div>
-            <div
-              class="close-icon absolute flex-row-center text-primary cursor-pointer"
-              @click="deleteBillboard(it.url, i)"
-            >
-              <feather
-                size="20"
-                stroke-width="2.5"
-                type="x"
-              ></feather>
-            </div>
-          </li>
-        </ul>
-      </div>
+          </el-image>
+          <div class="text-sm">
+            <div class="w-64 text-semi break-words break-all truncate">URL：{{ it.url }}</div>
+            <div class="text-semi">上传时间：{{ $dayjs(it.created_at).format('YYYY-MM-DD') }}</div>
+          </div>
+          <div
+            class="close-icon absolute flex-row-center text-primary cursor-pointer"
+            @click="deleteBillboard(it.url, i)"
+          >
+            <feather
+              size="20"
+              stroke-width="2.5"
+              type="x"
+            ></feather>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <div class="w-1/2 pl-8">
