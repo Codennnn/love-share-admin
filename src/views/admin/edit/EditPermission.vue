@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import _cloneDeepWith from 'lodash/cloneDeepWith'
-
 export default {
   name: 'EditPermission',
   props: {
@@ -63,8 +61,10 @@ export default {
     permissions: {
       handler(v) {
         if (v) {
+          // 如果传入了 props
           this.setPermissions()
         } else {
+          // 否则
           this.initValues()
         }
       },
@@ -84,12 +84,12 @@ export default {
       const purview = [{ read: false }, { write: false }, { create: false }, { delete: false }]
       this.per = Object.keys(this.modules).map(key => ({
         module: key,
-        purview: _cloneDeepWith(purview),
+        purview: this.$cloneDeepWith(purview),
       }))
     },
 
     setPermissions() {
-      const permissions = _cloneDeepWith(this.permissions)
+      const permissions = this.$cloneDeepWith(this.permissions)
       this.per = Object.keys(this.modules).map((key) => {
         // eslint-disable-next-line no-restricted-syntax
         for (const el of permissions) {

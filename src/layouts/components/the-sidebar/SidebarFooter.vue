@@ -167,7 +167,6 @@
 </template>
 
 <script>
-import _cloneDeepWith from 'lodash/cloneDeepWith'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
 import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
@@ -267,7 +266,7 @@ export default {
       if (theme === 'light') {
         return options
       }
-      const opt = _cloneDeepWith(options)
+      const opt = this.$cloneDeepWith(options)
       opt.plotOptions.radialBar.dataLabels.name.color = '#ccc'
       opt.plotOptions.radialBar.dataLabels.value.color = '#ccc'
       return opt

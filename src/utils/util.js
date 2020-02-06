@@ -1,3 +1,5 @@
+import _cloneDeepWith from 'lodash/cloneDeepWith'
+
 export function timeDiff(time) {
   let date
   if (typeof time === 'number') {
@@ -109,3 +111,5 @@ export const areaChartOptions = {
     x: { show: false },
   },
 }
+
+export const cloneDeepWith = _cloneDeepWith

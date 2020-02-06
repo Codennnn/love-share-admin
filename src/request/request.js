@@ -28,7 +28,7 @@ service.interceptors.request.use(
 
 const errorHandler = {
   errorNotify({
-    title = '哎呀！', message = '请求出错啦！', duration = 2000,
+    title = '哎呀！', message = '请求出错啦！', duration = 3500,
   } = {}) {
     Notification.error({
       title,
@@ -43,7 +43,7 @@ const errorHandler = {
     this.errorNotify({ title: `${status}`, message: `找不到资源 - ${statusText}` })
   },
   418(status) {
-    this.errorNotify({ title: `${status}`, message: '登录过期，请重新登录~', duration: '3000' })
+    this.errorNotify({ title: `${status}`, message: '登录过期，请重新登录~', duration: 3000 })
   },
   500(status, statusText) {
     this.errorNotify({ title: `${status}`, message: `服务出错 - ${statusText}` })

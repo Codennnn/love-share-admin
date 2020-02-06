@@ -16,6 +16,14 @@ export function createAdmin(data) {
   })
 }
 
+export function createAdminByInvitation(data) {
+  return request({
+    url: '/admin/invitation',
+    method: 'post',
+    data,
+  })
+}
+
 export function updateAdmin(data) {
   return request({
     url: '/admin/update',

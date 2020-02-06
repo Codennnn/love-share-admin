@@ -108,8 +108,6 @@
 </template>
 
 <script>
-import _cloneDeepWith from 'lodash/cloneDeepWith'
-
 const tags = {
   1: {
     text: '前端',
@@ -162,7 +160,7 @@ export default {
       }
     },
     todoData(data) {
-      this.task = _cloneDeepWith(data)
+      this.task = this.$cloneDeepWith(data)
     },
   },
 

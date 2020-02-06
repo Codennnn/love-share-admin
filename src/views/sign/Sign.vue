@@ -42,6 +42,7 @@
     </div>
 
     <SignUp
+      class="input-component"
       :is-sidebar-active="isSidebarActive"
       @closeSidebar="isSidebarActive = false"
     />

@@ -132,7 +132,6 @@
 </template>
 
 <script>
-import _cloneDeepWith from 'lodash/cloneDeepWith'
 import AreaChart from '@/components/AreaChart.vue'
 import { areaChartOptions } from '@/utils/util'
 
@@ -221,7 +220,7 @@ export default {
         [getOrderTransactionAmount(), getOrderVolume(), getOrderNum()],
       )
       this.charts = gridCharts.map((el, i) => {
-        const options = _cloneDeepWith(areaChartOptions)
+        const options = this.$cloneDeepWith(areaChartOptions)
         options.colors = [colors[i]]
         return Object.assign(el, { options }, { series: [res[i].data] })
       })

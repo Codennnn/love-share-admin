@@ -126,10 +126,8 @@
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-
 import _isEqual from 'lodash/isEqual'
-import _cloneDeepWith from 'lodash/cloneDeepWith'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 export default {
   name: 'EditUserInfo',
@@ -173,7 +171,7 @@ export default {
   watch: {
     isSidebarActive(val) {
       if (val) {
-        this.data = _cloneDeepWith(this.info)
+        this.data = this.$cloneDeepWith(this.info)
       }
     },
   },

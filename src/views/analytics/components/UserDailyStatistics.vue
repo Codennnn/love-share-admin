@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import _cloneDeepWith from 'lodash/cloneDeepWith'
 import LineChart from '@/components/LineChart.vue'
 
 import { getUserDailyStatistics } from '@/request/api/user'
@@ -123,9 +122,8 @@ export default {
   }),
 
   computed: {
-
     options() {
-      const opt = _cloneDeepWith(chartOptions)
+      const opt = this.$cloneDeepWith(chartOptions)
       opt.xaxis.categories = this.categories
       const theme = this.$store.state.themeStyle
       if (theme === 'light') {
