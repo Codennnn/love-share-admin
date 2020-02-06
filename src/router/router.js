@@ -185,6 +185,12 @@ export const asyncRoutes = [
         meta: { title: '广告牌' },
       },
       {
+        path: '/school-management',
+        name: 'SchoolManagement',
+        component: () => import('@/views/website/SchoolManagement.vue'),
+        meta: { title: '学校列表' },
+      },
+      {
         path: '/goods-category',
         name: 'GoodsCategory',
         component: () => import('@/views/goods/GoodsCategory.vue'),

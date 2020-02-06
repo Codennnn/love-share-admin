@@ -7,10 +7,11 @@ export function getSchoolList() {
   })
 }
 
-export function addSchool() {
+export function addSchool(data) {
   return request({
     url: '/school/add',
     method: 'post',
+    data,
   })
 }
 

@@ -55,7 +55,7 @@
               />
             </vs-td>
             <vs-td class="text-base text-gray font-bold">{{ tr.nickname }}</vs-td>
-            <vs-td class="text-semi">{{ tr.real_name }}</vs-td>
+            <vs-td>{{ tr.real_name }}</vs-td>
             <vs-td>
               <i
                 v-if="tr.gender"
@@ -66,9 +66,9 @@
                 class="el-icon-male primary text-xl"
               ></i>
             </vs-td>
-            <vs-td class="text-semi cursor-text">{{ tr.account }}</vs-td>
+            <vs-td class="cursor-text">{{ tr.account }}</vs-td>
             <vs-td>
-              <p class="text-semi">{{ $dayjs(tr.created_at).format('YYYY年M月DD日') }}</p>
+              <p>{{ $dayjs(tr.created_at).format('YYYY年M月DD日') }}</p>
             </vs-td>
             <vs-td>
               <vs-dropdown vs-trigger-click>

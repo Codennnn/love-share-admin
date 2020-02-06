@@ -15,7 +15,7 @@ import {
   DropdownMenu, DropdownItem, DatePicker, Form, FormItem, Image, Input,
   Menu, MenuItem, MenuItemGroup, Message, Option,
   Popover, Submenu, Steps, Step, Select,
-  Tooltip, Table, TableColumn, Tag, Transfer, Timeline, TimelineItem,
+  Tooltip, Table, TableColumn, Tag, Transfer, Timeline, TimelineItem, Upload,
 } from 'element-ui' // 按需引入组件
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/scss/element-override.scss'
@@ -74,5 +74,6 @@ Vue.use(Tag)
 Vue.use(Transfer)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Upload)
 
 Vue.prototype.$message = Message
