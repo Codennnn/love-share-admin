@@ -1,0 +1,14 @@
+{
+  "vetur.format.enable": true,
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatter.js": "none",
+  "vetur.format.defaultFormatterOptions": {
+    "wrap_attributes": "force-aligned"
+  },
+  "editor.formatOnSave": true,
+  "javascript.validate.enable": false,
+  "vetur.validation.script": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
