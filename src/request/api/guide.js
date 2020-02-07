@@ -25,7 +25,7 @@ export function deleteGuide(data) {
 
 export function getArticle(params) {
   return request({
-    url: '/guide/article',
+    url: '/guide/article/content',
     method: 'get',
     params,
   })

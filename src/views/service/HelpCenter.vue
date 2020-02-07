@@ -203,47 +203,45 @@ import {
   getGuideList, createGuide, getArticle, addArticle, deleteGuide, updateArticle, deleteArticle,
 } from '@/request/api/guide'
 
-const menus = [
-  {
-    title: '购物指南',
-    submenus: [
-      { title: '用户协议' },
-      { title: '交易条款' },
-      { title: '购物流程' },
-    ],
-  },
-  {
-    title: '支付问题',
-    submenus: [
-      { title: '支付流程' },
-      { title: '在线支付' },
-      { title: '货到付款' },
-    ],
-  },
-  {
-    title: '售后服务',
-    submenus: [
-      { title: '售后政策（三方）' },
-      { title: '退换货申请' },
-      { title: '售后常见问题' },
-    ],
-  },
-  {
-    title: '账户及会员',
-    submenus: [
-      { title: '账户安全与账户信息' },
-      { title: '账户资产' },
-      { title: '会员介绍' },
-    ],
-  },
-]
-
+// [
+//   {
+//     title: '购物指南',
+//     submenus: [
+//       { title: '用户协议' },
+//       { title: '交易条款' },
+//       { title: '购物流程' },
+//     ],
+//   },
+//   {
+//     title: '支付问题',
+//     submenus: [
+//       { title: '支付流程' },
+//       { title: '在线支付' },
+//       { title: '货到付款' },
+//     ],
+//   },
+//   {
+//     title: '售后服务',
+//     submenus: [
+//       { title: '售后政策（三方）' },
+//       { title: '退换货申请' },
+//       { title: '售后常见问题' },
+//     ],
+//   },
+//   {
+//     title: '账户及会员',
+//     submenus: [
+//       { title: '账户安全与账户信息' },
+//       { title: '账户资产' },
+//       { title: '会员介绍' },
+//     ],
+//   },
+// ]
 export default {
   name: 'HelpCenter',
   components: { VueEditor, VuePerfectScrollbar },
 
   data: () => ({
-    menus,
     guideList: [],
     article: {}, // 当前显示的文章
     payload: { // 新建栏目数据源

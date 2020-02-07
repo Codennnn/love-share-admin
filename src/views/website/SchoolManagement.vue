@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-8">
+  <div class="pt-6">
     <vs-table
       search
       pagination
@@ -63,7 +63,7 @@ export default {
 
   methods: {
     async importExcel(file) {
-      const type = file.name.split('.')[1]
+      const type = file.name.split('.')[1].toLowerCase()
       const validFileType = ['xlsx', 'xlc', 'xlm', 'xls', 'xlt', 'xlw', 'csv'].includes(type)
       if (!validFileType) {
         this.$vs.notify({
