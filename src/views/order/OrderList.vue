@@ -74,8 +74,8 @@
         </template>
 
         <template slot-scope="{data}">
-          <template v-for="tr in data">
-            <template v-for="sub in tr.sub_order">
+          <template v-for="order in data">
+            <template v-for="sub in order.sub_order">
               <vs-tr
                 v-for="td in sub.goods_list"
                 :key="td._id"
@@ -106,7 +106,7 @@
                 <vs-td :title="$dayjs(td.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
                   {{ $timeDiff(td.goods.created_at) }}
                 </vs-td>
-                <vs-td class="font-bold">{{ payments[tr.payment] }}</vs-td>
+                <vs-td class="font-bold">{{ payments[order.payment] }}</vs-td>
                 <vs-td>
                   <vs-chip
                     :style="{background: `rgba(var(--vs-${status[sub.status].color}), 0.15)`}"
@@ -128,13 +128,13 @@
                       <vs-dropdown-item>
                         <div
                           class="w-24 text-center"
-                          @click="viewDetail(sub._id)"
+                          @click="viewOrderDetail(order._id, sub._id)"
                         >查看详情</div>
                       </vs-dropdown-item>
                       <vs-dropdown-item divider>
                         <div
                           class="w-24 danger text-center"
-                          @click="deleteOrder(tr._id)"
+                          @click="deleteOrder(order._id)"
                         >删除订单</div>
                       </vs-dropdown-item>
                     </vs-dropdown-menu>
@@ -298,10 +298,10 @@ export default {
     },
 
     // 查看商品详情
-    viewDetail(id) {
+    viewOrderDetail(orderId, subId) {
       this.$router.push({
         path: '/order-detail',
-        query: { orderId: id },
+        query: { orderId, subId },
       })
     },
 
