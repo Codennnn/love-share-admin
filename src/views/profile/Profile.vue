@@ -1,13 +1,16 @@
 <template>
   <div class="py-6">
     <div class="flex">
-      <ProfileTodo class="w-1/2 mb-5" />
+      <div class="w-1/2">
+        <ProfileWelcome class="mb-5" />
+        <ProfileTodo />
+      </div>
 
       <div class="w-1/2 pl-4">
-        <ProfileBind class="" />
+        <ProfileBind class="mb-5" />
+        <ProfileLog />
       </div>
     </div>
-    <ProfileLog class="w-1/2 mb-5" />
 
     <div>
       <h2 class="mb-2 text-primary text-lg font-bold">管理权限</h2>
@@ -17,6 +20,7 @@
 </template>
 
 <script>
+import ProfileWelcome from './components/ProfileWelcome.vue'
 import ProfileTodo from './components/ProfileTodo.vue'
 import ProfileLog from './components/ProfileLog.vue'
 import ProfileBind from './components/ProfileBind.vue'
@@ -25,6 +29,7 @@ import EditPermission from '@/views/admin/edit/EditPermission.vue'
 export default {
   name: 'Profile',
   components: {
+    ProfileWelcome,
     ProfileTodo,
     ProfileLog,
     ProfileBind,

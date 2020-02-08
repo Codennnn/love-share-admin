@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import {
   getTodoList, addTodo, deleteTodo, updateTodo, updateTodoType,
 } from '@/request/api/todo'
@@ -100,6 +101,15 @@ export default {
         return state.todoList.filter(el => el.tags.includes(value) && !el.is_trashed)
       }
       return state.todoList.filter(el => !el.is_trashed)
+    },
+    todayTask: (_, getters) => {
+      const allTask = getters.filterItems({})
+      return allTask.filter((it) => {
+        const start = dayjs(it.complete_time[0])
+        const end = dayjs(it.complete_time[1])
+        return (dayjs().isSame(end, 'day') || dayjs().isAfter(start, 'day'))
+          && (dayjs().isSame(end, 'day') || dayjs().isBefore(end, 'day'))
+      })
     },
   },
 }

@@ -246,13 +246,7 @@ export default {
       return this.$store.state.todo.showTodoPopup
     },
     todayTask() {
-      const allTask = this.$store.getters['todo/filterItems']({})
-      return allTask.filter((it) => {
-        const start = this.$dayjs(it.complete_time[0])
-        const end = this.$dayjs(it.complete_time[1])
-        return (this.$dayjs().isSame(end, 'day') || this.$dayjs().isAfter(start, 'day'))
-         && (this.$dayjs().isSame(end, 'day') || this.$dayjs().isBefore(end, 'day'))
-      })
+      return this.$store.getters['todo/todayTask']
     },
     todayDoneTaskNum() {
       return this.todayTask.filter(el => el.is_done).length
