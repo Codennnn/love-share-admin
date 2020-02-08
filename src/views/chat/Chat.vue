@@ -71,10 +71,11 @@
           </ul>
           <div
             v-else
-            class="h-full py-40 flex flex-col items-center justify-center text-gray"
+            class="h-full py-40 flex flex-col items-center justify-center text-sm text-gray"
           >
             <i class="el-icon-chat-dot-round mb-4 text-4xl"></i>
-            <p class="text-sm">暂无联系人</p>
+            <p v-if="userId">暂无联系人</p>
+            <p v-else>还未绑定用户哦</p>
           </div>
         </div>
       </VuePerfectScrollbar>

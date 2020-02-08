@@ -25,7 +25,10 @@
           :class="{'px-1 py-2 bg-gray-100 rounded-lg': currMsg === cm._id}"
         >
           <div class="flex items-center">
-            <vs-avatar :src="`${cm.sender.avatar_url}?imageView2/2/w/50`"></vs-avatar>
+            <vs-avatar
+              :src="`${cm.sender.avatar_url}?imageView2/2/w/50`"
+              @click="viewUserDetail(cm.sender._id)"
+            ></vs-avatar>
             <p class="name ml-1">
               {{ cm.sender.nickname }}
             </p>
@@ -47,19 +50,25 @@
               :key="index"
             >
               <p class="text-sm">
-                <span class="name cursor-pointer">
-                  {{ it.sender.nickname }}
+                <span>
+                  <span
+                    class="name cursor-pointer"
+                    @click="viewUserDetail(it.sender._id)"
+                  >{{ it.sender.nickname }}</span>
                   <span
                     v-if="it.sender._id === owner"
-                    class="owner"
+                    class="owner cursor-default"
                   >主人</span>
                 </span>
                 <span class="mx-1 text-gray">回复</span>
-                <span class="name cursor-pointer">
-                  {{ it.at.nickname }}
+                <span>
+                  <span
+                    class="name cursor-pointer"
+                    @click="viewUserDetail(it.at._id)"
+                  >{{ it.at.nickname }}</span>
                   <span
                     v-if="it.at._id === owner"
-                    class="owner"
+                    class="owner cursor-default"
                   >主人</span>
                   :
                 </span>
@@ -129,6 +138,10 @@ export default {
     showComments: false,
   }),
 
+  userId() {
+    return this.$store.getters['admin/userId']
+  },
+
   mounted() {
     const erd = elementResizeDetectorMaker()
     erd.listenTo(this.$refs.comment, (el) => {
@@ -144,6 +157,15 @@ export default {
     showMoreComments() {
       this.maxHeight = 10000
       this.showComments = true
+    },
+
+    viewUserDetail(userId) {
+      if (userId !== this.userId) {
+        this.$router.push({
+          path: '/user-detail',
+          query: { userId },
+        })
+      }
     },
   },
 }
@@ -179,13 +201,14 @@ body[data-theme="dark"] {
 
 .msg {
   .name {
+    margin-right: 0.2rem;
     font-size: 0.875rem;
     font-weight: bold;
   }
   .owner {
     padding: 0.1rem 0.3rem;
     border-radius: 0.5rem;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     font-weight: normal;
     color: rgba(var(--vs-primary), 1);
     background: rgba(var(--vs-primary), 0.15);

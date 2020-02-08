@@ -36,7 +36,7 @@
     </div>
     <div class="hover-light cursor-pointer">
       <div
-        class="p-2 flex-row-center text-center text-white
+        class="py-3 flex-row-center text-center text-white
           bg-primary-gradient rounded-lg"
         @click="contactSeller()"
       >

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-
+import { Notification } from 'element-ui'
 import {
   getContactList, getChatData, getContactInfo, addContact, deleteContact,
 } from '@/request/api/chat'
@@ -72,6 +72,11 @@ const actions = {
     if (code === 2000) {
       await dispatch('initChat')
     } else {
+      Notification.error({
+        title: '无法添加联系人',
+        message: '请前往 "个人中心>绑定用户" 完成用户绑定哦~',
+        duration: 5000,
+      })
       throw new Error('添加联系人出错')
     }
   },

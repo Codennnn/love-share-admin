@@ -17,6 +17,7 @@
             @keyup.enter="bindUser()"
           />
           <div
+            title="绑定用户 (=・ω・=)"
             class="btn h-full flex-row-center cursor-pointer"
             @click="onBindUser()"
           >
