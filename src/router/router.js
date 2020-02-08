@@ -132,23 +132,6 @@ export const asyncRoutes = [
   },
 
   /*
-   * 留言管理
-   */
-  {
-    path: '',
-    component: Layout,
-    children: [
-      {
-        path: '/',
-        name: '',
-        component: () => import('@/views/user/UserList.vue'),
-        meta: { title: '用户列表' },
-      },
-    ],
-    meta: { title: '留言管理', icon: 'at-sign' },
-  },
-
-  /*
    * 资讯管理
    */
   {
