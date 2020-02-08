@@ -15,7 +15,10 @@
         ></feather>
       </div>
     </div>
-    <div class="img absolute top-0 right-0">
+    <div
+      class="img absolute top-0 transition"
+      style="right: -1px;"
+    >
       <el-image
         class="w-64"
         fit="contain"
@@ -39,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 .img {
   @media (max-width: 1100px) {
-    display: none;
+    opacity: 0;
   }
 }
 </style>
