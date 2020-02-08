@@ -84,7 +84,7 @@ body {
   }
 }
 
-.vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+.vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large):not(.vs-button-relief) {
   padding: .45rem 1.7rem;
 }
 
