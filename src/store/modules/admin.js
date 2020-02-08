@@ -65,5 +65,6 @@ export default {
     userId: state => state.info?.user?._id,
     nickname: state => state.info.nickname,
     avatar: state => state.info.avatar_url,
+    lockPwd: state => state.info?.lock_password,
   },
 }

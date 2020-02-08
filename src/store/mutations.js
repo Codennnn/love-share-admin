@@ -22,6 +22,9 @@ const mutations = {
   SET_SCHOOL_LIST(state, list) {
     state.schoolList = list
   },
+  SET_SECURITY(state, { show = false, active = 0 }) {
+    state.security = { show, active }
+  },
 }
 
 export default mutations

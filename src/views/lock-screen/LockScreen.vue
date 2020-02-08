@@ -2,11 +2,11 @@
   <div class="h-screen flex-row-center bg-primary">
     <div class="pb-20 flex flex-col justify-center items-center">
       <vs-avatar
-        class="base-shadow"
+        style="box-shadow: 0 0 20px 5px rgba(var(--vs-primary), 0.3);"
         size="100px"
         :src="info.avatar_url"
       />
-      <h3 class="my-4 text-primary text-xl font-bold">{{ info.nickname }}</h3>
+      <h3 class="my-4 text-primary text-xl font-bold cursor-default">{{ info.nickname }}</h3>
       <div>
         <div
           class="w-full radius overflow-hidden flex"
@@ -20,22 +20,17 @@
             v-model="password"
             @keyup.enter="unLocked()"
           />
-          <el-tooltip
-            content="解锁"
-            :open-delay="300"
+          <div
+            class="h-full flex-row-center radius bg-main-10 cursor-pointer"
+            style="width: 60px; height: 50px;"
+            @click="unLocked()"
           >
-            <div
-              class="h-full flex-row-center radius bg-main-10 cursor-pointer"
-              style="width: 60px; height: 50px;"
-              @click="unLocked()"
-            >
-              <feather
-                class="primary-semi"
-                size="22"
-                type="unlock"
-              ></feather>
-            </div>
-          </el-tooltip>
+            <feather
+              class="primary-semi"
+              size="22"
+              type="unlock"
+            ></feather>
+          </div>
         </div>
       </div>
       <div class="w-64 mt-4">

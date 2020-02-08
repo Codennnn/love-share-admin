@@ -66,8 +66,12 @@ export default {
     },
 
     lock() {
-      this.$router.push('/lock-screen')
-      localStorage.setItem('screen_lock', JSON.stringify({ isLocked: true }))
+      if (this.$store.getters['admin/lockPwd']) {
+        this.$router.push('/lock-screen')
+        localStorage.setItem('screen_lock', JSON.stringify({ isLocked: true }))
+      } else {
+        this.$store.commit('SET_SECURITY', { show: true, active: 1 })
+      }
     },
 
     // 退出登录

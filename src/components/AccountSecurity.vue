@@ -3,7 +3,10 @@
     title="账号安全"
     :active.sync="popupActive"
   >
-    <vs-tabs position="left">
+    <vs-tabs
+      position="left"
+      v-model="active"
+    >
       <vs-tab label="账号密码">
         <div class="ml-10">
           <vs-input
@@ -24,6 +27,7 @@
       <vs-tab label="锁屏密码">
         <div class="ml-10">
           <vs-input
+            type="password"
             label="新的锁屏密码"
             placeholder="按回车键提交"
             v-model.trim="lockPwd"
@@ -45,6 +49,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    active: {
+      type: Number,
+      default: 1,
+    },
   },
 
   data: () => ({
@@ -63,7 +71,7 @@ export default {
     },
     popupActive(v) {
       if (!v) {
-        this.$emit('onClose')
+        this.$store.commit('SET_SECURITY', { show: false })
       }
     },
   },

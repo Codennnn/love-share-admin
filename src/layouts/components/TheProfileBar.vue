@@ -17,17 +17,13 @@
               type="more-vertical"
             ></feather>
             <vs-dropdown-menu class="w-24">
-              <vs-dropdown-item class="text-sm text-center">
-                编辑信息
-              </vs-dropdown-item>
               <vs-dropdown-item
+                v-for="(menu, i) in menuItems"
+                :key="i"
                 class="text-sm text-center"
-                @click="activeAccountSecurity = true, showPopup = true"
+                @click="dispatch(menu.method)"
               >
-                账号安全
-              </vs-dropdown-item>
-              <vs-dropdown-item class="text-sm text-center">
-                退出登录
+                {{ menu.text }}
               </vs-dropdown-item>
             </vs-dropdown-menu>
           </vs-dropdown>
@@ -165,25 +161,19 @@
         </div>
       </div>
     </VuePerfectScrollbar>
-
-    <AccountSecurity
-      v-if="activeAccountSecurity"
-      :show-popup="showPopup"
-      @onClose="showPopup = false"
-    />
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
-const AccountSecurity = Vue.component(
-  'AccountSecurity',
-  () => import('@/components/AccountSecurity.vue'),
-)
-
+const menuItems = [
+  { text: '编辑信息', method: 'showAccountSecurity' },
+  { text: '账号安全', method: 'showAccountSecurity' },
+  { text: '锁定账号', method: 'lock' },
+  { text: '退出登录', method: 'logout' },
+]
 const noticeType = {
   1: { icon: 'message-square', color: 'primary' },
   2: { icon: 'check-circle', color: 'success' },
@@ -193,11 +183,11 @@ const noticeType = {
 export default {
   name: 'TheProfileBar',
   components: {
-    AccountSecurity,
     VuePerfectScrollbar,
   },
 
   data: () => ({
+    menuItems,
     noticeType,
     activeAccountSecurity: false,
     showPopup: false,
@@ -215,6 +205,31 @@ export default {
     },
     genderColor() {
       return this.info.gender ? 'danger' : 'primary'
+    },
+  },
+
+  methods: {
+    dispatch(methodName) {
+      this[methodName]()
+    },
+
+    showAccountSecurity() {
+      this.$store.commit('SET_SECURITY', { show: true, active: 0 })
+    },
+
+    lock() {
+      if (this.$store.getters['admin/lockPwd']) {
+        this.$router.push('/lock-screen')
+        localStorage.setItem('screen_lock', JSON.stringify({ isLocked: true }))
+      } else {
+        this.$store.commit('SET_SECURITY', { show: true, active: 1 })
+      }
+    },
+
+    // 退出登录
+    async logout() {
+      await this.$store.dispatch('admin/SignOut')
+      this.$router.replace('/sign')
     },
   },
 }

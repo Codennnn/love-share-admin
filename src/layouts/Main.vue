@@ -111,6 +111,11 @@
     <!-- 自定义栏 -->
     <TheCustomizer />
 
+    <!-- 账号安全 -->
+    <AccountSecurity
+      :show-popup="security.show"
+      :active="security.active"
+    />
   </div>
 </template>
 
@@ -122,6 +127,7 @@ import TheNavbar from './components/TheNavbar.vue'
 import TheFooter from './components/TheFooter.vue'
 import TheCustomizer from './components/TheCustomizer.vue'
 import TheProfileBar from './components/TheProfileBar.vue'
+import AccountSecurity from '@/components/AccountSecurity.vue'
 import Chat from '@/views/chat/Chat.vue'
 
 export default {
@@ -132,6 +138,7 @@ export default {
     TheFooter,
     TheCustomizer,
     TheProfileBar,
+    AccountSecurity,
     Chat,
     BackToTop,
   },
@@ -147,7 +154,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(['sidebarCollapse', 'navbarType']),
+    ...mapState(['sidebarCollapse', 'navbarType', 'security']),
     ...mapState('chat', ['showChatbox']),
   },
 
