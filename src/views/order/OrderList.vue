@@ -74,56 +74,74 @@
         </template>
 
         <template slot-scope="{data}">
-          <template v-for="(tr) in data">
-            <vs-tr
-              v-for="(td, i) in tr.goods_list"
-              :key="i"
-              @dblclick.native="viewDetail(td._id)"
-            >
-              <vs-td>{{ td.goods.name }}</vs-td>
-              <vs-td :title="`ID: ${td.goods.buyer._id}`">{{ td.goods.buyer.nickname }}</vs-td>
-              <vs-td :title="`ID: ${td.goods.seller._id}`">{{ td.goods.seller.nickname }}</vs-td>
-              <vs-td class="font-bold">
-                ￥{{ Number(td.goods.price).toFixed(2) }}
-              </vs-td>
-              <vs-td :title="$dayjs(td.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
-                {{ $timeDiff(td.goods.created_at) }}
-              </vs-td>
-              <vs-td class="font-bold">{{ payments[tr.payment] }}</vs-td>
-              <vs-td>
-                <vs-chip
-                  :style="{background: `rgba(var(--vs-${status[tr.status].color}), 0.2)`}"
-                  :class="['font-bold', status[tr.status].color]"
-                >
-                  {{ status[tr.status].text }}
-                </vs-chip>
-              </vs-td>
-              <vs-td>
-                <vs-dropdown>
-                  <i class="el-icon-more px-2 text-lg text-gray"></i>
-                  <vs-dropdown-menu>
-                    <vs-dropdown-item>
-                      <div
-                        class="w-24 text-center"
-                        @click="onCopy(tr._id)"
-                      >复制单号</div>
-                    </vs-dropdown-item>
-                    <vs-dropdown-item>
-                      <div
-                        class="w-24 text-center"
-                        @click="viewDetail(tr._id)"
-                      >查看详情</div>
-                    </vs-dropdown-item>
-                    <vs-dropdown-item divider>
-                      <div
-                        class="w-24 danger text-center"
-                        @click="deleteOrder(tr._id)"
-                      >删除订单</div>
-                    </vs-dropdown-item>
-                  </vs-dropdown-menu>
-                </vs-dropdown>
-              </vs-td>
-            </vs-tr>
+          <template v-for="tr in data">
+            <template v-for="sub in tr.sub_order">
+              <vs-tr
+                v-for="td in sub.goods_list"
+                :key="td._id"
+                @dblclick.native="viewDetail(td._id)"
+              >
+                <vs-td>{{ td.goods.name }}</vs-td>
+                <vs-td>
+                  <span
+                    class="cursor-pointer"
+                    @click="$router.push({
+                    path: '/user-detail',
+                    query: {userId: td.goods.buyer._id},
+                  })"
+                  >{{ td.goods.buyer.nickname }}</span>
+                </vs-td>
+                <vs-td>
+                  <span
+                    class="primary cursor-pointer"
+                    @click="$router.push({
+                    path: '/user-detail',
+                    query: {userId: td.goods.seller._id},
+                  })"
+                  >@{{ td.goods.seller.nickname }}</span>
+                </vs-td>
+                <vs-td class="font-bold">
+                  ￥{{ Number(td.goods.price).toFixed(2) }}
+                </vs-td>
+                <vs-td :title="$dayjs(td.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
+                  {{ $timeDiff(td.goods.created_at) }}
+                </vs-td>
+                <vs-td class="font-bold">{{ payments[tr.payment] }}</vs-td>
+                <vs-td>
+                  <vs-chip
+                    :style="{background: `rgba(var(--vs-${status[sub.status].color}), 0.15)`}"
+                    :class="['font-bold', status[sub.status].color]"
+                  >
+                    {{ status[sub.status].text }}
+                  </vs-chip>
+                </vs-td>
+                <vs-td>
+                  <vs-dropdown>
+                    <i class="el-icon-more px-2 text-lg text-gray"></i>
+                    <vs-dropdown-menu>
+                      <vs-dropdown-item>
+                        <div
+                          class="w-24 text-center"
+                          @click="onCopy(sub._id)"
+                        >复制单号</div>
+                      </vs-dropdown-item>
+                      <vs-dropdown-item>
+                        <div
+                          class="w-24 text-center"
+                          @click="viewDetail(sub._id)"
+                        >查看详情</div>
+                      </vs-dropdown-item>
+                      <vs-dropdown-item divider>
+                        <div
+                          class="w-24 danger text-center"
+                          @click="deleteOrder(tr._id)"
+                        >删除订单</div>
+                      </vs-dropdown-item>
+                    </vs-dropdown-menu>
+                  </vs-dropdown>
+                </vs-td>
+              </vs-tr>
+            </template>
           </template>
         </template>
       </vs-table>
@@ -161,9 +179,10 @@ const payments = {
   yinlian: '银行卡支付',
 }
 const status = {
-  1: { text: '已付款', color: 'success' },
-  2: { text: '待付款', color: 'warning' },
-  3: { text: '支付失败', color: 'danger' },
+  1: { text: '进行中', color: 'primary' },
+  2: { text: '已完成', color: 'success' },
+  3: { text: '派送中', color: 'warning' },
+  4: { text: '已取消', color: 'danger' },
 }
 const pickerOptions = {
   shortcuts: [{
