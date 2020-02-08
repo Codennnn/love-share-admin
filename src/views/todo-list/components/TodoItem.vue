@@ -198,7 +198,7 @@ export default {
     },
     tasks() {
       if (this.onlyToday) {
-        return this.queryItems.filter(it => this.isTodayTask(it.complete_time))
+        return this.$store.getters['todo/todayTask']
       }
       return this.queryItems
     },
@@ -207,13 +207,6 @@ export default {
   methods: {
     toggleType(todo_id, type, flag) {
       this.$store.dispatch('todo/updateTodoType', { todo_id, type, flag })
-    },
-
-    isTodayTask(time) {
-      const start = this.$dayjs(time[0])
-      const end = this.$dayjs(time[1])
-      return (this.$dayjs().isSame(end, 'day') || this.$dayjs().isAfter(start, 'day'))
-         && (this.$dayjs().isSame(end, 'day') || this.$dayjs().isBefore(end, 'day'))
     },
   },
 }

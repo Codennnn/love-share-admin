@@ -227,7 +227,7 @@ export default {
     searchText: '',
   }),
 
-  mounted() {
+  activated() {
     this.initCharts()
     this.getOrderList()
   },

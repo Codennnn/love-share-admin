@@ -201,7 +201,7 @@ export default {
     },
   },
 
-  created() {
+  activated() {
     this.getGoodsListOnSell()
     this.getGoodsListInfo()
   },

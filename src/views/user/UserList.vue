@@ -98,7 +98,7 @@ export default {
     userList: [],
   }),
 
-  created() {
+  activated() {
     this.getUserList()
   },
 
