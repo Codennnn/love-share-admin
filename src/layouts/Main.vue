@@ -121,7 +121,7 @@ import TheSidebar from './components/TheSidebar.vue'
 import TheNavbar from './components/TheNavbar.vue'
 import TheFooter from './components/TheFooter.vue'
 import TheCustomizer from './components/TheCustomizer.vue'
-import TheProfileBar from './TheProfileBar.vue'
+import TheProfileBar from './components/TheProfileBar.vue'
 import Chat from '@/views/chat/Chat.vue'
 
 export default {

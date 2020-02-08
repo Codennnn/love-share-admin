@@ -1,12 +1,12 @@
 <template>
   <div class="py-6">
     <div class="flex">
-      <div class="w-1/2">
+      <div class="w-1/2 pr-3">
         <ProfileWelcome class="mb-5" />
         <ProfileTodo />
       </div>
 
-      <div class="w-1/2 pl-4">
+      <div class="w-1/2 pl-3">
         <ProfileBind class="mb-5" />
         <ProfileLog />
       </div>
