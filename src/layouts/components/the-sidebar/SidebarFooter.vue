@@ -210,6 +210,7 @@ const options = {
           offsetY: 5,
           color: '#555',
           fontSize: '25px',
+          formatter: val => `${Number(val).toFixed(0)}%`,
         },
       },
     },
