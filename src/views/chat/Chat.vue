@@ -200,7 +200,7 @@ export default {
 
     // 监听自身 ID 接收消息
     this.sockets.subscribe(this.userId, (msg) => {
-      this.$store.commit('SEND_CHAT_MESSAGE', msg)
+      this.$store.commit('chat/SEND_CHAT_MESSAGE', msg)
     })
   },
 
@@ -231,7 +231,7 @@ export default {
         time: Date.now(),
       }
       this.$socket.emit('sendMessage', message)
-      this.$store.commit('SEND_CHAT_MESSAGE', message)
+      this.$store.commit('chat/SEND_CHAT_MESSAGE', message)
       this.message = ''
       this.$nextTick(() => {
         // 发送消息后聊天框滚动到底部

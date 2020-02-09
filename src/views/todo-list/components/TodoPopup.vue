@@ -21,20 +21,20 @@
           </div>
         </template>
       </div>
-      <div class="todo-icon__group flex items-center">
+      <div class="flex items-center">
         <feather
           size="19"
           type="bookmark"
           class="mr-2 text-gray cursor-pointer"
           :class="{'success': task.is_important}"
-          @click="task.is_important = !task.is_important"
+          @click="$set(task, 'is_important', !task.is_important)"
         ></feather>
         <feather
           size="19"
           type="star"
           class="mr-2 text-gray cursor-pointer"
           :class="{'warning': task.is_starred}"
-          @click="task.is_starred = !task.is_starred"
+          @click="$set(task, 'is_starred', !task.is_starred)"
         ></feather>
         <!-- 选择任务的标签 -->
         <vs-dropdown>
@@ -236,16 +236,6 @@ export default {
     border-radius: 10px;
     font-size: 14px;
     background-color: #e6e6e6;
-  }
-}
-
-// 弹出框的图标
-.todo-icon__group {
-  .icon {
-    margin-left: 8px;
-    font-size: 18px;
-    transition: all 0.2s;
-    color: #848484;
   }
 }
 </style>
