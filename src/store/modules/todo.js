@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { Message } from 'element-ui'
 import {
   getTodoList, addTodo, deleteTodo, updateTodo, updateTodoType,
 } from '@/request/api/todo'
@@ -75,6 +76,9 @@ const actions = {
   },
 
   async updateTodoType({ dispatch, commit }, { todo_id, type, flag }) {
+    if (type === 'is_done' && flag) {
+      Message.success('已完成一个任务！')
+    }
     commit('TOGGLE_TAG', { todo_id, type })
     const { code } = await updateTodoType({ todo_id, type, flag })
     if (code === 2000) {
@@ -107,7 +111,7 @@ export default {
       return allTask.filter((it) => {
         const start = dayjs(it.complete_time[0])
         const end = dayjs(it.complete_time[1])
-        return (dayjs().isSame(end, 'day') || dayjs().isAfter(start, 'day'))
+        return (dayjs().isSame(start, 'day') || dayjs().isAfter(start, 'day'))
           && (dayjs().isSame(end, 'day') || dayjs().isBefore(end, 'day'))
       })
     },

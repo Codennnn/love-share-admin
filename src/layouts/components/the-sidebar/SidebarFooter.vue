@@ -69,6 +69,7 @@
                 :key="i"
               >
                 <i
+                  :title="it.is_done ? '设为未完成' : '设为完成'"
                   class="el-icon-news mt-1 mr-3 text-2xl cursor-pointer"
                   :class="it.is_done ? 'text-gray' : 'primary'"
                   @click.stop="toggleType(it._id, 'is_done', !it.is_done)"
