@@ -1,11 +1,8 @@
 <template>
-  <vs-dropdown
-    vs-trigger-click
-    vs-custom-content
-  >
+  <vs-dropdown vs-custom-content>
     <el-badge
       class="nav-icon"
-      style="margin-top: 0.9rem;"
+      style="margin-top: 0.95rem;"
       :value="unreadAmount > 0 ? unreadAmount : ''"
     >
       <feather

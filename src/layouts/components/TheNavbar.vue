@@ -17,7 +17,6 @@
             :to="item.route"
           >
             <el-tooltip
-              :open-delay="100"
               :content="item.tip"
               effect="light"
             >

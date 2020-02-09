@@ -110,7 +110,7 @@
                 ></vs-progress>
               </div>
               <div class="w-1/2 mb-3 pl-4">
-                <p class="text-gray">用户: 100K</p>
+                <p class="text-gray">用户数量: 100K</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="60"
@@ -120,7 +120,7 @@
             </div>
             <div class="flex">
               <div class="w-1/2 mb-3 pr-4">
-                <p class="text-gray">Retention: 90%</p>
+                <p class="text-gray">用户留存: 90%</p>
                 <vs-progress
                   class="block mt-1"
                   :percent="70"
@@ -128,7 +128,7 @@
                 ></vs-progress>
               </div>
               <div class="w-1/2 mb-3 pl-4">
-                <p class="text-gray">Duration: 1yr</p>
+                <p class="text-gray">持续时间: 1年</p>
                 <vs-progress
                   class="block mt-1"
                   color="success"
