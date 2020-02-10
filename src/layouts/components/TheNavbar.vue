@@ -44,7 +44,7 @@
             </el-tooltip>
             <vs-input
               class="nav-search overflow-hidden"
-              :class="[showSearchInput ? 'w-48': 'w-0']"
+              :class="showSearchInput ? 'w-48': 'w-0'"
               placeholder="搜索你想要的宝贝"
               @keyup.esc="showSearchInput = false"
               @keyup.enter="search"
