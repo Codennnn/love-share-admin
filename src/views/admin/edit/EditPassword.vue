@@ -1,9 +1,8 @@
 <template>
-  <div class="w-1/2">
+  <div>
     <el-form
       ref="form"
       class="edit"
-      status-icon
       label-position="top"
       :rules="rules"
       :model="form"
@@ -38,7 +37,6 @@
         ></el-input>
       </el-form-item>
     </el-form>
-    <vs-button @click="submit()">确认修改</vs-button>
   </div>
 </template>
 

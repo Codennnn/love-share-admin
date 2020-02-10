@@ -2,7 +2,6 @@
   <div>
     <el-form
       ref="form"
-      status-icon
       class="edit"
       :rules="rules"
       :model="form"
@@ -22,7 +21,10 @@
       >
         <el-input v-model="form.real_name"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱（选填）">
+      <el-form-item
+        label="邮箱（选填）"
+        prop="email"
+      >
         <el-input v-model="form.email"></el-input>
       </el-form-item>
     </el-form>
@@ -46,8 +48,14 @@ const checkRealName = (rule, value, callback) => {
   }
   callback()
 }
-
-
+const checkEmail = (rule, value, callback) => {
+  if (!value) {
+    callback()
+  } else if (!/^[\u4e00-\u9fa5]{1,6}(·[\u4e00-\u9fa5]{1,6}){0,2}$/.test(value)) {
+    callback(new Error('姓名的格式不正确'))
+  }
+  callback()
+}
 export default {
   name: 'EditForm',
   props: {
@@ -62,6 +70,9 @@ export default {
       ],
       real_name: [
         { validator: checkRealName, trigger: 'blur' },
+      ],
+      email: [
+        { validator: checkEmail, trigger: 'blur' },
       ],
     },
   }),

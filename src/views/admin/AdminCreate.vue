@@ -82,7 +82,7 @@ export default {
           editForm.form,
           editPassword.form,
           { avatar_url: editAvatar.avatarUrl },
-          { gender: editAvatar.gender },
+          { gender: editAvatar.selectedGender },
           { permissions },
         )
         try {

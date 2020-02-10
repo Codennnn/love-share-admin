@@ -211,16 +211,16 @@ export default {
         overflow: hidden;
       }
       tr {
-        border-radius: 0.5rem;
+        border-radius: $large-radius;
         box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
         td {
           &:first-child {
-            border-top-left-radius: 0.5rem;
-            border-bottom-left-radius: 0.5rem;
+            border-top-left-radius: $large-radius;
+            border-bottom-left-radius: $large-radius;
           }
           &:last-child {
-            border-top-right-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
+            border-top-right-radius: $large-radius;
+            border-bottom-right-radius: $large-radius;
           }
         }
       }

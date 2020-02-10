@@ -55,6 +55,10 @@ const ReplaceAvatar = Vue.component(
   () => import('../ReplaceAvatar.vue'),
 )
 
+const defaultAvatar = {
+  male: 'https://cdn.hrspider.top/default_avatar_male.jpg',
+  female: 'https://cdn.hrspider.top/default_avatar_female.jpg',
+}
 export default {
   name: 'EditAvatar',
   components: { ReplaceAvatar },
@@ -66,13 +70,10 @@ export default {
   },
 
   data: () => ({
+    defaultAvatar,
     selectedGender: 0,
+    avatarUrl: 'https://cdn.hrspider.top/default_avatar_male.jpg', // 要显示的头像 URL
     showAvatarPopup: false,
-    avatarUrl: 'https://cdn.hrspider.top/default_avatar_male.jpg',
-    defaultAvatar: {
-      male: 'https://cdn.hrspider.top/default_avatar_male.jpg',
-      female: 'https://cdn.hrspider.top/default_avatar_female.jpg',
-    },
   }),
 
   watch: {
@@ -80,6 +81,7 @@ export default {
     selectedGender: {
       handler(gender) {
         const { male, female } = this.defaultAvatar
+        // 如果用户的头像还为默认头像的话，就可以根据性别切换头像
         if (this.avatarUrl === male || this.avatarUrl === female) {
           if (gender) {
             this.avatarUrl = female
@@ -92,7 +94,7 @@ export default {
     },
     avatar: {
       handler(avatar) {
-        if (avatar) {
+        if (avatar?.length > 0) {
           this.avatarUrl = avatar
         }
       },
