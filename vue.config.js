@@ -3,6 +3,8 @@ module.exports = {
     ? '/'
     : '/',
 
+  outputDir: 'admin',
+
   devServer: {
     host: '0.0.0.0',
     proxy: {
