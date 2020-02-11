@@ -4,8 +4,8 @@ import { getToken } from '@/permission/token'
 
 const service = Axios.create({
   // baseURL: '/api',
-  // baseURL: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:7001/api' : '/api',
-  baseURL: 'http://127.0.0.1:7001/api',
+  baseURL: process.env.NODE_ENV === 'production' ? 'http://129.204.137.172/api' : '/api',
+  // baseURL: 'http://127.0.0.1:7001/api',
   timeout: 10000,
   responseType: 'json',
   withCredentials: true,
