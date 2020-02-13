@@ -54,7 +54,7 @@
             </div>
           </div>
           <VuePerfectScrollbar
-            v-if="todayTask.length > 0"
+            v-if="remainingTask.length > 0"
             class="w-full mb-4 overflow-hidden"
             style="max-height: 12rem;"
             :settings="{
@@ -64,24 +64,47 @@
           >
             <ul class="h-full">
               <li
-                class="todo-item relative px-2 py-1 flex"
-                v-for="(it, i) in todayTask"
+                class="todo-item relative px-2 py-1 flex items-start"
+                v-for="(it, i) in remainingTask"
                 :key="i"
               >
                 <i
-                  :title="it.is_done ? '设为未完成' : '设为完成'"
-                  class="el-icon-news mt-1 mr-3 text-2xl cursor-pointer"
-                  :class="it.is_done ? 'text-gray' : 'primary'"
-                  @click.stop="toggleType(it._id, 'is_done', !it.is_done)"
+                  class="el-icon-news mt-1 mr-3 primary text-2xl cursor-pointer"
+                  @click="viewItem(it)"
                 ></i>
-                <div class="flex-1">
-                  <div
-                    class="flex items-center"
-                    :class="it.is_done ? 'text-gray' : 'text-primary'"
-                  >
-                    {{ it.title }}
+                <div>
+                  <div class="flex items-center ">
+                    <div class="text-primary truncate">
+                      {{ it.title }}
+                    </div>
+                    <el-dropdown>
+                      <div class="flex items-center">
+                        <feather
+                          class="more-icon ml-4 text-gray transition opacity-0 cursor-pointer"
+                          size="18"
+                          type="more-horizontal"
+                        ></feather>
+                      </div>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item @click.native="toggleType(it._id, 'is_done', !it.is_done)">
+                          设为完成
+                        </el-dropdown-item>
+                        <template v-if="it.tags.length > 0">
+                          <el-dropdown-item disabled>
+                            <div class="py-2 flex items-center justify-end">
+                              <div
+                                class="w-3 h-1 ml-1 rounded-full"
+                                v-for="(tag, i) in it.tags"
+                                :key="i"
+                                :class="`bg-${['main', 'success', 'warning', 'danger'][tag - 1]}`"
+                              >{{  }}</div>
+                            </div>
+                          </el-dropdown-item>
+                        </template>
+                      </el-dropdown-menu>
+                    </el-dropdown>
                   </div>
-                  <div class="w-64 truncate text-semi text-xs">{{ it.content }}</div>
+                  <div class="truncate text-semi text-xs">{{ it.content }}1</div>
                 </div>
               </li>
             </ul>
@@ -96,7 +119,7 @@
               </div>
               <div>
                 <span class="text-sm">已完成</span>
-                <span class="font-bold"> {{ todayDoneTaskNum }}</span>
+                <span class="font-bold"> {{ todayTask.length - remainingTask.length }}</span>
               </div>
             </div>
             <div class="w-32">
@@ -247,16 +270,19 @@ export default {
     showTodoPopup() {
       return this.$store.state.todo.showTodoPopup
     },
+
     todayTask() {
       return this.$store.getters['todo/todayTask']
     },
-    todayDoneTaskNum() {
-      return this.todayTask.filter(el => el.is_done).length
+    remainingTask() {
+      return this.todayTask.filter(el => !el.is_done)
     },
     radialBarValue() {
-      const percent = (this.todayDoneTaskNum / this.todayTask.length * 100) || 0
+      const doneNum = this.todayTask.length - this.remainingTask.length
+      const percent = (doneNum / this.todayTask.length * 100) || 0
       return [percent]
     },
+
     radialBarOptions() {
       const theme = this.$store.state.themeStyle
       if (theme === 'light') {
@@ -270,6 +296,10 @@ export default {
   },
 
   methods: {
+    viewItem(todo) {
+      this.$store.commit('todo/SET_TODO_POPUP_STATUS', { status: true, data: todo })
+    },
+
     viewAll() {
       this.$router.push('/todo-list')
       this.isTaskOpen = false
@@ -301,6 +331,15 @@ export default {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 10px;
+  }
+
+  .todo-item {
+    max-width: 20rem;
+    &:hover {
+      .more-icon {
+        opacity: 1;
+      }
+    }
   }
 }
 </style>
