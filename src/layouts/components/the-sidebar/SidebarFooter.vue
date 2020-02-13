@@ -96,8 +96,8 @@
                                 class="w-3 h-1 ml-1 rounded-full"
                                 v-for="(tag, i) in it.tags"
                                 :key="i"
-                                :class="`bg-${['main', 'success', 'warning', 'danger'][tag - 1]}`"
-                              >{{  }}</div>
+                                :class="`bg-${['main', 'warning', 'success', 'danger'][tag - 1]}`"
+                              ></div>
                             </div>
                           </el-dropdown-item>
                         </template>
@@ -147,7 +147,7 @@
                 :title="it.percent"
                 class="mt-0"
                 :color="it.color"
-                :percent="it.percent"
+                :percent="it.percent * 100"
               ></vs-progress>
             </div>
           </div>
@@ -195,12 +195,6 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
 import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
 
-const progress = [
-  { label: '前端', color: 'primary', percent: 50 },
-  { label: '后端', color: 'warning', percent: 70 },
-  { label: '其它', color: 'success', percent: 20 },
-  { label: 'BUG', color: 'danger', percent: 10 },
-]
 const options = {
   labels: ['完成度'],
   chart: {
@@ -254,7 +248,6 @@ export default {
   },
 
   data: () => ({
-    progress,
     isTaskOpen: false,
   }),
 
@@ -277,12 +270,42 @@ export default {
     remainingTask() {
       return this.todayTask.filter(el => !el.is_done)
     },
+    progress() {
+      const progress = [
+        { label: '前端', color: 'primary' },
+        { label: '后端', color: 'warning' },
+        { label: '其它', color: 'success' },
+        { label: 'BUG', color: 'danger' },
+      ]
+      const allCount = [0, 0, 0, 0]
+      const { todoList } = this.$store.state.todo
+      todoList.forEach(({ tags, is_trashed }) => {
+        if (tags.length > 0 && !is_trashed) {
+          tags.forEach((tag) => { allCount[tag - 1] += 1 })
+        }
+      })
+
+      const todayCount = [0, 0, 0, 0]
+      this.todayTask.forEach(({ tags }) => {
+        if (tags.length > 0) {
+          tags.forEach((tag) => { todayCount[tag - 1] += 1 })
+        }
+      })
+
+      todayCount
+        .map((el, i) => el / allCount[i])
+        .forEach((el, i) => {
+          progress[i].percent = el
+        })
+
+      return progress
+    },
+
     radialBarValue() {
       const doneNum = this.todayTask.length - this.remainingTask.length
       const percent = (doneNum / this.todayTask.length * 100) || 0
       return [percent]
     },
-
     radialBarOptions() {
       const theme = this.$store.state.themeStyle
       if (theme === 'light') {
