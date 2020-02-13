@@ -1,4 +1,5 @@
 import _cloneDeepWith from 'lodash/cloneDeepWith'
+import { Notification } from 'element-ui'
 
 export function timeDiff(time) {
   let date
@@ -56,6 +57,12 @@ export function setCreditColor(val) {
     return 'danger'
   }
   return 'primary'
+}
+
+export function errorNotify({
+  title = '哎呀！', message = '出错啦！', duration = 5000,
+} = {}) {
+  Notification.error({ title, message, duration })
 }
 
 export const areaChartOptions = {
