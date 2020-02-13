@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import consoleLog from '@/utils/console-log'
+
 export default {
   name: 'App',
   data: () => ({
@@ -45,6 +47,8 @@ export default {
     window.addEventListener('offline', () => {
       this.isOffline = true
     })
+
+    consoleLog()
   },
 }
 </script>
