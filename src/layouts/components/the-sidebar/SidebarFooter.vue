@@ -141,10 +141,10 @@
               class="text-sm"
               v-for="(it, i) in progress"
               :key="i"
+              :title="`占比：${it.percent * 100}%`"
             >
               {{ it.label }}
               <vs-progress
-                :title="it.percent"
                 class="mt-0"
                 :color="it.color"
                 :percent="it.percent * 100"
