@@ -28,8 +28,8 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url("../../assets/images/pages/404/not_found.png") no-repeat
-    center center;
+  background: url(https://gitee.com/chinesee/images/raw/master/img/img_019.png)
+    no-repeat center center;
   background-size: cover;
 }
 

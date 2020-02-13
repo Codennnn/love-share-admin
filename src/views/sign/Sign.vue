@@ -5,7 +5,7 @@
   >
     <img
       class="absolute left-0 h-full"
-      src="@/assets/images/sign-bg.png"
+      src="https://gitee.com/chinesee/images/raw/master/img/img_018.png"
     />
     <div
       class="absolute h-screen flex flex-col justify-center items-center overflow-auto"

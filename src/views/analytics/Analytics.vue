@@ -8,14 +8,14 @@
             <img
               class="decore-left absolute top-0 left-0"
               width="200"
-              src="@/assets/images/pages/dashboard/decore_left.png"
+              src="@/assets/images/decore_left.png"
             >
             <img
               class="decore-right absolute top-0 right-0"
               style="user-select: none;"
               width="175"
               draggable="false"
-              src="@/assets/images/pages/dashboard/decore_right.png"
+              src="@/assets/images/decore_right.png"
             >
             <div
               class="flex-row-center rounded-full"
@@ -250,7 +250,8 @@ export default {
   height: $width;
   left: calc((-#{$width} / 2) + #{$self});
   top: calc((-#{$width} / 2) + #{$self});
-  background: url("~@/assets/images/medal_sprites.png") $bgx $bgy;
+  background: url(https://gitee.com/chinesee/images/raw/master/img/img_021.png)
+    $bgx $bgy;
   transform: scale(0.1) translate(-50%, -50%);
 }
 .bg-medal0 {

@@ -22,7 +22,7 @@
       <el-image
         class="w-64"
         fit="contain"
-        :src="require('@/assets/images/admin_welcome.png')"
+        src="https://gitee.com/chinesee/images/raw/master/img/img_020.png"
       ></el-image>
     </div>
   </div>
