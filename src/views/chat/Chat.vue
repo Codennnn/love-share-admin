@@ -60,13 +60,6 @@
                 :lastMessaged="chatLastMessaged(contact._id)"
                 :isActiveChatUser="isActiveChatUser(contact._id)"
               />
-              <!-- <v-contextmenu
-                ref="contextmenu"
-                theme="bright"
-                @contextmenu="(e) => deleteContactId = e.componentOptions.propsData.contact._id"
-              >
-                <v-contextmenu-item @click="deleteContact()">删除联系人</v-contextmenu-item>
-              </v-contextmenu> -->
             </li>
           </ul>
           <div
@@ -112,18 +105,42 @@
       <!-- 输入框 -->
       <div
         v-if="activeChatUser"
-        class="chat-input flex items-center p-4 bg-primary"
+        class="chat-input flex items-center px-4 py-3 bg-primary"
       >
-        <vs-input
-          class="flex-1"
-          placeholder="输入您的消息..."
-          v-model="message"
-          @keyup.enter="sendMessage()"
-        />
-        <vs-button
-          class="bg-primary-gradient ml-4 text-sm"
-          @click="sendMessage()"
-        >发 送</vs-button>
+        <vs-dropdown
+          class="mr-2"
+          vs-trigger-click
+          vs-custom-content
+        >
+          <div class="py-2 px-3 bg-gray radius">
+            😊
+          </div>
+          <vs-dropdown-menu>
+            <VEmojiPicker
+              labelSearch="搜索..."
+              @select="onSelectEmoji"
+            />
+          </vs-dropdown-menu>
+        </vs-dropdown>
+        <div class="message relative flex-1 radius overflow-hidden bg-gray">
+          <vs-input
+            class="type-input w-full"
+            placeholder="输入您的消息..."
+            v-model="message"
+            @keyup.enter="sendMessage()"
+          />
+          <div
+            class="absolute top-0 right-0 w-12 h-full ml-4 flex-row-center
+             bg-main text-gray-100 text-sm rounded cursor-pointer"
+            @click="sendMessage()"
+          >
+            <feather
+              size="19"
+              stroke-width="1.8"
+              type="send"
+            ></feather>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -133,6 +150,7 @@
 import _debounce from 'lodash/debounce'
 import { mapState, mapGetters } from 'vuex'
 
+import VEmojiPicker from 'v-emoji-picker'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import ChatContact from './components/ChatContact.vue'
 import ChatNavbar from './components/ChatNavbar.vue'
@@ -141,6 +159,7 @@ import ChatLog from './components/ChatLog.vue'
 export default {
   name: 'Chat',
   components: {
+    VEmojiPicker,
     VuePerfectScrollbar,
     ChatContact,
     ChatNavbar,
@@ -216,6 +235,10 @@ export default {
       this.$nextTick(() => {
         this.$refs.chatLogPS.$el.scrollTop = this.$refs.chatLog.scrollHeight
       })
+    },
+
+    onSelectEmoji(emoji) {
+      this.message += emoji.data
     },
 
     sendMessage() {
@@ -331,6 +354,18 @@ $sidebar-width: 310px;
   position: relative;
   width: 100%;
 }
+
+.message .type-input::v-deep {
+  .vs-inputx {
+    border: none !important;
+    box-shadow: none;
+    background: transparent;
+    padding: 0.6rem 3rem 0.6rem 0.6rem;
+  }
+  .input-span-placeholder {
+    padding: 0.6rem 3rem 0.6rem 0.6rem;
+  }
+}
 </style>
 
 <style lang="scss">
@@ -340,24 +375,6 @@ $sidebar-width: 310px;
     .con-img.vs-avatar--con-img {
       border: 2px solid white;
     }
-  }
-}
-
-.v-contextmenu {
-  z-index: 9999999;
-  padding: 0;
-  border: none;
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-  &:hover {
-    box-shadow: 0 0 10px 0 rgba(var(--vs-danger), 1);
-  }
-  .v-contextmenu-item {
-    padding: 12px 14px;
-    transition: all 0.2s;
-  }
-  .v-contextmenu-item--hover {
-    background-color: rgba(var(--vs-danger), 0.95);
   }
 }
 </style>
