@@ -245,6 +245,12 @@ export const asyncRoutes = [
         },
       },
       {
+        path: '/log',
+        name: 'Log',
+        component: () => import('@/views/log/Log.vue'),
+        meta: { title: '网站日志' },
+      },
+      {
         path: '/order-detail',
         name: 'OrderDetail',
         component: () => import('@/views/order/OrderDetail.vue'),

@@ -37,7 +37,7 @@ const errorHandler = {
     errorNotify({ title: `${status}`, message: '登录过期，请重新登录~' })
   },
   422(status, statusText) {
-    errorNotify({ title: `${status}`, message: `找不到资源 - ${statusText}` })
+    errorNotify({ title: `${status}`, message: `参数校验出错 - ${statusText}` })
   },
   500(status, statusText) {
     errorNotify({ title: `${status}`, message: `服务出错 - ${statusText}` })

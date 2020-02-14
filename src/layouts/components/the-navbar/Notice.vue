@@ -2,7 +2,7 @@
   <vs-dropdown vs-custom-content>
     <el-badge
       class="nav-icon"
-      style="margin-top: 0.95rem;"
+      style="margin-top: 0.85rem;"
       :value="unreadAmount > 0 ? unreadAmount : ''"
     >
       <feather

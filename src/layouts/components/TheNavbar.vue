@@ -67,8 +67,21 @@
             <!-- 通知图标 -->
             <Notice />
 
+            <el-tooltip
+              :open-delay="100"
+              content="网站日志"
+              effect="light"
+            >
+              <feather
+                class="nav-icon ml-4"
+                type="terminal"
+                @click="$router.push('/log')"
+              ></feather>
+            </el-tooltip>
+
             <!-- 头像图标 -->
             <Avatar class="ml-5" />
+
           </div>
         </div>
       </div>
