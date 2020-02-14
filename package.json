@@ -24,7 +24,6 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.14",
     "material-icons": "^0.3.1",
-    "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
     "postcss": "^7.0.17",
     "qs": "^6.9.1",
