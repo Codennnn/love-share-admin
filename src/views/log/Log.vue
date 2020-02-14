@@ -1,7 +1,7 @@
 <template>
   <div>
     <vs-table
-      search
+      class="px-2 pb-4 radius overflow-hidden"
       pagination
       max-items="10"
       noDataText="暂无数据"
@@ -9,8 +9,9 @@
     >
       <template slot="thead">
         <vs-th>商品名称</vs-th>
-        <vs-th>买家</vs-th>
-        <vs-th>卖家</vs-th>
+        <vs-th>所在组件</vs-th>
+        <vs-th>路由</vs-th>
+        <vs-th>摘要</vs-th>
       </template>
 
       <template slot-scope="{data}">
@@ -19,7 +20,8 @@
           :key="tr._id"
         >
           <vs-td>{{ tr.err }}</vs-td>
-          <vs-td>{{ tr.detail }}</vs-td>
+          <vs-td>{{ tr.detail.component_name }}</vs-td>
+          <vs-td>{{ tr.detail.route }}</vs-td>
           <vs-td>{{ tr.info }}</vs-td>
           <vs-td>{{ $timeDiff(tr.created_at) }}</vs-td>
         </vs-tr>

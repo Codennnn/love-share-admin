@@ -79,7 +79,7 @@
               <vs-tr
                 v-for="td in sub.goods_list"
                 :key="td._id"
-                @dblclick.native="viewDetail(td._id)"
+                @dblclick.native="viewOrderDetil(order._id, sub._id)"
               >
                 <vs-td>{{ td.goods.name }}</vs-td>
                 <vs-td>
