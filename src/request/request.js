@@ -66,6 +66,7 @@ service.interceptors.response.use(
     }
   },
   (error) => {
+    /* eslint no-console: 0 */
     console.log('!!!!', error.response)
     const { status, statusText } = error.response
     /* eslint no-unused-expressions: [2, { allowTernary: true }] */

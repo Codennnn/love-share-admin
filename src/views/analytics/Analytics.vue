@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="flex flex-wrap w-full">
+    <div class="flex flex-wrap">
       <!-- 卡片 1：欢迎卡片 -->
-      <div class="lg:w-6/12 lg:pr-3 sm:w-full my-3 min-h-full">
+      <div class="lg:w-6/12 lg:pr-3 sm:w-full my-3">
         <div class="h-full text-white bg-primary-gradient radius">
           <div class="h-full relative flex flex-col justify-center items-center py-4">
             <img

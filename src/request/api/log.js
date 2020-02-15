@@ -8,10 +8,10 @@ export function getLogList(params) {
   })
 }
 
-export function createGuide(data) {
+export function deleteLog(data) {
   return request({
-    url: '/guide/create',
-    method: 'post',
+    url: '/log/delete',
+    method: 'delete',
     data,
   })
 }

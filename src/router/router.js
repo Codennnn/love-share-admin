@@ -48,6 +48,12 @@ export const asyncRoutes = [
         meta: { title: '数据分析' },
       },
       {
+        path: '/monitor',
+        name: 'Monitor',
+        component: () => import('@/views/analytics/Monitor.vue'),
+        meta: { title: '数据监控' },
+      },
+      {
         path: '/text',
         name: 'Text',
         component: () => import('@/views/analytics/Text.vue'),

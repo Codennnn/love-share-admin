@@ -86,27 +86,27 @@
             <TheFooter class="router-footer" />
           </div>
 
-          <!-- 在线聊天 -->
-          <transition
-            enter-active-class="animated zoomIn quickly"
-            leave-active-class="animated zoomOutLeft faster"
-            mode="out-in"
-          >
-            <template>
-              <div
-                id="chat-container"
-                v-show="showChatbox"
-              >
-                <Chat />
-              </div>
-            </template>
-          </transition>
-
           <!-- 个人中心 -->
           <TheProfileBar v-show="$route.path === '/profile'" />
         </div>
       </div>
     </div>
+
+    <!-- 在线聊天 -->
+    <transition
+      enter-active-class="animated zoomIn quickly"
+      leave-active-class="animated zoomOutLeft faster"
+      mode="out-in"
+    >
+      <template>
+        <div
+          id="chat-container"
+          v-show="showChatbox"
+        >
+          <Chat />
+        </div>
+      </template>
+    </transition>
 
     <!-- 自定义栏 -->
     <TheCustomizer />

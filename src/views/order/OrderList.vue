@@ -79,7 +79,7 @@
               <vs-tr
                 v-for="td in sub.goods_list"
                 :key="td._id"
-                @dblclick.native="viewOrderDetil(order._id, sub._id)"
+                @dblclick.native="viewOrderDetail(order._id, sub._id)"
               >
                 <vs-td>{{ td.goods.name }}</vs-td>
                 <vs-td>
@@ -109,8 +109,8 @@
                 <vs-td class="font-bold">{{ payments[order.payment] }}</vs-td>
                 <vs-td>
                   <vs-chip
-                    :style="{background: `rgba(var(--vs-${status[sub.status].color}), 0.15)`}"
-                    :class="['font-bold', status[sub.status].color]"
+                    :style="{background: `rgba(var(--vs-${status[sub.status].color}), 0.12)`}"
+                    :class="status[sub.status].color"
                   >
                     {{ status[sub.status].text }}
                   </vs-chip>
