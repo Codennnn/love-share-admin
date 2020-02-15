@@ -16,6 +16,7 @@
             class="pwd-input w-full"
             style="background: transparent;"
             size="large"
+            type="password"
             placeholder="请输入密码..."
             v-model="password"
             @keyup.enter="unLocked()"

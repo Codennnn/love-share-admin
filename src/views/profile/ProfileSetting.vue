@@ -64,10 +64,10 @@ export default {
   }),
 
   mounted() {
-    const { active } = this.$route?.query
-    if (active) {
-      this.active = active
-    }
+    // const { active } = this.$route.query
+    // if (active) {
+    //   this.active = active
+    // }
   },
 
   methods: {

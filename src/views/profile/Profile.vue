@@ -13,7 +13,7 @@
     </div>
 
     <div>
-      <h2 class="mb-2 text-primary text-lg font-bold">管理权限</h2>
+      <h2 class="mt-4 mb-2 text-primary text-lg font-bold">管理权限</h2>
       <EditPermission :permissions="permissions" />
     </div>
   </div>
