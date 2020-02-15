@@ -199,3 +199,68 @@ export const keywordList = [
     rank: 8, word: '关键词8', count: 621, user_num: 540, increase: 18,
   },
 ]
+
+export const salesMonthBar = {
+  series: [{
+    name: '交易额',
+    data: [75, 125, 225, 175, 125, 125, 75, 140, 80, 55, 125],
+  }],
+  chartOptions: {
+    chart: {
+      type: 'bar',
+      toolbar: { show: false },
+    },
+    dataLabels: { enabled: false },
+    xaxis: {
+      categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      labels: {
+        style: {
+          colors: '#999',
+        },
+      },
+      position: 'bottom',
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      crosshairs: {
+        fill: {
+          type: 'gradient',
+          gradient: {
+            colorFrom: '#D8E3F0',
+            colorTo: '#BED1E6',
+            stops: [0, 100],
+            opacityFrom: 0.4,
+            opacityTo: 0.5,
+          },
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: '#999',
+          fontSize: '14px',
+        },
+      },
+    },
+    states: {
+      hover: {
+        filter: 'none',
+      },
+    },
+    colors: ['#6165f7'],
+    plotOptions: {
+      bar: {
+        columnWidth: '40%',
+        distributed: true,
+        endingShape: 'rounded',
+      },
+    },
+    tooltip: {
+      x: { show: false },
+    },
+  },
+}

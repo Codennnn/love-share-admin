@@ -53,7 +53,12 @@ const chartOptions = {
   },
   xaxis: {
     categories: [],
-    axisBorder: {},
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
     labels: {
       style: {
         colors: '',
@@ -61,7 +66,6 @@ const chartOptions = {
     },
   },
   yaxis: {
-    axisBorder: {},
     labels: {
       style: {
         fontSize: '14px',
@@ -132,14 +136,12 @@ export default {
       if (theme === 'light') {
         this.$set(opt.chart, 'background', '#fff')
         this.$set(opt.grid, 'borderColor', '#ddd')
-        this.$set(opt.xaxis.axisBorder, 'color', '#ddd')
         this.$set(opt.xaxis.labels.style, 'colors', '#8b99a8')
         this.$set(opt.yaxis.labels.style, 'color', '#8b99a8')
         return opt
       }
       this.$set(opt.chart, 'background', '#333644')
       this.$set(opt.grid, 'borderColor', '#525465')
-      this.$set(opt.xaxis.axisBorder, 'color', '#525465')
       this.$set(opt.xaxis.labels.style, 'colors', '#9c9ea6')
       this.$set(opt.yaxis.labels.style, 'color', '#9c9ea6')
       return opt

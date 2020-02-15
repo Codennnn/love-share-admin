@@ -11,7 +11,7 @@
       <div class="p-6 flex flex-col items-center">
         <div class="w-full mb-5 flex justify-between items-center text-semi">
           <span>个人中心</span>
-          <vs-dropdown vs-trigger-click>
+          <vs-dropdown>
             <feather
               size="20"
               type="more-vertical"
@@ -169,8 +169,7 @@ import { mapState, mapGetters } from 'vuex'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 const menuItems = [
-  { text: '编辑信息', method: 'showAccountSecurity' },
-  { text: '账号安全', method: 'showAccountSecurity' },
+  { text: '账号设置', method: 'routeToProfileSetting' },
   { text: '锁定账号', method: 'lock' },
   { text: '退出登录', method: 'logout' },
 ]
@@ -189,7 +188,6 @@ export default {
   data: () => ({
     menuItems,
     noticeType,
-    activeAccountSecurity: false,
     showPopup: false,
   }),
 
@@ -213,8 +211,8 @@ export default {
       this[methodName]()
     },
 
-    showAccountSecurity() {
-      this.$store.commit('SET_SECURITY', { show: true, active: 0 })
+    routeToProfileSetting() {
+      this.$router.push('/profile-setting')
     },
 
     lock() {
@@ -222,7 +220,7 @@ export default {
         this.$router.push('/lock-screen')
         localStorage.setItem('screen_lock', JSON.stringify({ isLocked: true }))
       } else {
-        this.$store.commit('SET_SECURITY', { show: true, active: 1 })
+        this.$router.push('/profile-setting')
       }
     },
 

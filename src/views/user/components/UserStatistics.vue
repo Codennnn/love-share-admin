@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="flex items-center text-sm">
-        <span class="text-gray">最近一月</span>
-        <div class="ml-1 flex items-center primary ">
+        <span class="text-gray">近一周涨幅</span>
+        <div class="ml-1 flex items-center primary">
           <feather
             size="18"
             type="arrow-up"
@@ -34,7 +34,7 @@
       </div>
       <div class="flex items-center text-sm">
         <span class="text-gray">相对于昨天</span>
-        <div class="ml-1 flex items-center success ">
+        <div class="ml-1 flex items-center success">
           <feather
             size="18"
             type="arrow-up"
@@ -54,22 +54,43 @@
           <feather type="user-minus"></feather>
         </div>
       </div>
-      <div class="text-sm">
+      <div class="flex items-center text-sm">
+        <span class="text-gray">最近一月</span>
+        <div class="ml-1 flex items-center danger">
+          <feather
+            size="18"
+            type="arrow-up"
+          ></feather>
+          <span class="font-bold">2.50%</span>
+        </div>
       </div>
     </div>
 
-    <div
-      class="card ml-4 bg-gray"
-      style="padding: 0 1.25rem;"
-    >
+    <div class="card relative ml-4 p-4 flex justify-end bg-gray">
       <vue-apex-charts
-        ref="apexChart"
-        height="100%"
-        width='100%'
+        class=" absolute left-0"
+        height="165"
         type="donut"
         :options="chartOptions"
         :series="series"
       ></vue-apex-charts>
+      <ul class="mr-2">
+        <li class="flex items-center text-gray">
+          <div class="w-3 h-3 mr-2 rounded-full bg-main"></div>
+          <span>汉纸</span>
+        </li>
+        <li class="flex items-center text-gray">
+          <div class="w-3 h-3 mr-2 rounded-full bg-danger"></div>
+          <span>妹纸</span>
+        </li>
+        <li class="flex items-center text-gray">
+          <div
+            class="w-3 h-3 mr-2 rounded-full"
+            style="background: #bbb;"
+          ></div>
+          <span>未知</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -78,16 +99,29 @@
 import VueApexCharts from 'vue-apexcharts'
 
 const chartOptions = {
-  chart: {
-    type: 'donut',
-  },
-  dataLabels: {
-    enabled: false,
-  },
+  chart: { type: 'donut', offsetX: -50, offsetY: -12 },
+  dataLabels: { enabled: false },
+  legend: { show: false },
   labels: ['汉纸', '妹纸', '未知'],
   plotOptions: {
     pie: {
-      expandOnClick: false,
+      donut: {
+        labels: {
+          show: true,
+          name: { show: false },
+          value: {
+            offsetY: 4,
+            fontSize: '16px',
+            formatter: v => `${v}人`,
+          },
+          total: {
+            show: true,
+            showAlways: true,
+            label: '销售额',
+            formatter: w => `${w.globals.seriesTotals.reduce((a, b) => a + b, 0)}人`,
+          },
+        },
+      },
     },
   },
   colors: ['#6165f7', '#EA5455', '#bbb'],

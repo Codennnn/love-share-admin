@@ -6,10 +6,6 @@ const state = {
 
   categoryList: [],
   schoolList: [],
-  security: {
-    show: false,
-    active: 0,
-  },
 }
 
 export default state

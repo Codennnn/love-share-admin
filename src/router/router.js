@@ -317,6 +317,19 @@ export const asyncRoutes = [
         },
       },
       {
+        path: '/profile-setting',
+        name: 'ProfileSetting',
+        component: () => import('@/views/profile/ProfileSetting.vue'),
+        meta: {
+          title: '账号设置',
+          breadcrumb: [
+            { title: '首页', to: '/' },
+            { title: '个人中心', to: '/profile' },
+            { title: '账号设置', active: true },
+          ],
+        },
+      },
+      {
         path: '/notice',
         name: 'Notice',
         component: () => import('@/views/notice/Notice.vue'),
