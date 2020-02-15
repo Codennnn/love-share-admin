@@ -217,6 +217,10 @@
         <vs-button
           slot="reference"
           class="w-3/4 mt-8"
+          @click="$vs.notify({
+            title: '哟西',
+            text: '你点击了‘账号安全’',
+          })"
         >账号安全</vs-button>
       </div>
     </div>

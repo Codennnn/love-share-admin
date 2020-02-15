@@ -143,6 +143,9 @@ export default {
 
 <style lang="scss" scoped>
 .vs-tabs::v-deep {
+  .vs-icon-primary {
+    color: inherit;
+  }
   .ul-tabs {
     box-shadow: none;
     .vs-tabs--li {

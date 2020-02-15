@@ -41,7 +41,7 @@ import { mapGetters } from 'vuex'
 const popItems = [
   { icon: 'user', text: '个人中心', route: '/profile' },
   { icon: 'message-square', text: '我的消息', route: '/notice' },
-  { icon: 'settings', text: '账号设置' },
+  { icon: 'settings', text: '账号设置', route: '/profile-setting' },
   { icon: 'lock', text: '锁定后台' },
   { icon: 'log-out', text: '退出登录' },
 ]

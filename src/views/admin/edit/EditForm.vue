@@ -51,8 +51,8 @@ const checkRealName = (rule, value, callback) => {
 const checkEmail = (rule, value, callback) => {
   if (!value) {
     callback()
-  } else if (!/^[\u4e00-\u9fa5]{1,6}(·[\u4e00-\u9fa5]{1,6}){0,2}$/.test(value)) {
-    callback(new Error('姓名的格式不正确'))
+  } else if (!/^[\w.-]+@(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,3}$/.test(value)) {
+    callback(new Error('邮箱的格式不正确'))
   }
   callback()
 }
