@@ -19,11 +19,15 @@
               @updateInfo="getAdminDetail()"
             />
           </div>
-          <div class="w-1/3">
+          <div class="w-1/3 mb-4">
             <EditForm
               ref="editForm"
               :form-data="info"
             />
+            <vs-button
+              id="btn"
+              @click="onUpdateAmin()"
+            >确认修改</vs-button>
           </div>
         </div>
       </vs-tab>
@@ -33,9 +37,12 @@
         icon="el-icon-lock"
         icon-pack="el-icon"
       >
-        <div class="px-8 w-2/3">
+        <div class="px-8 mb-4 w-1/2">
           <EditPassword ref="editPassword" />
-          <vs-button>确认修改密码</vs-button>
+          <vs-button
+            id="btn"
+            @click="updatePassword()"
+          >确认修改密码</vs-button>
         </div>
       </vs-tab>
 
@@ -44,14 +51,27 @@
         icon="el-icon-monitor"
         icon-pack="el-icon"
       >
-        <div class="ml-10 w-2/3">
+        <div class="w-2/3 ml-10 mb-4">
           <vs-input
+            class="mb-4"
+            type="password"
+            label="登录密码"
+            placeholder="请填写您的登录密码"
+            v-model.trim="password"
+            @keyup.enter="updateLockPassword()"
+          />
+          <vs-input
+            class="mb-4"
             type="password"
             label="新的锁屏密码"
             placeholder="按回车键提交"
             v-model.trim="lockPwd"
             @keyup.enter="updateLockPassword()"
           />
+          <vs-button
+            id="btn"
+            @click="updateLockPassword()"
+          >修改锁屏密码</vs-button>
         </div>
       </vs-tab>
     </vs-tabs>
@@ -64,7 +84,7 @@ import EditForm from '@/views/admin/edit/EditForm.vue'
 import EditPassword from '@/views/admin/edit/EditPassword.vue'
 
 import {
-  updatePassword, updateLockPassword, getAdminDetail,
+  updatePassword, updateLockPassword, getAdminDetail, updateAdmin,
 } from '@/request/api/admin'
 
 export default {
@@ -75,6 +95,8 @@ export default {
     active: 0,
     info: {},
     detail: {},
+
+    password: '',
     lockPwd: '',
   }),
 
@@ -108,21 +130,59 @@ export default {
     },
 
     async updatePassword() {
-      if (this.editPassword) {
-        const { code } = await updatePassword({ old_pwd: this.oldPwd, new_pwd: this.newPwd })
+      if (this.$refs.editPassword.submit()) {
+        const { oldPassword: old_pwd, password2: new_pwd } = this.$refs.editPassword.form
+        const { code } = await updatePassword({ old_pwd, new_pwd })
         if (code === 2000) {
           await this.$store.dispatch('admin/SignOut')
-          this.popupActive = false
           this.$router.replace('/sign')
         }
       }
     },
 
+    // 更新管理员信息
+    async onUpdateAmin() {
+      if (this.$refs.editForm.submit()) {
+        const payload = Object.assign({
+          admin_id: this.info._id,
+          gender: this.$refs.editAvatar.selectedGender,
+        }, this.$refs.editForm.form)
+
+        try {
+          const { code, msg } = await updateAdmin(payload)
+          if (code === 2000) {
+            await this.getAdminDetail()
+            this.$vs.notify({
+              title: '信息更新成功',
+              text: msg,
+              color: 'success',
+            })
+          } else {
+            throw new Error(msg)
+          }
+        } catch (err) {
+          this.$vs.notify({
+            title: '信息更新失败',
+            text: err,
+            color: 'danger',
+          })
+        }
+      }
+    },
+
     async updateLockPassword() {
-      if (this.lockPwd.length > 0) {
-        const { code } = await updateLockPassword({ password: this.lockPwd })
+      if (this.password.length > 0 && this.lockPwd.length > 0) {
+        const { code, msg } = await updateLockPassword({
+          password: this.password,
+          lock_password: this.lockPwd,
+        })
         if (code === 2000) {
           await this.$store.dispatch('admin/getAdminInfo')
+          this.$vs.notify({
+            title: '更新成功',
+            text: msg,
+            color: 'success',
+          })
         }
       }
     },
@@ -131,6 +191,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#btn {
+  &:hover {
+    color: #fff !important; // 修正样式
+  }
+}
+
 .vs-tabs::v-deep {
   .con-slot-tabs {
     flex: 1;

@@ -8,12 +8,13 @@
       :model="form"
     >
       <el-form-item
-        label="登录账号"
-        prop="account"
+        label="原始密码"
+        prop="oldPassword"
       >
         <el-input
-          placeholder="只能由字母和数字组成"
-          v-model="form.account"
+          type="password"
+          placeholder="请填写账号原始密码"
+          v-model="form.oldPassword"
         ></el-input>
       </el-form-item>
       <el-form-item
@@ -43,9 +44,7 @@
 <script>
 const checkAccount = (rule, value, callback) => {
   if (!value) {
-    callback(new Error('请填写账号'))
-  } else if (!/^[0-9a-zA-Z]+$/.test(value)) {
-    callback(new Error('账号不符合规范'))
+    callback(new Error('请填写原始密码'))
   }
   callback()
 }
@@ -60,7 +59,7 @@ const checkPassword = (rule, value, callback) => {
 }
 
 export default {
-  name: 'EditForm',
+  name: 'EditPassword',
   data() {
     const checkPassword2 = (rule, value, callback) => {
       if (!value) {
@@ -72,12 +71,12 @@ export default {
     }
     return {
       form: {
-        account: '',
+        oldPassword: '',
         password: '',
         password2: '',
       },
       rules: {
-        account: [
+        oldPassword: [
           { validator: checkAccount, trigger: 'blur' },
         ],
         password: [

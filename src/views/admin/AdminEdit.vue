@@ -20,7 +20,7 @@
               @updateInfo="getAdminDetail()"
             />
           </div>
-          <div class="w-1/3">
+          <div class="w-1/2">
             <EditForm
               ref="editForm"
               :form-data="info"
@@ -54,8 +54,9 @@
         icon-pack="el-icon"
         label="安全设置"
       >
-        <div>
+        <div class="w-1/2">
           <EditPassword />
+          <vs-button id="btn">确认修改密码</vs-button>
         </div>
       </vs-tab>
     </vs-tabs>
@@ -142,6 +143,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#btn {
+  &:hover {
+    color: #fff !important; // 修正样式
+  }
+}
+
 .vs-tabs::v-deep {
   .vs-icon-primary {
     color: inherit;
