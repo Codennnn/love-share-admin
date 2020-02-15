@@ -118,7 +118,6 @@ export default {
 
 .card {
   width: 25%;
-  // width: 16rem;
   padding: 1.25rem;
   border-radius: $large-radius;
   .title {

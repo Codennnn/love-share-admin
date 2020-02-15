@@ -78,6 +78,9 @@ const chartOptions = {
       stops: [0, 100],
     },
   },
+  tooltip: {
+    x: { show: false },
+  },
   dataLabels: { enabled: false },
   stroke: { curve: 'smooth', width: 3, lineCap: 'round' },
   grid: {

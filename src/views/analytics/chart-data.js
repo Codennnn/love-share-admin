@@ -154,7 +154,7 @@ export const userRank = [
     avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-6.0c96c10d.jpg', nickname: '令狐冲', description: '二句三年得，一吟双泪流。', amount: 4752,
   },
   {
-    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-19.697c72c8.jpg', nickname: '郭靖', description: '', amount: 3875.5,
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-19.697c72c8.jpg', nickname: '郭靖', description: '举头望明月，低头思故乡', amount: 3875.5,
   },
   {
     avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-6.0c96c10d.jpg', nickname: '杨过', description: '记得当年草上飞，红军队里每相违。', amount: 3512,
@@ -170,5 +170,32 @@ export const userRank = [
   },
   {
     avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-17.2a01b307.jpg', nickname: '段誉', description: '举头西北浮云，倚天万里须长剑。', amount: 1423.8,
+  },
+]
+
+export const keywordList = [
+  {
+    rank: 1, word: '关键词1', count: 978, user_num: 921, increase: 56,
+  },
+  {
+    rank: 2, word: '关键词2', count: 854, user_num: 874, increase: 12,
+  },
+  {
+    rank: 3, word: '关键词3', count: 784, user_num: 741, increase: 41,
+  },
+  {
+    rank: 4, word: '关键词4', count: 741, user_num: 645, increase: 20,
+  },
+  {
+    rank: 5, word: '关键词5', count: 712, user_num: 636, increase: 30,
+  },
+  {
+    rank: 6, word: '关键词6', count: 687, user_num: 612, increase: 11,
+  },
+  {
+    rank: 7, word: '关键词7', count: 654, user_num: 689, increase: 14,
+  },
+  {
+    rank: 8, word: '关键词8', count: 621, user_num: 540, increase: 18,
   },
 ]

@@ -37,7 +37,6 @@
           <area-chart
             statistic="2.5K"
             label="用户数"
-            icon="UserIcon"
             color="primary"
             :options="subscribersGained.chartOptions"
             :series="subscribersGained.series"
@@ -56,7 +55,6 @@
           <area-chart
             statistic="9K"
             label="交易量"
-            icon="el-icon-finished"
             color="warning"
             :options="ordersRecevied.chartOptions"
             :series="ordersRecevied.series"

@@ -2,6 +2,7 @@
   <div class="flex flex-col justify-between h-full">
     <div class="p-6 pb-0">
       <div
+        v-if="!noIcon"
         class="flex-row-center w-12 h-12 rounded-full"
         :style="{ background: `rgba(var(--vs-${color}), .15)` }"
       >
@@ -33,9 +34,12 @@ export default {
   components: { VueApexCharts },
 
   props: {
+    noIcon: {
+      type: Boolean,
+      default: false,
+    },
     statistic: [Number, String],
     label: String,
-    icon: String,
     color: String,
     options: {
       type: Object,
