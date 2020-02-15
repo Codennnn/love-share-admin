@@ -8,14 +8,6 @@ export function addContact(data) {
   })
 }
 
-export function deleteContact(data) {
-  return request({
-    url: '/chat/contact/delete',
-    method: 'delete',
-    data,
-  })
-}
-
 export function getContactList(params) {
   return request({
     url: '/chat/contact/list',

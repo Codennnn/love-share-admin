@@ -1,15 +1,14 @@
 import Vue from 'vue'
-import { Notification } from 'element-ui'
 import {
-  getContactList, getChatData, getContactInfo, addContact, deleteContact,
+  getContactList, getChatData, getContactInfo, addContact,
 } from '@/request/api/chat'
 
 const state = {
   activeChatUser: '',
   activeChatNickname: '',
   contactList: [],
-  chatSearchQuery: '',
   chats: {},
+  chatSearchQuery: '',
   showChatbox: false, // 是否显示聊天框
 }
 
@@ -67,27 +66,13 @@ const actions = {
     ])
   },
 
-  async addContact({ dispatch }, contact_id) {
-    const { code } = await addContact({ contact_id })
+  async addContact({ dispatch, rootGetters }, contact_id) {
+    const user_id = rootGetters['admin/userId']
+    const { code } = await addContact({ user_id, contact_id })
     if (code === 2000) {
       await dispatch('initChat')
-    } else {
-      Notification.error({
-        title: '无法添加联系人',
-        message: '请前往 "个人中心>绑定用户" 完成用户绑定哦~',
-        duration: 5000,
-      })
-      throw new Error('添加联系人出错')
     }
-  },
-
-  async deleteContact({ dispatch }, contact_id) {
-    const { code } = await deleteContact({ contact_id })
-    if (code === 2000) {
-      await dispatch('initChat')
-    } else {
-      throw new Error('删除联系人出错')
-    }
+    return code
   },
 
   async getContactList({ commit, rootGetters }) {
@@ -97,6 +82,8 @@ const actions = {
       if (code === 2000) {
         commit('SET_CONTACT_LIST', data.contact_list)
       }
+    } else {
+      commit('SET_CONTACT_LIST', [])
     }
   },
 
@@ -107,6 +94,8 @@ const actions = {
       if (code === 2000) {
         commit('SET_CHAT_DATA', data.chats)
       }
+    } else {
+      commit('SET_CHAT_DATA', {})
     }
   },
 
@@ -165,6 +154,6 @@ export default {
       return unseenMsg
     },
 
-    isInChat: state => id => Object.prototype.hasOwnProperty.call(state.chats, id),
+    isInChat: state => id => state.contactList.some(el => el._id === id),
   },
 }

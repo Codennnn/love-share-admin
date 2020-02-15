@@ -15,7 +15,7 @@ import store from './store/store'
 import 'dayjs/locale/zh-cn' // dayjs 语言包
 import './router/control' // 路由控制
 import '@/layouts/theme' // 网站主题，样式
-// import '@/directives' // 自定义指令
+import '@/directives' // 自定义指令
 
 Vue.use(new VueSocketIO({
   connection: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : 'http://127.0.0.1:7001',

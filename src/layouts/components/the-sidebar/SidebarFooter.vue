@@ -4,6 +4,7 @@
     :class="{'px-3': !sidebarCollapse}"
     style="height: 50px;"
   >
+    <!-- 任务 -->
     <div
       v-show="!sidebarCollapse"
       class="relative w-3/4 h-full"
@@ -173,6 +174,7 @@
       </div>
     </div>
 
+    <!-- 聊天 -->
     <div
       class="chat flex-row-center radius cursor-pointer"
       style="height: 50px; width: 50px; margin-left: 0.4rem;"
@@ -185,7 +187,7 @@
       ></feather>
     </div>
 
-    <!-- 创建任务模态框 -->
+    <!-- 任务创建模态框 -->
     <TodoPopup :is-popup-active="showTodoPopup" />
   </div>
 </template>

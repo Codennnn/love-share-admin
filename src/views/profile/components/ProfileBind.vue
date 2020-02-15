@@ -12,7 +12,7 @@
         >
           <vs-input
             placeholder="请输入用户账号..."
-            v-model="phone"
+            v-model="account"
             @keyup.esc="showInput = !showInput"
             @keyup.enter="bindUser()"
           />
@@ -79,7 +79,7 @@ import { bindUser, unbindUser, getUserInfo } from '@/request/api/admin'
 export default {
   name: 'ProfileLog',
   data: () => ({
-    phone: '',
+    account: '',
     showInput: false,
     info: null,
   }),
@@ -101,18 +101,17 @@ export default {
     onBindUser() {
       if (!this.showInput) {
         this.showInput = true
-      } else if (this.phone.length > 0) {
+      } else if (this.account.length > 0) {
         this.bindUser()
       }
     },
 
     // 绑定用户
     async bindUser() {
-      const { code } = await bindUser({ phone: this.phone })
+      const { code } = await bindUser({ account: this.account })
       if (code === 2000) {
         await this.$store.dispatch('admin/getAdminInfo')
-        this.$store.dispatch('chat/getContactList')
-        this.$store.dispatch('chat/getChatData')
+        this.$store.dispatch('chat/initChat')
         this.getUserInfo()
       }
     },
@@ -123,7 +122,8 @@ export default {
         const { code } = await unbindUser()
         if (code === 2000) {
           this.info = null
-          this.$store.dispatch('admin/getAdminInfo')
+          await this.$store.dispatch('admin/getAdminInfo')
+          this.$store.dispatch('chat/initChat')
         }
       }
     },

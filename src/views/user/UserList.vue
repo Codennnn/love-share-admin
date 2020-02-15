@@ -29,6 +29,10 @@
               <vs-avatar
                 size="40px"
                 :src="`${tr.avatar_url}?imageView2/2/w/40`"
+                @click="$router.push({
+                  path: '/user-detail',
+                  query: {userId: tr._id}
+                })"
               />
             </vs-td>
             <vs-td class="font-bold">{{ tr.nickname }}</vs-td>
@@ -51,7 +55,10 @@
                 <vs-dropdown>
                   <i class="el-icon-more-outline"></i>
                   <vs-dropdown-menu class="w-24">
-                    <vs-dropdown-item class="text-center">
+                    <vs-dropdown-item
+                      class="text-center"
+                      @click="contactUser(tr._id, tr.nickname)"
+                    >
                       <i class="el-icon-chat-round mr-2"></i>
                       <span>联系</span>
                     </vs-dropdown-item>
@@ -108,6 +115,26 @@ export default {
       if (code === 2000) {
         this.userList = data.user_list
       }
+    },
+
+    // 联系卖家
+    async contactUser(_id, nickname) {
+      if (!this.$bind()) {
+        this.$vs.notify({
+          time: 4000,
+          title: '请绑定用户',
+          text: '您的管理员账号尚未绑定用户，请前往个人中心进行绑定',
+          color: 'warning',
+        })
+        return
+      }
+
+      if (!this.$store.getters['chat/isInChat'](_id)) {
+        const code = await this.$store.dispatch('chat/addContact', _id)
+        if (code !== 2000) return
+      }
+      this.$store.commit('chat/SET_ACTIVE_CHAT_USER', { _id, nickname })
+      this.$store.commit('chat/SET_CHAT_OPEN')
     },
   },
 }
