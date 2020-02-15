@@ -109,10 +109,11 @@
                 :key="i"
               >
                 <vs-td>
-                  <vs-image
-                    class="w-24 h-24 base-shadow"
+                  <el-image
+                    class="w-24 h-24 light-shadow radius"
+                    fit="contain"
                     :src="`${tr.img_list[0]}?imageView2/2/w/100`"
-                  ></vs-image>
+                  ></el-image>
                 </vs-td>
                 <vs-td>{{ tr.name }}</vs-td>
                 <vs-td class="font-bold">
