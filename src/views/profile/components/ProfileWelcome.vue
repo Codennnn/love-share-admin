@@ -5,7 +5,7 @@
   >
     <div class="relative z-50 flex flex-col">
       <div class="mb-1 text-primary text-2xl font-bold">欢迎回来</div>
-      <div class="text-xl text-gray">您今天有 {{ todayTask.length }} 个任务</div>
+      <div class="text-xl text-gray">您今天有 {{ remainingTask.length }} 个任务</div>
       <div>
         <feather
           class="mt-5 text-gray cursor-pointer"
@@ -32,8 +32,8 @@
 export default {
   name: 'ProfileWelcome',
   computed: {
-    todayTask() {
-      return this.$store.getters['todo/todayTask']
+    remainingTask() {
+      return this.$store.getters['todo/remainingTask']
     },
   },
 }

@@ -195,6 +195,7 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VueApexCharts from 'vue-apexcharts'
+import { mapGetters } from 'vuex'
 import TodoPopup from '@/views/todo-list/components/TodoPopup.vue'
 
 const options = {
@@ -266,12 +267,8 @@ export default {
       return this.$store.state.todo.showTodoPopup
     },
 
-    todayTask() {
-      return this.$store.getters['todo/todayTask']
-    },
-    remainingTask() {
-      return this.todayTask.filter(el => !el.is_done)
-    },
+    ...mapGetters('todo', ['todayTask', 'remainingTask']),
+
     progress() {
       const progress = [
         { label: '前端', color: 'primary' },

@@ -218,7 +218,7 @@ export default {
 
     // 监听自身 ID 接收消息
     this.sockets.subscribe(this.userId, (msg) => {
-      this.$store.commit('chat/SEND_CHAT_MESSAGE', msg)
+      this.$store.dispatch('chat/receiveMessage', msg)
     })
   },
 

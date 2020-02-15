@@ -115,5 +115,6 @@ export default {
           && (dayjs().isSame(end, 'day') || dayjs().isBefore(end, 'day'))
       })
     },
+    remainingTask: (_, getters) => getters.todayTask.filter(el => !el.is_done),
   },
 }
