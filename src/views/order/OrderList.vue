@@ -101,7 +101,7 @@
                   >@{{ td.goods.seller.nickname }}</span>
                 </vs-td>
                 <vs-td class="font-bold">
-                  ￥{{ Number(td.goods.price).toFixed(2) }}
+                  ￥{{ $numFixed(td.goods.price) }}
                 </vs-td>
                 <vs-td :title="$dayjs(td.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
                   {{ $timeDiff(td.goods.created_at) }}

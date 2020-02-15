@@ -40,7 +40,7 @@
           </vs-td>
           <vs-td>
             <p class="text-gray font-bold">
-              ￥{{ Number(tr.min_price).toFixed(2) }} - ￥{{ Number(tr.max_price).toFixed(2) }}
+              ￥{{ $numFixed(tr.min_price) }} - ￥{{ $numFixed(tr.max_price) }}
             </p>
           </vs-td>
           <vs-td class="text-gray">

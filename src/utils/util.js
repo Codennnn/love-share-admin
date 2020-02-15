@@ -59,6 +59,10 @@ export function setCreditColor(val) {
   return 'primary'
 }
 
+export function numFixed(num, digit = 2) {
+  return Number(num).toFixed(digit)
+}
+
 export function errorNotify({
   title = '哎呀！', message = '出错啦！', duration = 5000,
 } = {}) {

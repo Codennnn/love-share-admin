@@ -140,17 +140,17 @@
         </div>
       </div>
 
-      <!-- 卡片 5 -->
+      <!-- 卡片 5：本周买家榜 -->
       <div class="lg:w-1/2 lg:pl-3 sm:w-full my-3">
         <div class="h-full py-3 px-4 bg-semi radius overflow-hidden">
           <p class="mb-2 text-primary text-xl font-bold">本周买家榜</p>
           <ul>
             <li
               class="mb-2 flex items-center"
-              v-for="(it, i) in userList"
+              v-for="(it, i) in userRank"
               :key="i"
             >
-              <div class="area relative w-10 h-10 mr-4">
+              <div class="area relative w-10 h-10">
                 <vs-avatar
                   size="40px"
                   class="absolute left-0 top-0 z-50 m-0"
@@ -163,7 +163,11 @@
                   :class="`bg-medal${i}`"
                 ></div>
               </div>
-              <div class="text-primary truncate">{{ it.nickname }}</div>
+              <div class="mx-4">
+                <div class="w-24 text-primary truncate">{{ it.nickname }}</div>
+                <div class="text-xs text-gray">{{ it.description || '未填写' }}</div>
+              </div>
+              <div class="ml-auto text-primary font-bold">￥{{ $numFixed(it.amount) }}</div>
             </li>
           </ul>
         </div>
@@ -182,7 +186,9 @@ import { mapState } from 'vuex'
 import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import UserDailyStatistics from './components/UserDailyStatistics.vue'
-import { subscribersGained, ordersRecevied, salesBar } from './chart-data'
+import {
+  subscribersGained, ordersRecevied, salesBar, userRank,
+} from './chart-data'
 
 import { getUserList } from '@/request/api/user'
 
@@ -199,6 +205,7 @@ export default {
     subscribersGained,
     ordersRecevied,
     salesBar,
+    userRank,
   }),
 
   computed: {

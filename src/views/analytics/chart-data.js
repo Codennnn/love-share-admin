@@ -1,3 +1,4 @@
+/* eslint max-len: 0 */
 export const subscribersGained = {
   series: [{
     name: '用户数',
@@ -147,3 +148,27 @@ export const salesBar = {
     },
   },
 }
+
+export const userRank = [
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-6.0c96c10d.jpg', nickname: '令狐冲', description: '二句三年得，一吟双泪流。', amount: 4752,
+  },
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-19.697c72c8.jpg', nickname: '郭靖', description: '', amount: 3875.5,
+  },
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-6.0c96c10d.jpg', nickname: '杨过', description: '记得当年草上飞，红军队里每相违。', amount: 3512,
+  },
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-17.2a01b307.jpg', nickname: '段誉', description: '举头西北浮云，倚天万里须长剑。', amount: 2845,
+  },
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-14.c352e978.jpg', nickname: '小龙女', description: '满堂花醉三千客，一剑霜寒十四州。', amount: 2200,
+  },
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-17.2a01b307.jpg', nickname: '黄蓉', description: '水作青龙盘石堤，桃花夹岸鲁门西。', amount: 1874.4,
+  },
+  {
+    avatar_url: 'https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/demo-1/img/avatar-s-17.2a01b307.jpg', nickname: '段誉', description: '举头西北浮云，倚天万里须长剑。', amount: 1423.8,
+  },
+]

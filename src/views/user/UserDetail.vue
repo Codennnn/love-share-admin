@@ -45,7 +45,7 @@
                 <div class="text-gray text-sm">余 额</div>
               </div>
               <div class="text-semi text-xl font-bold">
-                {{ detail.beans ? Number(detail.beans).toFixed(2) : 0.00 }}
+                {{ detail.beans ? $numFixed(detail.beans) : 0.00 }}
               </div>
             </div>
             <div class="mb-3 px-4 py-2 flex justify-between items-center rounded-lg bg-gray">
@@ -116,7 +116,7 @@
                 </vs-td>
                 <vs-td>{{ tr.name }}</vs-td>
                 <vs-td class="font-bold">
-                  ￥{{ Number(tr.price).toFixed(2) }}
+                  ￥{{ $numFixed(tr.price) }}
                 </vs-td>
                 <vs-td>
                   {{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}

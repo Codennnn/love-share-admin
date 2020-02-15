@@ -5,7 +5,7 @@ import dayjs from 'dayjs' // 日期格式化
 import VueSocketIO from 'vue-socket.io' // socket.io
 import infiniteScroll from 'vue-infinite-scroll' // 无限滚动
 import VueFeather from 'vue-feather'
-import { timeDiff, cloneDeepWith } from '@/utils/util' // 时间差工具函数
+import { numFixed, timeDiff, cloneDeepWith } from '@/utils/util' // 时间差工具函数
 import errorHandler from '@/utils/error-handler' // 错误处理函数
 
 import App from './App.vue'
@@ -27,6 +27,7 @@ Vue.use(infiniteScroll)
 Vue.use(VueFeather)
 
 Vue.prototype.$dayjs = dayjs
+Vue.prototype.$numFixed = numFixed
 Vue.prototype.$timeDiff = timeDiff
 Vue.prototype.$cloneDeepWith = cloneDeepWith
 

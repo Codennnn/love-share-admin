@@ -65,7 +65,7 @@
                 :key="i"
               >{{ it.name }}</vs-chip>
             </vs-td>
-            <vs-td class="text-gray font-bold">￥{{ Number(tr.price).toFixed(2) }}</vs-td>
+            <vs-td class="text-gray font-bold">￥{{ $numFixed(tr.price) }}</vs-td>
             <vs-td class="text-semi">{{ tr.collect_num }}</vs-td>
             <vs-td class="text-gray font-bold">{{ tr.seller.nickname }}</vs-td>
             <vs-td
