@@ -1,15 +1,20 @@
 <template>
   <div>
-    <vs-tabs position="left">
-      <vs-tab label="信息编辑"></vs-tab>
-      <vs-tab label="账号安全"></vs-tab>
-      <vs-tab label="消息设置"></vs-tab>
-    </vs-tabs>
     <vs-tabs
       position="left"
       v-model="active"
     >
-      <vs-tab label="账号密码">
+      <vs-tab
+        label="信息编辑"
+        icon="el-icon-user"
+        icon-pack="el-icon"
+      ></vs-tab>
+
+      <vs-tab
+        label="修改密码"
+        icon="el-icon-lock"
+        icon-pack="el-icon"
+      >
         <div class="ml-10">
           <vs-input
             class="mb-2"
@@ -26,7 +31,12 @@
           />
         </div>
       </vs-tab>
-      <vs-tab label="锁屏密码">
+
+      <vs-tab
+        label="锁屏密码"
+        icon="el-icon-monitor"
+        icon-pack="el-icon"
+      >
         <div class="ml-10">
           <vs-input
             type="password"
@@ -47,10 +57,18 @@ import { updatePassword, updateLockPassword } from '@/request/api/admin'
 export default {
   name: 'ProfileSetting',
   data: () => ({
+    active: 0,
     oldPwd: '',
     newPwd: '',
     lockPwd: '',
   }),
+
+  mounted() {
+    const { active } = this.$route?.query
+    if (active) {
+      this.active = active
+    }
+  },
 
   methods: {
     async updatePassword() {
@@ -75,3 +93,14 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.vs-tabs::v-deep {
+  .vs-tabs--btn {
+    padding-right: 30px;
+  }
+  .vs-icon-primary {
+    color: inherit;
+  }
+}
+</style>

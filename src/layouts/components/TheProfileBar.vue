@@ -220,7 +220,10 @@ export default {
         this.$router.push('/lock-screen')
         localStorage.setItem('screen_lock', JSON.stringify({ isLocked: true }))
       } else {
-        this.$router.push('/profile-setting')
+        this.$router.push({
+          path: '/profile-setting',
+          query: { active: 2 },
+        })
       }
     },
 
