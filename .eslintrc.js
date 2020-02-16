@@ -19,7 +19,7 @@ module.exports = {
     'object-shorthand': ['error', 'always'],
     semi: ['error', 'never'],
     camelcase: 'off',
-    'max-len': ['error', { code: 120 }],
+    'max-len': 'off',
   },
 
   parserOptions: {
