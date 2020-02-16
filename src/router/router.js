@@ -151,9 +151,9 @@ export const asyncRoutes = [
         meta: { title: '帮助中心' },
       },
       {
-        path: '/',
-        name: '',
-        component: () => import('@/views/user/UserList.vue'),
+        path: '/frequent-questions',
+        name: 'FrequentQuestions',
+        component: () => import('@/views/service/FrequentQuestions.vue'),
         meta: { title: '常见问题' },
       },
     ],

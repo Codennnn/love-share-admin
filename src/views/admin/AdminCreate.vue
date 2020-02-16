@@ -1,7 +1,7 @@
 <template>
   <div
     id="main"
-    class="mt-6 p-6 base-shadow bg-semi radius vs-con-loading__container"
+    class="mt-6 p-6 bg-semi radius vs-con-loading__container"
   >
     <div class="mb-6 flex items-center">
       <!-- 头像 -->
