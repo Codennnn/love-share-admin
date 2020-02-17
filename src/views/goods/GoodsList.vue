@@ -40,12 +40,11 @@
       <div class="w-2/4 py-6 px-6 radius bg-gray">
         <div class="mb-3 text-semi">高级操作</div>
         <div class="flex items-center justify-between text-sm">
-          <div class="sm:w-1/2">
+          <div class="w-1/2">
             <vs-input
               class="search-input w-full"
               icon="search"
-              placeholder="输入商品 ID 搜索"
-              v-model="searchText"
+              placeholder="输入商品的 ID 搜索"
               @keyup.enter="onSearchByID"
             />
           </div>
@@ -68,65 +67,72 @@
           <i
             title="重置"
             class="el-icon-refresh-right cursor-pointer"
-            @click="selectedCategory = '', selectedSchool = ''"
+            @click="onReset()"
           ></i>
         </div>
       </div>
+
       <div
-        class="pt-8 pb-2 flex justify-around items-center flex-wrap overflow-hidden"
-        style="transition: all 0.4s ease;"
+        class="transition"
         :style="inputStyle"
       >
-        <div>
-          <el-select
-            v-model="selectedCategory"
-            filterable
-            placeholder="根据商品分类搜索"
-          >
-            <el-option
-              v-for="(it, i) in categoryList"
-              :key="i"
-              :label="it.name"
-              :value="it._id"
+        <div class="pt-8 pb-2 flex items-center flex-wrap overflow-hidden">
+          <div class="mr-4">
+            <el-select
+              filterable
+              placeholder="根据商品分类搜索"
+              v-model="selectedCategory"
             >
-            </el-option>
-          </el-select>
-        </div>
-        <div>
-          <el-select
-            v-model="selectedSchool"
-            filterable
-            placeholder="根据商品分类搜索"
-          >
-            <el-option
-              v-for="(it, i) in schoolList"
-              :key="i"
-              :label="it.name"
-              :value="it._id"
+              <el-option
+                v-for="(it, i) in categoryList"
+                :key="i"
+                :label="it.name"
+                :value="it._id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <div class="mr-4">
+            <el-select
+              v-model="selectedSchool"
+              filterable
+              placeholder="根据学校搜索"
             >
-            </el-option>
-          </el-select>
+              <el-option
+                v-for="(it, i) in schoolList"
+                :key="i"
+                :label="it.name"
+                :value="it._id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <div>
+            <vs-button
+              class="w-32 text-sm"
+              type="relief"
+              @click="getGoodsListBySelect()"
+            >确认搜索</vs-button>
+          </div>
         </div>
-        <div>
-          <el-select
-            v-model="selectedSchool"
-            filterable
-            placeholder="根据学校搜索"
-          >
-            <el-option
-              v-for="(it, i) in schoolList"
-              :key="i"
-              :label="it.name"
-              :value="it._id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div>
-          <vs-button
-            class="w-32 text-sm"
-            type="relief"
-          >确认搜索</vs-button>
+
+        <div class="pb-2 flex items-end">
+          <div class="w-1/2 pt-3 flex items-center">
+            <vs-input
+              class="mr-4 flex-1"
+              placeholder="输入商品的名称搜索"
+              v-model.trim="searchText"
+              @keyup.enter="getGoodsListBySearchAdmin()"
+            />
+            <vs-button
+              class="w-32 text-sm"
+              type="relief"
+              @click="getGoodsListBySearchAdmin()"
+            >搜 索</vs-button>
+          </div>
+          <div class="ml-auto text-gray">
+            已搜索到 {{ goodsListLength }} 件商品
+          </div>
         </div>
       </div>
     </div>
@@ -151,6 +157,8 @@ import {
   getGoodsListOffSell,
   getGoodsListInfo,
   getGoodsListByDateRange,
+  getGoodsListBySelect,
+  getGoodsListBySearchAdmin,
 } from '@/request/api/goods'
 
 export default {
@@ -191,8 +199,11 @@ export default {
       }
       return {
         opacity: '1',
-        'max-height': '100px',
+        'max-height': '200px',
       }
+    },
+    goodsListLength() {
+      return this.goodsList.length
     },
   },
 
@@ -240,13 +251,54 @@ export default {
       }
     },
 
-    // 根据日期范围获取商品
+    // 根据日期范围搜索商品
     async getGoodsListByDateRange(date_range) {
       if (!this.tableLoading) {
         this.tableLoading = true
         try {
           const { code, data } = await getGoodsListByDateRange({
             date_range,
+            page: 1,
+            page_size: 100,
+          })
+          if (code === 2000) {
+            this.tableTitle = '已上架商品'
+            this.goodsList = data.goods_list
+          }
+        } finally {
+          this.tableLoading = false
+        }
+      }
+    },
+
+    // 根据下拉选择搜索商品
+    async getGoodsListBySelect() {
+      if (!this.tableLoading && (this.selectedCategory || this.selectedSchool)) {
+        this.tableLoading = true
+        try {
+          const { code, data } = await getGoodsListBySelect({
+            category: this.selectedCategory,
+            school_id: this.selectedSchool,
+            page: 1,
+            page_size: 100,
+          })
+          if (code === 2000) {
+            this.tableTitle = '已上架商品'
+            this.goodsList = data.goods_list
+          }
+        } finally {
+          this.tableLoading = false
+        }
+      }
+    },
+
+    // 根据名称搜索商品
+    async getGoodsListBySearchAdmin() {
+      if (!this.tableLoading && this.searchText.length > 0) {
+        this.tableLoading = true
+        try {
+          const { code, data } = await getGoodsListBySearchAdmin({
+            search: this.searchText,
             page: 1,
             page_size: 100,
           })
@@ -272,8 +324,16 @@ export default {
     // 根据商品编号搜索
     onSearchByID() {
       if (this.searchText.length > 0) {
-        this.getGoodsListOffSell()
+        //
       }
+    },
+
+    // 重置搜索表单
+    onReset() {
+      this.selectedCategory = ''
+      this.selectedSchool = ''
+      this.searchText = ''
+      this.getGoodsListOnSell()
     },
   },
 }

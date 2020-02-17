@@ -61,7 +61,7 @@
             <vs-td class="text-primary">{{ tr.name }}</vs-td>
             <vs-td>
               <vs-chip
-                v-for="(it, i) in tr.category"
+                v-for="(it, i) in tr.categories"
                 :key="i"
               >{{ it.name }}</vs-chip>
             </vs-td>
@@ -115,7 +115,7 @@
                     icon-pack="el-icon"
                     icon="el-icon-star-off"
                     title="乐享值"
-                    :subtitle="`${tr.price}`"
+                    :subtitle="`${tr.seller.share_value}`"
                   ></vs-list-item>
                 </vs-list>
                 <vs-list class="w-5/12">

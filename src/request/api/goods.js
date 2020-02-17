@@ -31,6 +31,22 @@ export function getGoodsListByDateRange(data) {
   })
 }
 
+export function getGoodsListBySelect(params) {
+  return request({
+    url: '/goods/list/by_school_or_category_admin',
+    method: 'get',
+    params,
+  })
+}
+
+export function getGoodsListBySearchAdmin(params) {
+  return request({
+    url: '/goods/list/by_search_admin',
+    method: 'get',
+    params,
+  })
+}
+
 export function getGoodsListInfo() {
   return request({
     url: '/goods/list/info',

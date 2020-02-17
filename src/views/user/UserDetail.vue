@@ -259,9 +259,7 @@ const heatmapOptions = {
   chart: {
     offsetX: -20,
     offsetY: -12,
-    toolbar: {
-      show: false,
-    },
+    toolbar: { show: false },
   },
   xaxis: {
     axisBorder: { show: false },

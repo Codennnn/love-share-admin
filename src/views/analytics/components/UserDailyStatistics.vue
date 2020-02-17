@@ -3,7 +3,7 @@
     <p class="pt-6 pb-4 text-xl text-primary font-bold">
       每日新增用户统计
     </p>
-    <div class="px-10 radius bg-gray">
+    <div class="px-10 pb-4 radius bg-gray">
       <div class="pt-6 pb-4 flex justify-end items-center">
         <div class="mr-auto">
           <span class="primary text-sm mr-3 cursor-pointer">最近一周</span>
@@ -32,6 +32,7 @@
       </div>
       <LineChart
         ref="userChart"
+        class="user-chart"
         height="400px"
         type="area"
         :options="options"
@@ -180,3 +181,12 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.user-chart::v-deep {
+  .apexcharts-canvas {
+    border-radius: $large-radius;
+    overflow: hidden;
+  }
+}
+</style>
