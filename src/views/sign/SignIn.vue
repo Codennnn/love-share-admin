@@ -68,7 +68,7 @@ export default {
     signInErrorText: '账号或密码有误，请确认是否已注册',
     signInDisable: false,
 
-    position: {},
+    position: {}, // 登录的位置信息
   }),
 
   methods: {
@@ -93,7 +93,7 @@ export default {
           device,
         })
 
-        // 4001 - 账号未注册，4003 - 密码错误
+        // 2000-成功，4001-账号未注册，4003-密码错误
         if (code === 2000) {
           this.$router.replace('/')
         } else if (code === 4001 || code === 4003) {

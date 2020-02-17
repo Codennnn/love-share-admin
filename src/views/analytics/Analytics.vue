@@ -186,7 +186,7 @@ import AreaChart from '@/components/AreaChart.vue'
 import UserDailyStatistics from './components/UserDailyStatistics.vue'
 import {
   subscribersGained, ordersRecevied, salesBar, userRank,
-} from './chart-data'
+} from '@/utils/mock-data'
 
 import { getUserList } from '@/request/api/user'
 

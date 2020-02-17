@@ -119,7 +119,7 @@ import VueApexCharts from 'vue-apexcharts'
 import AreaChart from '@/components/AreaChart.vue'
 import {
   subscribersGained, ordersRecevied, salesMonthBar, keywordList,
-} from './chart-data'
+} from '@/utils/mock-data'
 
 const items = [
   {

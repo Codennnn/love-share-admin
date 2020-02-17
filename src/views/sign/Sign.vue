@@ -80,11 +80,12 @@ export default {
 
 <style lang="scss" scoped>
 .input-component::v-deep {
-  $padding: 0.75rem 0.5rem !global;
+  $padding: 0.75rem !global;
   .vs-inputx {
+    padding: $padding;
     border: none !important;
     box-shadow: none;
-    padding: $padding;
+    border-radius: $large-radius;
     background: rgba(var(--vs-gray), 0.08) !important;
   }
   .input-span-placeholder {
@@ -92,6 +93,7 @@ export default {
   }
   .vs-button {
     padding: 0.6rem !important;
+    border-radius: $large-radius;
   }
 }
 </style>

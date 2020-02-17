@@ -28,8 +28,7 @@ router.beforeEach(async (to, from, next) => {
       // 如果已经有了 token 再访问登录页的话，将会被重定向到首页
       next({ path: '/' })
     } else {
-      const hasPermissions = !!(store.state.admin.info?.permissions?.length > 0)
-
+      const hasPermissions = !!(store.getters['admin/permissions']?.length > 0)
       if (hasPermissions) {
         next()
       } else {

@@ -136,6 +136,7 @@
       :goodsList="goodsList"
       :tableTitle="tableTitle"
       :loading="tableLoading"
+      @getGoodsListOnSell="getGoodsListOnSell"
       @dateChange="getGoodsListByDateRange"
     />
   </div>
@@ -208,7 +209,7 @@ export default {
         try {
           const { code, data } = await getGoodsListOnSell({
             page: 1,
-            page_size: 10,
+            page_size: 100,
           })
           if (code === 2000) {
             this.tableTitle = '已上架商品'
@@ -227,7 +228,7 @@ export default {
         try {
           const { code, data } = await getGoodsListOffSell({
             page: 1,
-            page_size: 10,
+            page_size: 100,
           })
           if (code === 2000) {
             this.tableTitle = '已下架商品'
@@ -247,9 +248,10 @@ export default {
           const { code, data } = await getGoodsListByDateRange({
             date_range,
             page: 1,
-            page_size: 10,
+            page_size: 100,
           })
           if (code === 2000) {
+            this.tableTitle = '已上架商品'
             this.goodsList = data.goods_list
           }
         } finally {

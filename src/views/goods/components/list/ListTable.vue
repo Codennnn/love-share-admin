@@ -4,7 +4,6 @@
     class="radius vs-con-loading__container"
   >
     <vs-table
-      search
       pagination
       max-items="10"
       noDataText="暂无数据"
@@ -237,8 +236,12 @@ export default {
 
     // 按日期获取商品
     onDateChange(date) {
-      const dateRange = date.map(el => this.$dayjs(el).format('YYYY-MM-DD'))
-      this.$emit('dateChange', dateRange)
+      if (date) {
+        const dateRange = date.map(el => this.$dayjs(el).format('YYYY-MM-DD'))
+        this.$emit('dateChange', dateRange)
+      } else {
+        this.$emit('getGoodsListOnSell')
+      }
     },
 
     // 复制商品编号
