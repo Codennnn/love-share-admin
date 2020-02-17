@@ -43,19 +43,19 @@
         :data="orderList"
       >
         <template slot="header">
-          <div class="w-full flex items-center p-4">
+          <div class="w-full flex flex-wrap items-center p-4">
             <div class="text-xl text-primary font-semibold">订单列表</div>
             <div class="ml-auto mr-4 text-sm text-semi">
-              共查询到 {{ pagination.total }} 条数据
+              共查询到 {{ pagination.total }} 个订单, {{ totalGoodsNum }} 个商品
             </div>
             <div class="">
               <el-date-picker
+                unlink-panels
                 type="daterange"
                 align="right"
-                unlink-panels
-                v-model="date"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
+                v-model="date"
                 :picker-options="pickerOptions"
                 @change="onDateChange"
               ></el-date-picker>
@@ -76,71 +76,68 @@
         <template slot-scope="{data}">
           <template v-for="order in data">
             <template v-for="sub in order.sub_order">
-              <vs-tr
-                v-for="td in sub.goods_list"
-                :key="td._id"
-                @dblclick.native="viewOrderDetail(order._id, sub._id)"
-              >
-                <vs-td>{{ td.goods.name }}</vs-td>
-                <vs-td>
-                  <span
-                    class="cursor-pointer"
-                    @click="$router.push({
-                    path: '/user-detail',
-                    query: {userId: td.goods.buyer._id},
-                  })"
-                  >{{ td.goods.buyer.nickname }}</span>
-                </vs-td>
-                <vs-td>
-                  <span
-                    class="primary cursor-pointer"
-                    @click="$router.push({
-                    path: '/user-detail',
-                    query: {userId: td.goods.seller._id},
-                  })"
-                  >@{{ td.goods.seller.nickname }}</span>
-                </vs-td>
-                <vs-td class="font-bold">
-                  ￥{{ $numFixed(td.goods.price) }}
-                </vs-td>
-                <vs-td :title="$dayjs(td.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
-                  {{ $timeDiff(td.goods.created_at) }}
-                </vs-td>
-                <vs-td class="font-bold">{{ payments[order.payment] }}</vs-td>
-                <vs-td>
-                  <vs-chip
-                    :style="{background: `rgba(var(--vs-${status[sub.status].color}), 0.12)`}"
-                    :class="status[sub.status].color"
-                  >
-                    {{ status[sub.status].text }}
-                  </vs-chip>
-                </vs-td>
-                <vs-td>
-                  <vs-dropdown>
-                    <i class="el-icon-more px-2 text-lg text-gray"></i>
-                    <vs-dropdown-menu>
-                      <vs-dropdown-item>
-                        <div
-                          class="w-24 text-center"
-                          @click="onCopy(sub._id)"
-                        >复制单号</div>
-                      </vs-dropdown-item>
-                      <vs-dropdown-item>
-                        <div
-                          class="w-24 text-center"
-                          @click="viewOrderDetail(order._id, sub._id)"
-                        >查看详情</div>
-                      </vs-dropdown-item>
-                      <vs-dropdown-item divider>
-                        <div
-                          class="w-24 danger text-center"
-                          @click="deleteOrder(order._id)"
-                        >删除订单</div>
-                      </vs-dropdown-item>
-                    </vs-dropdown-menu>
-                  </vs-dropdown>
-                </vs-td>
-              </vs-tr>
+              <template v-for="td in sub.goods_list">
+                <vs-tr
+                  v-if="td.goods"
+                  :key="td._id"
+                  @dblclick.native="viewOrderDetail(order._id, sub._id)"
+                >
+                  <vs-td>{{ td.goods.name }}</vs-td>
+                  <vs-td>
+                    <span
+                      class="cursor-pointer"
+                      @click="$router.push({
+                      path: '/user-detail',
+                      query: {userId: td.goods.buyer._id},
+                    })"
+                    >{{ td.goods.buyer.nickname }}</span>
+                  </vs-td>
+                  <vs-td>
+                    <span
+                      class="primary cursor-pointer"
+                      @click="$router.push({
+                      path: '/user-detail',
+                      query: {userId: td.goods.seller._id},
+                    })"
+                    >@{{ td.goods.seller.nickname }}</span>
+                  </vs-td>
+                  <vs-td class="font-bold">
+                    ￥{{ $numFixed(td.goods.price) }}
+                  </vs-td>
+                  <vs-td :title="$dayjs(td.goods.created_at).format('YYYY/MM/DD HH:mm:ss')">
+                    {{ $timeDiff(td.goods.created_at) }}
+                  </vs-td>
+                  <vs-td class="font-bold">{{ payments[order.payment] }}</vs-td>
+                  <vs-td>
+                    <vs-chip
+                      :style="{background: `rgba(var(--vs-${status[sub.status].color}), 0.12)`}"
+                      :class="status[sub.status].color"
+                    >
+                      {{ status[sub.status].text }}
+                    </vs-chip>
+                  </vs-td>
+                  <vs-td>
+                    <el-dropdown>
+                      <i class="el-icon-more px-2 text-lg text-gray"></i>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item @click.native="onCopy(sub._id)">
+                          复制单号
+                        </el-dropdown-item>
+                        <el-dropdown-item @click.native="viewOrderDetail(order._id, sub._id)">
+                          查看详情
+                        </el-dropdown-item>
+                        <el-dropdown-item
+                          divider
+                          class="danger"
+                          @click.native="deleteOrder(order._id)"
+                        >
+                          删除订单
+                        </el-dropdown-item>
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </vs-td>
+                </vs-tr>
+              </template>
             </template>
           </template>
         </template>
@@ -161,6 +158,7 @@ import {
   getOrderNum,
 } from '@/request/api/order'
 
+// DEMO
 const gridCharts = [
   {
     statistic: 3200, label: '交易额', color: 'primary', icon: 'dollar-sign',
@@ -227,6 +225,13 @@ export default {
     searchText: '',
   }),
 
+  computed: {
+    // 获取所有订单中包含的商品个数
+    totalGoodsNum() {
+      return this.orderList.reduce((total, or) => total + or.sub_order.reduce((all, sub) => all + sub.goods_list.filter(li => li.goods).length, 0), 0)
+    },
+  },
+
   activated() {
     this.initCharts()
     this.getOrderList()
@@ -266,10 +271,6 @@ export default {
       }
     },
 
-    onSearch() {
-      this.getOrderList()
-    },
-
     // 按日期获取商品
     async onDateChange(date) {
       this.$vs.loading({
@@ -305,6 +306,7 @@ export default {
       })
     },
 
+    // 伪删除订单
     deleteOrder(id) {
       this.orderList.forEach((el, i, _) => {
         if (el._id === id) {
@@ -313,9 +315,10 @@ export default {
       })
     },
 
+    // 复制订单号
     onCopy(id) {
       this.$copyText(id).then(() => {
-        this.$message(`已复制订单编号：${id}  🎉`)
+        this.$message(`已复制订单号：${id}  🎉`)
       })
     },
   },

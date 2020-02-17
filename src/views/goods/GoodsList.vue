@@ -49,13 +49,6 @@
               @keyup.enter="onSearchByID"
             />
           </div>
-          <!-- <div class="sm:w-1/2 text-right">
-            <vs-button
-              color="primary"
-              type="border"
-              @click="exportExcel"
-            >导出列表数据</vs-button>
-          </div> -->
         </div>
       </div>
     </div>
@@ -143,7 +136,7 @@
       :goodsList="goodsList"
       :tableTitle="tableTitle"
       :loading="tableLoading"
-      @getGoodsListOnSell="getGoodsListOnSell"
+      @dateChange="getGoodsListByDateRange"
     />
   </div>
 </template>
@@ -156,6 +149,7 @@ import {
   getGoodsListOnSell,
   getGoodsListOffSell,
   getGoodsListInfo,
+  getGoodsListByDateRange,
 } from '@/request/api/goods'
 
 export default {
@@ -245,7 +239,26 @@ export default {
       }
     },
 
-    // 获取商品的统计数据
+    // 根据日期范围获取商品
+    async getGoodsListByDateRange(date_range) {
+      if (!this.tableLoading) {
+        this.tableLoading = true
+        try {
+          const { code, data } = await getGoodsListByDateRange({
+            date_range,
+            page: 1,
+            page_size: 10,
+          })
+          if (code === 2000) {
+            this.goodsList = data.goods_list
+          }
+        } finally {
+          this.tableLoading = false
+        }
+      }
+    },
+
+    // 获取商品的统计数据(上架和下架)
     async getGoodsListInfo() {
       const { code, data } = await getGoodsListInfo()
       if (code === 2000) {

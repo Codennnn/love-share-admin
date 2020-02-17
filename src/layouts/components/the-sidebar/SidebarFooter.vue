@@ -105,7 +105,7 @@
                       </el-dropdown-menu>
                     </el-dropdown>
                   </div>
-                  <div class="truncate text-semi text-xs">{{ it.content }}1</div>
+                  <div class="truncate text-semi text-xs">{{ it.content }}</div>
                 </div>
               </li>
             </ul>

@@ -23,6 +23,14 @@ export function getGoodsListOffSell(params) {
   })
 }
 
+export function getGoodsListByDateRange(data) {
+  return request({
+    url: '/goods/list/by_date_range',
+    method: 'post',
+    data,
+  })
+}
+
 export function getGoodsListInfo() {
   return request({
     url: '/goods/list/info',

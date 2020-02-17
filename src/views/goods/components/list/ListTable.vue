@@ -31,18 +31,19 @@
               </div>
             </el-tooltip>
             <el-date-picker
-              v-model="date"
+              unlink-panels
               type="daterange"
               align="right"
-              unlink-panels
               start-placeholder="开始日期"
               end-placeholder="结束日期"
+              v-model="date"
               :picker-options="pickerOptions"
               @change="onDateChange"
             ></el-date-picker>
           </div>
         </div>
       </template>
+
       <template slot="thead">
         <vs-th>商品名称</vs-th>
         <vs-th>分类</vs-th>
@@ -160,6 +161,33 @@
 </template>
 
 <script>
+const pickerOptions = {
+  shortcuts: [{
+    text: '最近一周',
+    onClick(picker) {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+      picker.$emit('pick', [start, end])
+    },
+  }, {
+    text: '最近一个月',
+    onClick(picker) {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+      picker.$emit('pick', [start, end])
+    },
+  }, {
+    text: '最近三个月',
+    onClick(picker) {
+      const end = new Date()
+      const start = new Date()
+      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+      picker.$emit('pick', [start, end])
+    },
+  }],
+}
 export default {
   name: 'ListTable',
   props: {
@@ -178,34 +206,8 @@ export default {
   },
 
   data: () => ({
+    pickerOptions,
     date: null,
-    pickerOptions: {
-      shortcuts: [{
-        text: '最近一周',
-        onClick(picker) {
-          const end = new Date()
-          const start = new Date()
-          start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-          picker.$emit('pick', [start, end])
-        },
-      }, {
-        text: '最近一个月',
-        onClick(picker) {
-          const end = new Date()
-          const start = new Date()
-          start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-          picker.$emit('pick', [start, end])
-        },
-      }, {
-        text: '最近三个月',
-        onClick(picker) {
-          const end = new Date()
-          const start = new Date()
-          start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-          picker.$emit('pick', [start, end])
-        },
-      }],
-    },
   }),
 
   watch: {
@@ -235,8 +237,8 @@ export default {
 
     // 按日期获取商品
     onDateChange(date) {
-      console.log(this.$dayjs(date[0]).unix(), this.$dayjs(date[1]).unix())
-      this.$emit('getGoodsListOnSell', date)
+      const dateRange = date.map(el => this.$dayjs(el).format('YYYY-MM-DD'))
+      this.$emit('dateChange', dateRange)
     },
 
     // 复制商品编号

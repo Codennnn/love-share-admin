@@ -162,6 +162,7 @@ export default {
       if (code === 2000) {
         this.categories = date
         this.series = data.series
+        // DEMO
         this.series = [{
           name: '用户数量',
           data: [10, 12, 9, 13, 10, 14, 12],
