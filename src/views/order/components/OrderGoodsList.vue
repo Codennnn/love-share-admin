@@ -9,6 +9,7 @@
       <vs-th>商品名称</vs-th>
       <vs-th>数量</vs-th>
       <vs-th>价格</vs-th>
+      <vs-th>备注信息</vs-th>
     </template>
 
     <template slot-scope="{data}">
@@ -27,6 +28,7 @@
         <vs-td>{{ tr.goods.name }}</vs-td>
         <vs-td>1</vs-td>
         <vs-td>￥{{ tr.goods.price }}</vs-td>
+        <vs-td class="w-40 break-words break-all">{{ tr.note }}</vs-td>
       </vs-tr>
     </template>
   </vs-table>
