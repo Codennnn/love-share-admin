@@ -38,6 +38,8 @@ const actions = {
     localStorage.removeItem('vuex')
     commit('SET_TOKEN', '')
     commit('SET_INFO', {})
+    commit('chat/SET_CONTACT_LIST', [], { root: true })
+    commit('chat/SET_CHAT_DATA', {}, { root: true })
     removeToken() // 移除本地token缓存
     resetRouter() // 重置路由，不然会出现路由重复的情况
   },

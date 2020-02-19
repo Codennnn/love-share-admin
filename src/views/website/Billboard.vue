@@ -27,25 +27,64 @@
           :id="`billboard-item-${i}`"
         >
           <el-image
-            class="h-full mr-3 rounded-lg"
-            style="width: 150px;"
+            class="h-full w-48 mr-3 rounded-lg"
             :src="`${it.url}?imageView2/2/w/200`"
             :preview-src-list="[it.url]"
           >
           </el-image>
-          <div class="text-sm">
-            <div class="w-64 text-semi break-words break-all truncate">URL：{{ it.url }}</div>
+          <div class="text-sm text-semi">
+            <div
+              class="w-64 truncate"
+              :title="it.url"
+            >URL：{{ it.url }}</div>
+            <div>Link：{{ it.link || '未指定' }}</div>
+            <div>类型：{{ types[it.type - 1].label }}</div>
             <div class="text-semi">上传时间：{{ $dayjs(it.created_at).format('YYYY-MM-DD') }}</div>
           </div>
           <div
-            class="close-icon absolute flex-row-center text-primary cursor-pointer"
-            @click="deleteBillboard(it.url, i)"
+            title="删除"
+            class="close-icon text-primary"
+            @click="currDelete = i"
           >
             <feather
               size="20"
               stroke-width="2.5"
               type="x"
             ></feather>
+          </div>
+          <div
+            title="管理"
+            class="edit-icon text-primary"
+            @click="showPopup = true, currEdit = $cloneDeepWith(it)"
+          >
+            <feather
+              size="18"
+              stroke-width="2"
+              type="terminal"
+            ></feather>
+          </div>
+
+          <div
+            v-if="currDelete === i"
+            class="delete-bg absolute top-0 left-0 w-full h-full flex-row-center text-primary text-sm"
+          >
+            <div class="absolute z-40 top-0 left-0 w-full h-full bg-primary opacity-75"></div>
+            <div class="relative z-50 flex-col-center">
+              <p class="mb-2">
+                删除后将不可恢复，请谨慎操作！
+              </p>
+              <div>
+                <vs-button
+                  color="danger"
+                  size="small"
+                  @click="deleteBillboard(it, i)"
+                >确认删除</vs-button>
+                <span
+                  class="ml-2 cursor-pointer"
+                  @click="currDelete = null"
+                >手滑点错了</span>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
@@ -64,21 +103,63 @@
         @on-success="successUpload"
       />
     </div>
+
+    <vs-popup
+      class="edit-popup"
+      title="管理广告牌"
+      :active.sync="showPopup"
+    >
+      <div class="w-full py-2 px-10 flex-col-center">
+        <span class="ml-1 text-sm self-start text-primary">类型</span>
+        <el-select
+          class="w-full mb-3"
+          v-model="currEdit.type"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="it in types"
+            :key="it.value"
+            :label="it.label"
+            :value="it.value"
+          >
+          </el-option>
+        </el-select>
+        <vs-input
+          class="w-full mb-4"
+          label="Link"
+          placeholder="请输入路由或外链链接"
+          v-model="currEdit.link"
+        />
+        <vs-button
+          class="w-full"
+          @click="updateBillboard()"
+        >完成修改</vs-button>
+      </div>
+    </vs-popup>
   </div>
 </template>
 
 <script>
 import { getToken } from '@/permission/token'
 
-import { getBillboardList, deleteBillboard } from '@/request/api/billboard'
+import { getBillboardList, deleteBillboard, updateBillboard } from '@/request/api/billboard'
 
+const types = [
+  { label: '普通', value: 1 },
+  { label: '路由', value: 2 },
+  { label: '外链', value: 3 },
+]
 export default {
   name: 'Billboard',
   data: () => ({
+    types,
     billboardList: [],
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
+    showPopup: false,
+    currDelete: null,
+    currEdit: {},
   }),
 
   created() {
@@ -93,19 +174,34 @@ export default {
       }
     },
 
-    async deleteBillboard(url, i) {
+    async deleteBillboard({ _id, url }, i) {
       this.$vs.loading({
         container: `#billboard-item-${i}`,
         scale: 1,
       })
 
       try {
-        const { code } = await deleteBillboard({ url })
+        const { code } = await deleteBillboard({ _id, url })
         if (code === 2000) {
           this.getBillboardList()
         }
       } finally {
+        this.currDelete = null
         this.$vs.loading.close(`#billboard-item-${i} > .con-vs-loading`)
+      }
+    },
+
+    async updateBillboard() {
+      const { _id, type, link } = this.currEdit
+      if (type === 1 || ((type === 2 || type === 3) && link)) {
+        try {
+          const { code } = await updateBillboard({ _id, type, link })
+          if (code === 2000) {
+            this.getBillboardList()
+          }
+        } finally {
+          this.showPopup = false
+        }
       }
     },
 
@@ -123,27 +219,69 @@ export default {
   }
 }
 
+.edit-popup::v-deep {
+  .vs-popup {
+    width: 350px;
+  }
+}
+
 .billboard-item {
-  .close-icon {
-    top: 0.75rem;
+  @mixin style {
+    position: absolute;
     right: -50px;
     width: 1.8rem;
     height: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 0.35rem;
     background: rgba(186, 187, 192, 0.2);
     transition: all 0.2s;
     opacity: 0;
+    cursor: pointer;
     &:hover {
       border-radius: 50%;
       color: white;
+    }
+  }
+  .close-icon {
+    top: 0.75rem;
+    @include style();
+    &:hover {
       background: rgba(var(--vs-danger), 0.8);
     }
   }
+  .edit-icon {
+    bottom: 0.75rem;
+    @include style();
+    &:hover {
+      background: rgba(var(--vs-primary), 0.8);
+    }
+  }
   &:hover {
-    .close-icon {
+    .close-icon,
+    .edit-icon {
       right: 0.75rem;
       opacity: 1;
     }
   }
+
+  .delete-bg {
+    animation: show 0.3s ease-out;
+    @keyframes show {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}
+</style>
+
+<style>
+.el-select-dropdown {
+  z-index: 999999 !important;
 }
 </style>

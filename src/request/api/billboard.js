@@ -14,3 +14,11 @@ export function deleteBillboard(data) {
     data,
   })
 }
+
+export function updateBillboard(data) {
+  return request({
+    url: '/billboard/update',
+    method: 'put',
+    data,
+  })
+}

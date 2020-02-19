@@ -376,4 +376,10 @@ $sidebar-width: 310px;
     }
   }
 }
+
+#EmojiPicker {
+  .category.active {
+    border-color: $primary;
+  }
+}
 </style>
