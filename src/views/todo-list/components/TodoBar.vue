@@ -33,7 +33,7 @@
         class="label-item text-semi"
         v-for="(item, i) in labelItems"
         :key="i"
-        :class="{'primary': currentSelected.value === item.value}"
+        :class="{'primary': item.value === currentSelected.value}"
         @click="setActive('filter', item.value)"
       >
         <feather
@@ -90,6 +90,11 @@ const labelItems = [
     icon: 'trash-2',
     text: '丢弃的',
     value: 'is_trashed',
+  },
+  {
+    icon: 'loader',
+    text: '待完成',
+    value: 'undone',
   },
 ]
 const labelMarks = [

@@ -198,7 +198,7 @@ export default {
     },
     tasks() {
       if (this.onlyToday) {
-        return this.$store.getters['todo/todayTask']
+        return this.$store.getters['todo/todayTask'].filter(el => this.queryItems.includes(el))
       }
       return this.queryItems
     },

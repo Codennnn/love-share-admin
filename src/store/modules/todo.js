@@ -94,8 +94,11 @@ export default {
   actions,
   getters: {
     adminId: state => state.info._id,
-    filterItems: state => ({ type, value }) => {
+    filterItems: state => ({ type, value } = {}) => {
       if (type === 'filter') {
+        if (value === 'undone') {
+          return state.todoList.filter(el => !el.is_done && !el.is_trashed)
+        }
         if (value === 'is_trashed') {
           return state.todoList.filter(el => el[value])
         }
@@ -107,7 +110,7 @@ export default {
       return state.todoList.filter(el => !el.is_trashed)
     },
     todayTask: (_, getters) => {
-      const allTask = getters.filterItems({})
+      const allTask = getters.filterItems()
       return allTask.filter((it) => {
         const start = dayjs(it.complete_time[0])
         const end = dayjs(it.complete_time[1])
