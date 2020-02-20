@@ -107,21 +107,23 @@
         v-if="activeChatUser"
         class="chat-input flex items-center px-4 py-3 bg-primary"
       >
-        <vs-dropdown
-          class="mr-2"
-          vs-trigger-click
-          vs-custom-content
+        <el-popover
+          class="mr-2 cursor-pointer"
+          popper-class="emoji-dropdown"
+          transition="el-zoom-in-bottom"
         >
-          <div class="py-2 px-3 bg-gray radius">
+          <VEmojiPicker
+            labelSearch="搜索..."
+            @select="onSelectEmoji"
+          />
+          <div
+            slot="reference"
+            class="py-2 px-3 bg-gray radius"
+          >
             😊
           </div>
-          <vs-dropdown-menu>
-            <VEmojiPicker
-              labelSearch="搜索..."
-              @select="onSelectEmoji"
-            />
-          </vs-dropdown-menu>
-        </vs-dropdown>
+        </el-popover>
+
         <div class="message relative flex-1 radius overflow-hidden bg-gray">
           <vs-input
             class="type-input w-full"
@@ -377,9 +379,20 @@ $sidebar-width: 310px;
   }
 }
 
-#EmojiPicker {
-  .category.active {
-    border-color: $primary;
+.emoji-dropdown {
+  z-index: 999999 !important;
+  padding: 0 !important;
+  border-radius: $large-radius !important;
+  overflow: hidden;
+  #EmojiPicker {
+    border-radius: $large-radius !important;
+    border: none;
+    .category {
+      padding: 0.5rem 0;
+      &.active {
+        border-color: $primary;
+      }
+    }
   }
 }
 </style>

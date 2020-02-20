@@ -150,7 +150,7 @@ export default {
 
     // 搜索
     search() {
-      console.log(this.searchText)
+      // console.log(this.searchText)
     },
   },
 }

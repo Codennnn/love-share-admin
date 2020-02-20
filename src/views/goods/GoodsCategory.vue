@@ -121,7 +121,6 @@ export default {
 
     leftCheckChange(checked) {
       this.leftCheck = checked
-      console.log(checked)
     },
 
     // 已上架的分类发生改变时

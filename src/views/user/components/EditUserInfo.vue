@@ -182,7 +182,7 @@ export default {
     },
 
     onUpdate() {
-      console.log(this.data)
+      //
     },
 
     onCancel() {
