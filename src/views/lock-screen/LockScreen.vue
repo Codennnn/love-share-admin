@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex-row-center bg-primary">
+  <div class="h-screen flex-row-center bg-main">
     <div class="pb-20 flex flex-col justify-center items-center">
       <vs-avatar
         style="box-shadow: 0 0 20px 5px rgba(var(--vs-primary), 0.3);"

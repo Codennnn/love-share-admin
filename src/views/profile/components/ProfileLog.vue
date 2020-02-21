@@ -38,7 +38,7 @@
       </ul>
     </VuePerfectScrollbar>
     <div
-      class="shadow-hidden absolute bottom-0 py-3 bg-primary bg-gray-200"
+      class="shadow-hidden absolute bottom-0 py-3 bg-main bg-gray-200"
       style="width: 110%; left: 50%; transform: translateX(-50%);"
     ></div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div style="width: 320px;">
     <VuePerfectScrollbar
-      class="fixed right-0 h-screen max-h-full bg-primary overflow-hidden"
+      class="fixed right-0 h-screen max-h-full bg-main overflow-hidden"
       style="width: 320px; box-shadow: -1px 0 15px rgba(0, 0, 0, 0.05);"
       :settings="{
         maxScrollbarLength: 200,
@@ -155,7 +155,7 @@
           </VuePerfectScrollbar>
           <div
             v-if="firstFewNotices.length >= 5"
-            class="shadow-hidden absolute bottom-0 py-3 bg-primary"
+            class="shadow-hidden absolute bottom-0 py-3 bg-main"
             style="width: 280px;"
           ></div>
         </div>
@@ -245,7 +245,7 @@ export default {
     height: 0.7rem;
     border: 3px solid;
     border-radius: 50%;
-    border-color: themed("bg-color-primary");
+    border-color: themed("bg-color-main");
   }
 }
 

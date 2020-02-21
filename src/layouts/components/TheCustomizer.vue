@@ -179,7 +179,7 @@ export default {
   .sidebar-main::v-deep {
     color: themed("text-color-primary");
     .vs-sidebar {
-      background: themed("bg-color-primary");
+      background: themed("bg-color-main");
       .sidebar-header {
         color: themed("text-color-gray-600");
       }

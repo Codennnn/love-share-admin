@@ -14,7 +14,7 @@
         <div
           class="msg break-words relative py-2 px-4 mb-2"
           :class="{'right text-white': msg.is_sent,
-           'left border border-solid border-primary text-primary bg-primary': !msg.is_sent}"
+           'left border border-solid border-primary text-primary bg-main': !msg.is_sent}"
         >
           <span class="break-words break-all">{{ msg.msg }}</span>
         </div>

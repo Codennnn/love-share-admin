@@ -11,7 +11,7 @@
         </div>
 
         <div class="w-40 h-10 mr-4 flex-row-center text-sm text-semi
-         bg-primary rounded-lg cursor-pointer">
+         bg-main rounded-lg cursor-pointer">
           <span>用户数量(人)</span>
           <feather
             size="20"
@@ -21,7 +21,7 @@
         </div>
         <div
           title="导出统计图"
-          class="w-10 h-10 flex-row-center rounded-lg primary-semi bg-primary cursor-pointer"
+          class="w-10 h-10 flex-row-center rounded-lg primary-semi bg-main cursor-pointer"
           @click="$refs.userChart.downloadPNG()"
         >
           <feather

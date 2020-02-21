@@ -68,7 +68,7 @@
             v-if="currDelete === i"
             class="delete-bg absolute top-0 left-0 w-full h-full flex-row-center text-primary text-sm"
           >
-            <div class="absolute z-40 top-0 left-0 w-full h-full bg-primary opacity-75"></div>
+            <div class="absolute z-40 top-0 left-0 w-full h-full bg-main opacity-75"></div>
             <div class="relative z-50 flex-col-center">
               <p class="mb-2">
                 删除后将不可恢复，请谨慎操作！

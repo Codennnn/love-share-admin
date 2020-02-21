@@ -26,7 +26,7 @@
     <div class="w-3/4">
       <div
         id="message-with-loading"
-        class="p-4 bg-primary radius vs-con-loading__container"
+        class="p-4 bg-main radius vs-con-loading__container"
       >
         <div class="mb-4 flex items-center justify-end">
           <el-dropdown

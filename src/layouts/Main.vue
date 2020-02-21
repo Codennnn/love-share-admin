@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-main bg-primary">
+  <div class="layout-main bg-main">
 
     <!-- 侧边栏 -->
     <TheSidebar />

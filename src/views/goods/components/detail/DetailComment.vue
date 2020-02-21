@@ -1,7 +1,7 @@
 <template>
   <div
     ref="comment"
-    class="relative p-3 bg-primary rounded-lg overflow-hidden"
+    class="relative p-3 bg-main rounded-lg overflow-hidden"
     :style="`max-height: ${maxHeight}px;`"
   >
     <div class="mb-1 flex justify-between items-center">

@@ -76,7 +76,7 @@
       ></vue-apex-charts>
       <ul class="mr-2">
         <li class="flex items-center text-gray">
-          <div class="w-3 h-3 mr-2 rounded-full bg-main"></div>
+          <div class="w-3 h-3 mr-2 rounded-full bg-primary"></div>
           <span>汉纸</span>
         </li>
         <li class="flex items-center text-gray">

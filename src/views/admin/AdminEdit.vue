@@ -2,7 +2,7 @@
   <div>
     <vs-tabs
       id="main"
-      class="p-6 bg-primary vs-con-loading__container"
+      class="p-6 bg-main vs-con-loading__container"
     >
       <vs-tab
         class="px-4 py-10"

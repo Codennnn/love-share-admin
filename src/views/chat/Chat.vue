@@ -12,7 +12,7 @@
       :click-not-close="true"
       :hidden-background="clickNotClose"
     >
-      <div class="flex items-center px-4 py-3 bg-primary">
+      <div class="flex items-center px-4 py-3 bg-main">
         <div class="relative inline-flex">
           <vs-avatar
             v-if="userId"
@@ -38,7 +38,7 @@
       <vs-divider class="m-0" />
 
       <VuePerfectScrollbar
-        class="chat-scroll-area bg-primary"
+        class="chat-scroll-area bg-main"
         :settings="{
           maxScrollbarLength: 60,
           wheelSpeed: 0.70,
@@ -105,7 +105,7 @@
       <!-- 输入框 -->
       <div
         v-if="activeChatUser"
-        class="chat-input flex items-center px-4 py-3 bg-primary"
+        class="chat-input flex items-center px-4 py-3 bg-main"
       >
         <el-popover
           class="mr-2 cursor-pointer"

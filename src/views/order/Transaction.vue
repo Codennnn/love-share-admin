@@ -69,6 +69,7 @@ export default {
   }),
 
   created() {
+    // 模拟
     const record = []
     Array.from({ length: 50 }).forEach(() => {
       record.push({

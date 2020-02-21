@@ -29,7 +29,7 @@
         </div>
       </div>
       <VuePerfectScrollbar
-        class="bg-primary"
+        class="bg-main"
         style="height: 350px;"
         :settings="{
           maxScrollbarLength: 160,
@@ -73,7 +73,7 @@
           </li>
         </ul>
         <div
-          class="h-full flex flex-col items-center justify-center bg-primary"
+          class="h-full flex flex-col items-center justify-center bg-main"
           v-else
         >
           <vs-icon

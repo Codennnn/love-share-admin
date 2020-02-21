@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-4 py-3 flex items-center bg-primary"
+    class="px-4 py-3 flex items-center bg-main"
     style="height: 64px; box-shadow: 5px 0 10px 0 rgba(0,0,0,0.1)"
   >
     <i

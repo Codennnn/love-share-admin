@@ -161,7 +161,7 @@ export default {
 
 @include themeify {
   .nav-bar::v-deep {
-    background: themed("bg-color-primary");
+    background: themed("bg-color-main");
     .nav-icon {
       color: themed("nav-icon-color");
     }
