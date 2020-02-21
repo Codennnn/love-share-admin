@@ -6,16 +6,16 @@
     user-select: none;
 
     &.menu-main {
-      background: themed("bg-color-primary");
+      background: themed("bg-color-main");
       box-shadow: 1px 0 15px rgba(0, 0, 0, 0.05) !important;
 
       .logo {
-        background: themed("bg-color-primary");
-        box-shadow: 0 15px 20px themed("bg-color-primary") !important;
+        background: themed("bg-color-main");
+        box-shadow: 0 15px 20px themed("bg-color-main") !important;
       }
 
       .el-menu.main {
-        background: themed("bg-color-primary");
+        background: themed("bg-color-main");
       }
 
       // 有子菜单
@@ -67,7 +67,7 @@
         }
 
         .el-menu-item-group {
-          background: themed("bg-color-primary");
+          background: themed("bg-color-main");
 
           .el-menu-item:not(.is-active) {
             color: themed("sidebar-text-color");
@@ -159,7 +159,7 @@
                 width: 40px;
                 height: 40px;
                 transform: translateY(-100%) scaleX(-1);
-                background-image: radial-gradient(200px at 40px 0px, rgba(0, 0, 0, 0) 40px, themed("bg-color-primary") 40px);
+                background-image: radial-gradient(200px at 40px 0px, rgba(0, 0, 0, 0) 40px, themed("bg-color-main") 40px);
               }
 
               &::after {
@@ -171,7 +171,7 @@
                 width: 40px;
                 height: 40px;
                 transform: translateY(100%) scale(-1, -1);
-                background-image: radial-gradient(200px at 40px 0px, rgba(0, 0, 0, 0) 40px, themed("bg-color-primary") 40px);
+                background-image: radial-gradient(200px at 40px 0px, rgba(0, 0, 0, 0) 40px, themed("bg-color-main") 40px);
               }
             }
           }
@@ -211,8 +211,8 @@
             position: relative;
             border-radius: 4rem 0 0 4rem;
             color: themed("sidebar-semi-text-active-color");
-            background: themed("bg-color-primary") !important;
-            box-shadow: 18px 0 0 0 themed("bg-color-primary");
+            background: themed("bg-color-main") !important;
+            box-shadow: 18px 0 0 0 themed("bg-color-main");
           }
 
           .menu-icon {

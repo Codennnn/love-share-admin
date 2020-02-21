@@ -57,9 +57,15 @@ primary;
 
 $bg-colors: gray,
 semi,
-primary,
+main,
 primary-10,
 danger-10;
+
+@each $color in $colors {
+  .bg-#{$color} {
+    background-color: rgba(var(--vs-#{$color}), 1) !important;
+  }
+}
 
 @include themeify {
   @each $color in $colors {
