@@ -110,7 +110,7 @@
           </span>
         </div>
         <vs-divider border-style="dashed" />
-        <div>
+        <div class="flex items-center justify-between">
           <vs-button
             v-if="goods.status === 1"
             color="success"
@@ -124,6 +124,15 @@
             color="danger"
             :disabled="true"
           >该商品已下架</vs-button>
+          <div
+            title="下架"
+            class="w-10 h-10 flex-row-center danger-semi bg-danger-10 radius cursor-pointer"
+          >
+            <feather
+              size="20"
+              type="trending-down"
+            ></feather>
+          </div>
         </div>
       </div>
     </div>

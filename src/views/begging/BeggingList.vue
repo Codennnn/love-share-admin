@@ -5,7 +5,7 @@
       pagination
       noDataText="暂无数据"
       class="p-4"
-      :max-items="10"
+      :max-items="8"
       :data="beggingList"
     >
       <div
@@ -26,7 +26,6 @@
         <vs-tr
           v-for="(tr, i) in data"
           :key="i"
-          :data="tr"
         >
           <vs-td>{{ tr.name }}</vs-td>
           <vs-td>
@@ -76,36 +75,16 @@
         </vs-tr>
       </template>
     </vs-table>
-
-    <!-- 侧边抽屉 -->
-    <AddNewDataSidebar
-      :title="sidebarTitle"
-      :isSidebarActive="addNewDataSidebar"
-      :data="sidebarData"
-      @closeSidebar="addNewDataSidebar = false"
-    />
   </div>
 </template>
 
 <script>
-import AddNewDataSidebar from './components/AddNewDataSidebar.vue'
-
-import {
-  getBeggingList,
-  updateBegging,
-  deleteBegging,
-} from '@/request/api/begging'
+import { getBeggingList, deleteBegging } from '@/request/api/begging'
 
 export default {
   data: () => ({
-    selected: [],
     beggingList: [],
-    sidebarTitle: '',
-    sidebarData: {},
-    addNewDataSidebar: false,
   }),
-
-  components: { AddNewDataSidebar },
 
   created() {
     this.getBeggingList()
@@ -120,10 +99,6 @@ export default {
       if (code === 2000) {
         this.beggingList = data.begging_list
       }
-    },
-
-    async updateBegging() {
-      await updateBegging()
     },
 
     async deleteBegging() {

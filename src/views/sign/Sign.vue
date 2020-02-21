@@ -80,7 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 .input-component::v-deep {
-  $padding: 0.75rem !global;
+  $padding: 0.75rem;
   .vs-inputx {
     padding: $padding;
     border: none !important;

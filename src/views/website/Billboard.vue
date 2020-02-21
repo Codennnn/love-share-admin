@@ -145,9 +145,9 @@ import { getToken } from '@/utils/token'
 import { getBillboardList, deleteBillboard, updateBillboard } from '@/request/api/billboard'
 
 const types = [
-  { label: '普通', value: 1 },
-  { label: '路由', value: 2 },
-  { label: '外链', value: 3 },
+  { label: '普通类型', value: 1 },
+  { label: '站内导航', value: 2 },
+  { label: '站外链接', value: 3 },
 ]
 export default {
   name: 'Billboard',

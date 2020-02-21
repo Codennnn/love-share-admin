@@ -45,6 +45,7 @@
               class="search-input w-full"
               icon="search"
               placeholder="输入商品的 ID 搜索"
+              v-model="searchId"
               @keyup.enter="onSearchByID"
             />
           </div>
@@ -172,6 +173,7 @@ export default {
     tableTitle: null, // 表格标题
     onSellCount: '--', // 已上架商品数量
     offSellCount: '--', // 违规下架商品数量
+    searchId: '', // 输入的商品 ID
     searchText: '',
     tableLoading: false,
     hideFilters: false, // 隐藏过滤搜索
@@ -323,8 +325,12 @@ export default {
 
     // 根据商品编号搜索
     onSearchByID() {
-      if (this.searchText.length > 0) {
-        //
+      if (this.searchId.length > 0) {
+        this.searchId = ''
+        this.$router.push({
+          path: '/goods-detail',
+          query: { goodsId: this.searchId },
+        })
       }
     },
 
