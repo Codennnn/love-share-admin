@@ -4,7 +4,7 @@ import store from '@/store/store'
 
 // 引入路由跳转加载进度条插件
 import 'nprogress/nprogress.css'
-import { getToken } from '@/permission/token'
+import { getToken } from '@/utils/token'
 
 NProgress.configure({ showSpinner: false }) // NProgress 配置
 

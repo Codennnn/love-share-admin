@@ -47,8 +47,9 @@
         <vs-th>商品名称</vs-th>
         <vs-th>分类</vs-th>
         <vs-th>单价</vs-th>
-        <vs-th>收藏数</vs-th>
         <vs-th>卖家昵称</vs-th>
+        <vs-th>收藏数</vs-th>
+        <vs-th>浏览量</vs-th>
         <vs-th></vs-th>
       </template>
 
@@ -61,13 +62,14 @@
             <vs-td class="text-primary">{{ tr.name }}</vs-td>
             <vs-td>
               <vs-chip
-                v-for="(it, i) in tr.categories"
+                v-for="(it, i) in tr.category"
                 :key="i"
               >{{ it.name }}</vs-chip>
             </vs-td>
             <vs-td class="text-gray font-bold">￥{{ $numFixed(tr.price) }}</vs-td>
-            <vs-td class="text-semi">{{ tr.collect_num }}</vs-td>
             <vs-td class="text-gray font-bold">{{ tr.seller.nickname }}</vs-td>
+            <vs-td class="text-semi">{{ tr.collect_num }}</vs-td>
+            <vs-td class="text-semi">{{ tr.views }}</vs-td>
             <vs-td
               title="查看详情"
               class="text-semi cursor-pointer"
@@ -82,47 +84,15 @@
             <!-- 展开的内容 -->
             <template slot="expand">
               <div class="flex w-full">
-                <div class="w-1/6">
-                  <div class="flex flex-col h-full justify-center items-center">
-                    <vs-avatar
-                      size="45px"
-                      :src="tr.seller.avatar_url"
-                      @click="viewUserDetail()"
-                    />
-                    <div
-                      class="my-2 text-gray text-base
-                      font-semibold cursor-pointer"
-                      @click="viewUserDetail()"
-                    >{{ tr.seller.nickname }}</div>
-                    <vs-chip color="success">
-                      乐享信用 良好
-                    </vs-chip>
-                  </div>
-                </div>
-                <vs-list class="w-5/12">
-                  <vs-list-header
-                    class="text-base"
-                    title="卖家信息"
-                    color="success"
-                  ></vs-list-header>
-                  <vs-list-item
-                    icon-pack="el-icon"
-                    icon="el-icon-user"
-                    title="真实姓名"
-                    :subtitle="tr.seller.real_name"
-                  ></vs-list-item>
-                  <vs-list-item
-                    icon-pack="el-icon"
-                    icon="el-icon-star-off"
-                    title="乐享值"
-                    :subtitle="`${tr.seller.share_value}`"
-                  ></vs-list-item>
-                </vs-list>
-                <vs-list class="w-5/12">
+                <el-image
+                  class="w-2/12 m-4 p-4 radius base-shadow"
+                  fit="contain"
+                  :src="`${tr.img_list[0]}?imageView2/2/w/100`"
+                ></el-image>
+                <vs-list class="w-4/12 ml-4">
                   <vs-list-header
                     class="text-base"
                     title="商品信息"
-                    color="warning"
                   ></vs-list-header>
                   <vs-list-item
                     icon-pack="el-icon"
@@ -150,6 +120,42 @@
                     >查看商品详情</vs-button>
                   </vs-list-item>
                 </vs-list>
+                <vs-list class="w-4/12">
+                  <vs-list-header
+                    class="text-base"
+                    title="卖家信息"
+                    color="success"
+                  ></vs-list-header>
+                  <vs-list-item
+                    icon-pack="el-icon"
+                    icon="el-icon-user"
+                    title="真实姓名"
+                    :subtitle="tr.seller.real_name"
+                  ></vs-list-item>
+                  <vs-list-item
+                    icon-pack="el-icon"
+                    icon="el-icon-star-off"
+                    title="乐享值"
+                    :subtitle="`${tr.seller.share_value}`"
+                  ></vs-list-item>
+                </vs-list>
+                <div class="flex-1">
+                  <div class="flex flex-col h-full justify-center items-center">
+                    <vs-avatar
+                      size="45px"
+                      :src="tr.seller.avatar_url"
+                      @click="viewUserDetail(tr.seller._id)"
+                    />
+                    <div
+                      class="my-2 text-gray text-base
+                      font-semibold cursor-pointer"
+                      @click="viewUserDetail(tr.seller._id)"
+                    >{{ tr.seller.nickname }}</div>
+                    <vs-chip :color="tr.seller.credit_value | creditColor">
+                      乐享信用 {{ tr.seller.credit_value | creditText }}
+                    </vs-chip>
+                  </div>
+                </div>
               </div>
             </template>
           </vs-tr>
@@ -223,6 +229,33 @@ export default {
     },
   },
 
+  filters: {
+    creditText(val) {
+      if (val >= 500 && val <= 690) {
+        return '良好'
+      }
+      if (val > 690) {
+        return '极好'
+      }
+      if (val < 490 && val >= 390) {
+        return '一般'
+      }
+      return '差劲'
+    },
+    creditColor(val) {
+      if (val >= 500 && val <= 690) {
+        return 'success'
+      }
+      if (val > 690) {
+        return 'primary'
+      }
+      if (val < 490 && val >= 390) {
+        return 'warning'
+      }
+      return 'danger'
+    },
+  },
+
   methods: {
     // 查看商品详情
     viewGoodsDetail(goodsId) {
@@ -254,10 +287,11 @@ export default {
     },
 
     // 导出为 Excel 表格
+
     exportExcel() {
       import('@/vendor/Export2Excel').then((excel) => {
-        const header = ['商品 ID', '商品名称', '价格', '卖家昵称', '卖家姓名', '发布时间']
-        const filterVal = ['_id', 'name', 'price', 'seller.nickname', 'seller.real_name', 'created_at']
+        const header = ['商品 ID', '商品名称', '价格', '卖家昵称', '卖家姓名', '收藏数', '浏览量', '发布时间']
+        const filterVal = ['_id', 'name', 'price', 'seller.nickname', 'seller.real_name', 'collect_num', 'views', 'created_at']
         const data = this.formatJson(filterVal, this.goodsList)
         excel.export_json_to_excel({
           header,
@@ -297,6 +331,9 @@ export default {
     .tr-expand {
       .vs-list--item {
         color: themed("text-color-semi");
+      }
+      .content-tr-expand {
+        padding-right: 10px;
       }
     }
   }

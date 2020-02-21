@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import { errorNotify, consoleLog } from '@/utils/util'
-import { getToken } from '@/permission/token'
+import { getToken } from '@/utils/token'
 
 const service = Axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : '/api',

@@ -29,11 +29,12 @@
         style="width: 40%;"
       >
         <p class="text-primary text-lg font-bold">{{ goods.name }}</p>
-        <div class="my-2 flex items-center justify-between text-gray text-sm">
-          <p>发布于 {{ $timeDiff(goods.created_at) }}</p>
-          <div class="flex items-center">
-            <span class="ml-2 text-sm text-gray">{{ goods.collect_num }} 人收藏</span>
-          </div>
+        <div class="my-2 text-gray text-sm">
+          <p>
+            <span>发布于 {{ $timeDiff(goods.created_at) }}，已被浏览</span>
+            <span class="mx-1">{{ goods.views }}</span>
+            <span>次，共有 {{ goods.collect_num }} 人收藏</span>
+          </p>
         </div>
         <vs-divider border-style="dashed" />
         <div class="info-item">
@@ -113,11 +114,11 @@
           <vs-button
             v-if="goods.status === 1"
             color="success"
-          >出售中</vs-button>
+          >此商品正在出售中</vs-button>
           <vs-button
             v-if="goods.status === 2"
             color="warning"
-          >已售出</vs-button>
+          >此商品已售出</vs-button>
           <vs-button
             v-if="goods.status === 3"
             color="danger"

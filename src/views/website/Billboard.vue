@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import { getToken } from '@/permission/token'
+import { getToken } from '@/utils/token'
 
 import { getBillboardList, deleteBillboard, updateBillboard } from '@/request/api/billboard'
 

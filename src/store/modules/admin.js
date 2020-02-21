@@ -1,4 +1,4 @@
-import { setToken, getToken, removeToken } from '@/permission/token'
+import { setToken, getToken, removeToken } from '@/utils/token'
 import { signIn, getAdminInfo } from '@/request/api/admin'
 import { resetRouter } from '@/router/router'
 
