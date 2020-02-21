@@ -79,12 +79,12 @@ export default {
     async getGoodsDetail() {
       const { code, data: { goods_detail } } = await getGoodsDetail({ goods_id: this.goodsId })
       if (code === 2000) {
-        if (!goods_detail?._id) {
-          this.$router.replace('/not-found')
+        if (goods_detail) {
+          this.goods = goods_detail
           return
         }
-        this.goods = goods_detail
       }
+      this.$router.replace('/not-found')
     },
 
     // 获取卖家信息

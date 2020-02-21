@@ -140,7 +140,7 @@
     <div class="mt-4">
       <p class="text-primary">商品详细介绍</p>
       <div
-        class="mt-2 text-sm goods-desc"
+        class="mt-2 text-sm text-semi goods-desc"
         v-html="goods.description"
       ></div>
     </div>

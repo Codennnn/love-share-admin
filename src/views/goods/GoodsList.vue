@@ -326,11 +326,11 @@ export default {
     // 根据商品编号搜索
     onSearchByID() {
       if (this.searchId.length > 0) {
-        this.searchId = ''
         this.$router.push({
           path: '/goods-detail',
           query: { goodsId: this.searchId },
         })
+        this.searchId = ''
       }
     },
 
