@@ -38,6 +38,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 // 修正图标大小
 .material-icons {
   font-size: inherit;
