@@ -183,22 +183,6 @@ export default {
         display: flex;
         flex-grow: 1;
       }
-
-      .vs-table--search {
-        .vs-table--search-input {
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          font-size: 1rem;
-          & + i {
-            left: 1rem;
-          }
-          &:focus + i {
-            left: 1rem;
-          }
-        }
-        .vs-icon {
-          font-size: 1.4rem;
-        }
-      }
     }
 
     .vs-table {
@@ -207,7 +191,7 @@ export default {
       padding: 0 1rem;
       & .is-selected {
         border: none;
-        box-shadow: 0 0 10px 0 rgba(var(--vs-primary), 0.2) !important;
+        box-shadow: 0 0 15px 10px rgba(var(--vs-gray), 0.1) !important;
         overflow: hidden;
       }
       tr {

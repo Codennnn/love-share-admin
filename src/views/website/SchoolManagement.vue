@@ -28,7 +28,6 @@
       </template>
       <template slot-scope="{data}">
         <vs-tr
-          class="bg-gray"
           v-for="(tr, i) in data"
           :key="i"
           :data="tr"

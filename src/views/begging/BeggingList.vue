@@ -54,13 +54,6 @@
                 <i class="el-icon-more-outline"></i>
                 <vs-dropdown-menu class="w-24">
                   <vs-dropdown-item
-                    class="text-center"
-                    @click="addNewDataSidebar = true, sidebarTitle = '编辑更新信息', sidebarData = tr"
-                  >
-                    <i class="el-icon-edit mr-2"></i>
-                    <span>编辑</span>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
                     divider
                     class="text-center danger"
                     @click="deleteBegging(tr.buying_id)"

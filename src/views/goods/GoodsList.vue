@@ -360,8 +360,16 @@ export default {
 
 .search-input::v-deep {
   // 重设输入框样式
+  $padding: 0.6rem 0.5rem 0.6rem 2.5rem !important;
   .vs-inputx {
-    padding-left: 35px;
+    padding: $padding;
+    box-shadow: $light-shadow !important;
+    &:focus {
+      box-shadow: $base-shadow !important;
+    }
+  }
+  .vs-input--placeholder {
+    padding: $padding;
   }
   .vs-icon {
     top: 0.6rem;
