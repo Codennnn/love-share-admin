@@ -69,6 +69,14 @@ export function deleteGoods() {
   })
 }
 
+export function updateManyGoods(data) {
+  return request({
+    url: '/goods/update_many',
+    method: 'put',
+    data,
+  })
+}
+
 export function dismountGoods() {
   return request({
     url: '/goods/dismount',

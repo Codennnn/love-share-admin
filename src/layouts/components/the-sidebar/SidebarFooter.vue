@@ -44,7 +44,7 @@
           <div class="mb-2 flex items-center">
             <p class="text-xl text-primary font-bold">今日任务</p>
             <div
-              class="ml-3 mt-1 w-6 h-6 primary-semi bg-main-10
+              class="ml-3 mt-1 w-6 h-6 primary-semi bg-primary-10
              flex-row-center rounded-lg cursor-pointer"
               @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true})"
             >

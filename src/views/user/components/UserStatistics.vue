@@ -102,7 +102,7 @@ const chartOptions = {
   chart: { type: 'donut', offsetX: -50, offsetY: -12 },
   dataLabels: { enabled: false },
   legend: { show: false },
-  labels: ['汉纸', '妹纸', '未知'],
+  labels: ['汉纸', '妹纸', '未设置'],
   plotOptions: {
     pie: {
       donut: {

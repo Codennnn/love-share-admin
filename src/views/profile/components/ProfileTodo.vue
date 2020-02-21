@@ -4,7 +4,7 @@
       <div class="text-primary text-lg font-bold">任务列表</div>
       <div
         class="w-10 h-10 flex-row-center
-         primary-semi bg-main-10 radius cursor-pointer"
+         primary-semi bg-primary-10 radius cursor-pointer"
         @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true})"
       >
         <feather

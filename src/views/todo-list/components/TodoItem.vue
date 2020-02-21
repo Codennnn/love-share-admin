@@ -7,7 +7,7 @@
         style="background: rgba(var(--vs-primary), 0.065);"
       >
         <div
-          class="absolute left-0 z-50 h-full flex-row-center radius bg-main-10 cursor-pointer"
+          class="absolute left-0 z-50 h-full flex-row-center radius bg-primary-10 cursor-pointer"
           style="width: 50px; height: 50px;"
         >
           <feather
@@ -27,7 +27,7 @@
       <div
         class="ml-4 w-24 py-3 flex-row-center text-sm radius cursor-pointer"
         style="transition: all 0.3s;"
-        :class="{'primary-semi bg-main-10': onlyToday, 'text-primary base-shadow ': !onlyToday}"
+        :class="{'primary-semi bg-primary-10': onlyToday, 'text-primary base-shadow ': !onlyToday}"
         @click="onlyToday = !onlyToday"
       >
         今日任务

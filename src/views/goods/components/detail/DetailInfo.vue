@@ -125,12 +125,14 @@
             :disabled="true"
           >该商品已下架</vs-button>
           <div
-            title="下架"
-            class="w-10 h-10 flex-row-center danger-semi bg-danger-10 radius cursor-pointer"
+            class="w-10 h-10 flex-row-center radius cursor-pointer"
+            :title="goods.status === 1 ? '下架' : '上架'"
+            :class="{'danger-semi bg-danger-10': goods.status === 1, 'primary-semi bg-primary-10': goods.status === 3}"
+            @click="goods.status === 1 ? updateGoodsStatus(3) : updateGoodsStatus(1)"
           >
             <feather
               size="20"
-              type="trending-down"
+              :type="goods.status === 1 ? 'trending-down' : 'trending-up'"
             ></feather>
           </div>
         </div>
@@ -156,6 +158,7 @@
 
 <script>
 import ElImageViewer from 'element-ui/packages/image/src/image-viewer.vue'
+import { updateManyGoods } from '@/request/api/goods'
 
 export default {
   name: 'DetailInfo',
@@ -166,6 +169,23 @@ export default {
   data: () => ({
     showViewer: false,
   }),
+
+  methods: {
+    // 更新商品的状态
+    async updateGoodsStatus(status) {
+      const { code } = await updateManyGoods({
+        goods_id_list: [this.goodsId],
+        status,
+      })
+      if (code === 2000) {
+        if (status === 1) {
+          this.$message.info('此商品已重新上架')
+        } else {
+          this.$message.error('此商品已被下架')
+        }
+      }
+    },
+  },
 }
 </script>
 

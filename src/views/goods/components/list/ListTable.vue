@@ -20,7 +20,7 @@
               <div
                 @click="exportExcel()"
                 class="w-10 h-10 mr-5 flex-row-center primary-semi
-                 rounded-lg bg-main-10 cursor-pointer"
+                 rounded-lg bg-primary-10 cursor-pointer"
               >
                 <feather
                   size="21"
@@ -87,7 +87,7 @@
                 <el-image
                   class="w-2/12 m-4 p-4 radius base-shadow"
                   fit="contain"
-                  :src="`${tr.img_list[0]}?imageView2/2/w/100`"
+                  :src="`${tr.img_list[0]}?imageView2/2/w/200`"
                 ></el-image>
                 <vs-list class="w-4/12 ml-4">
                   <vs-list-header

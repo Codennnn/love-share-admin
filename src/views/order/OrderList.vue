@@ -37,8 +37,8 @@
     >
       <vs-table
         pagination
-        max-items="10"
         noDataText="暂无数据"
+        :max-items="10"
         :data="orderList"
       >
         <template slot="header">
@@ -47,18 +47,16 @@
             <div class="ml-auto mr-4 text-sm text-semi">
               共查询到 {{ pagination.total }} 个订单, {{ totalGoodsNum }} 个商品
             </div>
-            <div class="">
-              <el-date-picker
-                unlink-panels
-                type="daterange"
-                align="right"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                v-model="date"
-                :picker-options="pickerOptions"
-                @change="onDateChange"
-              ></el-date-picker>
-            </div>
+            <el-date-picker
+              unlink-panels
+              type="daterange"
+              align="right"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              v-model="date"
+              :picker-options="pickerOptions"
+              @change="onDateChange"
+            ></el-date-picker>
           </div>
         </template>
         <template slot="thead">
@@ -157,7 +155,7 @@ import {
   getOrderNum,
 } from '@/request/api/order'
 
-// DEMO
+// 模拟
 const gridCharts = [
   {
     statistic: 3200, label: '交易额', color: 'primary', icon: 'dollar-sign',

@@ -93,6 +93,12 @@ export const asyncRoutes = [
         component: () => import('@/views/order/OrderList.vue'),
         meta: { title: '订单列表' },
       },
+      {
+        path: '/transaction',
+        name: 'Transaction',
+        component: () => import('@/views/order/Transaction.vue'),
+        meta: { title: '交易记录' },
+      },
     ],
     meta: { title: '订单管理', icon: 'clipboard' },
   },

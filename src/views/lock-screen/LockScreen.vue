@@ -22,7 +22,7 @@
             @keyup.enter="unLocked()"
           />
           <div
-            class="h-full flex-row-center radius bg-main-10 cursor-pointer"
+            class="h-full flex-row-center radius bg-primary-10 cursor-pointer"
             style="width: 60px; height: 50px;"
             @click="unLocked()"
           >

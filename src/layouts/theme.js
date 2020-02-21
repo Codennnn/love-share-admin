@@ -23,7 +23,6 @@ import '@/assets/scss/element-override.scss'
 Vue.use(Vuesax, {
   theme: {
     colors: {
-      // primary: '#7367F0',
       primary: '#6165f7',
       success: '#28C76F',
       danger: '#EA5455',
