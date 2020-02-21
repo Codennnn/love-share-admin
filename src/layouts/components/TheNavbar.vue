@@ -31,25 +31,28 @@
           <div class="flex items-center">
 
             <!-- 搜索图标 -->
-            <el-tooltip
-              :open-delay="100"
-              :content="showSearchInput ? '关闭搜索' : '全站搜索'"
-              effect="light"
-            >
-              <feather
-                class="nav-icon"
-                :type="showSearchInput ? 'x' : 'search'"
-                @click="showSearchInput = !showSearchInput"
-              ></feather>
-            </el-tooltip>
-            <vs-input
-              class="nav-search overflow-hidden"
-              :class="showSearchInput ? 'w-48': 'w-0'"
-              placeholder="搜索你想要的宝贝"
-              @keyup.esc="showSearchInput = false"
-              @keyup.enter="search"
-              v-model="searchText"
-            />
+            <div class="relative flex items-center">
+              <el-tooltip
+                class="relative z-50 transition"
+                :class="{'mr-2': showSearchInput}"
+                :content="showSearchInput ? '关闭搜索' : '全站搜索'"
+                effect="light"
+              >
+                <feather
+                  class="nav-icon"
+                  :type="showSearchInput ? 'x' : 'search'"
+                  @click="showSearchInput = !showSearchInput"
+                ></feather>
+              </el-tooltip>
+              <vs-input
+                class="nav-search absolute right-0 top-0 z-40 overflow-hidden"
+                :class="showSearchInput ? 'w-48': 'w-0'"
+                placeholder="搜索你想要的宝贝"
+                @keyup.esc="showSearchInput = false"
+                @keyup.enter="search"
+                v-model="searchText"
+              />
+            </div>
 
             <!-- 全屏图标 -->
             <el-tooltip
@@ -198,21 +201,6 @@ export default {
 .nav-right {
   display: flex;
   align-items: center;
-}
-
-// 搜索框
-.nav-search::v-deep {
-  // 重设输入框样式
-  .vs-inputx {
-    border: none !important;
-    border-bottom: 2px solid #a0a0a0 !important;
-    box-shadow: none;
-    border-radius: 0;
-    &.vs-input--input:focus {
-      border: none !important;
-      border-bottom: 2px solid #a0a0a0 !important;
-    }
-  }
 }
 </style>
 
