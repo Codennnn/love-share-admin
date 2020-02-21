@@ -46,7 +46,6 @@ $colors: primary,
 success,
 warning,
 danger,
-dark,
 primary-semi,
 danger-semi;
 
@@ -97,8 +96,21 @@ danger-10;
   .vs-input {
     color: themed("text-color-primary");
 
+    $padding: 0.55rem;
+
     .vs-inputx {
+      padding: $padding;
+      border: none !important;
       background: themed("input-bg-color");
+      border-radius: $large-radius;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .vs-input--placeholder {
+      padding: $padding;
     }
 
     .vs-input--placeholder,
@@ -154,20 +166,34 @@ danger-10;
     .el-form-item__label {
       color: themed("text-color-semi");
     }
+
+    .el-form-item__label,
+    .el-form-item__error {
+      margin-left: 0.65rem;
+    }
+  }
+
+  .el-input {
+    border-radius: $large-radius;
   }
 
   .el-input__inner {
     color: themed("text-color-primary");
-    border-color: themed("border-color-primary");
     background: themed("input-bg-color");
+    border-radius: $large-radius;
+    border: none !important;
 
     &::placeholder {
       color: themed("text-color-primary") !important;
     }
 
     .el-range-input {
-      color: themed("text-color-primary");
+      color: themed("text-color-primary") !important;
       background: themed("input-bg-color");
+
+      &::placeholder {
+        color: themed("text-color-primary") !important;
+      }
     }
   }
 }
