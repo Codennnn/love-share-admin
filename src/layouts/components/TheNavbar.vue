@@ -103,7 +103,7 @@ const navIcons = [
   { tip: '商品列表', icon: 'package', route: '/goods-list' },
   { tip: '订单列表', icon: 'clipboard', route: '/order-list' },
   { tip: '用户列表', icon: 'users', route: '/user-list' },
-  { tip: '求购列表', icon: 'shopping-bag', route: '/buying-list' },
+  { tip: '求购列表', icon: 'shopping-bag', route: '/begging-list' },
 ]
 
 export default {

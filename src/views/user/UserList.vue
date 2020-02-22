@@ -65,7 +65,7 @@
                       联系
                     </div>
                   </el-dropdown-item>
-                  <el-dropdown-item @click="$router.push({
+                  <el-dropdown-item @click.native="$router.push({
                     path: '/user-detail',
                     query: { userId: tr._id }
                   })">
@@ -79,7 +79,7 @@
                       查看
                     </div>
                   </el-dropdown-item>
-                  <el-dropdown-item @click="$router.push({
+                  <el-dropdown-item @click.native="$router.push({
                     path: '/user-detail',
                     query: { userId: tr._id }
                   })">

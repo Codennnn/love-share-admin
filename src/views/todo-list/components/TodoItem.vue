@@ -156,22 +156,10 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import FlipList from '@/components/FlipList.vue'
 
 const tags = {
-  1: {
-    text: '前端',
-    color: 'main',
-  },
-  2: {
-    text: '后端',
-    color: 'warning',
-  },
-  3: {
-    text: '其它',
-    color: 'success',
-  },
-  4: {
-    text: 'BUG',
-    color: 'danger',
-  },
+  1: { text: '前端', color: 'primary' },
+  2: { text: '后端', color: 'warning' },
+  3: { text: '其它', color: 'success' },
+  4: { text: 'BUG', color: 'danger' },
 }
 export default {
   name: 'TodoItem',

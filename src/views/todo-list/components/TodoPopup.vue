@@ -37,14 +37,14 @@
           @click="$set(task, 'is_starred', !task.is_starred)"
         ></feather>
         <!-- 选择任务的标签 -->
-        <vs-dropdown>
+        <el-dropdown>
           <feather
             size="19"
             type="tag"
             class="mt-2 text-gray"
           ></feather>
-          <vs-dropdown-menu>
-            <vs-dropdown-item
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
               v-for="(tag, i) in tags"
               :key="i"
             >
@@ -53,9 +53,9 @@
                 v-model="task.tags"
                 @click.stop
               >{{ tag.text }}</vs-checkbox>
-            </vs-dropdown-item>
-          </vs-dropdown-menu>
-        </vs-dropdown>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
 
@@ -111,7 +111,7 @@
 const tags = {
   1: {
     text: '前端',
-    color: 'main',
+    color: 'primary',
     type: 1,
   },
   2: {

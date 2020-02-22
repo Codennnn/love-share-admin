@@ -49,20 +49,19 @@
             {{ $dayjs(tr.updated_at).format('YYYY/MM/DD') }}
           </vs-td>
           <vs-td>
-            <div class="text-center">
-              <vs-dropdown>
-                <i class="el-icon-more-outline"></i>
-                <vs-dropdown-menu class="w-24">
-                  <vs-dropdown-item
-                    divider
-                    class="text-center danger"
+            <div>
+              <el-dropdown>
+                <i class="el-icon-more text-semi"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    class="danger"
                     @click="deleteBegging(tr.buying_id)"
                   >
                     <i class="el-icon-delete mr-2"></i>
                     <span>删除</span>
-                  </vs-dropdown-item>
-                </vs-dropdown-menu>
-              </vs-dropdown>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </vs-td>
         </vs-tr>

@@ -11,22 +11,22 @@
       <div class="p-6 flex flex-col items-center">
         <div class="w-full mb-5 flex justify-between items-center text-semi">
           <span>个人中心</span>
-          <vs-dropdown>
+          <el-dropdown>
             <feather
               size="20"
               type="more-vertical"
             ></feather>
-            <vs-dropdown-menu class="w-24">
-              <vs-dropdown-item
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item
                 v-for="(menu, i) in menuItems"
                 :key="i"
                 class="text-sm text-center"
-                @click="dispatch(menu.method)"
+                @click.native="dispatch(menu.method)"
               >
                 {{ menu.text }}
-              </vs-dropdown-item>
-            </vs-dropdown-menu>
-          </vs-dropdown>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
 
         <div class="text-center">

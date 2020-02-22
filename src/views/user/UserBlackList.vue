@@ -37,26 +37,26 @@
           </vs-td>
           <vs-td>
             <div class="text-center">
-              <vs-dropdown>
-                <i class="el-icon-more-outline"></i>
-                <vs-dropdown-menu class="w-24">
-                  <vs-dropdown-item class="text-center">
+              <el-dropdown>
+                <i class="el-icon-more text-gray"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item class="text-center">
                     <i class="el-icon-chat-round mr-2"></i>
                     <span>联系</span>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item class="text-center">
+                  </el-dropdown-item>
+                  <el-dropdown-item class="text-center">
                     <i class="el-icon-news mr-2"></i>
                     <span>查看</span>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
+                  </el-dropdown-item>
+                  <el-dropdown-item
                     class="text-center danger"
                     divider
                   >
                     <i class="el-icon-delete mr-2"></i>
                     <span>删除</span>
-                  </vs-dropdown-item>
-                </vs-dropdown-menu>
-              </vs-dropdown>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </vs-td>
         </vs-tr>

@@ -18,26 +18,26 @@
           >
             <div slot="header">
               {{ guide.section }}
-              <vs-dropdown>
-                <i class="el-icon-more ml-1 text-xs text-light"></i>
-                <vs-dropdown-menu>
-                  <vs-dropdown-item @click="visible1 = true, payload.section = guide.section,
+              <el-dropdown>
+                <i class="el-icon-more ml-1 text-xs text-gray"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item @click.native="visible1 = true, payload.section = guide.section,
                    createGuide()">
                     添加文章
-                  </vs-dropdown-item>
-                  <vs-dropdown-item>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
                     编辑栏目
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
+                  </el-dropdown-item>
+                  <el-dropdown-item
                     divider
                     v-if="guide.articles.length <= 0"
                     class="danger"
-                    @click="deleteGuide(guide._id)"
+                    @click.native="deleteGuide(guide._id)"
                   >
                     删除栏目
-                  </vs-dropdown-item>
-                </vs-dropdown-menu>
-              </vs-dropdown>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
             <ul class="ml-2 text-semi">
               <li

@@ -19,7 +19,7 @@
           class="w-32"
           v-for="(pop, i) in popItems"
           :key="i"
-          @click="routeTo(pop.route, pop.text)"
+          @click.native="routeTo(pop.route, pop.text)"
         >
           <div class="flex-row-center">
             <feather

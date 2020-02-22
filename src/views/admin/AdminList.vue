@@ -7,7 +7,6 @@
         noDataText="暂无数据"
         :max-items="5"
         :data="adminList"
-        v-model="selected"
       >
         <div
           slot="header"
@@ -71,13 +70,13 @@
               <p>{{ $dayjs(tr.created_at).format('YYYY年M月DD日') }}</p>
             </vs-td>
             <vs-td>
-              <vs-dropdown vs-trigger-click>
+              <el-dropdown>
                 <feather
                   size="20"
                   type="more-horizontal"
                 ></feather>
-                <vs-dropdown-menu class="w-24">
-                  <vs-dropdown-item class="text-center">
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item class="text-center">
                     <div class="flex-row-center">
                       <feather
                         class="mr-3"
@@ -87,8 +86,8 @@
                       ></feather>
                       <span>联系</span>
                     </div>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
+                  </el-dropdown-item>
+                  <el-dropdown-item
                     class="text-center"
                     @click="$router.push({
                       path: '/admin-detail',
@@ -104,8 +103,8 @@
                       ></feather>
                       <span>查看</span>
                     </div>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item
+                  </el-dropdown-item>
+                  <el-dropdown-item
                     class="text-center"
                     @click="$router.push({
                       path: '/admin-edit',
@@ -121,8 +120,8 @@
                       ></feather>
                       <span>编辑</span>
                     </div>
-                  </vs-dropdown-item>
-                  <vs-dropdown-item divider>
+                  </el-dropdown-item>
+                  <el-dropdown-item divider>
                     <div class="flex-row-center danger">
                       <feather
                         class="mr-3"
@@ -132,9 +131,9 @@
                       ></feather>
                       <span>删除</span>
                     </div>
-                  </vs-dropdown-item>
-                </vs-dropdown-menu>
-              </vs-dropdown>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </vs-td>
           </vs-tr>
         </template>
@@ -149,7 +148,6 @@ import { getAdminList } from '@/request/api/admin'
 export default {
   name: 'AdminList',
   data: () => ({
-    selected: [],
     adminList: [],
   }),
 
@@ -189,11 +187,6 @@ export default {
       border-collapse: separate;
       border-spacing: 0 1.3rem;
       padding: 0 1rem;
-      & .is-selected {
-        border: none;
-        box-shadow: 0 0 15px 10px rgba(var(--vs-gray), 0.1) !important;
-        overflow: hidden;
-      }
       tr {
         border-radius: $large-radius;
         box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
