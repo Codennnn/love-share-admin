@@ -101,6 +101,7 @@ img {
 }
 
 .el-dropdown-menu {
+  z-index: 999999 !important;
   padding: 0.2rem 0 !important;
   border-radius: $medium-radius !important;
   box-shadow: $base-shadow !important;
@@ -118,4 +119,12 @@ img {
 
 .el-popover {
   border-radius: $medium-radius !important;
+}
+
+.el-picker-panel {
+  border-radius: $large-radius !important;
+}
+
+.el-range-separator {
+  padding: 0 !important;
 }
