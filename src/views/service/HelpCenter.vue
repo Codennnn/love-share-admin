@@ -76,7 +76,7 @@
               placeholder="文章标题"
             />
             <vs-button
-              class="mt-4 mb-3 w-full"
+              class="mt-4 mb-3 w-full radius"
               @click="createGuide()"
             >添加</vs-button>
           </div>
@@ -86,15 +86,15 @@
             class="mt-5 w-full flex justify-center"
           >
             <div
-              class="p-2 flex-row-center bg-main cursor-pointer"
-              style="width: 11rem; color: white; font-size: 0.95rem; border-radius: 0.4rem;"
+              class="py-1 px-2 flex-row-center bg-primary radius text-white cursor-pointer"
+              style="width: 11rem; font-size: 0.9rem;"
               @click="visible1 = true"
             >
               <div class="flex-1 text-center">
                 添加栏目
               </div>
               <div
-                class="ml-auto px-2 py-1 text-sm rounded"
+                class="ml-auto w-8 h-8 flex-row-center rounded-lg"
                 style="background: rgba(121, 131, 255);"
               >
                 <feather
