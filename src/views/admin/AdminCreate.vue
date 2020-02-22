@@ -22,8 +22,11 @@
     </div>
 
     <!-- 权限 -->
-    <div class="mb-5 p-5 radius">
-      <div class="flex items-center justify-between">
+    <div class="mb-5 radius">
+      <div
+        class="mb-2 py-4 px-2 flex items-center justify-between"
+        style="box-shadow: 0 10px 10px 0 rgba(var(--vs-gray),0.06);"
+      >
         <p class="text-lg text-semi">权 限</p>
         <div>
           <vs-switch v-model="allSelected">
@@ -32,9 +35,9 @@
           </vs-switch>
         </div>
       </div>
-      <vs-divider />
       <EditPermission
         ref="editPermissions"
+        class="px-1"
         :all-selected="allSelected"
         :editable="true"
       />

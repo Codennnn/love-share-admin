@@ -7,15 +7,15 @@
     </div>
 
     <!-- 头像 -->
-    <vs-dropdown vs-custom-content>
+    <el-dropdown vs-custom-content>
       <div class="flex-row-center">
         <vs-avatar
           size="40px"
           :src="`${avatar}`"
         />
       </div>
-      <vs-dropdown-menu>
-        <vs-dropdown-item
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item
           class="w-32"
           v-for="(pop, i) in popItems"
           :key="i"
@@ -29,9 +29,9 @@
             ></feather>
             <span class="inner-text ml-2 text-sm">{{ pop.text }}</span>
           </div>
-        </vs-dropdown-item>
-      </vs-dropdown-menu>
-    </vs-dropdown>
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
   </div>
 </template>
 

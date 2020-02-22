@@ -20,6 +20,7 @@
 </template>
 
 <script>
+// 模拟
 const questions = [
   { header: '为什么选择乐享回收？', content: '相比卖给个人，拍拍回收交易更快，最快3-5天即可得到返款。更无须担心买卖纠纷、隐私泄露等风险。' },
   { header: '提交订单的价格是最终成交价吗？', content: '物品实际情况和提交信息一致，则会按照订单提交价格成交。如果检测结果有差异，我们会主动联系您确认价格。若您不接受，拍拍回收会为您退还物品，并承担快递费用。(山寨机、报废机等退货运费由用户承担)' },
@@ -52,9 +53,17 @@ export default {
 <style lang="scss" scoped>
 @include themeify {
   .vs-collapse::v-deep {
+    .vs-collapse-item {
+      background-color: themed("bg-color-semi");
+    }
     .vs-icon {
       color: themed("text-color-primary");
     }
   }
+}
+
+.vs-collapse-item {
+  border-radius: $large-radius !important;
+  margin-bottom: 1rem !important;
 }
 </style>

@@ -51,37 +51,61 @@
               <p>{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
             </vs-td>
             <vs-td>
-              <div class="text-center">
-                <vs-dropdown>
-                  <i class="el-icon-more-outline"></i>
-                  <vs-dropdown-menu class="w-24">
-                    <vs-dropdown-item
-                      class="text-center"
-                      @click="contactUser(tr._id, tr.nickname)"
-                    >
-                      <i class="el-icon-chat-round mr-2"></i>
-                      <span>联系</span>
-                    </vs-dropdown-item>
-                    <vs-dropdown-item
-                      class="text-center"
-                      @click="$router.push({
-                        path: '/user-detail',
-                        query: { userId: tr._id }
-                      })"
-                    >
-                      <i class="el-icon-news mr-2"></i>
-                      <span>查看</span>
-                    </vs-dropdown-item>
-                    <vs-dropdown-item
-                      class="text-center danger"
-                      divider
-                    >
-                      <i class="el-icon-delete mr-2"></i>
-                      <span>删除</span>
-                    </vs-dropdown-item>
-                  </vs-dropdown-menu>
-                </vs-dropdown>
-              </div>
+              <el-dropdown>
+                <i class="el-icon-more-outline"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item @click.native="contactUser(tr._id, tr.nickname)">
+                    <div class="flex-row-center">
+                      <feather
+                        class="mr-2"
+                        size="17"
+                        stroke-width="1.4"
+                        type="message-square"
+                      ></feather>
+                      联系
+                    </div>
+                  </el-dropdown-item>
+                  <el-dropdown-item @click="$router.push({
+                    path: '/user-detail',
+                    query: { userId: tr._id }
+                  })">
+                    <div class="flex-row-center">
+                      <feather
+                        class="mr-2"
+                        size="17"
+                        stroke-width="1.4"
+                        type="disc"
+                      ></feather>
+                      查看
+                    </div>
+                  </el-dropdown-item>
+                  <el-dropdown-item @click="$router.push({
+                    path: '/user-detail',
+                    query: { userId: tr._id }
+                  })">
+                    <div class="flex-row-center">
+                      <feather
+                        class="mr-2"
+                        size="17"
+                        stroke-width="1.4"
+                        type="user-x"
+                      ></feather>
+                      禁用
+                    </div>
+                  </el-dropdown-item>
+                  <el-dropdown-item divided>
+                    <div class="flex-row-center danger">
+                      <feather
+                        class="mr-2"
+                        size="17"
+                        stroke-width="1.4"
+                        type="trash-2"
+                      ></feather>
+                      删除
+                    </div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </vs-td>
           </vs-tr>
         </template>

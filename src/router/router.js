@@ -191,6 +191,12 @@ export const asyncRoutes = [
         component: () => import('@/views/goods/GoodsCategory.vue'),
         meta: { title: '商品分类' },
       },
+      {
+        path: '/message-template',
+        name: 'MessageTemplate',
+        component: () => import('@/views/website/MessageTemplate.vue'),
+        meta: { title: '消息模板' },
+      },
     ],
     meta: { title: '网站管理', icon: 'monitor' },
   },
