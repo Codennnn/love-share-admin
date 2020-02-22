@@ -105,37 +105,38 @@ export default {
     },
 
     // 更新管理员信息
-    async onUpdateAmin() {
+    onUpdateAmin() {
       if (this.$refs.editForm.submit()) {
-        this.$vs.loading({ container: '#main', scale: 1 })
+        this.$loading(
+          async () => {
+            const payload = Object.assign({
+              admin_id: this.info._id,
+              gender: this.$refs.editAvatar.selectedGender,
+              permissions: this.$refs.editPermissions.getPermissions(),
+            }, this.$refs.editForm.form)
 
-        const payload = Object.assign({
-          admin_id: this.info._id,
-          gender: this.$refs.editAvatar.selectedGender,
-          permissions: this.$refs.editPermissions.getPermissions(),
-        }, this.$refs.editForm.form)
-
-        try {
-          const { code, msg } = await updateAdmin(payload)
-          if (code === 2000) {
-            await this.getAdminDetail()
+            const { code, msg } = await updateAdmin(payload)
+            if (code === 2000) {
+              await this.getAdminDetail()
+              this.$vs.notify({
+                title: '信息更新成功',
+                text: msg,
+                color: 'success',
+              })
+            } else {
+              throw new Error(msg)
+            }
+          },
+          { container: '#main', scale: 1 },
+          null,
+          (err) => {
             this.$vs.notify({
-              title: '信息更新成功',
-              text: msg,
-              color: 'success',
+              title: '信息更新失败',
+              text: err,
+              color: 'danger',
             })
-          } else {
-            throw new Error(msg)
-          }
-        } catch (err) {
-          this.$vs.notify({
-            title: '信息更新失败',
-            text: err,
-            color: 'danger',
-          })
-        } finally {
-          this.$vs.loading.close('#main > .con-vs-loading')
-        }
+          },
+        )
       }
     },
   },

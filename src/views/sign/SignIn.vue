@@ -72,37 +72,37 @@ export default {
   }),
 
   methods: {
-    async login() {
+    login() {
       if (this.validate()) {
-        this.$vs.loading({
-          background: 'primary',
-          color: '#fff',
-          container: '#signInBtn',
-          scale: 0.45,
-        })
-        this.signInDisable = true
+        this.$loading(
+          async () => {
+            this.signInDisable = true
 
-        const [account, password] = [this.signInInput[0].value, this.signInInput[1].value]
-        const position = await this.getPosition()
-        const device = navigator.userAgent
+            const [account, password] = [this.signInInput[0].value, this.signInInput[1].value]
+            const position = await this.getPosition()
+            const device = navigator.userAgent
 
-        const code = await this.$store.dispatch('admin/signIn', {
-          account,
-          password,
-          position,
-          device,
-        })
+            const code = await this.$store.dispatch('admin/signIn', {
+              account, password, position, device,
+            })
 
-        // 2000-成功，4001-账号未注册，4003-密码错误
-        if (code === 2000) {
-          this.$router.replace('/')
-        } else if (code === 4001 || code === 4003) {
-          this.signInError = true
-        } else {
-          this.$message.error('登录失败，请再次尝试')
-        }
-        this.$vs.loading.close('#signInBtn > .con-vs-loading')
-        this.signInDisable = false
+            // 2000-成功，4001-账号未注册，4003-密码错误
+            if (code === 2000) {
+              this.$router.replace('/')
+            } else if (code === 4001 || code === 4003) {
+              this.signInError = true
+            } else {
+              this.$message.error('登录失败，请再次尝试')
+            }
+          },
+          {
+            background: 'primary',
+            color: '#fff',
+            container: '#signInBtn',
+            scale: 0.45,
+          },
+          () => { this.signInDisable = false },
+        )
       }
     },
 

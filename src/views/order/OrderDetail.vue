@@ -5,11 +5,11 @@
   >
     <div>
       <!-- 订单进度 -->
-      <div class="card flex items-center">
+      <div class="card flex items-center bg-gray">
         <div class="text-sm">
-          <p class="mr-3">
+          <p class="mr-3 text-primary">
             订单号：
-            <span class="text-gray-500">{{ subOrder._id }}</span>
+            <span class="text-gray">{{ subOrder._id }}</span>
           </p>
           <div
             class="p-6 flex-col-center text-2xl font-bold"
@@ -29,8 +29,8 @@
       </div>
 
       <!-- 所购商品表格 -->
-      <div class="card">
-        <div class="card-header mb-2">购物清单</div>
+      <div class="card bg-semi">
+        <div class="card-header mb-2 text-primary">购物清单</div>
         <div class="flex">
           <OrderGoodsList
             class="w-2/3"
@@ -59,9 +59,9 @@
       </div>
 
       <!-- 交易信息 -->
-      <div class="card">
+      <div class="card bg-main">
         <div class="card-header">
-          <p>交易信息</p>
+          <p class="text-primary">交易信息</p>
         </div>
         <vs-divider />
         <div>
@@ -199,28 +199,24 @@ export default {
   },
 
   methods: {
-    async getOrderDetail(order_id, sub_id) {
-      this.$vs.loading({
-        container: '#div-with-loading',
-        scale: 1,
-      })
-
-      try {
-        const { code, data: { order_detail } } = await getOrderDetail({ order_id, sub_id })
-        if (code === 2000) {
-          if (order_detail) {
-            this.detail = order_detail
-            this.address = order_detail.address
-            this.subOrder = order_detail.sub_order
-            this.goodsList = order_detail.sub_order.goods_list
-            this.initStepsData()
-          } else {
-            this.$router.replace('/not-found')
+    getOrderDetail(order_id, sub_id) {
+      this.$loading(
+        async () => {
+          const { code, data: { order_detail } } = await getOrderDetail({ order_id, sub_id })
+          if (code === 2000) {
+            if (order_detail) {
+              this.detail = order_detail
+              this.address = order_detail.address
+              this.subOrder = order_detail.sub_order
+              this.goodsList = order_detail.sub_order.goods_list
+              this.initStepsData()
+            } else {
+              this.$router.replace('/not-found')
+            }
           }
-        }
-      } finally {
-        this.$vs.loading.close('#div-with-loading > .con-vs-loading')
-      }
+        },
+        { container: '#div-with-loading', scale: 1 },
+      )
     },
 
     initStepsData() {
@@ -273,6 +269,23 @@ export default {
   }
 }
 
+@include themeify {
+  .order-info {
+    .label {
+      color: themed("text-color-gray");
+    }
+    .value {
+      color: themed("text-color-semi");
+    }
+  }
+
+  .el-timeline-item::v-deep {
+    .el-timeline-item__content {
+      color: themed("text-color-semi");
+    }
+  }
+}
+
 .order-info {
   display: flex;
   .order-info__col {
@@ -285,7 +298,6 @@ export default {
   }
   .label {
     width: 28%;
-    color: #a0a0a0;
     font-size: 15px;
   }
   .value {

@@ -312,22 +312,19 @@ export default {
     },
 
     // 获取文章
-    async getArticle(section_id, article_id) {
-      this.showEditor = false
-      this.$vs.loading({
-        container: '.article-container',
-        scale: 1,
-      })
-      try {
-        const { code, data } = await getArticle({
-          section_id, article_id,
-        })
-        if (code === 2000) {
-          this.article = data.article
-        }
-      } finally {
-        this.$vs.loading.close('.article-container > .con-vs-loading')
-      }
+    getArticle(section_id, article_id) {
+      this.$loading(
+        async () => {
+          this.showEditor = false
+          const { code, data } = await getArticle({
+            section_id, article_id,
+          })
+          if (code === 2000) {
+            this.article = data.article
+          }
+        },
+        { container: '.article-container', scale: 1 },
+      )
     },
 
     // 点击编辑文章

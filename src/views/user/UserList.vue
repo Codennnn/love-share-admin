@@ -90,7 +90,10 @@
                       禁用
                     </div>
                   </el-dropdown-item>
-                  <el-dropdown-item divided>
+                  <el-dropdown-item
+                    divided
+                    @click.native="deleteUser()"
+                  >
                     <div class="flex-row-center danger">
                       <feather
                         class="mr-2"
@@ -108,7 +111,11 @@
         </template>
       </vs-table>
     </div>
-
+    <vs-button
+      id="click"
+      class=" vs-con-loading__container"
+      @click="click()"
+    >CLICK</vs-button>
     <!-- <vs-popup v-model="showPopup"></vs-popup> -->
   </div>
 </template>
@@ -171,6 +178,25 @@ export default {
         this.$message.error('用户已禁用，可在用户黑名单中查看')
         this.userList.splice(this.userList.findIndex(el => el._id === user_id), 1)
       }
+    },
+
+    deleteUser() {
+      // 待完成
+    },
+
+    click() {
+      this.$loading(
+        async () => {
+          await this.getUserList()
+          await new Promise(resolve => setTimeout(() => {
+            resolve()
+          }, 1000))
+        },
+        {
+          container: '#click', scale: 0.45, background: 'primary', color: '#fff',
+        },
+        () => { console.log(456) },
+      )
     },
   },
 }

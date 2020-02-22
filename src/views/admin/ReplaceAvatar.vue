@@ -128,47 +128,42 @@ export default {
     },
 
     onReplace() {
-      this.$refs.cropper.getCropBlob(async (blob) => {
+      this.$refs.cropper.getCropBlob((blob) => {
         const filename = `${Date.now()}.${blob.type.split('/')[1]}`
         const formData = new FormData()
         formData.append('avatar', blob, filename)
         formData.append('id', this.adminId)
 
-        this.$vs.loading({
-          background: 'primary',
-          color: '#fff',
-          container: '#replaceBtn',
-          scale: 0.45,
-        })
-        this.btnDisable = true
-
-        try {
-          const { code, data: { avatar_url } } = await uploadAvatar(formData)
-          if (code === 2000) {
-            const res = await replaceAvatar({ admin_id: this.adminId, avatar_url })
-            if (res.code === 2000) {
-              this.avatarUrl = avatar_url
-              if (this.adminId === this.$store.getters['admin/adminId']) {
-                this.$emit('updateInfo')
-                this.$store.commit('admin/SET_AVATAR', avatar_url)
+        this.$loading(
+          async () => {
+            this.btnDisable = true
+            const { code, data: { avatar_url } } = await uploadAvatar(formData)
+            if (code === 2000) {
+              const res = await replaceAvatar({ admin_id: this.adminId, avatar_url })
+              if (res.code === 2000) {
+                this.avatarUrl = avatar_url
+                if (this.adminId === this.$store.getters['admin/adminId']) {
+                  this.$emit('updateInfo')
+                  this.$store.commit('admin/SET_AVATAR', avatar_url)
+                }
+                this.$vs.notify({
+                  time: 3000,
+                  title: '图片上传成功',
+                  text: '头像已更换',
+                  color: 'success',
+                })
+                this.showPopup = false
               }
-              this.$vs.notify({
-                time: 3000,
-                title: '图片上传成功',
-                text: '头像已更换',
-                color: 'success',
-              })
-              this.showPopup = false
+            } else if (code === 3000 || code === 4003 || code === 5000) {
+              this.showAlert = true
             }
-          } else if (code === 3000 || code === 4003 || code === 5000) {
-            this.showAlert = true
-          }
-        } catch {
-          this.onShowAlert('图片上传失败，请重试！')
-        } finally {
-          this.$vs.loading.close('#replaceBtn > .con-vs-loading')
-          this.btnDisable = false
-        }
+          },
+          {
+            background: 'primary', color: '#fff', container: '#replaceBtn', scale: 0.45,
+          },
+          () => { this.btnDisable = false },
+          () => { this.onShowAlert('图片上传失败，请重试！') },
+        )
       })
     },
   },

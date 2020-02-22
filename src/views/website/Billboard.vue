@@ -174,21 +174,20 @@ export default {
       }
     },
 
-    async deleteBillboard({ _id, url }, i) {
-      this.$vs.loading({
-        container: `#billboard-item-${i}`,
-        scale: 1,
-      })
-
-      try {
-        const { code } = await deleteBillboard({ _id, url })
-        if (code === 2000) {
-          this.getBillboardList()
-        }
-      } finally {
-        this.currDelete = null
-        this.$vs.loading.close(`#billboard-item-${i} > .con-vs-loading`)
-      }
+    deleteBillboard({ _id, url }, i) {
+      this.$loading(
+        async () => {
+          const { code } = await deleteBillboard({ _id, url })
+          if (code === 2000) {
+            this.getBillboardList()
+          }
+        },
+        {
+          container: `#billboard-item-${i}`,
+          scale: 1,
+        },
+        () => { this.currDelete = null },
+      )
     },
 
     async updateBillboard() {

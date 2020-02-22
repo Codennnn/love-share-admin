@@ -247,39 +247,10 @@ export default {
       })
     },
 
-    async getOrderList() {
-      this.$vs.loading({
-        type: 'point',
-        container: '#table-loading',
-        scale: 1,
-      })
-
-      try {
-        const { code, data } = await getOrderList({
-          page: 1,
-          page_size: 100,
-        })
-        if (code === 2000) {
-          this.orderList = data.order_list
-          this.pagination = data.pagination
-        }
-      } finally {
-        this.$vs.loading.close('#table-loading > .con-vs-loading')
-      }
-    },
-
-    // 按日期获取商品
-    async onDateChange(date) {
-      this.$vs.loading({
-        type: 'point',
-        container: '#table-loading',
-        scale: 1,
-      })
-      if (date) {
-        try {
-          const date_range = date.map(el => this.$dayjs(el).format('YYYY-MM-DD'))
-          const { code, data } = await getOrderListByDateRange({
-            date_range,
+    getOrderList() {
+      this.$loading(
+        async () => {
+          const { code, data } = await getOrderList({
             page: 1,
             page_size: 100,
           })
@@ -287,9 +258,29 @@ export default {
             this.orderList = data.order_list
             this.pagination = data.pagination
           }
-        } finally {
-          this.$vs.loading.close('#table-loading > .con-vs-loading')
-        }
+        },
+        { type: 'point', container: '#table-loading', scale: 1 },
+      )
+    },
+
+    // 按日期获取商品
+    onDateChange(date) {
+      if (date) {
+        this.$loading(
+          async () => {
+            const date_range = date.map(el => this.$dayjs(el).format('YYYY-MM-DD'))
+            const { code, data } = await getOrderListByDateRange({
+              date_range,
+              page: 1,
+              page_size: 100,
+            })
+            if (code === 2000) {
+              this.orderList = data.order_list
+              this.pagination = data.pagination
+            }
+          },
+          { type: 'point', container: '#table-loading', scale: 1 },
+        )
       } else {
         this.getOrderList()
       }

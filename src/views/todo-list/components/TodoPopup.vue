@@ -183,38 +183,38 @@ export default {
       }
     },
 
-    async addTodo() {
-      this.loading = true
-      this.$vs.loading({
-        background: 'primary',
-        color: '#fff',
-        container: '#confirmBtn',
-        scale: 0.45,
-      })
-      try {
-        await this.$store.dispatch('todo/addTodo', this.task)
-        this.isPopupActiveLocal = false
-      } finally {
-        this.$vs.loading.close('#confirmBtn > .con-vs-loading')
-        this.loading = false
-      }
+    addTodo() {
+      this.$loading(
+        async () => {
+          this.loading = true
+          await this.$store.dispatch('todo/addTodo', this.task)
+          this.isPopupActiveLocal = false
+        },
+        {
+          background: 'primary',
+          color: '#fff',
+          container: '#confirmBtn',
+          scale: 0.45,
+        },
+        () => { this.loading = false },
+      )
     },
 
-    async updateTodo() {
-      this.loading = true
-      this.$vs.loading({
-        background: 'primary',
-        color: '#fff',
-        container: '#confirmBtn',
-        scale: 0.45,
-      })
-      try {
-        await this.$store.dispatch('todo/updateTodo', this.task)
-        this.isPopupActiveLocal = false
-      } finally {
-        this.$vs.loading.close('#confirmBtn > .con-vs-loading')
-        this.loading = false
-      }
+    updateTodo() {
+      this.$loading(
+        async () => {
+          this.loading = true
+          await this.$store.dispatch('todo/updateTodo', this.task)
+          this.isPopupActiveLocal = false
+        },
+        {
+          background: 'primary',
+          color: '#fff',
+          container: '#confirmBtn',
+          scale: 0.45,
+        },
+        () => { this.loading = false },
+      )
     },
   },
 }
