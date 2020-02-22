@@ -69,7 +69,7 @@ danger-10;
 @include themeify {
   @each $color in $colors {
     .#{$color} {
-      color: themed("#{$color}");
+      color: themed("#{$color}") !important;
     }
   }
 
@@ -106,6 +106,18 @@ danger-10;
 
       &:focus {
         box-shadow: none;
+      }
+    }
+
+    &.no-dark {
+      .vs-inputx {
+        color: #6f8193;
+        background: #f6f7f8;
+      }
+
+      .vs-input--placeholder {
+        opacity: 0.8;
+        color: #6f8193;
       }
     }
 
@@ -175,6 +187,36 @@ danger-10;
 
   .el-input {
     border-radius: $large-radius;
+
+    &.no-dark {
+      background: #f6f7f8;
+
+      .el-input__inner {
+        color: #6f8193 !important;
+
+        &::placeholder {
+          opacity: 0.8;
+          color: #6f8193 !important;
+        }
+      }
+    }
+  }
+
+  .el-select {
+    border-radius: $large-radius;
+
+    &.no-dark {
+      background: #f6f7f8;
+
+      .el-input__inner {
+        color: #6f8193 !important;
+
+        &::placeholder {
+          opacity: 0.8;
+          color: #6f8193 !important;
+        }
+      }
+    }
   }
 
   .el-input__inner {
@@ -182,6 +224,14 @@ danger-10;
     background: themed("input-bg-color");
     border-radius: $large-radius;
     border: none !important;
+
+    &.no-dark {
+      background: #f6f7f8;
+
+      .el-range-input {
+        color: #6f8193 !important;
+      }
+    }
 
     $placeholder-opacity: 0.8;
 

@@ -20,12 +20,15 @@
 
       // 有子菜单
       .multi-menu {
+        border-radius: $large-radius;
+
         .el-submenu__title {
           span {
             color: themed("sidebar-text-color");
           }
 
           &:hover {
+            border-radius: $medium-radius;
             background: themed("bg-color-gray");
           }
 
@@ -41,6 +44,7 @@
 
           .el-menu-item {
             &:hover {
+              border-radius: $medium-radius;
               background: themed("bg-color-gray");
             }
           }
@@ -77,6 +81,7 @@
 
       // 无子菜单
       .single-menu {
+        border-radius: $medium-radius;
 
         // 鼠标悬浮样式
         &:hover {
@@ -93,6 +98,7 @@
       }
 
       .el-menu-item.is-active {
+        border-radius: $medium-radius;
 
         .menu-icon,
         span {
@@ -233,6 +239,7 @@
             color: themed("sidebar-semi-text-color");
 
             &:hover {
+              border-radius: $medium-radius;
               background: themed("sidebar-semi-item-hover-color");
             }
           }
@@ -244,6 +251,7 @@
 
         // 鼠标悬浮样式
         &:hover {
+          border-radius: $medium-radius;
           background: themed("sidebar-semi-item-hover-color");
         }
 
@@ -255,6 +263,7 @@
       }
 
       .el-menu-item.is-active {
+        border-radius: $medium-radius;
         color: themed("sidebar-semi-text-color");
 
         .menu-icon {

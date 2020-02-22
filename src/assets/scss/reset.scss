@@ -121,8 +121,16 @@ img {
   border-radius: $medium-radius !important;
 }
 
+.el-select-dropdown,
 .el-picker-panel {
   border-radius: $large-radius !important;
+  box-shadow: $heavy-shadow !important;
+  border: none !important;
+  overflow: hidden;
+}
+
+.el-select-dropdown__wrap {
+  margin-bottom: -16px !important;
 }
 
 .el-range-separator {
