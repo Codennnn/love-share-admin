@@ -112,7 +112,7 @@
       <div class="w-full py-2 px-10 flex-col-center">
         <span class="ml-1 text-sm self-start text-primary">类型</span>
         <el-select
-          class="w-full mb-3"
+          class="w-full mb-3 no-dark"
           v-model="currEdit.type"
           placeholder="请选择"
         >
@@ -125,7 +125,7 @@
           </el-option>
         </el-select>
         <vs-input
-          class="w-full mb-4"
+          class="w-full mb-4 no-dark"
           label="Link"
           placeholder="请输入路由或外链链接"
           v-model="currEdit.link"

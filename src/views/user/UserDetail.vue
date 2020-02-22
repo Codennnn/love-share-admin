@@ -24,7 +24,7 @@
               <td>真实姓名</td>
               <td>{{ detail.real_name }}</td>
               <td>性 别</td>
-              <td>{{ detail.gender === '0' ? '女' : '男' }}</td>
+              <td>{{ detail.gender === '0' ? '未填写' : detail.gender === '1' ? '男' : '女' }}</td>
             </tr>
             <tr>
               <td>个人简介</td>

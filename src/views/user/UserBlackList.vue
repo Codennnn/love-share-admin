@@ -1,7 +1,6 @@
 <template>
   <div class="pt-8">
     <vs-table
-      search
       pagination
       noDataText="暂无数据"
       :max-items="8"
@@ -36,28 +35,10 @@
             <p>{{ $dayjs(tr.created_at).format('YYYY/MM/DD') }}</p>
           </vs-td>
           <vs-td>
-            <div class="text-center">
-              <el-dropdown>
-                <i class="el-icon-more text-gray"></i>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item class="text-center">
-                    <i class="el-icon-chat-round mr-2"></i>
-                    <span>联系</span>
-                  </el-dropdown-item>
-                  <el-dropdown-item class="text-center">
-                    <i class="el-icon-news mr-2"></i>
-                    <span>查看</span>
-                  </el-dropdown-item>
-                  <el-dropdown-item
-                    class="text-center danger"
-                    divider
-                  >
-                    <i class="el-icon-delete mr-2"></i>
-                    <span>删除</span>
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-            </div>
+            <span
+              class="danger cursor-pointer"
+              @click="removeBlock(tr._id)"
+            >解除黑名单</span>
           </vs-td>
         </vs-tr>
       </template>
@@ -66,15 +47,8 @@
 </template>
 
 <script>
-const getBlackList = () => ({
-  code: 2000,
-  data: {
-    balck_list: [...Array(50).keys()].map(el => ({
-      avatar_url: 'https://cdn.hrspider.top/avatar-1578673645394.jpeg',
-      nickname: `令狐少侠${el}`,
-    })),
-  },
-})
+import { getBlockUserList, updateUserAccountInfo } from '@/request/api/user'
+
 export default {
   name: 'UserBlackList',
   data: () => ({
@@ -87,9 +61,21 @@ export default {
 
   methods: {
     async getBlackList() {
-      const { code, data: { balck_list } } = await getBlackList()
+      const { code, data: { user_list } } = await getBlockUserList()
       if (code === 2000) {
-        this.balckList = balck_list
+        this.balckList = user_list
+      }
+    },
+
+    async removeBlock(user_id) {
+      const { code } = await updateUserAccountInfo({
+        user_id,
+        is_blocked: false,
+        info: '',
+      })
+      if (code === 2000) {
+        this.$message.success('用户已解除黑名单')
+        this.getBlackList()
       }
     },
   },

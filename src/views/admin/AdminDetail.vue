@@ -34,7 +34,7 @@
               </tr>
               <tr>
                 <td class="text-semi">性 别</td>
-                <td class="text-gray">{{ detail.gender ? '女' : '男' }}</td>
+                <td class="text-gray">{{ detail.gender === 1 ? '女' : '男' }}</td>
               </tr>
               <tr>
                 <td class="text-semi">状 态</td>

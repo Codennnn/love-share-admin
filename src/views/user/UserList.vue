@@ -52,7 +52,7 @@
             </vs-td>
             <vs-td>
               <el-dropdown>
-                <i class="el-icon-more-outline"></i>
+                <i class="el-icon-more text-semi"></i>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item @click.native="contactUser(tr._id, tr.nickname)">
                     <div class="flex-row-center">
@@ -79,10 +79,7 @@
                       查看
                     </div>
                   </el-dropdown-item>
-                  <el-dropdown-item @click.native="$router.push({
-                    path: '/user-detail',
-                    query: { userId: tr._id }
-                  })">
+                  <el-dropdown-item @click.native="blockUser(tr._id)">
                     <div class="flex-row-center">
                       <feather
                         class="mr-2"
@@ -111,6 +108,8 @@
         </template>
       </vs-table>
     </div>
+
+    <!-- <vs-popup v-model="showPopup"></vs-popup> -->
   </div>
 </template>
 
@@ -118,7 +117,7 @@
 import { setCreditColor } from '@/utils/util'
 import UserStatistics from './components/UserStatistics.vue'
 
-import { getUserList } from '@/request/api/user'
+import { getUserList, updateUserAccountInfo } from '@/request/api/user'
 
 export default {
   name: 'UserList',
@@ -127,6 +126,7 @@ export default {
   data: () => ({
     setCreditColor,
     userList: [],
+    showPopup: false,
   }),
 
   activated() {
@@ -159,6 +159,18 @@ export default {
       }
       this.$store.commit('chat/SET_ACTIVE_CHAT_USER', { _id, nickname })
       this.$store.commit('chat/SET_CHAT_OPEN')
+    },
+
+    async blockUser(user_id) {
+      const { code } = await updateUserAccountInfo({
+        user_id,
+        is_blocked: true,
+        info: '该用户存在违规行为',
+      })
+      if (code === 2000) {
+        this.$message.error('用户已禁用，可在用户黑名单中查看')
+        this.userList.splice(this.userList.findIndex(el => el._id === user_id), 1)
+      }
     },
   },
 }

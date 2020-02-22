@@ -15,6 +15,22 @@ export function getUserList(params) {
   })
 }
 
+export function updateUserAccountInfo(data) {
+  return request({
+    url: '/user/account/update',
+    method: 'put',
+    data,
+  })
+}
+
+export function getBlockUserList(params) {
+  return request({
+    url: '/user/block_list',
+    method: 'get',
+    params,
+  })
+}
+
 export function getUserDetailByAdmin(params) {
   return request({
     url: '/user/detail_by_admin',

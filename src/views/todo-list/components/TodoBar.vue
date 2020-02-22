@@ -98,7 +98,7 @@ const labelItems = [
   },
 ]
 const labelMarks = [
-  { color: 'main', text: '前端', value: 1 },
+  { color: 'primary', text: '前端', value: 1 },
   { color: 'warning', text: '后端', value: 2 },
   { color: 'success', text: '其它', value: 3 },
   { color: 'danger', text: 'BUG', value: 4 },

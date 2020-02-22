@@ -63,7 +63,7 @@
     <div class="w-full pt-2">
       <!-- 输入标题框 -->
       <vs-input
-        class="w-full"
+        class="w-full no-dark"
         label-placeholder="标题"
         v-model.trim="task.title"
       />
@@ -81,6 +81,7 @@
     <div>
       <div class="mb-1 text-gray text-xs">计划完成日期</div>
       <el-date-picker
+        class="no-dark"
         type="daterange"
         value-format="timestamp"
         range-separator="至"

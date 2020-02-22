@@ -17,7 +17,7 @@
         </div>
         <vs-input
           class="search-input sticky top-0 z-40 w-full"
-          style="background: transparent;"
+          style="height: 50px; background: transparent;"
           size="large"
           placeholder="搜索..."
           v-model.lazy.trim="search"
@@ -203,14 +203,12 @@ export default {
 <style lang="scss" scoped>
 // 重设输入框样式
 .search-input::v-deep {
+  $padding: 0.9rem 0.6rem 0.6rem 4rem !important;
   .vs-inputx {
-    border: none !important;
-    box-shadow: none;
-    padding-left: 4rem;
+    padding: $padding;
   }
   .input-span-placeholder {
-    padding-top: 0.9rem;
-    padding-left: 4rem;
+    padding: $padding;
   }
 }
 

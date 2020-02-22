@@ -23,8 +23,8 @@
         >
           <div class="flex-row-center">
             <feather
-              size="15"
-              stroke-width="1.5"
+              size="16"
+              stroke-width="1.8"
               :type="pop.icon"
             ></feather>
             <span class="inner-text ml-2 text-sm">{{ pop.text }}</span>

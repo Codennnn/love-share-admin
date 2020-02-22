@@ -21,7 +21,7 @@
         </div>
         <div
           title="导出统计图"
-          class="w-10 h-10 flex-row-center rounded-lg primary-semi bg-main cursor-pointer"
+          class="w-10 h-10 flex-row-center rounded-lg primary bg-main cursor-pointer"
           @click="$refs.userChart.downloadPNG()"
         >
           <feather

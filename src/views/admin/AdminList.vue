@@ -72,6 +72,7 @@
             <vs-td>
               <el-dropdown>
                 <feather
+                  class="text-gray"
                   size="20"
                   type="more-horizontal"
                 ></feather>
@@ -89,7 +90,7 @@
                   </el-dropdown-item>
                   <el-dropdown-item
                     class="text-center"
-                    @click="$router.push({
+                    @click.native="$router.push({
                       path: '/admin-detail',
                       query: { adminId: tr._id }
                     })"
@@ -106,7 +107,7 @@
                   </el-dropdown-item>
                   <el-dropdown-item
                     class="text-center"
-                    @click="$router.push({
+                    @click.native="$router.push({
                       path: '/admin-edit',
                       query: {adminId: tr._id}
                     })"

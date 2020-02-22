@@ -363,8 +363,9 @@ export default {
 @include themeify {
   .scroll-area {
     background: themed("bg-color-gray");
-    .vs-collapse-item {
+    .vs-collapse-item::v-deep {
       .vs-collapse-item--header {
+        .vs-icon,
         div {
           color: themed("text-color-primary");
         }

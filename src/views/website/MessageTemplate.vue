@@ -44,6 +44,7 @@
         >
           <div class="w-64">
             <el-input
+              class="no-dark"
               placeholder="只能是中文、字母、数字"
               v-model="form.name"
             ></el-input>
