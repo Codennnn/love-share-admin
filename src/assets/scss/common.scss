@@ -35,7 +35,7 @@
 }
 
 .transition {
-  transition: all 0.3s;
+  transition: $transition;
 }
 
 .quickly {
@@ -183,7 +183,10 @@ danger-10;
     border-radius: $large-radius;
     border: none !important;
 
+    $placeholder-opacity: 0.8;
+
     &::placeholder {
+      opacity: $placeholder-opacity;
       color: themed("text-color-primary") !important;
     }
 
@@ -192,6 +195,7 @@ danger-10;
       background: themed("input-bg-color");
 
       &::placeholder {
+        opacity: $placeholder-opacity;
         color: themed("text-color-primary") !important;
       }
     }

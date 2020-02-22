@@ -99,3 +99,19 @@ img {
     font-size: 0.775rem;
   }
 }
+
+.el-dropdown-menu {
+  padding: 0.2rem 0 !important;
+  border-radius: $medium-radius !important;
+  box-shadow: $base-shadow !important;
+  border: none !important;
+
+  .el-dropdown-menu__item {
+    transition: $transition;
+  }
+
+  .el-dropdown-menu__item:not(.is-disabled):hover,
+  .el-dropdown-menu__item:focus {
+    background-color: rgba(var(--vs-primary), 0.03);
+  }
+}
