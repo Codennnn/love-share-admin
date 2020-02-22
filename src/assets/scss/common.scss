@@ -62,26 +62,26 @@ danger-10;
 
 @each $color in $colors {
   .bg-#{$color} {
-    background-color: rgba(var(--vs-#{$color}), 1) !important;
+    background-color: rgba(var(--vs-#{$color}), 1);
   }
 }
 
 @include themeify {
   @each $color in $colors {
     .#{$color} {
-      color: themed("#{$color}") !important;
+      color: themed("#{$color}");
     }
   }
 
   @each $color in $text-colors {
     .text-#{$color} {
-      color: themed("text-color-#{$color}") !important;
+      color: themed("text-color-#{$color}");
     }
   }
 
   @each $color in $bg-colors {
     .bg-#{$color} {
-      background-color: themed("bg-color-#{$color}") !important;
+      background-color: themed("bg-color-#{$color}");
     }
   }
 
