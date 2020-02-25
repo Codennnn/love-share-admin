@@ -76,12 +76,12 @@ const actions = {
   },
 
   async updateTodoType({ dispatch, commit }, { todo_id, type, flag }) {
-    if (type === 'is_done' && flag) {
-      Message.success('已完成一个任务！')
-    }
     commit('TOGGLE_TAG', { todo_id, type })
     const { code } = await updateTodoType({ todo_id, type, flag })
     if (code === 2000) {
+      if (type === 'is_done' && flag) {
+        Message.success('已完成一个任务！')
+      }
       dispatch('getTodoList')
     }
   },

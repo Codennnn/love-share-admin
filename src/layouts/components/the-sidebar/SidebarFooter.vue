@@ -97,7 +97,7 @@
                                 class="w-3 h-1 ml-1 rounded-full"
                                 v-for="(tag, i) in it.tags"
                                 :key="i"
-                                :class="`bg-${['main', 'warning', 'success', 'danger'][tag - 1]}`"
+                                :class="`bg-${['primary', 'warning', 'success', 'danger'][tag - 1]}`"
                               ></div>
                             </div>
                           </el-dropdown-item>

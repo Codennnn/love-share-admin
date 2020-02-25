@@ -6,7 +6,7 @@
       class="grid pt-3 pb-6"
     >
       <div
-        class="bg-semi radius base-shadow overflow-hidden"
+        class="bg-semi radius light-shadow overflow-hidden"
         v-for="(it, i) in charts"
         :key="i"
       >
