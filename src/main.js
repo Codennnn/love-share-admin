@@ -20,7 +20,7 @@ import '@/layouts/theme' // 网站主题，样式
 import '@/directives' // 自定义指令
 
 Vue.use(new VueSocketIO({
-  connection: process.env.NODE_ENV === 'production' ? 'https://129.204.137.172' : 'http://127.0.0.1:7001',
+  connection: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : 'http://127.0.0.1:7001',
 }))
 // https://holdme.top/api http://nat.hrspider.top:8080
 Vue.use(animated)

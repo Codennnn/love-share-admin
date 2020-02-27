@@ -3,8 +3,8 @@ import { errorNotify, consoleLog } from '@/utils/util'
 import { getToken } from '@/utils/token'
 
 const service = Axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://129.204.137.172/api' : '/api',
-  // https://holdme.top/api
+  baseURL: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : '/api',
+  // https://129.204.137.172/api
   timeout: 10000,
   responseType: 'json',
   withCredentials: true,
