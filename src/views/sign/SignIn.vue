@@ -25,9 +25,13 @@
       color='danger'
       :active.sync="signInError"
     >{{ signInErrorText }}</vs-alert>
-    <div class="text-right">
+    <div class="px-2 flex justify-between text-sm text-gray-500">
       <span
-        class="forget-pwd text-sm text-gray-500 cursor-pointer"
+        class="forget-pwd cursor-pointer"
+        @click="getCount()"
+      >获取体验账号</span>
+      <span
+        class="forget-pwd cursor-pointer"
         @click="switchToReset()"
       >忘记密码？</span>
     </div>
@@ -156,6 +160,11 @@ export default {
         code: 3,
         message: 'Geolocation Service Is Unavailable',
       }
+    },
+
+    getCount() {
+      this.signInInput[0].value = 'czc12580520'
+      this.signInInput[1].value = '123456'
     },
   },
 }
