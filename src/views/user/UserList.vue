@@ -111,11 +111,8 @@
         </template>
       </vs-table>
     </div>
-    <vs-button
-      id="click"
-      class=" vs-con-loading__container"
-      @click="click()"
-    >CLICK</vs-button>
+
+    <!-- 发送拉黑通知 -->
     <!-- <vs-popup v-model="showPopup"></vs-popup> -->
   </div>
 </template>
@@ -182,21 +179,6 @@ export default {
 
     deleteUser() {
       // 待完成
-    },
-
-    click() {
-      this.$loading(
-        async () => {
-          await this.getUserList()
-          await new Promise(resolve => setTimeout(() => {
-            resolve()
-          }, 1000))
-        },
-        {
-          container: '#click', scale: 0.45, background: 'primary', color: '#fff',
-        },
-        () => { console.log(456) },
-      )
     },
   },
 }
