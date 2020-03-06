@@ -48,7 +48,7 @@
           >
             <feather
               size="20"
-              stroke-width="2.5"
+              stroke-width="2.4"
               type="x"
             ></feather>
           </div>
@@ -58,8 +58,8 @@
             @click="showPopup = true, currEdit = $cloneDeepWith(it)"
           >
             <feather
-              size="18"
-              stroke-width="2"
+              size="20"
+              stroke-width="2.4"
               type="terminal"
             ></feather>
           </div>
@@ -68,9 +68,12 @@
             v-if="currDelete === i"
             class="delete-bg absolute top-0 left-0 w-full h-full flex-row-center text-primary text-sm"
           >
-            <div class="absolute z-40 top-0 left-0 w-full h-full bg-main opacity-75"></div>
+            <div
+              class="absolute z-40 top-0 left-0 w-full h-full bg-main"
+              style="opacity: 0.85;"
+            ></div>
             <div class="relative z-50 flex-col-center">
-              <p class="mb-2">
+              <p class="mb-2 text-base font-bold">
                 删除后将不可恢复，请谨慎操作！
               </p>
               <div>
@@ -80,7 +83,7 @@
                   @click="deleteBillboard(it, i)"
                 >确认删除</vs-button>
                 <span
-                  class="ml-2 cursor-pointer"
+                  class="ml-2 font-bold cursor-pointer"
                   @click="currDelete = null"
                 >手滑点错了</span>
               </div>
@@ -131,7 +134,7 @@
           v-model="currEdit.link"
         />
         <vs-button
-          class="w-full"
+          class="w-full radius"
           @click="updateBillboard()"
         >完成修改</vs-button>
       </div>
@@ -226,18 +229,13 @@ export default {
 
 .billboard-item {
   @mixin style {
-    position: absolute;
+    @apply absolute flex justify-center items-center opacity-0 cursor-pointer;
     right: -50px;
     width: 1.8rem;
     height: 1.8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 0.35rem;
     background: rgba(186, 187, 192, 0.2);
     transition: all 0.2s;
-    opacity: 0;
-    cursor: pointer;
     &:hover {
       border-radius: 50%;
       color: white;

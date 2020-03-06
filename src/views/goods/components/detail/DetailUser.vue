@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="hover-light cursor-pointer">
+    <div class="hover-light radius cursor-pointer">
       <div
         class="py-3 flex-row-center text-center text-white
           bg-primary-gradient rounded-lg"

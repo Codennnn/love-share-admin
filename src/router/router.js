@@ -53,12 +53,6 @@ export const asyncRoutes = [
         component: () => import('@/views/analytics/Monitor.vue'),
         meta: { title: '数据监控' },
       },
-      {
-        path: '/text',
-        name: 'Text',
-        component: () => import('@/views/analytics/Text.vue'),
-        meta: { title: '测试' },
-      },
     ],
     meta: { title: '数据分析', icon: 'activity' },
   },
@@ -348,6 +342,12 @@ export const asyncRoutes = [
         meta: {
           title: '通知中心',
         },
+      },
+      {
+        path: '/test',
+        name: 'Test',
+        component: () => import('@/views/analytics/Test.vue'),
+        meta: { title: '测试' },
       },
     ],
   },

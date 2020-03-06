@@ -133,7 +133,7 @@
           />
           <div
             class="absolute top-0 right-0 w-12 h-full ml-4 flex-row-center
-             bg-main text-gray-100 text-sm rounded cursor-pointer"
+             bg-gray text-semi text-sm rounded cursor-pointer"
             @click="sendMessage()"
           >
             <feather

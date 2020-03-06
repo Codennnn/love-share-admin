@@ -3,7 +3,7 @@
     <vs-table
       search
       pagination
-      class="p-3"
+      class="p-3 radius"
       noDataText="暂无数据"
       :max-items="10"
       :data="schoolList"
@@ -76,6 +76,19 @@ export default {
       }
       const [sheetData] = await file2Xce(file)
       if (sheetData.sheet) {
+        const codeMap = new Map()
+        this.schoolList.forEach(el => codeMap.set(el.code, 0))
+        const len = sheetData.sheet.filter(el => codeMap.has(el.code)).length
+        if (len > 0) {
+          this.$vs.notify({
+            title: '数据导入有误',
+            text: `成功导入 ${this.schoolList.length - len} 条数据，${len} 条导入失败，错误原因：存在重复数据`,
+            color: 'danger',
+            position: 'top-right',
+            time: 5000,
+          })
+          return
+        }
         const { code } = await addSchool({ school_list: sheetData.sheet })
         if (code === 2000) {
           this.$store.dispatch('getSchoolList')

@@ -16,7 +16,7 @@
         wheelSpeed: 0.60,
       }"
     >
-      <ul class="pt-2 overflow-hidden">
+      <ul class="pt-2 text-sm overflow-hidden">
         <li
           class="msg relative mb-2"
           style="transition: all 0.3s;"
@@ -40,7 +40,7 @@
               {{ $timeDiff(cm.created_at) }}
             </p>
           </div>
-          <p class="ml-8 text-sm text-gray">{{ cm.content }}</p>
+          <p class="ml-8 text-gray">{{ cm.content }}</p>
           <ul
             v-if="cm.replies.length > 0"
             class="ml-6 p-2 bg-gray rounded-lg"
@@ -49,7 +49,7 @@
               v-for="(it, index) in cm.replies"
               :key="index"
             >
-              <p class="text-sm">
+              <p>
                 <span>
                   <span
                     class="name cursor-pointer"
@@ -78,6 +78,11 @@
               </p>
             </li>
           </ul>
+
+          <span
+            class="comment-block absolute top-0 right-0 mt-3 text-gray text-xs hidden cursor-pointer"
+            @click="changeGoodsComments(cm._id)"
+          >屏蔽此留言</span>
         </li>
       </ul>
     </VuePerfectScrollbar>
@@ -107,6 +112,8 @@
 <script>
 import elementResizeDetectorMaker from 'element-resize-detector'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+
+import { changeGoodsComments } from '@/request/api/goods'
 
 export default {
   name: 'DetailComment',
@@ -167,6 +174,18 @@ export default {
         })
       }
     },
+
+    async changeGoodsComments(comment_id) {
+      const { code } = await changeGoodsComments({
+        goods_id: this.goodsId,
+        comment_id,
+        content: '此用户评论涉嫌违规',
+      })
+      if (code === 2000) {
+        this.$emit('refreshComments')
+        this.$message.success('已屏蔽留言')
+      }
+    },
   },
 }
 </script>
@@ -212,6 +231,11 @@ body[data-theme="dark"] {
     font-weight: normal;
     color: rgba(var(--vs-primary), 1);
     background: rgba(var(--vs-primary), 0.15);
+  }
+  &:hover {
+    .comment-block {
+      @apply block;
+    }
   }
 }
 

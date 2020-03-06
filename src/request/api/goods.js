@@ -106,3 +106,11 @@ export function getGoodsComments(params) {
     params,
   })
 }
+
+export function changeGoodsComments(data) {
+  return request({
+    url: '/goods/comment/change',
+    method: 'put',
+    data,
+  })
+}

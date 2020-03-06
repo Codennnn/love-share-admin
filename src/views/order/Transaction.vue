@@ -57,7 +57,8 @@ const payments = {
 }
 const status = {
   1: { color: 'success', text: '支付成功' },
-  2: { color: 'danger', text: '取消支付' },
+  2: { color: 'warning', text: '待支付' },
+  3: { color: 'danger', text: '取消支付' },
 }
 export default {
   name: 'Transaction',
@@ -71,17 +72,50 @@ export default {
   created() {
     // 模拟
     const record = []
-    Array.from({ length: 50 }).forEach(() => {
-      record.push({
+    const data = [
+      {
         _id: '1257896452453',
         payment: 1,
         amount: 58,
         status: 1,
         created_at: 1657896452453,
         seller: {
-          nickname: '令狐少侠',
+          nickname: '刘德华',
         },
-      })
+      },
+      {
+        _id: '1975466452453',
+        payment: 2,
+        amount: 69,
+        status: 1,
+        created_at: 1657896452783,
+        seller: {
+          nickname: '张学友',
+        },
+      },
+      {
+        _id: '1975465647353',
+        payment: 3,
+        amount: 99,
+        status: 2,
+        created_at: 1657897862783,
+        seller: {
+          nickname: '郭富城',
+        },
+      },
+      {
+        _id: '1145685647353',
+        payment: 3,
+        amount: 104,
+        status: 3,
+        created_at: 16572297862783,
+        seller: {
+          nickname: '黎明',
+        },
+      },
+    ]
+    Array.from({ length: 10 }).forEach(() => {
+      record.push(...data)
     })
     this.recordList = record
   },

@@ -6,22 +6,18 @@
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 14px;
   background-color: rgba(0, 0, 0, 0);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.05);
-  border: 2px solid #ffffff;
+  background-color: rgba(0, 0, 0, 0.08);
+  border: 3px solid #ffffff;
 }
 
 ::-webkit-scrollbar-track-piece {
-  background-color: rgb(245, 245, 245);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  cursor: pointer;
+  background-color: transparent;
 }
 
 html {
