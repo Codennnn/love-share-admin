@@ -43,13 +43,7 @@ const mutations = {
 
 const actions = {
   generateRoutes({ commit }, permissions) {
-    // let accessedRoutes
-    // if (permissions.includes('super_admin')) {
-    //   // 如果权限为 “超级管理员” 则拥有所有路由的权限
-    //   accessedRoutes = asyncRoutes || []
-    // } else {
     const accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
-    // }
     commit('SET_ROUTES', accessedRoutes)
     return accessedRoutes
   },

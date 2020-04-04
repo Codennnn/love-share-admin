@@ -11,7 +11,7 @@ Vue.use(Router)
 export const constantRoutes = [
   {
     path: '/sign',
-    name: 'Sing',
+    name: 'Sign',
     hidden: true,
     component: () => import('@/views/sign/Sign.vue'),
     meta: { title: '登录' },
