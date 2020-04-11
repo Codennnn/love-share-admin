@@ -38,7 +38,7 @@
               </tr>
               <tr>
                 <td class="text-semi">状 态</td>
-                <td class="text-gray">{{ '令狐少侠' }}</td>
+                <td class="text-gray">{{ '正常' }}</td>
               </tr>
             </table>
           </div>

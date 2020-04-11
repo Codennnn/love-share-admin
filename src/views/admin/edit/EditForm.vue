@@ -1,11 +1,22 @@
 <template>
   <div>
     <el-form
+      hide-required-asterisk
       ref="form"
       class="edit"
       :rules="rules"
       :model="form"
     >
+      <el-form-item
+        label="登入账号"
+        prop="account"
+        required
+      >
+        <el-input
+          placeholder="请填写登入账号"
+          v-model="form.account"
+        ></el-input>
+      </el-form-item>
       <el-form-item
         label="昵称"
         prop="nickname"
@@ -84,6 +95,7 @@ export default {
           this.form = v
         } else {
           this.form = {
+            account: '',
             nickname: '',
             real_name: '',
             email: '',
