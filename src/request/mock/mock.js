@@ -15,10 +15,13 @@ Mock.mock('/admin/info', 'get', {
 Mock.mock('/admin/list', 'get', {
   code: 2000,
 })
-Mock.mock('/admin/update', 'get', {
+Mock.mock('/admin/sign_log', 'get', {
   code: 2000,
 })
-Mock.mock('/admin/sign_log', 'get', {
+Mock.mock('/admin/detail', 'get', {
+  code: 2000,
+})
+Mock.mock('/user/other/info', 'get', {
   code: 2000,
 })
 
