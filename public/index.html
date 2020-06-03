@@ -9,31 +9,47 @@
         content="width=device-width,initial-scale=1.0">
   <link rel="icon"
         href="<%= BASE_URL %>favicon.ico">
-  <title>乐享校园 - 管理端</title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
   <style>
-    .screen-loading {
+    [v-cloak] {
+      position: relative;
       height: 100vh;
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: rgb(209, 196, 255);
+    }
+
+    [v-cloak]>* {
+      display: none;
+    }
+
+    [v-cloak]::before {
+      content: "页面正在加载中...";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 30px;
+      font-weight: bold;
+      color: #626262;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
 
 <body data-theme="light">
   <noscript>
-    <strong>很抱歉，您的浏览器没有启动JavaScript，请启动后继续使用。</strong>
+    <strong>很抱歉，您的浏览器没有启用 JavaScript，请启动后继续使用。</strong>
   </noscript>
-  <!-- Vue示例挂载后，此处会被置换 -->
-  <div id="app">
-    <div class="screen-loading">
-      <img src="https://gitee.com/chinesee/images/raw/master/img/img_023.gif" />
-      <h2 style="color: white;">正在前往目的地</h2>
-    </div>
-  </div>
+  <!-- Vue 实例挂载后，此处会被置换 -->
+  <div id="app"
+       v-cloak></div>
+
+  <!-- require cdn assets js -->
+  <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+  <script type="text/javascript"
+          src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+  <% } %>
 </body>
 
 </html>

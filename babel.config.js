@@ -7,7 +7,6 @@ const plugins = [
       styleLibraryName: 'theme-chalk',
     },
   ],
-  // ES 新语法
   '@babel/plugin-proposal-optional-chaining',
 ]
 

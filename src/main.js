@@ -1,14 +1,15 @@
 import Vue from 'vue'
-import animated from 'animate.css' // css 动画库
-import VueClipboard from 'vue-clipboard2' // 粘贴板
-import dayjs from 'dayjs' // 日期格式化
-import VueSocketIO from 'vue-socket.io' // socket.io
-import infiniteScroll from 'vue-infinite-scroll' // 无限滚动
+import animated from 'animate.css'
+import VueClipboard from 'vue-clipboard2'
+import dayjs from 'dayjs'
+// import VueSocketIO from 'vue-socket.io'
+import infiniteScroll from 'vue-infinite-scroll'
 import VueFeather from 'vue-feather'
+import './request/mock/mock'
 import {
   numFixed, timeDiff, cloneDeepWith, loading,
-} from '@/utils/util' // 时间差工具函数
-import errorHandler from '@/utils/error-handler' // 错误处理函数
+} from '@/utils/util'
+import errorHandler from '@/utils/error-handler'
 
 import App from './App.vue'
 import router from './router/router'
@@ -19,10 +20,10 @@ import './router/control' // 路由控制
 import '@/layouts/theme' // 网站主题，样式
 import '@/directives' // 自定义指令
 
-Vue.use(new VueSocketIO({
-  connection: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : 'http://127.0.0.1:7001',
-}))
-// https://holdme.top/api http://nat.hrspider.top:8080
+// Vue.use(new VueSocketIO({
+//   connection: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : 'http://127.0.0.1:7001',
+// }))
+
 Vue.use(animated)
 Vue.use(VueClipboard)
 Vue.use(infiniteScroll)

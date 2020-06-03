@@ -6,7 +6,7 @@ import 'material-icons/iconfont/material-icons.css'
 
 import '@/assets/scss/reset.scss' // 覆盖默认样式
 import '@/assets/scss/common.scss' // 公共样式
-import '@/assets/scss/variables.scss' // scss 变量
+import '@/assets/scss/variables.scss' // scss 全局变量
 import '@/assets/scss/tailwind.scss' // tailwind 样式
 import '@/assets/iconfont/iconfont.css' // 阿里云字体图标
 

@@ -2,20 +2,22 @@ import NProgress from 'nprogress'
 import router from './router'
 import store from '@/store/store'
 
-// 引入路由跳转加载进度条插件
 import 'nprogress/nprogress.css'
-import { getToken } from '@/utils/token'
+import { getToken, removeToken } from '@/utils/token'
 
-NProgress.configure({ showSpinner: false }) // NProgress 配置
+NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/sign']
 
-router.beforeEach(async (to, from, next) => {
-  NProgress.start() // 进度条开始
+const setPageTitle = (title) => {
+  const subTitle = title ? `${title} - ` : ''
+  document.title = `${subTitle}${process.env.VUE_APP_PAGE_TITLE}`
+}
 
-  // 设置网页标题
-  const title = to.meta?.title
-  document.title = title ? `${title} - 乐享校园` : '校园闲置物品交易平台'
+router.beforeEach(async (to, from, next) => {
+  NProgress.start()
+
+  setPageTitle(to.meta?.title)
 
   const hasToken = !!getToken()
 
@@ -32,14 +34,16 @@ router.beforeEach(async (to, from, next) => {
       if (hasPermissions) {
         next()
       } else {
-        const { permissions } = await store.dispatch('admin/getAdminInfo')
-          .catch(() => {
-            next('/sign')
-          })
-        const accessedRoutes = await store.dispatch('permission/generateRoutes', permissions)
-        // 动态添加路由
-        router.addRoutes(accessedRoutes)
-        next({ ...to, replace: true })
+        try {
+          const { permissions } = await store.dispatch('admin/getAdminInfo')
+          const accessedRoutes = await store.dispatch('permission/generateRoutes', permissions)
+          // 动态添加路由
+          router.addRoutes(accessedRoutes)
+          next({ ...to, replace: true })
+        } catch {
+          removeToken()
+          next('/sign')
+        }
       }
     }
   } else if (whiteList.includes(to.path)) {

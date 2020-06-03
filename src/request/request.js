@@ -1,11 +1,10 @@
-import Axios from 'axios'
+import axios from 'axios'
 import { errorNotify, consoleLog } from '@/utils/util'
 import { getToken } from '@/utils/token'
 
-const service = Axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://holdme.top/api' : '/api',
-  // https://129.204.137.172/api
-  timeout: 10000,
+const service = axios.create({
+  baseURL: process.env.VUE_APP_REQUEST_BASE_URL,
+  timeout: 20000,
   responseType: 'json',
   withCredentials: true,
 })

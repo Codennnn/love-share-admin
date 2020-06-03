@@ -2,9 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Layout from '@/layouts/Main.vue' // 主框架
+import Sign from '@/views/sign/Sign.vue' // 登录
 import Analytics from '@/views/analytics/Analytics.vue' // 数据分析
-
-const TodoList = () => import('@/views/todo-list/TodoList.vue')
 
 Vue.use(Router)
 
@@ -13,21 +12,21 @@ export const constantRoutes = [
     path: '/sign',
     name: 'Sign',
     hidden: true,
-    component: () => import('@/views/sign/Sign.vue'),
+    component: Sign,
     meta: { title: '登录' },
   },
   {
     path: '/not-found',
     name: 'not-found',
     hidden: true,
-    component: () => import('@/views/error-page/NotFound.vue'),
+    component: () => import(/* webpackChunkName: 'NotFound' */ '@/views/error-page/NotFound.vue'),
     meta: { title: '404 not found' },
   },
   {
     path: '/lock-screen',
     name: 'LockScreen',
     hidden: true,
-    component: () => import('@/views/lock-screen/LockScreen.vue'),
+    component: () => import(/* webpackChunkName: 'LockScreen' */ '@/views/lock-screen/LockScreen.vue'),
     meta: { title: '屏幕锁定' },
   },
 ]
@@ -50,7 +49,7 @@ export const asyncRoutes = [
       {
         path: '/monitor',
         name: 'Monitor',
-        component: () => import('@/views/analytics/Monitor.vue'),
+        component: () => import(/* webpackChunkName: 'Monitor' */ '@/views/analytics/Monitor.vue'),
         meta: { title: '数据监控' },
       },
     ],
@@ -67,7 +66,7 @@ export const asyncRoutes = [
       {
         path: '/goods-list',
         name: 'GoodsList',
-        component: () => import('@/views/goods/GoodsList.vue'),
+        component: () => import(/* webpackChunkName: 'GoodsList' */ '@/views/goods/GoodsList.vue'),
         meta: { title: '商品列表', permission: { moduleName: 'goods', purviews: ['read'] } },
       },
     ],
@@ -84,13 +83,13 @@ export const asyncRoutes = [
       {
         path: '/order-list',
         name: 'OrderList',
-        component: () => import('@/views/order/OrderList.vue'),
+        component: () => import(/* webpackChunkName: 'OrderList' */ '@/views/order/OrderList.vue'),
         meta: { title: '订单列表', permission: { moduleName: 'order', purviews: ['read'] } },
       },
       {
         path: '/transaction',
         name: 'Transaction',
-        component: () => import('@/views/order/Transaction.vue'),
+        component: () => import(/* webpackChunkName: 'Transaction' */ '@/views/order/Transaction.vue'),
         meta: { title: '交易记录' },
       },
     ],
@@ -107,13 +106,13 @@ export const asyncRoutes = [
       {
         path: '/user-list',
         name: 'UserList',
-        component: () => import('@/views/user/UserList.vue'),
+        component: () => import(/* webpackChunkName: 'UserList' */ '@/views/user/UserList.vue'),
         meta: { title: '用户列表', permission: { moduleName: 'user', purviews: ['read'] } },
       },
       {
         path: '/user-black-list',
         name: 'UserBlackList',
-        component: () => import('@/views/user/UserBlackList.vue'),
+        component: () => import(/* webpackChunkName: 'UserBlackList' */ '@/views/user/UserBlackList.vue'),
         meta: { title: '用户黑名单', permission: { moduleName: 'user', purviews: ['read'] } },
       },
     ],
@@ -130,7 +129,7 @@ export const asyncRoutes = [
       {
         path: '/begging-list',
         name: 'BeggingList',
-        component: () => import('@/views/begging/BeggingList.vue'),
+        component: () => import(/* webpackChunkName: 'BeggingList' */ '@/views/begging/BeggingList.vue'),
         meta: { title: '求购列表' },
       },
     ],
@@ -147,13 +146,13 @@ export const asyncRoutes = [
       {
         path: '/help-center',
         name: 'HelpCenter',
-        component: () => import('@/views/service/HelpCenter.vue'),
+        component: () => import(/* webpackChunkName: 'HelpCenter' */ '@/views/service/HelpCenter.vue'),
         meta: { title: '帮助中心' },
       },
       {
         path: '/frequent-questions',
         name: 'FrequentQuestions',
-        component: () => import('@/views/service/FrequentQuestions.vue'),
+        component: () => import(/* webpackChunkName: 'FrequentQuestions' */ '@/views/service/FrequentQuestions.vue'),
         meta: { title: '常见问题' },
       },
     ],
@@ -170,25 +169,25 @@ export const asyncRoutes = [
       {
         path: '/website',
         name: 'Website',
-        component: () => import('@/views/website/Billboard.vue'),
+        component: () => import(/* webpackChunkName: 'Billboard' */ '@/views/website/Billboard.vue'),
         meta: { title: '广告牌' },
       },
       {
         path: '/school-management',
         name: 'SchoolManagement',
-        component: () => import('@/views/website/SchoolManagement.vue'),
+        component: () => import(/* webpackChunkName: 'SchoolManagement' */ '@/views/website/SchoolManagement.vue'),
         meta: { title: '学校列表' },
       },
       {
         path: '/goods-category',
         name: 'GoodsCategory',
-        component: () => import('@/views/goods/GoodsCategory.vue'),
+        component: () => import(/* webpackChunkName: 'GoodsCategory' */ '@/views/goods/GoodsCategory.vue'),
         meta: { title: '商品分类' },
       },
       {
         path: '/message-template',
         name: 'MessageTemplate',
-        component: () => import('@/views/website/MessageTemplate.vue'),
+        component: () => import(/* webpackChunkName: 'MessageTemplate' */ '@/views/website/MessageTemplate.vue'),
         meta: { title: '消息模板' },
       },
     ],
@@ -205,13 +204,13 @@ export const asyncRoutes = [
       {
         path: '/admin-list',
         name: 'AdminList',
-        component: () => import('@/views/admin/AdminList.vue'),
+        component: () => import(/* webpackChunkName: 'AdminList' */ '@/views/admin/AdminList.vue'),
         meta: { title: '管理员列表', permission: { moduleName: 'admin', purviews: ['read'] } },
       },
       {
         path: '/admin-create',
         name: 'AdminCreate',
-        component: () => import('@/views/admin/AdminCreate.vue'),
+        component: () => import(/* webpackChunkName: 'AdminCreate' */ '@/views/admin/AdminCreate.vue'),
         meta: { title: '创建管理员', permission: { moduleName: 'admin', purviews: ['read'] } },
       },
     ],
@@ -229,7 +228,7 @@ export const asyncRoutes = [
       {
         path: '/todo-list',
         name: 'TodoList',
-        component: TodoList,
+        component: () => import(/* webpackChunkName: 'TodoList' */ '@/views/todo-list/TodoList.vue'),
         meta: { title: '任务列表', icon: 'server' },
       },
     ],
@@ -246,7 +245,7 @@ export const asyncRoutes = [
       {
         path: '/goods-detail',
         name: 'GoodsDetail',
-        component: () => import('@/views/goods/GoodsDetail.vue'),
+        component: () => import(/* webpackChunkName: 'GoodsDetail' */ '@/views/goods/GoodsDetail.vue'),
         meta: {
           title: '商品详情',
           breadcrumb: [
@@ -259,13 +258,13 @@ export const asyncRoutes = [
       {
         path: '/log',
         name: 'Log',
-        component: () => import('@/views/log/Log.vue'),
+        component: () => import(/* webpackChunkName: 'Log' */ '@/views/log/Log.vue'),
         meta: { title: '网站日志' },
       },
       {
         path: '/order-detail',
         name: 'OrderDetail',
-        component: () => import('@/views/order/OrderDetail.vue'),
+        component: () => import(/* webpackChunkName: 'OrderDetail' */ '@/views/order/OrderDetail.vue'),
         meta: {
           title: '订单详情',
           breadcrumb: [
@@ -278,7 +277,7 @@ export const asyncRoutes = [
       {
         path: '/user-detail',
         name: 'UserDetail',
-        component: () => import('@/views/user/UserDetail.vue'),
+        component: () => import(/* webpackChunkName: 'UserDetail' */ '@/views/user/UserDetail.vue'),
         meta: {
           title: '用户详情',
           breadcrumb: [
@@ -291,7 +290,7 @@ export const asyncRoutes = [
       {
         path: '/admin-detail',
         name: 'AdminDetail',
-        component: () => import('@/views/admin/AdminDetail.vue'),
+        component: () => import(/* webpackChunkName: 'AdminDetail' */ '@/views/admin/AdminDetail.vue'),
         meta: {
           title: '管理员信息',
           breadcrumb: [
@@ -304,7 +303,7 @@ export const asyncRoutes = [
       {
         path: '/admin-edit',
         name: 'AdminEdit',
-        component: () => import('@/views/admin/AdminEdit.vue'),
+        component: () => import(/* webpackChunkName: 'AdminEdit' */ '@/views/admin/AdminEdit.vue'),
         meta: {
           title: '管理员信息',
           breadcrumb: [
@@ -317,7 +316,7 @@ export const asyncRoutes = [
       {
         path: '/profile',
         name: 'Profile',
-        component: () => import('@/views/profile/Profile.vue'),
+        component: () => import(/* webpackChunkName: 'Profile' */ '@/views/profile/Profile.vue'),
         meta: {
           title: '个人中心',
         },
@@ -325,7 +324,7 @@ export const asyncRoutes = [
       {
         path: '/profile-setting',
         name: 'ProfileSetting',
-        component: () => import('@/views/profile/ProfileSetting.vue'),
+        component: () => import(/* webpackChunkName: 'ProfileSetting' */ '@/views/profile/ProfileSetting.vue'),
         meta: {
           title: '账号设置',
           breadcrumb: [
@@ -338,7 +337,7 @@ export const asyncRoutes = [
       {
         path: '/notice',
         name: 'Notice',
-        component: () => import('@/views/notice/Notice.vue'),
+        component: () => import(/* webpackChunkName: 'Notice' */ '@/views/notice/Notice.vue'),
         meta: {
           title: '通知中心',
         },
@@ -356,8 +355,7 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  mode: 'history',
-  // mode: 'hash',
+  mode: process.env.VUE_APP_ROUTER_MODE,
   base: process.env.BASE_URL,
   routes: constantRoutes,
 })
