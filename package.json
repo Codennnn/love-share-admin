@@ -6,6 +6,7 @@
     "start": "vue-cli-service serve",
     "start:preview": "vue-cli-service serve --mode preview",
     "build": "vue-cli-service build",
+    "build:preview": "vue-cli-service build --mode preview",
     "build:modern": "vue-cli-service build -- modern",
     "lint": "vue-cli-service lint"
   },

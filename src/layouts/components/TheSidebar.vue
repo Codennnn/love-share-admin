@@ -185,7 +185,8 @@ export default {
 
 // 滚动区域
 .menu-scroll-wrapper {
-  height: calc(100% - 64px - 100px);
+  padding-top: 80px;
+  height: calc(100% - 100px);
   overflow: hidden;
 }
 
