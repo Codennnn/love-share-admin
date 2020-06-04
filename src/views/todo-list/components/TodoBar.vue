@@ -3,6 +3,7 @@
     <!-- 添加任务按钮 -->
     <div class="text-center">
       <vs-button
+        style="padding: .6rem 0;"
         class="w-48 radius"
         @click="$store.commit('todo/SET_TODO_POPUP_STATUS', {status: true})"
       >添加任务</vs-button>

@@ -218,10 +218,12 @@ export default {
       }
     }, 400)
 
-    // 监听自身 ID 接收消息
-    this.sockets.subscribe(this.userId, (msg) => {
-      this.$store.dispatch('chat/receiveMessage', msg)
-    })
+    if (this.sockets) {
+      // 监听自身 ID 接收消息
+      this.sockets.subscribe(this.userId, (msg) => {
+        this.$store.dispatch('chat/receiveMessage', msg)
+      })
+    }
   },
 
   beforeDestroy() {

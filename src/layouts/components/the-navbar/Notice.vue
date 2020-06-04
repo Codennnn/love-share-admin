@@ -128,17 +128,19 @@ export default {
   },
 
   mounted() {
-    this.sockets.subscribe(`receiveNotice${this.adminId}`, (notice) => {
-      this.$vs.notify({
-        title: notice.title,
-        text: `${notice.content.substring(0, 10)}...`,
-        icon: 'chat',
-        color: ['primary', 'success', 'warning', 'danger'][notice.type - 1],
-        position: 'top-right',
-        time: 5000,
+    if (this.sockets) {
+      this.sockets.subscribe(`receiveNotice${this.adminId}`, (notice) => {
+        this.$vs.notify({
+          title: notice.title,
+          text: `${notice.content.substring(0, 10)}...`,
+          icon: 'chat',
+          color: ['primary', 'success', 'warning', 'danger'][notice.type - 1],
+          position: 'top-right',
+          time: 5000,
+        })
+        this.$store.dispatch('notice/getUnreadNotices')
       })
-      this.$store.dispatch('notice/getUnreadNotices')
-    })
+    }
   },
 
   computed: {
