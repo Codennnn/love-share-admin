@@ -5,7 +5,7 @@
   >
     <!-- 顶部LOGO -->
     <div
-      class="logo sticky top-0 left-0 z-50 w-full flex items-center h-16 cursor-pointer"
+      class="logo absolute top-0 left-0 z-50 w-full flex items-center h-16 cursor-pointer"
       @click="switchCollapse"
     >
       <img
