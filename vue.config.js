@@ -69,13 +69,18 @@ module.exports = {
           test: /\.js$|\.html$|\.css/,
           threshold: 8192,
         }),
-        new BundleAnalyzerPlugin(),
       )
 
       config.externals = {
         ...config.externals,
         ...assetsCDN.externals,
       }
+    }
+
+    if (process.env.VUE_APP_MODE === 'dev_preview') {
+      config.plugins.push(
+        new BundleAnalyzerPlugin(),
+      )
     }
   },
 }
