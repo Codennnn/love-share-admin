@@ -4,8 +4,6 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const IS_PROD = process.env.NODE_ENV === 'production'
 
 const assetsCDN = {
-  publicPath: process.env.VUE_APP_PUBLIC_PATH,
-
   externals: {
     vue: 'Vue',
     'vue-router': 'VueRouter',
@@ -22,6 +20,8 @@ const assetsCDN = {
 }
 
 module.exports = {
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
+
   productionSourceMap: false,
 
   // devServer: {
