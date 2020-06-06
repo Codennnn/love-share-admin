@@ -24,15 +24,15 @@ module.exports = {
 
   productionSourceMap: false,
 
-  // devServer: {
-  //   host: '0.0.0.0',
-  //   proxy: {
-  //     [process.env.VUE_APP_REQUEST_BASE_URL]: {
-  //       target: process.env.VUE_APP_BASE_API,
-  //       changeOrigin: true,
-  //     },
-  //   },
-  // },
+  devServer: {
+    host: '0.0.0.0',
+    proxy: {
+      [process.env.VUE_APP_REQUEST_BASE_URL]: {
+        target: process.env.VUE_APP_BASE_API,
+        changeOrigin: true,
+      },
+    },
+  },
 
   css: {
     loaderOptions: {
@@ -77,7 +77,7 @@ module.exports = {
       }
     }
 
-    if (process.env.VUE_APP_MODE === 'dev_preview') {
+    if (process.env.VUE_APP_MODE === 'preview') {
       config.plugins.push(
         new BundleAnalyzerPlugin(),
       )

@@ -3,7 +3,7 @@ import { errorNotify, consoleLog } from '@/utils/util'
 import { getToken } from '@/utils/token'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_REQUEST_BASE_URL,
+  // baseURL: process.env.VUE_APP_REQUEST_BASE_URL,
   timeout: 20000,
   responseType: 'json',
   withCredentials: true,
